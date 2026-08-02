@@ -24,16 +24,16 @@
           "title_en": "Architecture: Dual Agents (Antigravity × OpenCode) & Multi-Model Delegation",
           "desc_zh": "Antigravity 作為主要控制節點，負責高階系統架構規劃與 UI/UX 美學基調；OpenCode 作為終端機執行節點，負責背景代碼寫入、型態檢查與單元測試。兩者皆可依任務複雜度動態派發 Gemini 或 Claude 作為獨立 Subagent 處理子任務，並在提交前執行 open-code-review 二方代碼掃描。",
           "desc_en": "Antigravity serves as the primary leader node for system planning and UI/UX design. OpenCode acts as the secondary leader for terminal execution and testing. Both dispatch Gemini or Claude subagents, followed by open-code-review scanning.",
-          "img_url_zh": "assets/synergy_diagram_zh.jpg",
-          "img_url_en": "assets/synergy_diagram.jpg"
+          "img_url_zh": "assets/synergy_diagram_custom.png",
+          "img_url_en": "assets/synergy_diagram_custom.png"
         },
         {
           "title_zh": "工作流程：grill-with-docs 領域模型與架構對齊機制",
           "title_en": "Workflow: grill-with-docs Domain Modeling & Architecture Alignment",
           "desc_zh": "當輸入包含「架構」、「規劃」、「設計」等意圖關鍵字時，系統自動啟動需求對齊程序。透過結構化問答釐清領域模型 (Domain Modeling) 與系統邊界，確定無誤後生成 `.antigravity/tasks/task-xxx.md` 任務看板檔，再交由 OpenCode 進行非互動式執行與驗證。",
           "desc_en": "When keywords like 'architecture' or 'planning' are detected, system initiates domain grilling to clarify boundaries and outputs task board files (.antigravity/tasks/*.md) for OpenCode execution.",
-          "img_url_zh": "assets/grill_diagram_zh.jpg",
-          "img_url_en": "assets/grill_diagram.jpg"
+          "img_url_zh": "assets/synergy_diagram_custom.png",
+          "img_url_en": "assets/synergy_diagram_custom.png"
         }
       ],
       "sub_modules_zh": [
