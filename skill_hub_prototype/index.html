@@ -75,16 +75,17 @@
       background: #ffffff;
       border: 1px solid var(--border-color);
       border-radius: 8px;
-      padding: 6px 12px;
+      padding: 6px 14px;
       font-size: 12.5px;
       font-weight: 600;
-      color: var(--text-main);
+      color: var(--accent);
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 6px;
+      transition: all 0.15s ease;
     }
-    .lang-toggle:hover { background: var(--bg-sub); }
+    .lang-toggle:hover { background: var(--accent-bg); border-color: var(--accent); }
 
     .back-btn {
       display: none;
@@ -195,14 +196,13 @@
       </div>
 
       <div class="header-right">
-        <button id="lang-btn" class="lang-toggle">🌐 繁體中文</button>
+        <button id="lang-btn" class="lang-toggle">🌐 Switch to English</button>
         <button id="back-btn" class="back-btn">← 返回主頁 (Home)</button>
       </div>
     </div>
   </header>
 
   <main>
-    <!-- LEVEL 1: HOME VIEW -->
     <div id="home-view">
       <section class="home-hero">
         <h1 class="home-hero-title">Antigravity 4 大整合技能集展覽館</h1>
@@ -262,7 +262,6 @@
       </div>
     </div>
 
-    <!-- LEVEL 2: DETAIL SUB-PAGE VIEW -->
     <div id="detail-view" class="detail-view">
       <div class="detail-header">
         <h1 id="detail-title" class="detail-title">core-synergy-skill</h1>

@@ -22,9 +22,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('Failed to load skills_data.json', err);
   }
 
+  // Language Toggle: Displays what language the user will switch TO
   langBtn.addEventListener('click', () => {
     currentLang = currentLang === 'zh' ? 'en' : 'zh';
-    langBtn.innerHTML = currentLang === 'zh' ? '🌐 繁體中文' : '🌐 English';
+    langBtn.innerHTML = currentLang === 'zh' ? '🌐 Switch to English' : '🌐 切換至 繁體中文';
     handleRoute();
   });
 
@@ -292,7 +293,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     return card;
   }
 
-  // Presentation Spec Card with 16:9 High-Fidelity Single Slide Deck Mockup
   function createPresentation16x9SlideCard(item) {
     const card = document.createElement('div');
     card.className = 'card';
@@ -310,9 +310,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
       <p class="card-desc">${item.desc}</p>
       
-      <!-- High-Fidelity 16:9 Live Single Slide Deck Container -->
       <div style="${cssStyle} width:100%; aspect-ratio: 16/9; border-radius: 12px; padding: 18px; margin-bottom: 14px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" onclick="copyText('${mainTrig}', '觸發詞')" title="16:9 高保真簡報單頁範例 (點擊複製觸發詞)">
-        <!-- Slide Top Bar: Badge & Slide Page Counter -->
         <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
           <span style="background:${bgAccent}; color:#fff; font-size:9.5px; font-weight:900; padding:2px 8px; border-radius:4px; text-transform:uppercase; letter-spacing:0.5px;">
             ${slideBadge}
@@ -320,7 +318,6 @@ document.addEventListener('DOMContentLoaded', async () => {
           <span style="font-size:10px; font-family:monospace; opacity:0.8;">#01 / 10 SLIDES</span>
         </div>
 
-        <!-- Slide Middle: Large Spec Title & Subtext -->
         <div style="margin: auto 0;">
           <div style="font-size:17px; font-weight:900; line-height:1.2; letter-spacing:-0.4px; margin-bottom:4px; text-transform:uppercase;">
             ${slideTitle}
@@ -330,8 +327,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           </div>
         </div>
 
-        <!-- Slide Bottom Row: Modular 3-Column Bullet Grid Preview -->
-        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:6px; border-top:1px stroke rgba(255,255,255,0.15); padding-top:6px; font-size:9.5px; opacity:0.9;">
+        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:6px; font-size:9.5px; opacity:0.9;">
           <div style="background:rgba(255,255,255,0.08); padding:4px; border-radius:4px;">✦ Section A</div>
           <div style="background:rgba(255,255,255,0.08); padding:4px; border-radius:4px;">✦ 10:1 Ratio</div>
           <div style="background:rgba(255,255,255,0.08); padding:4px; border-radius:4px;">✦ Slidev Ready</div>
