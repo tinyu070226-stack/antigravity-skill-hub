@@ -20,18 +20,18 @@
       "description_en": "Defines Antigravity & OpenCode dual-agent architecture, multi-model delegation, domain grilling, and automated code review gate.",
       "principles": [
         {
-          "title_zh": "系統架構：雙 Agent (Antigravity × OpenCode) 與異構模型分工",
-          "title_en": "Architecture: Dual Agents (Antigravity × OpenCode) & Multi-Model Delegation",
-          "desc_zh": "Antigravity 作為主要控制節點，負責高階系統架構規劃與 UI/UX 美學基調；OpenCode 作為終端機執行節點，負責背景代碼寫入、型態檢查與單元測試。兩者皆可依任務複雜度動態派發 Gemini 或 Claude 作為獨立 Subagent 處理子任務，並在提交前執行 open-code-review 二方代碼掃描。",
-          "desc_en": "Antigravity serves as the primary leader node for system planning and UI/UX design. OpenCode acts as the secondary leader for terminal execution and testing. Both dispatch Gemini or Claude subagents, followed by open-code-review scanning.",
+          "title_zh": "雙主 Agent (Antigravity × OpenCode) 與多 LLM 戰隊分工原理",
+          "title_en": "Dual-Leader Architecture (Antigravity × OpenCode) & Multi-LLM Delegation",
+          "desc_zh": "Antigravity 作為「主 Agent」，為內嵌的各個 LLM 派發工作。具體由 Gemini (Pro/Flash) 負責系統架構規劃與邏輯測試；Claude 專責 UI/UX 與美感建立（且 Claude 僅在「初次建立視覺」時啟用一次，後續微調與修復一律禁用以保護配額）。在需要時（如遇到問題或驗證代碼），Antigravity 會自主呼叫 OpenCode 進行「雙主 Agent 協同」。OpenCode 同樣能調度 LLM 作為子 Agent，當執行特定任務（如搜尋 20 個檔案並修改）時，OpenCode 會開啟全新的獨立 Subagent 上下文視窗處理，大幅降低整個專案開發過程中的總 Token 消耗！",
+          "desc_en": "Antigravity acts as the primary leader agent, assigning work to embedded LLM subagents. Gemini models handle system architecture and logic testing. Claude is dedicated to initial UI/UX aesthetic creation (strictly enabled ONLY once during initial creation to conserve quota). When verification or error resolution is needed, Antigravity autonomously invokes OpenCode for dual-leader synergy. OpenCode also dispatches LLM subagents in isolated subagent context windows for multi-file operations (e.g., searching and editing 20 files), dramatically reducing overall token consumption across project development!",
           "img_url_zh": "assets/synergy_diagram_custom.png",
           "img_url_en": "assets/synergy_diagram_custom.png"
         },
         {
-          "title_zh": "工作流程：grill-with-docs 領域模型與架構對齊機制",
-          "title_en": "Workflow: grill-with-docs Domain Modeling & Architecture Alignment",
-          "desc_zh": "當輸入包含「架構」、「規劃」、「設計」等意圖關鍵字時，系統自動啟動需求對齊程序。透過結構化問答釐清領域模型 (Domain Modeling) 與系統邊界，確定無誤後生成 `.antigravity/tasks/task-xxx.md` 任務看板檔，再交由 OpenCode 進行非互動式執行與驗證。",
-          "desc_en": "When keywords like 'architecture' or 'planning' are detected, system initiates domain grilling to clarify boundaries and outputs task board files (.antigravity/tasks/*.md) for OpenCode execution.",
+          "title_zh": "雙主 Agent (Antigravity × OpenCode) 與多 LLM 戰隊分工原理",
+          "title_en": "Dual-Leader Architecture (Antigravity × OpenCode) & Multi-LLM Delegation",
+          "desc_zh": "Antigravity 作為「主 Agent」，為內嵌的各個 LLM 派發工作。具體由 Gemini (Pro/Flash) 負責系統架構規劃與邏輯測試；Claude 專責 UI/UX 與美感建立（且 Claude 僅在「初次建立視覺」時啟用一次，後續微調與修復一律禁用以保護配額）。在需要時（如遇到問題或驗證代碼），Antigravity 會自主呼叫 OpenCode 進行「雙主 Agent 協同」。OpenCode 同樣能調度 LLM 作為子 Agent，當執行特定任務（如搜尋 20 個檔案並修改）時，OpenCode 會開啟全新的獨立 Subagent 上下文視窗處理，大幅降低整個專案開發過程中的總 Token 消耗！",
+          "desc_en": "Antigravity acts as the primary leader agent, assigning work to embedded LLM subagents. Gemini models handle system architecture and logic testing. Claude is dedicated to initial UI/UX aesthetic creation (strictly enabled ONLY once during initial creation to conserve quota). When verification or error resolution is needed, Antigravity autonomously invokes OpenCode for dual-leader synergy. OpenCode also dispatches LLM subagents in isolated subagent context windows for multi-file operations (e.g., searching and editing 20 files), dramatically reducing overall token consumption across project development!",
           "img_url_zh": "assets/synergy_diagram_custom.png",
           "img_url_en": "assets/synergy_diagram_custom.png"
         }
