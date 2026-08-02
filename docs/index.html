@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antigravity Master Skill Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-sub: #f1f5f9;
+      --border-color: #e2e8f0;
+      --border-hover: #cbd5e1;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --accent: #0284c7;
+      --accent-bg: #e0f2fe;
+      --accent-rose: #e11d48;
+      --accent-rose-bg: #ffe4e6;
+      --accent-teal: #0f766e;
+      --accent-teal-bg: #ccfbf1;
+      --accent-purple: #7c3aed;
+      --accent-purple-bg: #f3e8ff;
+      --radius: 16px;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04);
+      --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding-bottom: 80px;
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-group { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+    .logo-badge {
+      background: var(--text-main);
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+    .logo-title { font-size: 18px; font-weight: 700; letter-spacing: -0.4px; }
+
+    .header-right { display: flex; gap: 10px; align-items: center; }
+
+    .lang-toggle {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .lang-toggle:hover { background: var(--bg-sub); }
+
+    .back-btn {
+      display: none;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      align-items: center;
+      gap: 6px;
+    }
+    .back-btn:hover { background: var(--bg-sub); }
+
+    main { max-width: 1200px; margin: 40px auto 0; padding: 0 24px; }
+
+    .home-hero { text-align: center; margin-bottom: 48px; }
+    .home-hero-title { font-size: 32px; font-weight: 800; letter-spacing: -0.8px; margin-bottom: 12px; }
+    .home-hero-desc { font-size: 15px; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+    .master-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+    @media (max-width: 768px) { .master-grid { grid-template-columns: 1fr; } }
+
+    .master-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .master-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+
+    .master-card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .icon-core { background: var(--accent-rose-bg); color: var(--accent-rose); }
+    .icon-design { background: var(--accent-bg); color: var(--accent); }
+    .icon-motion { background: var(--accent-teal-bg); color: var(--accent-teal); }
+    .icon-presentation { background: var(--accent-purple-bg); color: var(--accent-purple); }
+
+    .master-card-title { font-size: 20px; font-weight: 700; letter-spacing: -0.4px; margin-bottom: 8px; }
+    .master-card-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6; flex: 1; }
+
+    .master-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--bg-sub);
+      padding-top: 16px;
+    }
+
+    .count-tag { font-size: 12px; font-weight: 600; color: var(--text-muted); background: var(--bg-sub); padding: 4px 10px; border-radius: 8px; }
+    .enter-btn { font-size: 13px; font-weight: 600; color: var(--accent); display: flex; align-items: center; gap: 4px; }
+
+    .detail-view { display: none; }
+    .detail-header { background: #ffffff; border: 1px solid var(--border-color); border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+    .detail-title { font-size: 24px; font-weight: 800; letter-spacing: -0.6px; margin-bottom: 6px; }
+    .detail-desc { font-size: 14px; color: var(--text-muted); }
+
+    .search-bar { margin-bottom: 24px; display: flex; gap: 12px; }
+    .search-input { flex: 1; background: #ffffff; border: 1px solid var(--border-color); border-radius: 10px; padding: 10px 16px; font-size: 14px; outline: none; box-shadow: var(--shadow-sm); }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 20px; }
+
+    .card { background: #ffffff; border: 1px solid var(--border-color); border-radius: 14px; padding: 20px; box-shadow: var(--shadow-sm); }
+    .card-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+    .card-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; }
+
+    .preview-box { background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; margin-bottom: 12px; height: 90px; display: flex; align-items: center; justify-content: center; }
+
+    .trigger-group { display: flex; justify-content: space-between; align-items: center; background: var(--bg-sub); border: 1px dashed var(--border-color); border-radius: 8px; padding: 6px 12px; }
+    .trigger-text { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); font-weight: 500; }
+    .copy-btn { background: #fff; border: 1px solid var(--border-color); border-radius: 4px; padding: 2px 8px; font-size: 10px; cursor: pointer; }
+
+    .swatches { display: flex; gap: 6px; margin-top: 10px; }
+    .swatch { width: 20px; height: 20px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.12); cursor: pointer; }
+
+    #toast { position: fixed; bottom: 24px; right: 24px; background: var(--text-main); color: #ffffff; padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 500; opacity: 0; transform: translateY(10px); transition: all 0.2s ease; z-index: 1000; pointer-events: none; }
+    #toast.show { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="logo-group" id="logo-home">
+        <span class="logo-badge">ANTIGRAVITY</span>
+        <span class="logo-title">Master Skill Hub</span>
+      </div>
+
+      <div class="header-right">
+        <button id="lang-btn" class="lang-toggle">🌐 繁體中文</button>
+        <button id="back-btn" class="back-btn">← 返回主頁 (Home)</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- LEVEL 1: HOME VIEW -->
+    <div id="home-view">
+      <section class="home-hero">
+        <h1 class="home-hero-title">Antigravity 4 大整合技能集展覽館</h1>
+        <p class="home-hero-desc">
+          點擊下方大卡片進入個別技能的內部運作圖文原理、70+ 種風格 live 展演、色票卡與觸發清單。
+        </p>
+      </section>
+
+      <div class="master-grid">
+        <div class="master-card" onclick="openDetail('core-synergy-skill')">
+          <div class="master-card-icon icon-core">⚙️</div>
+          <h2 class="master-card-title">core-synergy-skill</h2>
+          <p class="master-card-desc">
+            底層協同與工程門禁引擎。包含雙主 Agent (Antigravity × OpenCode) 運作圖解、grill-with-docs 詰問對齊流程與 open-code-review 門禁。
+          </p>
+          <div class="master-card-footer">
+            <span class="count-tag">運作圖解 + 5個核心子模組</span>
+            <span class="enter-btn">檢視運作原理與細節 →</span>
+          </div>
+        </div>
+
+        <div class="master-card" onclick="openDetail('design-system-skill')">
+          <div class="master-card-icon icon-design">🎨</div>
+          <h2 class="master-card-title">design-system-skill</h2>
+          <p class="master-card-desc">
+            視覺美學與反 Slop 全集。包含 50 種網頁設計風格 (Live CSS 預覽/色票)、Hallmark 20 主題 (8-State組件驗證) 與雙重防禦原理圖解。
+          </p>
+          <div class="master-card-footer">
+            <span class="count-tag">防禦圖解 + 70+ 風格展演</span>
+            <span class="enter-btn">進入風格展演館 →</span>
+          </div>
+        </div>
+
+        <div class="master-card" onclick="openDetail('ui-motion-skill')">
+          <div class="master-card-icon icon-motion">✨</div>
+          <h2 class="master-card-title">ui-motion-skill</h2>
+          <p class="master-card-desc">
+            前端動效與向量動畫全集。整合 Anime.js 時間軸彈簧物理、LottieFiles 向量動效、Text-to-Lottie 生成與 React Bits (shadcn CLI) 組件庫規範。
+          </p>
+          <div class="master-card-footer">
+            <span class="count-tag">4 大動效與元件庫</span>
+            <span class="enter-btn">檢視動效規範 →</span>
+          </div>
+        </div>
+
+        <div class="master-card" onclick="openDetail('presentation-skill')">
+          <div class="master-card-icon icon-presentation">📊</div>
+          <h2 class="master-card-title">presentation-skill</h2>
+          <p class="master-card-desc">
+            簡報視覺與 Slidev 導出全集。包含 10 大客製化簡報視覺 Specs (霓虹拼貼, Apple Mockup, Kinfolk 雜誌風, 瑞士商業風等) 與 Felo / Slidev 導出器。
+          </p>
+          <div class="master-card-footer">
+            <span class="count-tag">10 大簡報 Specs</span>
+            <span class="enter-btn">進入簡報展演館 →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEVEL 2: DETAIL SUB-PAGE VIEW -->
+    <div id="detail-view" class="detail-view">
+      <div class="detail-header">
+        <h1 id="detail-title" class="detail-title">core-synergy-skill</h1>
+        <p id="detail-desc" class="detail-desc">底層協同與工程門禁全集詳細細節</p>
+      </div>
+
+      <div id="detail-principles"></div>
+
+      <div class="search-bar">
+        <input type="text" id="detail-search" class="search-input" placeholder="在目前技能內部搜尋風格、HEX 色票或觸發詞...">
+      </div>
+
+      <div id="detail-grid" class="grid"></div>
+    </div>
+  </main>
+
+  <div id="toast">已複製觸發詞</div>
+
+  <script src="app.js"></script>
+</body>
+</html>

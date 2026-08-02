@@ -1,0 +1,926 @@
+{
+  "master_skills": [
+    {
+      "id": "core-synergy-skill",
+      "name": "core-synergy-skill",
+      "title_zh": "core-synergy-skill (底層協同與工程門禁全集)",
+      "title_en": "core-synergy-skill (Core Synergy & Gate Suite)",
+      "category": "Master Skills",
+      "badge": "默認開啟",
+      "badge_type": "core",
+      "triggers": [
+        "@core-synergy-skill",
+        "agent-skills",
+        "grill-with-docs",
+        "opencode",
+        "team-mode",
+        "open-code-review"
+      ],
+      "description_zh": "本技能定義 Antigravity 與 OpenCode 雙 Agent 協同架構、多模型分工策略、領域模型審核機制與自動化二方代碼門禁。",
+      "description_en": "Defines Antigravity & OpenCode dual-agent architecture, multi-model delegation, domain grilling, and automated code review gate.",
+      "principles": [
+        {
+          "title_zh": "系統架構：雙 Agent (Antigravity × OpenCode) 與異構模型分工",
+          "title_en": "Architecture: Dual Agents (Antigravity × OpenCode) & Multi-Model Delegation",
+          "desc_zh": "Antigravity 作為主要控制節點，負責高階系統架構規劃與 UI/UX 美學基調；OpenCode 作為終端機執行節點，負責背景代碼寫入、型態檢查與單元測試。兩者皆可依任務複雜度動態派發 Gemini 或 Claude 作為獨立 Subagent 處理子任務，並在提交前執行 open-code-review 二方代碼掃描。",
+          "desc_en": "Antigravity serves as the primary leader node for system planning and UI/UX design. OpenCode acts as the secondary leader for terminal execution and testing. Both dispatch Gemini or Claude subagents, followed by open-code-review scanning.",
+          "img_url_zh": "assets/synergy_diagram_zh.jpg",
+          "img_url_en": "assets/synergy_diagram.jpg"
+        },
+        {
+          "title_zh": "工作流程：grill-with-docs 領域模型與架構對齊機制",
+          "title_en": "Workflow: grill-with-docs Domain Modeling & Architecture Alignment",
+          "desc_zh": "當輸入包含「架構」、「規劃」、「設計」等意圖關鍵字時，系統自動啟動需求對齊程序。透過結構化問答釐清領域模型 (Domain Modeling) 與系統邊界，確定無誤後生成 `.antigravity/tasks/task-xxx.md` 任務看板檔，再交由 OpenCode 進行非互動式執行與驗證。",
+          "desc_en": "When keywords like 'architecture' or 'planning' are detected, system initiates domain grilling to clarify boundaries and outputs task board files (.antigravity/tasks/*.md) for OpenCode execution.",
+          "img_url_zh": "assets/grill_diagram_zh.jpg",
+          "img_url_en": "assets/grill_diagram.jpg"
+        }
+      ],
+      "sub_modules": [
+        "agent-skills: 生產級代碼品質評估、重構與輔助除錯工具集",
+        "grill-with-docs: 領域模型詰問與架構意圖對齊程序 (關鍵字: 「計劃」、「設計」、「架構」、「grill me」)",
+        "Antigravity × OpenCode 協同模式: CLI 直連、Task Board 檔案看板、JSON Hooks 攔截、open-code-review 門禁",
+        "team-mode: 依任務難度調度 Pro (高難度架構) 與 Flash (檔案檢索) 模型子 Agent"
+      ]
+    },
+    {
+      "id": "design-system-skill",
+      "name": "design-system-skill",
+      "title_zh": "design-system-skill (視覺美學與反 Slop 全集)",
+      "title_en": "design-system-skill (Design System & Anti-Slop)",
+      "category": "Master Skills",
+      "badge": "默認開啟",
+      "badge_type": "core",
+      "triggers": [
+        "@design-system-skill",
+        "50-styles",
+        "hallmark",
+        "emil-skills",
+        "ui-skills",
+        "前端風格",
+        "反slop"
+      ],
+      "description_zh": "整合 50 種經典與現代網頁設計風格知識庫、Nutlope Hallmark 反 AI 模板化防禦機制 (20 主題 catalog、8-State 組件寫滿、Pre-emit 6 軸自我評分) 以及 Emil Kowalski 8 大設計工程體系。",
+      "description_en": "Integrates 50 Web Design Styles KB, Nutlope Hallmark anti-slop rules (20 themes, 8-state validation, 6-axis scoring), and Emil Kowalski design engineering.",
+      "sub_modules": [
+        "50 Web Design Styles KB: 50 種網頁設計體系 (Hex 色票、邊框陰影、材質、Typography)",
+        "Nutlope Hallmark: 20 視覺主題輪替、8 種組件狀態寫滿、Pre-emit 6 軸自我評分",
+        "Emil Kowalski 設計工程: Apple 質感細節、Easing/Spring 動態詞彙、60 FPS 效能審查",
+        "UI-Skills 路由: OKLCH 色彩 (better-colors)、瑞士排版 (swiss-design)、A11y (build-primitive)"
+      ]
+    },
+    {
+      "id": "ui-motion-skill",
+      "name": "ui-motion-skill",
+      "title_zh": "ui-motion-skill (前端動效與向量動畫全集)",
+      "title_en": "ui-motion-skill (UI Motion & Micro-interactions)",
+      "category": "Master Skills",
+      "badge": "按需觸發",
+      "badge_type": "motion",
+      "triggers": [
+        "@ui-motion-skill",
+        "animejs",
+        "lottie",
+        "text-to-lottie",
+        "reactbits",
+        "動效",
+        "微互動"
+      ],
+      "description_zh": "規範前端動畫與微互動開發標準。整合 Anime.js 時間軸與物理彈簧緩動、LottieFiles 向量點優化、Text-to-Lottie 向量 JSON 生成與 React Bits (shadcn CLI) 組件庫。",
+      "description_en": "Standards for UI animations combining Anime.js timeline engineering, LottieFiles vector design, Text-to-Lottie generation, and React Bits shadcn CLI components.",
+      "sub_modules": [
+        "hyperframes@animejs: Anime.js 時間軸 (anime.timeline)、Stagger 交錯動畫與 GPU Transform 屬性優化",
+        "LottieFiles & Text-to-Lottie: 向量點優化與純向量 Lottie JSON 動態代碼生成",
+        "React Bits Protocol: shadcn CLI 官方下載模式 (SplitText, BlurText, MagnetLines, SoftAurora, BlobCursor)"
+      ]
+    },
+    {
+      "id": "presentation-skill",
+      "name": "presentation-skill",
+      "title_zh": "presentation-skill (簡報視覺與 Slidev 導出全集)",
+      "title_en": "presentation-skill (Presentation Specs & Slidev)",
+      "category": "Master Skills",
+      "badge": "按需觸發",
+      "badge_type": "presentation",
+      "triggers": [
+        "@presentation-skill",
+        "felo",
+        "slidev",
+        "簡報風格",
+        "簡報導出",
+        "slides.md"
+      ],
+      "description_zh": "定義 10 大客製化簡報視覺 Specs 規範 (含霓虹拼貼, Apple 3D Mockup, Kinfolk 雜誌風, 瑞士商業風純文字等) 與 Felo / Slidev (slides.md) 語法導出器。",
+      "description_en": "Defines 10 custom presentation visual specs with Felo Slides and Slidev (slides.md) exporter.",
+      "sub_modules": [
+        "10 大簡報視覺 Specs 路由: 霓虹拼貼, Apple 3D Mockup, Kinfolk 雜誌風, 瑞士商業 (無Markdown符號) 等",
+        "Slidev & Felo 導出器: 自動轉譯標準 Slidev (slides.md)，含 v-clicks 動畫與 Mermaid 圖表"
+      ]
+    }
+  ],
+  "web_styles_50": [
+    {
+      "name": "Neo-Brutalism (新蠻荒主義)",
+      "triggers": "neubrutalism, 新蠻荒, raw brutal",
+      "hex": [
+        "#FFE600",
+        "#FF5959",
+        "#000000"
+      ],
+      "desc": "高飽和撞色、重黑粗線條邊框與硬塊陰影 (box-shadow: 4px 4px #000)。",
+      "css": "background: #FFE600; border: 3px solid #000; box-shadow: 4px 4px 0px #000; font-weight: 800; color: #000;"
+    },
+    {
+      "name": "Swiss Grid (瑞士網格國際風格)",
+      "triggers": "swiss style, 瑞士風格, grid layout",
+      "hex": [
+        "#F4F4F5",
+        "#FF3B30",
+        "#18181B"
+      ],
+      "desc": "嚴格 12 欄網格對齊、非對稱無襯線大字體、絕對理性與現代主義排版。",
+      "css": "background: #F4F4F5; border-top: 4px solid #FF3B30; color: #18181B; font-family: Helvetica, sans-serif;"
+    },
+    {
+      "name": "Japanese Editorial (日式雜誌風)",
+      "triggers": "japanese, 日式風格, 雜誌風, 和風",
+      "hex": [
+        "#F7F5F0",
+        "#2C2C2C",
+        "#C84B31"
+      ],
+      "desc": "暖色紙張材質 (Ivory Paper)、竪排文字 (writing-mode)、極致留白與優雅空氣感。",
+      "css": "background: #F7F5F0; color: #2C2C2C; font-family: 'Yu Mincho', serif; border: 1px solid #E5E0D8;"
+    },
+    {
+      "name": "Glassmorphism (新玻璃擬物)",
+      "triggers": "glassmorphism, 玻璃擬物, glass ui",
+      "hex": [
+        "rgba(255,255,255,0.4)",
+        "#a855f7",
+        "#06b6d4"
+      ],
+      "desc": "毛玻璃背景虛化 (backdrop-filter: blur)、半透明邊框與光感漸變。",
+      "css": "background: rgba(255,255,255,0.4); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.6);"
+    },
+    {
+      "name": "Bento Grid 2.0 (便當盒網格)",
+      "triggers": "bento, bento grid, 便當盒佈局",
+      "hex": [
+        "#09090B",
+        "#18181B",
+        "#27272A"
+      ],
+      "desc": "Apple/Linear 風格微卡片組合、多尺寸方格、極細 1px 邊框與內置微小動效。",
+      "css": "background: #09090B; border: 1px solid #27272A; border-radius: 16px; color: #FAFAFA;"
+    },
+    {
+      "name": "Cyberpunk 2077 (賽博朋克)",
+      "triggers": "cyberpunk, 賽博朋克, 霓虹霓光",
+      "hex": [
+        "#00F0FF",
+        "#FF0055",
+        "#FFE600"
+      ],
+      "desc": "高對比霓虹青紫黃、故障風 (Glitch Effect)、科技切角與發光邊框。",
+      "css": "background: #00F0FF; color: #000; clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%); font-weight: 900;"
+    },
+    {
+      "name": "VisionOS Spatial (蘋果空間UI)",
+      "triggers": "visionos, spatial ui, 空間UI",
+      "hex": [
+        "rgba(255,255,255,0.25)",
+        "#38bdf8",
+        "#0f172a"
+      ],
+      "desc": "動態懸浮光效、Specular Highlight 高光邊緣、懸停深淺景深。",
+      "css": "background: rgba(255,255,255,0.25); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.1);"
+    },
+    {
+      "name": "Aurora UI (極光動態漸變)",
+      "triggers": "aurora, 極光風格, fluid gradient",
+      "hex": [
+        "#7928CA",
+        "#FF0080",
+        "#00DFD8"
+      ],
+      "desc": "彌散色彩斑塊、動態 Blur 漸變背景、夢幻光暈與現代高質感。",
+      "css": "background: linear-gradient(135deg, #7928CA, #FF0080, #00DFD8); color: #FFF; border-radius: 12px;"
+    },
+    {
+      "name": "Neumorphism (新擬物柔和風格)",
+      "triggers": "neumorphism, 軟UI, soft ui",
+      "hex": [
+        "#E0E5EC",
+        "#A3B1C6",
+        "#FFFFFF"
+      ],
+      "desc": "同色系雙向陰影 (light/dark shadow)、凸起與凹陷的微立體觸感。",
+      "css": "background: #E0E5EC; box-shadow: 6px 6px 12px #a3b1c6, -6px -6px 12px #ffffff; border-radius: 16px;"
+    },
+    {
+      "name": "Industrial Brutalism (工業蠻荒)",
+      "triggers": "industrial, 工業風, raw concrete",
+      "hex": [
+        "#1A1A1A",
+        "#E5E5E5",
+        "#FF4500"
+      ],
+      "desc": "裸露混凝土感、金屬網格底紋、警示黃橙色與粗獷鋼鐵線條。",
+      "css": "background: #1A1A1A; border-left: 4px solid #FF4500; color: #E5E5E5; font-family: monospace;"
+    },
+    {
+      "name": "Claymorphism (黏土擬物風格)",
+      "triggers": "claymorphism, 黏土風格, 3d clay",
+      "hex": [
+        "#F3E8FF",
+        "#C084FC",
+        "#9333EA"
+      ],
+      "desc": "圓潤蓬鬆雙內陰影、軟萌 3D 黏土造型與可愛浮雕感。",
+      "css": "background: #F3E8FF; box-shadow: inset -6px -6px 12px #C084FC, inset 6px 6px 12px #FFF; border-radius: 24px; color: #581C87;"
+    },
+    {
+      "name": "Dark OLED Obsidian (深空黑曜石)",
+      "triggers": "dark oled, 黑曜石, pure black",
+      "hex": [
+        "#000000",
+        "#121212",
+        "#00E5FF"
+      ],
+      "desc": "發光二極體純黑底、高鮮豔發光文字與省電極致視覺。",
+      "css": "background: #000000; border: 1px solid #1f1f1f; color: #00E5FF; text-shadow: 0 0 8px rgba(0,229,255,0.5);"
+    },
+    {
+      "name": "Retro Win95 (95年代復古網頁)",
+      "triggers": "retro 95, 95復古, classic win",
+      "hex": [
+        "#008080",
+        "#C0C0C0",
+        "#000080"
+      ],
+      "desc": "灰底凸起三維框 (border 2px inset/outset)、青綠桌面與傳統視窗標題列。",
+      "css": "background: #C0C0C0; border: 2px outset #FFF; color: #000; font-family: 'MS Sans Serif', sans-serif;"
+    },
+    {
+      "name": "Kinfolk Editorial (Kinfolk 雜誌風格)",
+      "triggers": "kinfolk, 雜誌編輯, 暖白紙色",
+      "hex": [
+        "#F4F1EA",
+        "#33312E",
+        "#8C8275"
+      ],
+      "desc": "極大比例留白、明朝體 Serif、莫蘭迪低飽和大地色與高級沉靜感。",
+      "css": "background: #F4F1EA; color: #33312E; font-family: Georgia, serif; letter-spacing: 0.05em;"
+    },
+    {
+      "name": "Vaporwave (美式蒸汽波)",
+      "triggers": "vaporwave, 蒸汽波, 復古霓虹",
+      "hex": [
+        "#FF71CE",
+        "#01CDFE",
+        "#05FFA1"
+      ],
+      "desc": "80 年代粉紫青漸變、棕櫚樹網格、復古雕像與懷舊浪漫。",
+      "css": "background: linear-gradient(to right, #FF71CE, #01CDFE); color: #FFF; font-family: sans-serif; font-weight: 700;"
+    },
+    {
+      "name": "Flat Design 2.0 (現代扁平 2.0)",
+      "triggers": "flat design, 現代扁平, minimalist flat",
+      "hex": [
+        "#2563EB",
+        "#F8FAFC",
+        "#0F172A"
+      ],
+      "desc": "取消純硬線條，加入極輕柔單層微陰影與鮮明品牌幾何圖形。",
+      "css": "background: #2563EB; color: #FFF; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);"
+    },
+    {
+      "name": "Minimal Dark Terminal (黑客終端)",
+      "triggers": "terminal, 黑客風格, cli ui",
+      "hex": [
+        "#0D1117",
+        "#238636",
+        "#58A6FF"
+      ],
+      "desc": "GitHub Dark 與黑客終端等寬字體、綠色 Status 點與指令提示符。",
+      "css": "background: #0D1117; border: 1px solid #30363D; color: #58A6FF; font-family: monospace;"
+    },
+    {
+      "name": "Biomimetic Nature (仿生自然風格)",
+      "triggers": "biomimetic, 自然風格, 森林綠",
+      "hex": [
+        "#0F291E",
+        "#34D399",
+        "#ECFDF5"
+      ],
+      "desc": "葉脈曲線、苔蘚深綠、有機弧線邊框與大地自然氣息。",
+      "css": "background: #0F291E; color: #34D399; border-radius: 30px 10px 30px 10px; border: 1px solid #059669;"
+    },
+    {
+      "name": "Chromatic Holographic (全息光澤)",
+      "triggers": "holographic, 全息彩虹, chrome shine",
+      "hex": [
+        "#FF9A9E",
+        "#FECFEF",
+        "#A1C4FD"
+      ],
+      "desc": "金屬全息反射、彩虹光澤流動感與未來流行主義。",
+      "css": "background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%); color: #1e293b; border-radius: 12px;"
+    },
+    {
+      "name": "E-Ink Paper (電子墨水屏)",
+      "triggers": "eink, 電子紙, Kindle風格",
+      "hex": [
+        "#EAEAEA",
+        "#111111",
+        "#777777"
+      ],
+      "desc": "無高調彩度、雙色灰階動態抖動網點、極致無負擔閱讀體驗。",
+      "css": "background: #EAEAEA; color: #111; border: 1px solid #111; font-family: serif;"
+    },
+    {
+      "name": "Gen-Z Chaos (Z世代解構主義)",
+      "triggers": "genz, z世代, 拼貼解構",
+      "hex": [
+        "#CCFF00",
+        "#FF00FF",
+        "#000000"
+      ],
+      "desc": "傾斜貼紙文字、貼紙手繪插畫、打破慣例框框與高彩活力爆發。",
+      "css": "background: #CCFF00; color: #000; transform: rotate(-2deg); font-weight: 900; border: 2px solid #000;"
+    },
+    {
+      "name": "Tactile Skeuomorphism (經典擬物觸感)",
+      "triggers": "skeuomorphism, 經典擬物, 皮革木紋",
+      "hex": [
+        "#3D2314",
+        "#D4AF37",
+        "#F5E6D3"
+      ],
+      "desc": "縫線皮革、金屬按鈕紋理、實體微立體感與工藝重現。",
+      "css": "background: #3D2314; color: #F5E6D3; border: 2px solid #D4AF37; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);"
+    },
+    {
+      "name": "Voxel 3D (體素積木風)",
+      "triggers": "voxel, 體素積木, Minecraft風格",
+      "hex": [
+        "#4ADE80",
+        "#166534",
+        "#FEF08A"
+      ],
+      "desc": "3D 立體方塊像素、階梯網格與幾何趣味。",
+      "css": "background: #4ADE80; color: #166534; border: 3px solid #166534; box-shadow: 6px 6px 0px #166534;"
+    },
+    {
+      "name": "HUD Military Tech (戰術抬頭顯示)",
+      "triggers": "hud, 抬頭顯示, 戰術科技",
+      "hex": [
+        "#051923",
+        "#00A6FB",
+        "#0582CA"
+      ],
+      "desc": "十字準星、座標數據圖例、動態邊角括號與軍事科技風格。",
+      "css": "background: #051923; border: 1px solid #00A6FB; color: #00A6FB; font-family: monospace;"
+    },
+    {
+      "name": "Gradient Mesh 3.0 (高階色彩網格)",
+      "triggers": "gradient mesh, 漸變網格, 彌散光學",
+      "hex": [
+        "#FF512F",
+        "#DD2476",
+        "#3A1C71"
+      ],
+      "desc": "3 色以上流體漸變、多維立體光源與高端科技流體。",
+      "css": "background: linear-gradient(to right, #FF512F, #DD2476); color: #FFF; border-radius: 16px;"
+    },
+    {
+      "name": "Accessible High-Contrast (無障礙高對比)",
+      "triggers": "a11y high contrast, 高對比無障礙, WCAG AAA",
+      "hex": [
+        "#000000",
+        "#FFFF00",
+        "#FFFFFF"
+      ],
+      "desc": "符合 WCAG AAA 最高標準、純黑底純黃字與極度清晰識別度。",
+      "css": "background: #000000; color: #FFFF00; border: 3px solid #FFFF00; font-size: 14px; font-weight: bold;"
+    },
+    {
+      "name": "Memphis Group 80s (孟菲斯波普風格)",
+      "triggers": "memphis, 孟菲斯, 波點幾何",
+      "hex": [
+        "#F43F5E",
+        "#0EA5E9",
+        "#FACC15"
+      ],
+      "desc": "波浪紋、黑白波點幾何塊、彩線拋物線與快樂波普風格。",
+      "css": "background: #FACC15; color: #000; border: 2px solid #000; background-image: radial-gradient(#0ea5e9 20%, transparent 20%);"
+    },
+    {
+      "name": "Scandinavian Hygge (北歐溫馨簡約)",
+      "triggers": "hygge, scandinavian, 北歐極簡",
+      "hex": [
+        "#F8FAF8",
+        "#4A5568",
+        "#E2E8F0"
+      ],
+      "desc": "極簡燕麥色底、柔和木質色調、極高舒適度與放鬆家居質感。",
+      "css": "background: #F8FAF8; color: #4A5568; border-radius: 12px; border: 1px solid #E2E8F0;"
+    },
+    {
+      "name": "Kinetic Typography (動態字體風格)",
+      "triggers": "kinetic, 動態排版, 大字體流動",
+      "hex": [
+        "#000000",
+        "#FFFFFF",
+        "#FF3366"
+      ],
+      "desc": "超大尺寸字體溢出邊框、滾動字幕與流動文字視覺號召。",
+      "css": "background: #000; color: #FFF; font-size: 16px; font-weight: 900; letter-spacing: -1px;"
+    },
+    {
+      "name": "Dimensional Papercut (立體剪紙)",
+      "triggers": "papercut, 剪紙風格, 疊層影子",
+      "hex": [
+        "#1E293B",
+        "#38BDF8",
+        "#7DD3FC"
+      ],
+      "desc": "多層紙張堆疊立體影、陰影落差與溫馨工藝質感。",
+      "css": "background: #38BDF8; color: #0F172A; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3); border-radius: 12px;"
+    },
+    {
+      "name": "Retro Future 80s (80年代未來的遐想)",
+      "triggers": "retro future, 復古未來, synthwave",
+      "hex": [
+        "#2E0249",
+        "#570A57",
+        "#F806CC"
+      ],
+      "desc": "霓虹網格線延伸至地平線、夕陽太陽圓盤與電子合成器風格。",
+      "css": "background: #2E0249; border-bottom: 2px solid #F806CC; color: #F806CC; font-family: sans-serif;"
+    },
+    {
+      "name": "Micro-Interaction Focus (微互動導向)",
+      "triggers": "micro interaction, 微互動, 靈動微動",
+      "hex": [
+        "#FFFFFF",
+        "#0284C7",
+        "#F1F5F9"
+      ],
+      "desc": "每一個組件懸停均有 3D 浮動、點擊微彈簧與精緻反饋。",
+      "css": "background: #FFF; border: 1px solid #E2E8F0; color: #0284C7; transition: transform 0.2s;"
+    },
+    {
+      "name": "Liquid Motion (流體水波)",
+      "triggers": "liquid motion, 流體質感, 水波動態",
+      "hex": [
+        "#0EA5E9",
+        "#38BDF8",
+        "#E0F2FE"
+      ],
+      "desc": "有機液體波動邊框、藍色清澈漸變與流暢水潤感知。",
+      "css": "background: linear-gradient(180deg, #0EA5E9 0%, #38BDF8 100%); color: #FFF; border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;"
+    },
+    {
+      "name": "Zero-Margin Maximalism (極致滿版極多主義)",
+      "triggers": "maximalism, 極多主義, 零留白",
+      "hex": [
+        "#FF0000",
+        "#00FF00",
+        "#0000FF"
+      ],
+      "desc": "充滿畫面的色彩圖塊、無留白、撞擊感與爆炸資訊視覺。",
+      "css": "background: #FF0000; color: #FFFF00; font-weight: 900; padding: 12px; text-transform: uppercase;"
+    },
+    {
+      "name": "Raw Concrete Monolith (巨石水泥風)",
+      "triggers": "monolith, 巨石建築, 原始水泥",
+      "hex": [
+        "#262626",
+        "#525252",
+        "#A3A3A3"
+      ],
+      "desc": "深灰巨石塊面、堅硬幾何與現代建築感質感。",
+      "css": "background: #262626; color: #D4D4D4; border: 1px solid #404040; font-family: sans-serif;"
+    },
+    {
+      "name": "Soft Pastel UI (柔和馬卡龍粉彩)",
+      "triggers": "pastel, 馬卡龍, 柔色彩彩",
+      "hex": [
+        "#FECDD3",
+        "#E0E7FF",
+        "#FEF08A"
+      ],
+      "desc": "淡粉淡藍馬卡龍配色、低對比無壓迫感與療癒氛圍。",
+      "css": "background: #FECDD3; color: #881337; border-radius: 16px; font-weight: 600;"
+    },
+    {
+      "name": "Cyber Gothic (賽博哥特風格)",
+      "triggers": "cyber gothic, 暗黑哥特, 黑銀科技",
+      "hex": [
+        "#050505",
+        "#E2E8F0",
+        "#94A3B8"
+      ],
+      "desc": "深黑銀灰襯線字體、尖角金屬框邊與冷峻神秘科技感。",
+      "css": "background: #050505; color: #E2E8F0; border: 1px solid #334155; font-family: Times, serif;"
+    },
+    {
+      "name": "Vintage Film Grain (復古底片顆粒)",
+      "triggers": "film grain, 復古底片, 膠片質感",
+      "hex": [
+        "#292524",
+        "#D6D3D1",
+        "#F59E0B"
+      ],
+      "desc": "細緻雜訊噪點底紋、舊照片暖色調與懷舊底片藝術。",
+      "css": "background: #292524; color: #D6D3D1; border: 1px dashed #78716C;"
+    },
+    {
+      "name": "Spatial Floating Cards (懸浮景深卡片)",
+      "triggers": "floating ui, 景深懸浮, 3d level",
+      "hex": [
+        "#F8FAFC",
+        "#FFFFFF",
+        "#0EA5E9"
+      ],
+      "desc": "三層 z-index 陰影落差、滾動時層次浮動視覺。",
+      "css": "background: #FFF; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1); border-radius: 12px;"
+    },
+    {
+      "name": "Voice AI Responsive (語音波形響應)",
+      "triggers": "voice ui, 語音波形, ai assistant",
+      "hex": [
+        "#0F172A",
+        "#38BDF8",
+        "#818CF8"
+      ],
+      "desc": "動態音波起伏條、Siri/Gemini 風格流光邊框。",
+      "css": "background: #0F172A; border: 2px solid #38BDF8; color: #38BDF8; border-radius: 20px;"
+    },
+    {
+      "name": "Extreme Minimalism (極致極簡主義)",
+      "triggers": "extreme minimalism, 極簡純白, ultra clean",
+      "hex": [
+        "#FFFFFF",
+        "#111111",
+        "#EEEEEE"
+      ],
+      "desc": "除文字與單線條外無任何多餘裝飾、回歸純粹資訊。",
+      "css": "background: #FFF; color: #111; border-bottom: 1px solid #111; font-weight: 400;"
+    },
+    {
+      "name": "Biophilic Greenhouse (綠意溫室風)",
+      "triggers": "greenhouse, 綠意溫室, 植物系",
+      "hex": [
+        "#064E3B",
+        "#A7F3D0",
+        "#047857"
+      ],
+      "desc": "植物綠與暖日光配色、自然和諧感。",
+      "css": "background: #064E3B; color: #A7F3D0; border-radius: 12px;"
+    },
+    {
+      "name": "3D Hyper-Realism (超寫實 3D 渲染)",
+      "triggers": "hyper 3d, 寫實3d, 光線追蹤",
+      "hex": [
+        "#0F172A",
+        "#38BDF8",
+        "#F43F5E"
+      ],
+      "desc": "光線追蹤金屬光澤、球體玻璃反射質感。",
+      "css": "background: radial-gradient(circle at 50% 50%, #1e293b, #0f172a); color: #38bdf8;"
+    },
+    {
+      "name": "Bauhaus Geometric (包浩斯幾何風格)",
+      "triggers": "bauhaus, 包浩斯, 原色幾何",
+      "hex": [
+        "#DD2476",
+        "#FF512F",
+        "#1A202C"
+      ],
+      "desc": "三原色 (紅黃藍) 圓形正方形三角構造、經典工業美學。",
+      "css": "background: #DD2476; color: #FFF; border-radius: 50% 0 0 0;"
+    },
+    {
+      "name": "AI Native Glass (AI 原生智能介面)",
+      "triggers": "ai native, ai 介面, 智能流光",
+      "hex": [
+        "#0B0F19",
+        "#6366F1",
+        "#A855F7"
+      ],
+      "desc": "智能漸變光暈跟隨滑鼠、自動卡片佈局與科技感知。",
+      "css": "background: #0B0F19; border: 1px solid #6366F1; color: #A855F7;"
+    },
+    {
+      "name": "Soft Pastel Neumorphic (柔彩軟擬物)",
+      "triggers": "pastel neumorphism, 柔彩軟擬物",
+      "hex": [
+        "#F3F4F6",
+        "#E5E7EB",
+        "#9CA3AF"
+      ],
+      "desc": "馬卡龍色彩結合軟凝膠質感凹凸細節。",
+      "css": "background: #F3F4F6; box-shadow: 4px 4px 8px #d1d5db, -4px -4px 8px #ffffff;"
+    },
+    {
+      "name": "Brutalist Mono Terminal (蠻荒單色終端)",
+      "triggers": "mono brutalist, 單色蠻荒",
+      "hex": [
+        "#000000",
+        "#FFFFFF"
+      ],
+      "desc": "純黑白粗體等寬字、粗框無陰影黑白二值視覺。",
+      "css": "background: #000; color: #FFF; border: 3px solid #FFF; font-family: monospace;"
+    },
+    {
+      "name": "Luxe Gold Noir (黑金奢華暗黑風)",
+      "triggers": "luxe gold, 黑金奢華, 高級金",
+      "hex": [
+        "#0A0A0A",
+        "#D4AF37",
+        "#262626"
+      ],
+      "desc": "純黑亮面背景、拉絲黃金高光線條邊框與極致尊榮質感。",
+      "css": "background: #0A0A0A; border: 1px solid #D4AF37; color: #D4AF37;"
+    },
+    {
+      "name": "Clean Nordique (北歐極簡清爽)",
+      "triggers": "nordique, 北歐清爽, clean slate",
+      "hex": [
+        "#F8FAFC",
+        "#0284C7",
+        "#475569"
+      ],
+      "desc": "Slate/White 高雅配色、簡潔清晰卡片分層與放鬆目視質感。",
+      "css": "background: #F8FAFC; border: 1px solid #E2E8F0; color: #0F172A;"
+    },
+    {
+      "name": "Cyber Metallic Slate (賽博金屬板岩)",
+      "triggers": "metallic slate, 金屬板岩, 硬核科技",
+      "hex": [
+        "#1E293B",
+        "#94A3B8",
+        "#38BDF8"
+      ],
+      "desc": "拉絲鋼鐵板岩冷灰底、湛藍指示燈亮點與極度堅固感。",
+      "css": "background: #1E293B; border-top: 2px solid #38BDF8; color: #94A3B8;"
+    }
+  ],
+  "hallmark_themes_20": [
+    {
+      "name": "editorial-serif (典雅雜誌明朝)",
+      "color": "#FBF9F5, #1C1917, #8C8275",
+      "font": "Playfair Display / Georgia",
+      "css": "background: #FBF9F5; color: #1C1917; border: 1px solid #E7E5E4; font-family: Georgia, serif;",
+      "desc": "暖紙白底、高雅 serif 大字體標題、1.8x 行高、適用品牌故事與精品的極致空氣感"
+    },
+    {
+      "name": "neubrutalism-vivid (高對比蠻荒)",
+      "color": "#FFE600, #000000, #FF3B30",
+      "font": "Space Grotesk / Impact",
+      "css": "background: #FFE600; color: #000000; border: 3px solid #000; box-shadow: 4px 4px 0px #000; font-family: sans-serif; font-weight: 800;",
+      "desc": "純黑 4px 重硬邊框、硬塊陰影 (box-shadow: 4px 4px #000)、高飽和黃紅青撞色"
+    },
+    {
+      "name": "cyber-terminal (深空科技終端)",
+      "color": "#090D16, #00FF66, #00BFFF",
+      "font": "JetBrains Mono / monospace",
+      "css": "background: #090D16; color: #00FF66; border: 1px solid #00FF66; font-family: monospace; text-shadow: 0 0 5px rgba(0,255,102,0.5);",
+      "desc": "單色綠字黑底、矩陣光暈邊框、等寬字體、命令提示列符號與戰術數據面板"
+    },
+    {
+      "name": "bento-dark-lux (暗黑奢華便當盒)",
+      "color": "#09090B, #FAFAFA, #27272A",
+      "font": "Inter / Plus Jakarta",
+      "css": "background: #09090B; color: #FAFAFA; border: 1px solid #27272A; border-radius: 16px; font-family: sans-serif;",
+      "desc": "OLED 純黑底、1px 微暗邊框、Linear/Apple 式高質感微卡片佈局與 subtle hover 光暈"
+    },
+    {
+      "name": "glass-aurora (極光毛玻璃)",
+      "color": "rgba(255,255,255,0.12), #FFFFFF, #38BDF8",
+      "font": "Satoshi / System UI",
+      "css": "background: linear-gradient(135deg, rgba(121,40,202,0.6), rgba(255,0,128,0.6)); color: #FFF; backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.4); border-radius: 14px;",
+      "desc": "彌散光暈漸變背景、毛玻璃虛化邊框、Specular 高光頂邊與夢幻質感"
+    },
+    {
+      "name": "nordique-clean (北歐極簡清爽)",
+      "color": "#F8FAFC, #0F172A, #0284C7",
+      "font": "Inter / System",
+      "css": "background: #F8FAFC; color: #0F172A; border: 1px solid #E2E8F0; border-radius: 12px; font-family: sans-serif;",
+      "desc": "高雅 Slate 暖白底色、湛藍點睛色、極簡 1px 邊框與舒適閱讀卡片與高透氣感"
+    },
+    {
+      "name": "japanese-editorial (日式和風質感)",
+      "color": "#F7F5F0, #2C2C2C, #C84B31",
+      "font": "Yu Mincho / Shippori",
+      "css": "background: #F7F5F0; color: #2C2C2C; border: 1px solid #E5E0D8; font-family: serif;",
+      "desc": "莫蘭迪紙張色系、日式留白、竪排視覺標題與空氣感體驗"
+    },
+    {
+      "name": "industrial-steel (工業鋼鐵硬核)",
+      "color": "#1A1A1A, #E5E5E5, #FF4500",
+      "font": "Roboto Mono / monospace",
+      "css": "background: #1A1A1A; color: #E5E5E5; border-left: 4px solid #FF4500; font-family: monospace;",
+      "desc": "金屬網格底紋、警示橘紅邊框、純硬塊線條與堅毅工程感知"
+    },
+    {
+      "name": "vision-spatial (蘋果空間懸浮)",
+      "color": "rgba(255,255,255,0.25), #0F172A, #38BDF8",
+      "font": "SF Pro / Inter",
+      "css": "background: rgba(255,255,255,0.3); color: #0F172A; border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-radius: 20px;",
+      "desc": "動態懸浮光效、Specular Highlight 高光頂邊與微立態層次落差"
+    },
+    {
+      "name": "clay-pastel (馬卡龍黏土)",
+      "color": "#F3E8FF, #581C87, #C084FC",
+      "font": "Fredoka / Nunito",
+      "css": "background: #F3E8FF; color: #581C87; box-shadow: inset -4px -4px 8px #C084FC, inset 4px 4px 8px #FFF; border-radius: 20px;",
+      "desc": "軟萌雙向雙層內陰影、軟膠浮雕質感與療癒互動觸感"
+    },
+    {
+      "name": "retro-win95 (95 懷舊復古)",
+      "color": "#C0C0C0, #000000, #000080",
+      "font": "MS Sans Serif / Tahoma",
+      "css": "background: #C0C0C0; color: #000; border: 2px outset #FFF; font-family: Tahoma, sans-serif;",
+      "desc": "經典灰底 3D 凸起框 (outset)、深藍視窗標題列與懷舊視窗美學"
+    },
+    {
+      "name": "vapor-neon (蒸汽波懷舊)",
+      "color": "#FF71CE, #FFFFFF, #01CDFE",
+      "font": "Outfit / System",
+      "css": "background: linear-gradient(90deg, #FF71CE, #01CDFE); color: #FFF; font-family: sans-serif; font-weight: 700; border-radius: 10px;",
+      "desc": "80 年代霓虹粉青雙色漸變、日落太陽幾何與復古浪漫"
+    },
+    {
+      "name": "monochrome-minimal (單色極簡)",
+      "color": "#000000, #FFFFFF, #888888",
+      "font": "Space Mono / monospace",
+      "css": "background: #000000; color: #FFFFFF; border: 1px solid #FFFFFF; font-family: monospace;",
+      "desc": "純黑白二值對比、無任何干擾多餘色彩與純粹資訊力量"
+    },
+    {
+      "name": "biophilic-emerald (綠意翡翠)",
+      "color": "#064E3B, #A7F3D0, #047857",
+      "font": "Plus Jakarta / sans-serif",
+      "css": "background: #064E3B; color: #A7F3D0; border: 1px solid #047857; border-radius: 16px;",
+      "desc": "翡翠深綠配色、自然有機曲線邊框與植感呼吸感"
+    },
+    {
+      "name": "holo-chromatic (彩虹全息)",
+      "color": "#A1C4FD, #1E293B, #C2E9FB",
+      "font": "Syne / Inter",
+      "css": "background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%); color: #1e293b; border-radius: 14px; font-weight: 700;",
+      "desc": "彩虹全息流光金屬漸變、高奢科技感與未來流行美學"
+    },
+    {
+      "name": "eink-reader (電子紙閱讀)",
+      "color": "#EAEAEA, #111111, #666666",
+      "font": "Lora / Georgia",
+      "css": "background: #EAEAEA; color: #111111; border: 1px solid #111; font-family: Georgia, serif;",
+      "desc": "無彩度純灰階抖動網點、高對比書籍閱讀質感與低壓視覺"
+    },
+    {
+      "name": "genz-deconstruct (Z 世代解構)",
+      "color": "#CCFF00, #000000, #FF00FF",
+      "font": "Cabinet Grotesk / Impact",
+      "css": "background: #CCFF00; color: #000000; border: 2px solid #000; transform: rotate(-1deg); font-weight: 900;",
+      "desc": "傾斜貼紙字體、打破網格與高張力撞色幾何活力"
+    },
+    {
+      "name": "hud-tactical (戰術抬頭顯示)",
+      "color": "#051923, #00A6FB, #0582CA",
+      "font": "Fira Code / monospace",
+      "css": "background: #051923; color: #00A6FB; border: 1px solid #00A6FB; font-family: monospace;",
+      "desc": "十字準星、座標數據圖例、動態括號與軍事科技面"
+    },
+    {
+      "name": "mesh-gradient (彌散網格)",
+      "color": "#FF512F, #FFFFFF, #DD2476",
+      "font": "Clash Display / sans-serif",
+      "css": "background: linear-gradient(135deg, #FF512F, #DD2476); color: #FFFFFF; border-radius: 16px;",
+      "desc": "多色流體漸變、光學彌散背景與現代高視覺號召"
+    },
+    {
+      "name": "luxe-noir (黑金高奢)",
+      "color": "#0A0A0A, #D4AF37, #262626",
+      "font": "Cinzel / Times",
+      "css": "background: #0A0A0A; color: #D4AF37; border: 1px solid #D4AF37; font-family: Times, serif;",
+      "desc": "曜石黑底、拉絲黃金高光線條與極致尊榮奢華感知"
+    }
+  ],
+  "presentation_specs_10": [
+    {
+      "name": "neon-collage-architect",
+      "triggers": "霓虹拼貼, neon collage, 構築主義",
+      "ratio": "16:9 · 10:1 Font scaling",
+      "css": "background: #0D0E15; color: #00F0FF; border: 2px solid #FF0055; font-family: sans-serif;",
+      "desc": "3 色限量色盤、10:1 標題/副標字體跳躍率、技術圖紙與前衛拼貼感。",
+      "slide_title": "NEON ARCHITECTURE 2050",
+      "slide_sub": "Constructivism & Tech Diagram Layout",
+      "slide_badge": "SPEC #01",
+      "bg_accent": "#FF0055"
+    },
+    {
+      "name": "premium-apple-mockup-designer",
+      "triggers": "premium mockup, apple mockup, 裝置模型",
+      "ratio": "16:9 · 3D Device Framing",
+      "css": "background: #000000; color: #F5F5F7; border: 1px solid #333336; font-family: -apple-system, sans-serif;",
+      "desc": "Studio Display, iPhone, MacBook 3D 裁切佈局展示。",
+      "slide_title": "Pro Display XDR Specs",
+      "slide_sub": "Extreme Dynamic Range & 6K Precision",
+      "slide_badge": "MOCKUP 3D",
+      "bg_accent": "#2997FF"
+    },
+    {
+      "name": "sculpture-pop-remix",
+      "triggers": "sculpture pop, remix pop, 石膏撞色",
+      "ratio": "16:9 · Vaporwave Pop",
+      "css": "background: linear-gradient(135deg, #FF71CE, #01CDFE); color: #FFFFFF; font-family: sans-serif; font-weight: 800;",
+      "desc": "古典石膏像結合高對比雙色調與蒸汽波美學。",
+      "slide_title": "SCULPTURE POP REMIX",
+      "slide_sub": "Classical Aesthetics meets Cyberpunk Contrast",
+      "slide_badge": "VAPOR POP",
+      "bg_accent": "#05FFA1"
+    },
+    {
+      "name": "modern-editorial-designer",
+      "triggers": "editorial, 雜誌風, kinfolk",
+      "ratio": "16:9 · Ivory Paper 1.8x",
+      "css": "background: #F4F1EA; color: #2B2927; border: 1px solid #E2DED4; font-family: Georgia, serif;",
+      "desc": "暖白紙色 (#f1f0ea)、明朝體 (Serif)、大面積留白與空氣感。",
+      "slide_title": "Kinfolk & Quiet Luxury",
+      "slide_sub": "Minimalist Editorial Layout with High Air Quality",
+      "slide_badge": "EDITORIAL",
+      "bg_accent": "#8C8275"
+    },
+    {
+      "name": "new-economy-editorial-director",
+      "triggers": "swiss style, new economy, bauhaus",
+      "ratio": "16:9 · STRICT NO MARKDOWN",
+      "css": "background: #F4F4F5; color: #18181B; border-top: 5px solid #FF3B30; font-family: Helvetica, sans-serif;",
+      "desc": "【嚴格禁止 Markdown 符號】純文字非對稱構圖、10:1 巨型標題。",
+      "slide_title": "NEW ECONOMY 2050",
+      "slide_sub": "Swiss International Typographic Alignment",
+      "slide_badge": "NO MARKDOWN",
+      "bg_accent": "#FF3B30"
+    },
+    {
+      "name": "dark-mode-bento-architect",
+      "triggers": "bento presentation, 暗黑便當簡報, oled slide",
+      "ratio": "16:9 · OLED Dark Grid",
+      "css": "background: #09090B; color: #FAFAFA; border: 1px solid #27272A; font-family: sans-serif;",
+      "desc": "深色便當盒佈局、高對比發光文字與模組化卡片分區。",
+      "slide_title": "Linear Bento Slide Deck",
+      "slide_sub": "Modular Grid Cards with Subtle Glowing Borders",
+      "slide_badge": "BENTO OLED",
+      "bg_accent": "#38BDF8"
+    },
+    {
+      "name": "cyberpunk-glitch-presenter",
+      "triggers": "cyberpunk slide, 賽博簡報, 故障風簡報",
+      "ratio": "16:9 · High Contrast Neon",
+      "css": "background: #05050A; color: #00F0FF; border: 1px solid #FF0055; font-family: monospace;",
+      "desc": "高對比青紫霓虹撞色、故障線條與前衛戰術科技感。",
+      "slide_title": "CYBERPUNK GLITCH PROTOCOL",
+      "slide_sub": "High Voltage Neon & Tactical Grid Lines",
+      "slide_badge": "GLITCH 2077",
+      "bg_accent": "#FF0055"
+    },
+    {
+      "name": "glassmorphism-aurora-slide",
+      "triggers": "glass slide, 極光簡報, 毛玻璃簡報",
+      "ratio": "16:9 · Blur 20px Specular",
+      "css": "background: linear-gradient(135deg, rgba(121,40,202,0.8), rgba(255,0,128,0.8)); color: #FFFFFF; backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.4);",
+      "desc": "彌散漸變極光背景、毛玻璃卡片與高光邊緣構圖。",
+      "slide_title": "Aurora Spatial Presentation",
+      "slide_sub": "Diffuse Fluid Gradient with Specular Rim Light",
+      "slide_badge": "AURORA GLASS",
+      "bg_accent": "#00DFD8"
+    },
+    {
+      "name": "minimalist-typographic-deck",
+      "triggers": "typographic deck, 文字簡報, 極簡簡報",
+      "ratio": "16:9 · Pure Typography",
+      "css": "background: #FFFFFF; color: #0F172A; border-bottom: 3px solid #0F172A; font-family: sans-serif; font-weight: 900;",
+      "desc": "無任何多餘圖片裝飾、100% 依賴字體層級與理性視覺落差。",
+      "slide_title": "PURE TYPOGRAPHY SLIDE",
+      "slide_sub": "Zero Graphic Clutter · 100% Font Hierarchy Precision",
+      "slide_badge": "TYPO 100%",
+      "bg_accent": "#0F172A"
+    },
+    {
+      "name": "slidev-markdown-exporter",
+      "triggers": "slidev export, slidev markdown, slides.md",
+      "ratio": "16:9 · Slidev AST Engine",
+      "css": "background: #1E1E1E; color: #4EC9B0; border: 1px solid #333; font-family: monospace;",
+      "desc": "轉譯完整 Slidev (slides.md)，含 v-clicks 動畫與 Mermaid 圖表。",
+      "slide_title": "slides.md AST Exporter",
+      "slide_sub": "Native Slidev Syntax & Mermaid Diagrams",
+      "slide_badge": "SLIDEV AST",
+      "bg_accent": "#CE9178"
+    }
+  ]
+}
