@@ -35,13 +35,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       backBtn.textContent = '← Back to Home';
       detailSearch.placeholder = 'Search styles, HEX swatches, or triggers inside current skill...';
       
-      // Update Home Hero UI
       const homeTitle = document.querySelector('.home-hero-title');
       const homeDesc = document.querySelector('.home-hero-desc');
-      if (homeTitle) homeTitle.textContent = 'Antigravity Master Skill Architecture Hub';
-      if (homeDesc) homeDesc.textContent = 'Click any master card to explore interactive principles, 70+ design styles, HEX swatches, and trigger keys.';
+      if (homeTitle) homeTitle.textContent = 'Antigravity Skill Hub Architecture';
+      if (homeDesc) homeDesc.textContent = 'Click any skill card to explore interactive principles, 70+ design styles, HEX swatches, and trigger keys.';
 
-      // Update 4 Master Cards on Home
       const masterCards = document.querySelectorAll('.master-card');
       if (masterCards.length >= 4) {
         masterCards[0].querySelector('.master-card-desc').textContent = 'Core synergy & engineering gate suite. Includes Antigravity × OpenCode dual-agent architecture diagrams, grill-with-docs alignment, and open-code-review.';
@@ -83,7 +81,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         masterCards[2].querySelector('.count-tag').textContent = '4 大動效與元件庫';
         masterCards[2].querySelector('.enter-btn').textContent = '檢視動效規範 →';
 
-        masterCards[3].querySelector('.master-card-desc').textContent = '簡報視覺與 Slidev 導出全集。包含 10 大客製化簡報視覺 Specs (霓虹拼貼, Apple Mockup, Kinfolk 雜誌風, 瑞士商業風等) 與 Felo / Slidev 導出器。';
+        masterCards[3].querySelector('.master-card-desc').textContent = '簡報視覺與 Slidev 導出器。包含 10 大客製化簡報視覺 Specs (霓虹拼貼, Apple Mockup, Kinfolk 雜誌風, 瑞士商業風等) 與 Felo / Slidev 導出器。';
         masterCards[3].querySelector('.count-tag').textContent = '10 大簡報 Specs';
         masterCards[3].querySelector('.enter-btn').textContent = '進入簡報展演館 →';
       }
