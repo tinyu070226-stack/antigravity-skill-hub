@@ -22,12 +22,73 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('Failed to load skills_data.json', err);
   }
 
-  // Language Toggle: Displays what language the user will switch TO
+  // Language Toggle Switcher
   langBtn.addEventListener('click', () => {
     currentLang = currentLang === 'zh' ? 'en' : 'zh';
     langBtn.innerHTML = currentLang === 'zh' ? '🌐 Switch to English' : '🌐 切換至 繁體中文';
+    updateStaticText();
     handleRoute();
   });
+
+  function updateStaticText() {
+    if (currentLang === 'en') {
+      backBtn.textContent = '← Back to Home';
+      detailSearch.placeholder = 'Search styles, HEX swatches, or triggers inside current skill...';
+      
+      // Update Home Hero UI
+      const homeTitle = document.querySelector('.home-hero-title');
+      const homeDesc = document.querySelector('.home-hero-desc');
+      if (homeTitle) homeTitle.textContent = 'Antigravity Master Skill Architecture Hub';
+      if (homeDesc) homeDesc.textContent = 'Click any master card to explore interactive principles, 70+ design styles, HEX swatches, and trigger keys.';
+
+      // Update 4 Master Cards on Home
+      const masterCards = document.querySelectorAll('.master-card');
+      if (masterCards.length >= 4) {
+        masterCards[0].querySelector('.master-card-desc').textContent = 'Core synergy & engineering gate suite. Includes Antigravity × OpenCode dual-agent architecture diagrams, grill-with-docs alignment, and open-code-review.';
+        masterCards[0].querySelector('.count-tag').textContent = 'Diagrams + 5 Core Sub-modules';
+        masterCards[0].querySelector('.enter-btn').textContent = 'View Architecture & Details →';
+
+        masterCards[1].querySelector('.master-card-desc').textContent = 'Design system & anti-slop suite. Includes 50 web design styles (Live CSS/Swatches), Hallmark 20 themes (8-state validation), and anti-slop rules.';
+        masterCards[1].querySelector('.count-tag').textContent = 'Anti-Slop + 70+ Style Showcase';
+        masterCards[1].querySelector('.enter-btn').textContent = 'Enter Style Gallery →';
+
+        masterCards[2].querySelector('.master-card-desc').textContent = 'UI Motion & Micro-interactions suite. Integrates Anime.js timeline engineering, LottieFiles vector animations, Text-to-Lottie, and React Bits (shadcn CLI).';
+        masterCards[2].querySelector('.count-tag').textContent = '4 Motion Engine Libraries';
+        masterCards[2].querySelector('.enter-btn').textContent = 'View Motion Specs →';
+
+        masterCards[3].querySelector('.master-card-desc').textContent = 'Presentation visual specs & Slidev suite. Includes 10 custom 16:9 presentation specs (Neon Collage, Apple Mockup, Kinfolk, Swiss) and Felo/Slidev exporter.';
+        masterCards[3].querySelector('.count-tag').textContent = '10 Presentation Specs';
+        masterCards[3].querySelector('.enter-btn').textContent = 'Enter Presentation Gallery →';
+      }
+    } else {
+      backBtn.textContent = '← 返回主頁 (Home)';
+      detailSearch.placeholder = '在目前技能內部搜尋風格、HEX 色票或觸發詞...';
+
+      const homeTitle = document.querySelector('.home-hero-title');
+      const homeDesc = document.querySelector('.home-hero-desc');
+      if (homeTitle) homeTitle.textContent = 'Antigravity 4 大整合技能集展覽館';
+      if (homeDesc) homeDesc.textContent = '點擊下方大卡片進入個別技能的內部運作圖文原理、70+ 種風格 live 展演、色票卡與觸發清單。';
+
+      const masterCards = document.querySelectorAll('.master-card');
+      if (masterCards.length >= 4) {
+        masterCards[0].querySelector('.master-card-desc').textContent = '底層協同與工程門禁引擎。包含雙主 Agent (Antigravity × OpenCode) 運作圖解、grill-with-docs 詰問對齊流程與 open-code-review 門禁。';
+        masterCards[0].querySelector('.count-tag').textContent = '運作圖解 + 5個核心子模組';
+        masterCards[0].querySelector('.enter-btn').textContent = '檢視運作原理與細節 →';
+
+        masterCards[1].querySelector('.master-card-desc').textContent = '視覺美學與反 Slop 全集。包含 50 種網頁設計風格 (Live CSS 預覽/色票)、Hallmark 20 主題 (8-State組件驗證) 與雙重防禦原理圖解。';
+        masterCards[1].querySelector('.count-tag').textContent = '防禦圖解 + 70+ 風格展演';
+        masterCards[1].querySelector('.enter-btn').textContent = '進入風格展演館 →';
+
+        masterCards[2].querySelector('.master-card-desc').textContent = '前端動效與向量動畫全集。整合 Anime.js 時間軸彈簧物理、LottieFiles 向量動效、Text-to-Lottie 生成與 React Bits (shadcn CLI) 組件庫規範。';
+        masterCards[2].querySelector('.count-tag').textContent = '4 大動效與元件庫';
+        masterCards[2].querySelector('.enter-btn').textContent = '檢視動效規範 →';
+
+        masterCards[3].querySelector('.master-card-desc').textContent = '簡報視覺與 Slidev 導出全集。包含 10 大客製化簡報視覺 Specs (霓虹拼貼, Apple Mockup, Kinfolk 雜誌風, 瑞士商業風等) 與 Felo / Slidev 導出器。';
+        masterCards[3].querySelector('.count-tag').textContent = '10 大簡報 Specs';
+        masterCards[3].querySelector('.enter-btn').textContent = '進入簡報展演館 →';
+      }
+    }
+  }
 
   function showToast(msg) {
     toast.textContent = msg;
@@ -37,9 +98,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     }, 2000);
   }
 
-  window.copyText = (text, type = '觸發詞') => {
+  window.copyText = (text, type = 'Trigger') => {
     navigator.clipboard.writeText(text);
-    showToast(`已複製${type}: ${text}`);
+    const toastMsg = currentLang === 'en' ? `Copied ${type}: ${text}` : `已複製${type}: ${text}`;
+    showToast(toastMsg);
   };
 
   window.openDetail = (masterId, pushHistory = true) => {
@@ -122,10 +184,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     if (masterId === 'core-synergy-skill') {
-      masterInfo.sub_modules.forEach((sm, idx) => {
+      const subList = currentLang === 'en' ? (masterInfo.sub_modules_en || masterInfo.sub_modules) : (masterInfo.sub_modules_zh || masterInfo.sub_modules);
+      subList.forEach((sm, idx) => {
         const card = document.createElement('div');
         card.className = 'card';
         const icons = ['⚙️', '🍖', '🔄', '🤖'];
+        const copyBtnText = currentLang === 'en' ? 'Copy Trigger' : '複製觸發詞';
         card.innerHTML = `
           <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
             <span style="font-size:22px;">${icons[idx % icons.length]}</span>
@@ -134,7 +198,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <p class="card-desc">${sm.split(':')[1] || ''}</p>
           <div class="trigger-group">
             <span class="trigger-text">@core-synergy-skill</span>
-            <button class="copy-btn" onclick="copyText('@core-synergy-skill', '觸發詞')">複製觸發詞</button>
+            <button class="copy-btn" onclick="copyText('@core-synergy-skill', '${copyBtnText}')">${copyBtnText}</button>
           </div>
         `;
         detailGrid.appendChild(card);
@@ -151,10 +215,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
       });
     } else if (masterId === 'ui-motion-skill') {
-      masterInfo.sub_modules.forEach((sm, idx) => {
+      const subList = currentLang === 'en' ? (masterInfo.sub_modules_en || masterInfo.sub_modules) : (masterInfo.sub_modules_zh || masterInfo.sub_modules);
+      subList.forEach((sm, idx) => {
         const card = document.createElement('div');
         card.className = 'card';
         const motionIcons = ['⚡', '🎬', '🧩'];
+        const copyBtnText = currentLang === 'en' ? 'Copy Trigger' : '複製觸發詞';
         card.innerHTML = `
           <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
             <span style="font-size:22px;">${motionIcons[idx % motionIcons.length]}</span>
@@ -163,7 +229,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <p class="card-desc">${sm.split(':')[1] || ''}</p>
           <div class="trigger-group">
             <span class="trigger-text">@ui-motion-skill</span>
-            <button class="copy-btn" onclick="copyText('@ui-motion-skill', '觸發詞')">複製觸發詞</button>
+            <button class="copy-btn" onclick="copyText('@ui-motion-skill', '${copyBtnText}')">${copyBtnText}</button>
           </div>
         `;
         detailGrid.appendChild(card);
@@ -179,60 +245,65 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function matchesQuery(item, query) {
     if (!query) return true;
-    const nameStr = (item.name || item.title || '').toLowerCase();
-    const trigStr = Array.isArray(item.triggers) ? item.triggers.join(' ').toLowerCase() : (item.triggers || '').toLowerCase();
-    const descStr = (item.description || item.desc || '').toLowerCase();
-    const hexStr = Array.isArray(item.hex) ? item.hex.join(' ').toLowerCase() : '';
-    return nameStr.includes(query) || trigStr.includes(query) || descStr.includes(query) || hexStr.includes(query);
+    const nameStr = (item.name_en || item.name_zh || item.name || '').toLowerCase();
+    const trigStr = (currentLang === 'en' ? item.triggers_en : item.triggers_zh) || item.triggers || '';
+    const descStr = (currentLang === 'en' ? item.desc_en : item.desc_zh) || item.desc || '';
+    return nameStr.includes(query) || trigStr.toLowerCase().includes(query) || descStr.toLowerCase().includes(query);
   }
 
   function createRichStyleMockupCard(item) {
     const card = document.createElement('div');
     card.className = 'card';
-    const mainTrig = item.triggers.split(',')[0].trim();
+    const trigStr = (currentLang === 'en' ? (item.triggers_en || item.triggers_zh) : item.triggers_zh) || item.triggers || '';
+    const mainTrig = trigStr.split(',')[0].trim();
     const [c1, c2, c3] = item.hex || ['#ffffff', '#000000', '#0284c7'];
+    const nameStr = currentLang === 'en' ? (item.name_en || item.name_zh) : (item.name_zh || item.name);
+    const descStr = currentLang === 'en' ? (item.desc_en || item.desc_zh) : (item.desc_zh || item.desc);
+    const copyBtnText = currentLang === 'en' ? 'Copy Trigger' : '複製觸發詞';
+    const subtextStr = currentLang === 'en' ? 'High-Fidelity Component Mockup · All 3 Colorways Rendered' : '高保真美學組件範例 · 湊齊全 3 色票主副色系與對應裝飾';
+    const colorwayLabel = currentLang === 'en' ? '3 Colorways Palette:' : '三色全齊展示:';
 
     card.innerHTML = `
       <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-        <h3 class="card-title" style="margin:0; font-size:15px; font-weight:700;">🎨 ${item.name}</h3>
+        <h3 class="card-title" style="margin:0; font-size:15px; font-weight:700;">🎨 ${nameStr}</h3>
         <span style="font-size:10px; background:#e0f2fe; color:#0284c7; padding:2px 6px; border-radius:4px; font-weight:600;">50 Styles</span>
       </div>
-      <p class="card-desc">${item.desc}</p>
+      <p class="card-desc">${descStr}</p>
       
-      <div style="${item.css} padding: 18px 20px; border-radius: 12px; margin-bottom: 14px; min-height: 140px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden;" onclick="copyText('${item.css}', 'CSS 代碼')" title="點擊複製 CSS 樣式">
+      <div style="${item.css} padding: 18px 20px; border-radius: 12px; margin-bottom: 14px; min-height: 140px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden;" onclick="copyText('${item.css}', 'CSS')" title="Click to copy CSS style">
         <div style="display:flex; justify-content:space-between; align-items:center;">
           <span style="background: ${c3 || c2}; color: ${c1}; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px;">
-            ${item.name.split(' ')[0]} SPEC
+            ${nameStr.split(' ')[0]} SPEC
           </span>
           <span style="width: 8px; height: 8px; border-radius: 50%; background: ${c2}; display: inline-block;"></span>
         </div>
 
         <div style="margin: 12px 0;">
           <div style="font-size: 16px; font-weight: 800; line-height: 1.25; margin-bottom: 4px; color: inherit;">
-            ${item.name.split(' ')[0]} Master Title
+            ${nameStr.split(' ')[0]} Master Title
           </div>
           <div style="font-size: 11.5px; opacity: 0.85; line-height: 1.4;">
-            高保真美學組件範例 · 湊齊全 3 色票主副色系與對應裝飾
+            ${subtextStr}
           </div>
         </div>
 
         <div style="display:flex; align-items:center; justify-content:space-between; padding-top: 8px;">
-          <span style="font-size: 10.5px; font-weight: 600; opacity: 0.9;">三色全齊展示:</span>
+          <span style="font-size: 10.5px; font-weight: 600; opacity: 0.9;">${colorwayLabel}</span>
           <div style="display:flex; gap: 6px;">
-            <div style="background:${c1}; width:16px; height:16px; border-radius:50%; border:1px solid rgba(0,0,0,0.2);" title="色卡 1: ${c1}"></div>
-            <div style="background:${c2}; width:16px; height:16px; border-radius:50%; border:1px solid rgba(0,0,0,0.2);" title="色卡 2: ${c2}"></div>
-            <div style="background:${c3 || c2}; width:16px; height:16px; border-radius:50%; border:1px solid rgba(0,0,0,0.2);" title="色卡 3: ${c3 || c2}"></div>
+            <div style="background:${c1}; width:16px; height:16px; border-radius:50%; border:1px solid rgba(0,0,0,0.2);" title="Color 1: ${c1}"></div>
+            <div style="background:${c2}; width:16px; height:16px; border-radius:50%; border:1px solid rgba(0,0,0,0.2);" title="Color 2: ${c2}"></div>
+            <div style="background:${c3 || c2}; width:16px; height:16px; border-radius:50%; border:1px solid rgba(0,0,0,0.2);" title="Color 3: ${c3 || c2}"></div>
           </div>
         </div>
       </div>
 
       <div class="trigger-group">
-        <span class="trigger-text">${item.triggers}</span>
-        <button class="copy-btn" onclick="copyText('${mainTrig}', '觸發詞')">複製觸發詞</button>
+        <span class="trigger-text">${trigStr}</span>
+        <button class="copy-btn" onclick="copyText('${mainTrig}', '${copyBtnText}')">${copyBtnText}</button>
       </div>
 
       <div class="swatches" style="margin-top:10px;">
-        ${item.hex.map(h => `<div class="swatch" style="background: ${h};" title="點擊複製 HEX: ${h}" onclick="copyText('${h}', 'HEX 色票')"></div>`).join('')}
+        ${item.hex.map(h => `<div class="swatch" style="background: ${h};" title="Click to copy HEX: ${h}" onclick="copyText('${h}', 'HEX Swatch')"></div>`).join('')}
       </div>
     `;
     return card;
@@ -243,13 +314,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     card.className = 'card';
     const cssStyle = item.css || 'background:#f8fafc; color:#0f172a; border:1px solid #e2e8f0;';
     const fontName = item.font || 'Inter';
+    const nameStr = currentLang === 'en' ? (item.name_en || item.name_zh) : (item.name_zh || item.name);
+    const descStr = currentLang === 'en' ? (item.desc_en || item.desc_zh) : (item.desc_zh || item.desc);
+    const fontLabel = currentLang === 'en' ? 'Font Pairing:' : '字體配對:';
+    const matrixTitle = currentLang === 'en' ? '⚡ Hallmark 8-State Anti-Slop Validation Matrix:' : '⚡ Hallmark 8-State 反 Slop 互動驗證矩陣:';
+    const clickTestText = currentLang === 'en' ? '(Click to test)' : '(點擊測試狀態)';
+    const copyBtnText = currentLang === 'en' ? 'Copy Trigger' : '複製觸發詞';
+    const subtextStr = currentLang === 'en' ? `Unique Theme Visual Mockup · Font (${fontName})` : `獨特視覺氣質 UI 範例 · 字體配對 (${fontName})`;
 
     card.innerHTML = `
       <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-        <h3 class="card-title" style="margin:0; font-size:15px; font-weight:700;">💎 ${item.name}</h3>
+        <h3 class="card-title" style="margin:0; font-size:15px; font-weight:700;">💎 ${nameStr}</h3>
         <span style="font-size:10px; background:#ccfbf1; color:#0f766e; padding:2px 6px; border-radius:4px; font-weight:600;">Hallmark 20</span>
       </div>
-      <p class="card-desc">${item.desc}</p>
+      <p class="card-desc">${descStr}</p>
       
       <div style="${cssStyle} padding: 16px; border-radius: 12px; margin-bottom: 14px; min-height: 120px; display: flex; flex-direction: column; justify-content: space-between;">
         <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -259,35 +337,36 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         <div style="margin: 10px 0;">
           <div style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">
-            ${item.name.split(' ')[0]} Signature
+            ${nameStr.split(' ')[0]} Signature
           </div>
           <div style="font-size: 11.5px; opacity: 0.85; line-height: 1.4;">
-            獨特視覺氣質 UI 範例 · 字體配對 (${fontName})
+            ${subtextStr}
           </div>
         </div>
       </div>
 
       <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; margin-bottom:14px;">
         <div style="font-size:11px; font-weight:700; color:#475569; margin-bottom:8px; display:flex; justify-content:space-between;">
-          <span>⚡ Hallmark 8-State 反 Slop 互動驗證矩陣:</span>
-          <span style="color:#0f766e;">(點擊測試狀態)</span>
+          <span>${matrixTitle}</span>
+          <span style="color:#0f766e;">${clickTestText}</span>
         </div>
 
         <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 6px;">
-          <button style="padding:4px 6px; font-size:10px; border-radius:4px; border:1px solid #cbd5e1; background:#ffffff; cursor:pointer;" onclick="showToast('State: Default (預設狀態)')">Default</button>
-          <button style="padding:4px 6px; font-size:10px; border-radius:4px; border:1px solid #0284c7; background:#e0f2fe; color:#0284c7; cursor:pointer;" onclick="showToast('State: Hover (懸停狀態)')">Hover</button>
-          <button style="padding:4px 6px; font-size:10px; border-radius:4px; border:1px solid #0369a1; background:#0284c7; color:#fff; cursor:pointer;" onclick="showToast('State: Active (點擊狀態)')">Active</button>
-          <button style="padding:4px 6px; font-size:10px; border-radius:4px; border:2px solid #0f172a; background:#ffffff; cursor:pointer;" onclick="showToast('State: Focus (聚焦狀態)')">Focus</button>
-          <button style="padding:4px 6px; font-size:10px; border-radius:4px; border:1px solid #e2e8f0; background:#f1f5f9; color:#94a3b8; cursor:pointer;" onclick="showToast('State: Loading (加載中...)')">Loading...</button>
-          <button style="padding:4px 6px; font-size:10px; border-radius:4px; border:1px solid #059669; background:#dcfce7; color:#15803d; cursor:pointer;" onclick="showToast('State: Success (成功狀態)')">Success</button>
-          <button style="padding:4px 6px; font-size:10px; border-radius:4px; border:1px solid #dc2626; background:#fee2e2; color:#b91c1c; cursor:pointer;" onclick="showToast('State: Error (錯誤攔截)')">Error</button>
+          <button style="padding:4px 6px; font-size:10px; border-radius:4px; border:1px solid #cbd5e1; background:#ffffff; cursor:pointer;" onclick="showToast('State: Default')">Default</button>
+          <button style="padding:4px 6px; font-size:10px; border-radius:4px; border:1px solid #0284c7; background:#e0f2fe; color:#0284c7; cursor:pointer;" onclick="showToast('State: Hover')">Hover</button>
+          <button style="padding:4px 6px; font-size:10px; border-radius:4px; border:1px solid #0369a1; background:#0284c7; color:#fff; cursor:pointer;" onclick="showToast('State: Active')">Active</button>
+          <button style="padding:4px 6px; font-size:10px; border-radius:4px; border:2px solid #0f172a; background:#ffffff; cursor:pointer;" onclick="showToast('State: Focus')">Focus</button>
+          <button style="padding:4px 6px; font-size:10px; border-radius:4px; border:1px solid #e2e8f0; background:#f1f5f9; color:#94a3b8; cursor:pointer;" onclick="showToast('State: Loading...')">Loading...</button>
+          <button style="padding:4px 6px; font-size:10px; border-radius:4px; border:1px solid #059669; background:#dcfce7; color:#15803d; cursor:pointer;" onclick="showToast('State: Success')">Success</button>
+          <button style="padding:4px 6px; font-size:10px; border-radius:4px; border:1px solid #dc2626; background:#fee2e2; color:#b91c1c; cursor:pointer;" onclick="showToast('State: Error')">Error</button>
           <button style="padding:4px 6px; font-size:10px; border-radius:4px; border:1px solid #cbd5e1; background:#f1f5f9; color:#cbd5e1; cursor:not-allowed;" disabled>Disabled</button>
         </div>
       </div>
 
+      <div style="font-size:11.5px; color:#64748b; margin-bottom:8px;">${fontLabel} <code style="font-family:monospace; background:#f1f5f9; padding:2px 6px; border-radius:4px;">${fontName}</code></div>
       <div class="trigger-group">
-        <span class="trigger-text">hallmark, ${item.name.split(' ')[0]}</span>
-        <button class="copy-btn" onclick="copyText('hallmark', '觸發詞')">複製觸發詞</button>
+        <span class="trigger-text">hallmark, ${nameStr.split(' ')[0]}</span>
+        <button class="copy-btn" onclick="copyText('hallmark', '${copyBtnText}')">${copyBtnText}</button>
       </div>
     `;
     return card;
@@ -296,21 +375,26 @@ document.addEventListener('DOMContentLoaded', async () => {
   function createPresentation16x9SlideCard(item) {
     const card = document.createElement('div');
     card.className = 'card';
-    const mainTrig = item.triggers.split(',')[0].trim();
+    const trigStr = (currentLang === 'en' ? (item.triggers_en || item.triggers_zh) : item.triggers_zh) || item.triggers || '';
+    const mainTrig = trigStr.split(',')[0].trim();
+    const nameStr = currentLang === 'en' ? (item.name_en || item.name_zh) : (item.name_zh || item.name);
+    const descStr = currentLang === 'en' ? (item.desc_en || item.desc_zh) : (item.desc_zh || item.desc);
     const cssStyle = item.css || 'background:#0f172a; color:#38bdf8; border:1px solid #1e293b;';
-    const slideTitle = item.slide_title || item.name;
-    const slideSub = item.slide_sub || item.desc;
+    const slideTitle = item.slide_title || nameStr;
+    const slideSub = item.slide_sub || descStr;
     const slideBadge = item.slide_badge || 'SPEC SLIDE';
     const bgAccent = item.bg_accent || '#0284c7';
+    const ratioLabel = currentLang === 'en' ? 'Ratio / Spec:' : '比例/特徵:';
+    const copyBtnText = currentLang === 'en' ? 'Copy Trigger' : '複製觸發詞';
 
     card.innerHTML = `
       <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-        <h3 class="card-title" style="margin:0; font-size:15px; font-weight:700;">📊 ${item.name}</h3>
+        <h3 class="card-title" style="margin:0; font-size:15px; font-weight:700;">📊 ${nameStr}</h3>
         <span style="font-size:10px; background:#f3e8ff; color:#7c3aed; padding:2px 6px; border-radius:4px; font-weight:600;">10 Specs</span>
       </div>
-      <p class="card-desc">${item.desc}</p>
+      <p class="card-desc">${descStr}</p>
       
-      <div style="${cssStyle} width:100%; aspect-ratio: 16/9; border-radius: 12px; padding: 18px; margin-bottom: 14px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" onclick="copyText('${mainTrig}', '觸發詞')" title="16:9 高保真簡報單頁範例 (點擊複製觸發詞)">
+      <div style="${cssStyle} width:100%; aspect-ratio: 16/9; border-radius: 12px; padding: 18px; margin-bottom: 14px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" onclick="copyText('${mainTrig}', '${copyBtnText}')" title="16:9 Live Slide Deck Spec">
         <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
           <span style="background:${bgAccent}; color:#fff; font-size:9.5px; font-weight:900; padding:2px 8px; border-radius:4px; text-transform:uppercase; letter-spacing:0.5px;">
             ${slideBadge}
@@ -334,10 +418,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         </div>
       </div>
 
-      <div style="font-size:11.5px; color:#64748b; margin-bottom:8px;">比例/特徵: <code style="font-family:monospace; background:#f1f5f9; padding:2px 6px; border-radius:4px;">${item.ratio}</code></div>
+      <div style="font-size:11.5px; color:#64748b; margin-bottom:8px;">${ratioLabel} <code style="font-family:monospace; background:#f1f5f9; padding:2px 6px; border-radius:4px;">${item.ratio}</code></div>
       <div class="trigger-group">
-        <span class="trigger-text">${item.triggers}</span>
-        <button class="copy-btn" onclick="copyText('${mainTrig}', '觸發詞')">複製觸發詞</button>
+        <span class="trigger-text">${trigStr}</span>
+        <button class="copy-btn" onclick="copyText('${mainTrig}', '${copyBtnText}')">${copyBtnText}</button>
       </div>
     `;
     return card;
