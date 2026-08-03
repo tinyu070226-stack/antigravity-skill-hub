@@ -115,3 +115,18 @@ Antigravity 具備高階架構規劃、UI/UX 美學設計與系統引導能力�
   3. **5 輪收斂與出處標註 (Source Attribution)**：
      - 搜尋上限嚴格限制為 5 輪，回答時必須明確附帶檔案相對路徑與行號出處。
 
+
+---
+
+## 🎬 簡報多 Agent 極致省 Token 裝配流水線 Protocol (Deck Multi-Agent Assembly Pipeline)
+
+- **核心架構 (解耦內容與視覺，Token 消耗降低 70%+)**：
+  1. **Phase 1: 內容結構解耦 (Gemini 主力/低 Token)**：
+     - Gemini 讀取素材，僅產出純內容 JSON (`deck_content.json`)。包含：總頁數、標題、副標、內文重點 (bullet points) 與圖片對應描述。絕不包含任何排版代碼。
+  2. **Phase 2: 視覺與 Design Tokens (Claude Subagent / 現成樣式庫)**：
+     - Claude 僅根據選定的 10 大 Specs 之一產出輕量 `deck_theme.css` (變數, Typography 10:1 Ratio, Grid 規則)。
+     - **次數優化**：若選擇現有 10 大 Specs，直接載入 `.agents/skills/presentation-skill/themes/` 現成 CSS，**Claude 呼叫次數為 0**！
+  3. **Phase 3: 0 Token 零跑版代碼裝配引擎 (`build_deck.py`)**：
+     - **0 Token 拼接**：本機 Python 裝配引擎 [`build_deck.py`](file:///c:/Users/Tim/Downloads/2050簡報_Blueprint_OS/.agents/skills/presentation-skill/build_deck.py) 讀取 `deck_content.json` + `deck_theme.css`，在 0.1 秒內自動拼接出符合 Print CSS Standard 的 16:9 HTML 簡報！
+  4. **Phase 4: 輕量 CLI 執行與 PDF 導出 (OpenCode)**：
+     - OpenCode 僅在 Terminal 執行 `python build_deck.py` 或打開瀏覽器另存 PDF。**嚴禁讓 OpenCode 讀取長 Context 寫大篇幅 HTML 代碼**，實現 OpenCode 零 Context 負擔！
