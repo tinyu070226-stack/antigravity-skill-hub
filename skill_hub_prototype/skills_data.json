@@ -181,26 +181,26 @@
         "網頁文章",
         "刊物排版"
       ],
-      "description_zh": "本技能定義 10 大客製化 16:9 簡報視覺 Specs、Slidev/Felo 導出器，以及 beautiful-article 10 大文章保留率類型與 11 大大師排版主題（Tufte, Bodoni, Vignelli 等）。",
-      "description_en": "Defines 10 custom 16:9 presentation specs, Slidev/Felo exporters, and beautiful-article 10 retention models with 11 master typography themes (Tufte, Bodoni, Vignelli).",
+      "description_zh": "本技能定義 10 大客製化 16:9 簡報視覺風格 Specs、強行兩階段簡報計畫書對齊 (2-Stage Deck Plan Gate)、Slidev/Felo 導出器，以及 beautiful-article 文章排版引擎。",
+      "description_en": "Defines 10 custom 16:9 presentation specs, compulsory 2-stage deck planning gate, Slidev exporters, and beautiful-article editorial engine.",
       "sub_modules_zh": [
-        "Standard Master Prompt: 標準提示詞模板卡片、兩階段計畫書要求與 3 大紅線原則",
-        "10 簡報 Specs: 霓虹拼貼, Apple 3D Mockup, Kinfolk 雜誌風, 瑞士商業風等 16:9 簡報規範",
-        "beautiful-article 排版: 10 大文章保留率模型 (Longform 100%, Tutorial 90%, Report 80%, Briefing 50%) + 11 大大師排版主題 (Tufte, Bodoni, Vignelli)",
-        "Slidev / Felo 導出器: 自動將簡報與文章導出為可編輯的 slides.md 與 HTML 頁面"
+        "兩階段簡報規劃門禁 (2-Stage Deck Plan Gate): 嚴禁直接做簡報！必須先產出 presentation_plan.md (含總頁數、大標小標、內文大意、視覺選型、紅線自查)，等使用者確認後才輸出 Slidev/HTML 簡報。",
+        "10 大 16:9 簡報視覺 Specs: 霓虹拼貼 (Neon 10:1), Apple 3D Mockup, 石膏 Pop 撞色, Kinfolk 雜誌風, 瑞士新經濟 (嚴禁 Markdown 符號), 沉靜黑夜 Living Artifact, 溫柔扁平插畫, Slidev 導出器等。",
+        "簡報 3 大紅線原則: (1) 完整呈現原文無刪減歪曲 (2) 不改變圖片比例 (3) 嚴禁文字與圖片重疊或貼邊。",
+        "beautiful-article 單頁刊物排版: 素材 (URL/PDF/DOCX) 重構為單頁文章，支援 10 大保留率模型與 11 大大師主題。"
       ],
       "sub_modules_en": [
-        "Standard Master Prompt: Prompt template card, 2-stage planning requirement, and 3 Red-Line rules",
-        "10 Presentation Specs: 16:9 Live deck specs (Neon Collage, Apple 3D Mockup, Kinfolk, Swiss)",
-        "beautiful-article Editorial: 10 Article retention models (Longform 100%, Report 80%, Briefing 50%) + 11 Master typography themes (Tufte, Bodoni, Vignelli)",
-        "Slidev / Felo Exporters: Exports decks and articles to editable slides.md and HTML files"
+        "2-Stage Deck Plan Gate: Mandatory 2-stage execution! Writes presentation_plan.md (slides count, headers, subtext, visual choice, redline check) for user approval before writing slides code.",
+        "10 Artistic 16:9 Presentation Specs: Neon Architecture (10:1 scaling), Apple 3D Mockup, Sculpture Pop, Kinfolk (Mincho Serif), Swiss New Economy (STRICT NO MARKDOWN), Living Artifact, Gentle Flat, Slidev.",
+        "3 Red-Line Presentation Rules: (1) 100% full content fidelity, (2) preserve image aspect ratios, (3) zero text-image overlaps or border clipping.",
+        "beautiful-article Editorial Engine: Single-page web publication refactoring with 10 retention models and 11 master themes."
       ],
       "principles": [
         {
           "title_zh": "📝 簡報製作 Master Prompt 提示詞範例 (Standard Master Prompt)",
           "title_en": "📝 Standard Master Prompt Template for Presentation Creation",
-          "desc_zh": "我要在這個對話進行「(某某簡報製作任務)」。請以「(某某檔案)」的內容為材料，嚴格遵守「(某某風格)」的規則和風格，製作可編輯的 ppt 簡報。\n\n請先不要直接執行 ppt 的製作，而是先寫出「簡報規劃的計畫書」，計畫書中要寫出：總共會有幾頁、每一頁的「大標題」內容、「小標題」內容、大致的內文要寫什麼、需不需要使用 ai 圖片生成，或是可以去網路上搜尋下載圖片。\n\n【紅線 (嚴格遵守)】\n\n1. 簡報請完整呈現「(某某檔案)」的完整內容，不要有曲解、誇大其辭、用詞太過激昂的情況。\n\n2. 圖片請不要調整原有的圖片比例，只允許對圖片進行「裁切」、「縮小」、「放大」。\n\n3. 無論是大標題小標題或內文、圖片，請都不要與其他文字或圖片有重疊，也不要有貼到畫面過於邊緣的地方。",
-          "desc_en": "I want to initiate a '(Presentation Task Name)' in this conversation. Please use the content of '(Source File)' as material, strictly adhere to the rules and aesthetics of '(Specific Style)', and create an editable presentation deck.\n\nPlease DO NOT create the slides directly. First write a 'Presentation Planning Document' specifying: total slide count, each slide's 'main title', 'subtitle', outline content, whether AI image generation is needed, or if web image download is preferred.\n\n[Red Lines (Strict Constraints)]\n\n1. Presentation must faithfully present the complete content of '(Source File)' without distortion, hyperbole, or overly dramatic tone.\n\n2. Images must preserve original aspect ratio; only cropping, scaling down, or scaling up are permitted.\n\n3. Text elements (headlines, subheads, body) and images must NEVER overlap each other, nor touch extreme outer edges.",
+          "desc_zh": "我要在這個對話進行「簡報製作任務」。請以「簡報檔案」的內容為材料，嚴格遵守「16:9 客製化視覺風格 Specs」的規則和風格，製作可編輯的 16:9 Slidev/HTML 簡報。\n\n請先不要直接執行簡報的製作，而是先寫出「簡報規劃的計畫書 (presentation_plan.md)」，計畫書中要寫出：總共有幾頁、每一頁的「大標題」內容、「小標題」內容、大致的內文要寫什麼、選用的 10 大簡報風格 Spec 名稱、帶不需要使用 AI 圖片生成（或去網路上搜尋下載圖片）。\n\n【簡報 3 大紅線原則 (嚴格遵守)】\n1. 簡報請完整呈現「簡報檔案」的完整內容，不要有曲解、誇大其詞、用詞太過激進的情況。\n2. 圖片請不要調整原有的圖片比例，只允許對圖片進行「裁切」、「縮小」、「放大」。\n3. 無論是大標題小標題或內文、圖片，都不要與其他文字或圖片有重疊，也不要有貼到畫面過於邊緣的地方。\n\n【10 大 16:9 簡報視覺風格 Specs】\n1. Neon Collage Architect (霓虹拼貼): 最多3色、10:1標題/副標巨型階層、藍圖圖紙與前衛拼貼。\n2. Premium Apple Mockup Designer (裝置模型): Studio Display/MacBook 3D裝置裁切與高品質極簡留白。\n3. Sculpture Pop Remix (石膏撞色): 古典石膏像結合 Vaporwave 青紫撞色與高對比霓虹。\n4. Modern Editorial Designer / Kinfolk (雜誌風): 暖白紙色 (#f1f0ea)、明朝體 Serif (Mincho)、大面積空氣感留白。\n5. New Economy Editorial Director (瑞士新經濟): 【嚴格禁止 Markdown 符號】純文字非對稱構圖、10:1 巨型標題。\n6. Refined Minimal Portfolio (極簡作品集): 60%+ 極致留白、01. INTRODUCTION 頂部引導標示。\n7. Anti-Gravity Presentation (Living Artifact): 深色黑夜畫布、霓虹發光線條、沉靜科技氣場。\n8. Gentle Flat Illustration (溫柔扁平): 最多3種柔和粉彩、可愛圓潤粗線條人物、教育解說圖解。\n9. Slidev Markdown Exporter (Slidev 導出): 輸出標準 slides.md，支援 v-clicks 遞進與 Mermaid 圖表。\n10. Food Brand Visual Master (美食海報): 10 大攝影 Prompts (Hero, Closeup, Ingredients, Macro)。",
+          "desc_en": "I would like to conduct a 'Presentation Deck Task'. Using the provided source file as material, strictly adhere to the 16:9 Visual Style Specs to produce editable 16:9 Slidev/HTML slides.\n\nDO NOT write the slides code directly! You MUST first create a 'Presentation Plan Document (presentation_plan.md)' outlining: total slide count, main header, subheader, key body paragraph summary for each slide, selected 10 Visual Spec style, and whether external images are required.\n\n【THE 3 RED-LINE PRESENTATION RULES (STRICT)】\n1. Preserve 100% full text fidelity. Do not distort, exaggerate, or omit source content.\n2. Never distort image aspect ratios. Only crop, shrink, or enlarge.\n3. Zero text/image overlaps and zero edge clipping. Keep generous margin buffers.\n\n【THE 10 ARTISTIC 16:9 VISUAL SPECS】\n1. Neon Collage Architect: Strict 3-color max, 10:1 header scale ratio, blueprint graph grid.\n2. Premium Apple Mockup Designer: Studio Display / MacBook 3D framing with negative space.\n3. Sculpture Pop Remix: Classical marble sculpture with neon Vaporwave cyan/magenta contrast.\n4. Modern Editorial Designer / Kinfolk: Warm paper (#f1f0ea), Mincho Serif typography, Kinfolk airiness.\n5. New Economy Editorial Director: 【STRICTLY NO MARKDOWN SYMBOLS】Pure text asymmetric Swiss layout, 10:1 colossal title.\n6. Refined Minimal Portfolio: 60%+ whitespace, 01. INTRODUCTION top breadcrumbs.\n7. Anti-Gravity Presentation (Living Artifact): OLED dark space canvas, neon cyan glowing lines.\n8. Gentle Flat Illustration: Soft pastel palette, cute thick outlines, educational graphics.\n9. Slidev Exporter: Outputs standard slides.md with v-clicks incremental reveal.\n10. Food Brand Visual Master: Sequential Midjourney prompts across 10 asset categories.",
           "img_url_zh": "",
           "img_url_en": ""
         },
