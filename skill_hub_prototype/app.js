@@ -172,13 +172,31 @@ document.addEventListener('DOMContentLoaded', async () => {
           mediaHtml = `<div style="margin-top:16px; border:1px solid #e2e8f0; border-radius:12px; overflow:hidden;"><img src="${pImg}" alt="${pTitle}" style="width:100%; height:auto; display:block;" /></div>`;
         }
 
-        const formattedDesc = pDesc.replace(/\n/g, '<br/>');
+        // Custom styled box for Presentation Master Prompt with copy button and dark slate code container
+        if (masterId === 'presentation-skill') {
+          const copyBtnLabel = currentLang === 'en' ? '📋 Copy Master Prompt' : '📋 一鍵複製 Master Prompt';
+          const introLabel = currentLang === 'en' ? 'In presentation tasks, copy and send the following Master Prompt directly:' : '進行簡報製作任務時，可直接點擊下方按鈕複製完整 Master Prompt 提示詞：';
+          
+          pBox.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+              <h3 style="font-size:18px; font-weight:800; color:#0f172a; margin:0;">${pTitle}</h3>
+              <button class="copy-btn" style="background:#0284c7; color:#ffffff; border:none; padding:8px 16px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer;" onclick="copyText(\`${pDesc.replace(/`/g, '\\`')}\`, 'Master Prompt')">${copyBtnLabel}</button>
+            </div>
+            <p style="font-size:14px; color:#475569; margin-bottom:14px;">${introLabel}</p>
+            <div style="background:#0f172a; color:#f8fafc; border:1px solid #1e293b; border-radius:14px; padding:20px; font-family:'JetBrains Mono', monospace; font-size:13px; line-height:1.7; white-space:pre-wrap; box-shadow:inset 0 2px 4px rgba(0,0,0,0.2);">
+${pDesc}
+            </div>
+            ${mediaHtml}
+          `;
+        } else {
+          const formattedDesc = pDesc.replace(/\n/g, '<br/>');
+          pBox.innerHTML = `
+            <h3 style="font-size:18px; font-weight:700; color:#0f172a; margin-bottom:10px; letter-spacing:-0.3px;">${pTitle}</h3>
+            <p style="font-size:14.5px; color:#475569; line-height:1.65;">${formattedDesc}</p>
+            ${mediaHtml}
+          `;
+        }
 
-        pBox.innerHTML = `
-          <h3 style="font-size:18px; font-weight:700; color:#0f172a; margin-bottom:10px; letter-spacing:-0.3px;">${pTitle}</h3>
-          <p style="font-size:14.5px; color:#475569; line-height:1.65;">${formattedDesc}</p>
-          ${mediaHtml}
-        `;
         detailPrinciples.appendChild(pBox);
       });
     }
