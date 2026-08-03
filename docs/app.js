@@ -13,17 +13,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   let skillsData = null;
 
-  // DEFAULT LANGUAGE SET TO ENGLISH
-  let currentLang = 'en';
+  // 1. LANGUAGE PERSISTENCE VIA LOCALSTORAGE
+  const savedLang = localStorage.getItem('agy_skill_hub_lang');
+  let currentLang = savedLang ? savedLang : 'en';
 
-  // Set initial button text to switch to Traditional Chinese
-  langBtn.innerHTML = '🌐 切換至 繁體中文';
+  // Update toggle button text according to current language
+  langBtn.innerHTML = currentLang === 'zh' ? '🌐 Switch to English' : '🌐 切換至 繁體中文';
 
   try {
-    const res = await fetch('skills_data.json?v=1.1.3');
+    const res = await fetch('skills_data.json?v=1.1.4');
     skillsData = await res.json();
     updateStaticText();
-    handleRoute();
+    handleRoute(false); // Do not scroll to top on initial page load
   } catch (err) {
     console.error('Failed to load skills_data.json', err);
   }
@@ -35,12 +36,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     return cleaned.replace(/^,|,$/g, '').trim();
   }
 
-  // Language Toggle Switcher
+  // 2. LANGUAGE SWITCHER WITH SCROLL POSITION PRESERVATION
   langBtn.addEventListener('click', () => {
+    const currentScrollY = window.scrollY; // Preserve scroll Y position
     currentLang = currentLang === 'zh' ? 'en' : 'zh';
+    localStorage.setItem('agy_skill_hub_lang', currentLang); // Save to LocalStorage
+
     langBtn.innerHTML = currentLang === 'zh' ? '🌐 Switch to English' : '🌐 切換至 繁體中文';
     updateStaticText();
-    handleRoute();
+    handleRoute(false); // Re-render route without auto-scrolling to top
+
+    // Restore exact scroll position
+    window.scrollTo({ top: currentScrollY, behavior: 'instant' });
   });
 
   function updateStaticText() {
@@ -119,7 +126,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (pushHistory) {
       window.location.hash = masterId;
     }
-    renderRoute(masterId);
+    renderRoute(masterId, true);
   };
 
   function goHome(pushHistory = true) {
@@ -129,23 +136,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderHome();
   }
 
-  function handleRoute() {
+  function handleRoute(shouldScrollTop = true) {
     const hash = window.location.hash.replace('#', '');
     if (hash && ['core-synergy-skill', 'design-system-skill', 'ui-motion-skill', 'presentation-skill'].includes(hash)) {
-      renderRoute(hash);
+      renderRoute(hash, shouldScrollTop);
     } else {
       renderHome();
     }
   }
 
-  window.addEventListener('hashchange', handleRoute);
+  window.addEventListener('hashchange', () => handleRoute(true));
 
   backBtn.addEventListener('click', () => goHome(true));
   logoHome.addEventListener('click', () => goHome(true));
 
   detailSearch.addEventListener('input', () => {
     const hash = window.location.hash.replace('#', '');
-    if (hash) renderRoute(hash);
+    if (hash) renderRoute(hash, false);
   });
 
   function renderHome() {
@@ -156,14 +163,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function renderRoute(masterId) {
+  function renderRoute(masterId, shouldScrollTop = true) {
     homeView.style.display = 'none';
     detailView.style.display = 'block';
     backBtn.style.display = 'flex';
     detailGrid.innerHTML = '';
     if (detailPrinciples) detailPrinciples.innerHTML = '';
     const query = detailSearch.value.toLowerCase().trim();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (shouldScrollTop) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
     const masterInfo = skillsData.master_skills.find(m => m.id === masterId);
     if (!masterInfo) return;
@@ -369,7 +379,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const copyBtnText = currentLang === 'en' ? 'Copy Trigger' : '複製觸發詞';
     const subtextStr = currentLang === 'en' ? `Unique Theme Visual Mockup · Font (${fontName})` : `獨特視覺氣質 UI 範例 · 字體配對 (${fontName})`;
     
-    const rawTrig = (currentLang === 'en' ? item.triggers_en : item.triggers_zh) || item.triggers || '';
+    // FIX HALLMARK TRIGGERS LAYOUT BUG IN CHINESE MODE
+    const rawTrig = (currentLang === 'en' ? item.triggers_en : item.triggers_zh) || item.triggers || `hallmark, ${item.name_zh || item.name_en}`;
     const trigStr = currentLang === 'en' ? cleanEnglishText(rawTrig) : rawTrig;
     const mainTrig = trigStr.split(',')[0].trim();
 
