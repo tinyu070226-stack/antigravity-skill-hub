@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           mediaHtml = `<div style="margin-top:16px; border:1px solid #e2e8f0; border-radius:12px; overflow:hidden;"><img src="${pImg}" alt="${pTitle}" style="width:100%; height:auto; display:block;" /></div>`;
         }
 
-        // Custom styled box for Presentation Master Prompt with strict left-aligned text, balanced top/bottom margins, and centered icon button
+        // Custom styled box for Presentation Master Prompt with top border shifted down to blue marker line
         if (masterId === 'presentation-skill') {
           const tooltipLabel = currentLang === 'en' ? 'Copy Master Prompt' : '複製 Master Prompt 提示詞';
           const introLabel = currentLang === 'en' ? 'In presentation tasks, click the top-right icon to copy the full prompt:' : '進行簡報製作任務時，可直接點擊右上方圖示複製完整提示詞：';
@@ -180,12 +180,12 @@ document.addEventListener('DOMContentLoaded', async () => {
           const cleanPromptText = pDesc.trim();
 
           pBox.innerHTML = `
-            <div style="margin-bottom:16px; text-align:left;">
+            <div style="margin-bottom:24px; text-align:left;">
               <h3 style="font-size:18px; font-weight:800; color:#0f172a; margin-bottom:6px; text-align:left;">${pTitle}</h3>
               <p style="font-size:14px; color:#475569; text-align:left; margin:0;">${introLabel}</p>
             </div>
 
-            <div style="position:relative; background:#f1f5f9; color:#0f172a; border:1px solid #cbd5e1; border-radius:14px; padding:16px 52px 16px 20px; font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-size:13.5px; line-height:1.75; text-align:left; white-space:pre-wrap; display:block;">
+            <div style="position:relative; background:#f1f5f9; color:#0f172a; border:1px solid #cbd5e1; border-radius:14px; padding:16px 52px 16px 20px; font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-size:13.5px; line-height:1.75; text-align:left; white-space:pre-wrap; display:block; margin-top:12px;">
               <button class="copy-btn" title="${tooltipLabel}" style="position:absolute; top:12px; right:12px; background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; width:34px; height:34px; display:inline-flex; align-items:center; justify-content:center; padding:0; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,0.05); font-size:15px; line-height:1; transition:all 0.15s ease;" onclick="copyText(\`${cleanPromptText.replace(/`/g, '\\`')}\`, 'Master Prompt')" onmouseenter="this.style.background='#e0f2fe'; this.style.borderColor='#0284c7';" onmouseleave="this.style.background='#ffffff'; this.style.borderColor='#cbd5e1';">
                 <span style="display:inline-block; transform:translateY(-1px);">📋</span>
               </button><div style="text-align:left; display:block; margin:0; padding:0;">${cleanPromptText}</div></div>
