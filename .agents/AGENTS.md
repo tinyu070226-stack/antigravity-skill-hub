@@ -47,7 +47,6 @@ Antigravity 具備高階架構規劃、UI/UX 美學設計與系統引導能力�
 - **觸發時機**：OpenCode 完成程式碼撰寫、重構或修復準備 Commit 時。
 - **自動行為**：系統自動觸發 `@alibaba-group/open-code-review` 對 Git diff 進行深度掃描與安全/品質評分，自動攔截邏輯 Bug 與潛在漏洞，確保 Production-ready 品質。
 
-
 ---
 
 ## 🎨 前端 50 種設計風格知識庫 (優先參考規則)
@@ -58,19 +57,16 @@ Antigravity 具備高階架構規劃、UI/UX 美學設計與系統引導能力�
 
 ---
 
-## 📝 技能目錄 PDF 檔自動同步規則 (永久生效)
-
----
-
 ## ⚡ 模型智慧路由與額度保護 Protocol (Model Smart Routing & Quota Guard)
 
 - **核心配額與分工規則 (永久生效)**：
-  1. **Claude 模型 (極致審美時機)**：
-     - **ONLY 限於「第一次最開始建立全新 UI/UX、全新網頁/元件架構」之初始化生成時**，可調用 Claude 模型建立頂級視覺骨架與審美基調。
-     - **嚴格禁令**：對於後續所有的 UI 微調、樣式修改、動畫調整、重構與程式碼修復，**一律嚴禁再調用 Claude 模型**！
+  1. **Claude 模型 (頂級視覺美學調用時機)**：
+     - **適用時機 1 (初始化)**：最開始建立全新 UI/UX、全新網頁/元件架構之初始化生成時。
+     - **適用時機 2 (風格重構/大改)**：**當使用者明確指示「變更整體風格」、「重構整體 UI/UX 視覺」、「更換 Theme 風格」或進行大範圍視覺重新設計時，全面允許調用 Claude 模型重新塑造頂級美學視覺！**
+     - **微調禁令**：對於平日一般的修復、邏輯修改或極小範圍調整，不需調用 Claude。
   2. **Gemini 模型 (主力全能/ Google AI 會員)**：
      - **涵蓋日常 95% 以上任務**：包括需求拆解、架構規劃、後端 API、資料庫 Schema、演算法、單元測試、自動除錯與大型 Context 檔案搜尋。
-     - **包辦所有後續 UI 微調**：所有「第一次初始化之後」的介面微調、CSS 修正與重構，**一律全數交給 Gemini 模型 (Pro / Flash)**，並配合 `frontend-design-styles (50種風格庫)` 與 `hallmark` 規範來保持視覺質感。
+     - **包辦日常維護**：平時的小範圍維護與重構交給 Gemini 模型 (Pro / Flash)，並配合 `frontend-design-styles (50種風格庫)` 與 `hallmark` 規範來保持視覺質感。
   3. **Subagent 上下文隔離 (Token 巨額節省)**：
      - 大型或多檔案任務強制使用 `team-mode` 派發獨立 Subagent，隔離對話歷史紀錄，避免 Context 爆炸與重複發送，達成極低 API Token 消耗。
 
@@ -83,3 +79,15 @@ Antigravity 具備高階架構規劃、UI/UX 美學設計與系統引導能力�
   2. **`design-system-skill`**：整合前端 50 種設計風格 KB、Nutlope Hallmark (20主題, 8-State驗證, 6軸打分) + Emil Kowalski 8大質感與 OKLCHBetter-colors。
   3. **`ui-motion-skill`**：整合 Anime.js 時間軸彈簧物理、LottieFiles 向量動效、Text-to-Lottie 生成與 React Bits (shadcn CLI) 組件庫規範。
   4. **`presentation-skill`**：整合 10 大客製化簡報視覺風格 Specs (含霓虹拼貼, Apple Mockup, Kinfolk 雜誌風, 瑞士商業風等) 與 Felo / Slidev 導出器。
+
+---
+
+## 🛡️ UI 視覺排版與兩階段防禦機制 (UI Layout Defense Protocol)
+
+- **核心視覺防禦與測試規則 (永久生效)**：
+  1. **文字排版 DOM 結構隔離 (Anti-PreWrap Slop Rule)**：
+     - 凡是包含多行提示詞 (Master Prompt)、文字卡片或嚴格靠左對齊的需求，**嚴禁僅依賴 `white-space: pre-wrap` 渲染 Raw String**（防止隱形 `\n` 與空格導致瀏覽器誤判置中與頂部高度）。
+     - **強制要求**：必須使用 `.replace(/^[\s\r\n]+/, '')` 清理頭部，並拆分為獨立且明確靠左的 `<p style="text-align:left;">` DOM 元素進行結構化渲染。
+  2. **UI 樣式雙重驗證門禁 (Visual Layout Verification Protocol)**：
+     - 當使用者回報 UI 位置跑掉或樣式無變化時，**嚴禁連續猜測 CSS Padding/Margin 或單純歸咎於快取**。
+     - 必須第一時間檢查資料源 (`JSON/DOM Data Source`) 是否夾帶不可見字元，並於背景驗證確保修改後在視覺上完全符合預期。
