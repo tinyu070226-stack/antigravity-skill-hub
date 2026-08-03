@@ -382,7 +382,7 @@
       "name_zh": "Industrial Brutalism (工業蠻荒)",
       "name_en": "Industrial",
       "desc_zh": "裸露混凝土感、金屬網格底紋、警示黃橙色與粗獷鋼鐵線條。",
-      "desc_en": "裸露混凝土感、金屬網格底紋、警示黃橙色與粗獷鋼鐵線條。",
+      "desc_en": "Exposed concrete textures, metallic grid mesh, safety orange warning accents, and heavy steel rivets.",
       "triggers_zh": "industrial, 工業風, raw concrete",
       "triggers_en": "industrial, raw concrete"
     },
@@ -416,7 +416,7 @@
       "name_zh": "Dark OLED Obsidian (深空黑曜石)",
       "name_en": "Dark",
       "desc_zh": "發光二極體純黑底、高鮮豔發光文字與省電極致視覺。",
-      "desc_en": "發光二極體純黑底、高鮮豔發光文字與省電極致視覺。",
+      "desc_en": "Pure OLED black canvas, vivid neon glowing text, ultra battery saving visual minimalism.",
       "triggers_zh": "dark oled, 黑曜石, pure black",
       "triggers_en": "dark oled, pure black"
     },
@@ -433,7 +433,7 @@
       "name_zh": "Retro Win95 (95年代復古網頁)",
       "name_en": "Retro",
       "desc_zh": "灰底凸起三維框 (border 2px inset/outset)、青綠桌面與傳統視窗標題列。",
-      "desc_en": "灰底凸起三維框 (border 2px inset/outset)、青綠桌面與傳統視窗標題列。",
+      "desc_en": "Bevelled 3D borders (inset/outset), teal desktop canvas, and classic window titlebars.",
       "triggers_zh": "retro 95, 95復古, classic win",
       "triggers_en": "retro 95, 95, classic win"
     },
@@ -450,7 +450,7 @@
       "name_zh": "Kinfolk Editorial (Kinfolk 雜誌風格)",
       "name_en": "Kinfolk",
       "desc_zh": "極大比例留白、明朝體 Serif、莫蘭迪低飽和大地色與高級沉靜感。",
-      "desc_en": "極大比例留白、明朝體 Serif、莫蘭迪低飽和大地色與高級沉靜感。",
+      "desc_en": "Extreme whitespace ratio, Mincho Serif typography, muted Morandi earth tones, and quiet luxury sophistication.",
       "triggers_zh": "kinfolk, 雜誌編輯, 暖白紙色",
       "triggers_en": "kinfolk"
     },
@@ -501,7 +501,7 @@
       "name_zh": "Minimal Dark Terminal (黑客終端)",
       "name_en": "Minimal",
       "desc_zh": "GitHub Dark 與黑客終端等寬字體、綠色 Status 點與指令提示符。",
-      "desc_en": "GitHub Dark 與黑客終端等寬字體、綠色 Status 點與指令提示符。",
+      "desc_en": "GitHub Dark Status",
       "triggers_zh": "terminal, 黑客風格, cli ui",
       "triggers_en": "terminal, cli ui"
     },
@@ -569,7 +569,7 @@
       "name_zh": "Gen-Z Chaos (Z世代解構主義)",
       "name_en": "Gen-Z",
       "desc_zh": "傾斜貼紙文字、貼紙手繪插畫、打破慣例框框與高彩活力爆發。",
-      "desc_en": "傾斜貼紙文字、貼紙手繪插畫、打破慣例框框與高彩活力爆發。",
+      "desc_en": "",
       "triggers_zh": "genz, z世代, 拼貼解構",
       "triggers_en": "genz, z"
     },
@@ -637,7 +637,7 @@
       "name_zh": "Gradient Mesh 3.0 (高階色彩網格)",
       "name_en": "Gradient",
       "desc_zh": "3 色以上流體漸變、多維立體光源與高端科技流體。",
-      "desc_en": "3 色以上流體漸變、多維立體光源與高端科技流體。",
+      "desc_en": "3",
       "triggers_zh": "gradient mesh, 漸變網格, 彌散光學",
       "triggers_en": "gradient mesh"
     },
@@ -688,7 +688,7 @@
       "name_zh": "Scandinavian Hygge (北歐溫馨簡約)",
       "name_en": "Scandinavian",
       "desc_zh": "極簡燕麥色底、柔和木質色調、極高舒適度與放鬆家居質感。",
-      "desc_en": "極簡燕麥色底、柔和木質色調、極高舒適度與放鬆家居質感。",
+      "desc_en": "",
       "triggers_zh": "hygge, scandinavian, 北歐極簡",
       "triggers_en": "hygge, scandinavian"
     },
@@ -739,7 +739,7 @@
       "name_zh": "Retro Future 80s (80年代未來的遐想)",
       "name_en": "Retro",
       "desc_zh": "霓虹網格線延伸至地平線、夕陽太陽圓盤與電子合成器風格。",
-      "desc_en": "霓虹網格線延伸至地平線、夕陽太陽圓盤與電子合成器風格。",
+      "desc_en": "Bevelled 3D borders (inset/outset), teal desktop canvas, and classic window titlebars.",
       "triggers_zh": "retro future, 復古未來, synthwave",
       "triggers_en": "retro future, synthwave"
     },
@@ -756,7 +756,7 @@
       "name_zh": "Micro-Interaction Focus (微互動導向)",
       "name_en": "Micro-Interaction",
       "desc_zh": "每一個組件懸停均有 3D 浮動、點擊微彈簧與精緻反饋。",
-      "desc_en": "每一個組件懸停均有 3D 浮動、點擊微彈簧與精緻反饋。",
+      "desc_en": "3D",
       "triggers_zh": "micro interaction, 微互動, 靈動微動",
       "triggers_en": "micro interaction"
     },
@@ -790,7 +790,7 @@
       "name_zh": "Zero-Margin Maximalism (極致滿版極多主義)",
       "name_en": "Zero-Margin",
       "desc_zh": "充滿畫面的色彩圖塊、無留白、撞擊感與爆炸資訊視覺。",
-      "desc_en": "充滿畫面的色彩圖塊、無留白、撞擊感與爆炸資訊視覺。",
+      "desc_en": "",
       "triggers_zh": "maximalism, 極多主義, 零留白",
       "triggers_en": "maximalism"
     },
@@ -824,7 +824,7 @@
       "name_zh": "Soft Pastel UI (柔和馬卡龍粉彩)",
       "name_en": "Soft",
       "desc_zh": "淡粉淡藍馬卡龍配色、低對比無壓迫感與療癒氛圍。",
-      "desc_en": "淡粉淡藍馬卡龍配色、低對比無壓迫感與療癒氛圍。",
+      "desc_en": "",
       "triggers_zh": "pastel, 馬卡龍, 柔色彩彩",
       "triggers_en": "pastel"
     },
@@ -841,7 +841,7 @@
       "name_zh": "Cyber Gothic (賽博哥特風格)",
       "name_en": "Cyber",
       "desc_zh": "深黑銀灰襯線字體、尖角金屬框邊與冷峻神秘科技感。",
-      "desc_en": "深黑銀灰襯線字體、尖角金屬框邊與冷峻神秘科技感。",
+      "desc_en": "",
       "triggers_zh": "cyber gothic, 暗黑哥特, 黑銀科技",
       "triggers_en": "cyber gothic"
     },
@@ -858,7 +858,7 @@
       "name_zh": "Vintage Film Grain (復古底片顆粒)",
       "name_en": "Vintage",
       "desc_zh": "細緻雜訊噪點底紋、舊照片暖色調與懷舊底片藝術。",
-      "desc_en": "細緻雜訊噪點底紋、舊照片暖色調與懷舊底片藝術。",
+      "desc_en": "",
       "triggers_zh": "film grain, 復古底片, 膠片質感",
       "triggers_en": "film grain"
     },
@@ -909,7 +909,7 @@
       "name_zh": "Extreme Minimalism (極致極簡主義)",
       "name_en": "Extreme",
       "desc_zh": "除文字與單線條外無任何多餘裝飾、回歸純粹資訊。",
-      "desc_en": "除文字與單線條外無任何多餘裝飾、回歸純粹資訊。",
+      "desc_en": "",
       "triggers_zh": "extreme minimalism, 極簡純白, ultra clean",
       "triggers_en": "extreme minimalism, ultra clean"
     },
@@ -943,7 +943,7 @@
       "name_zh": "3D Hyper-Realism (超寫實 3D 渲染)",
       "name_en": "3D",
       "desc_zh": "光線追蹤金屬光澤、球體玻璃反射質感。",
-      "desc_en": "光線追蹤金屬光澤、球體玻璃反射質感。",
+      "desc_en": "",
       "triggers_zh": "hyper 3d, 寫實3d, 光線追蹤",
       "triggers_en": "hyper 3d, 3d"
     },
@@ -960,7 +960,7 @@
       "name_zh": "Bauhaus Geometric (包浩斯幾何風格)",
       "name_en": "Bauhaus",
       "desc_zh": "三原色 (紅黃藍) 圓形正方形三角構造、經典工業美學。",
-      "desc_en": "三原色 (紅黃藍) 圓形正方形三角構造、經典工業美學。",
+      "desc_en": "()",
       "triggers_zh": "bauhaus, 包浩斯, 原色幾何",
       "triggers_en": "bauhaus"
     },
@@ -977,7 +977,7 @@
       "name_zh": "AI Native Glass (AI 原生智能介面)",
       "name_en": "AI",
       "desc_zh": "智能漸變光暈跟隨滑鼠、自動卡片佈局與科技感知。",
-      "desc_en": "智能漸變光暈跟隨滑鼠、自動卡片佈局與科技感知。",
+      "desc_en": "",
       "triggers_zh": "ai native, ai 介面, 智能流光",
       "triggers_en": "ai native, ai"
     },
@@ -994,7 +994,7 @@
       "name_zh": "Soft Pastel Neumorphic (柔彩軟擬物)",
       "name_en": "Soft",
       "desc_zh": "馬卡龍色彩結合軟凝膠質感凹凸細節。",
-      "desc_en": "馬卡龍色彩結合軟凝膠質感凹凸細節。",
+      "desc_en": "",
       "triggers_zh": "pastel neumorphism, 柔彩軟擬物",
       "triggers_en": "pastel neumorphism"
     },
@@ -1010,7 +1010,7 @@
       "name_zh": "Brutalist Mono Terminal (蠻荒單色終端)",
       "name_en": "Brutalist",
       "desc_zh": "純黑白粗體等寬字、粗框無陰影黑白二值視覺。",
-      "desc_en": "純黑白粗體等寬字、粗框無陰影黑白二值視覺。",
+      "desc_en": "",
       "triggers_zh": "mono brutalist, 單色蠻荒",
       "triggers_en": "mono brutalist"
     },
@@ -1027,7 +1027,7 @@
       "name_zh": "Luxe Gold Noir (黑金奢華暗黑風)",
       "name_en": "Luxe",
       "desc_zh": "純黑亮面背景、拉絲黃金高光線條邊框與極致尊榮質感。",
-      "desc_en": "純黑亮面背景、拉絲黃金高光線條邊框與極致尊榮質感。",
+      "desc_en": "",
       "triggers_zh": "luxe gold, 黑金奢華, 高級金",
       "triggers_en": "luxe gold"
     },
@@ -1044,7 +1044,7 @@
       "name_zh": "Clean Nordique (北歐極簡清爽)",
       "name_en": "Clean",
       "desc_zh": "Slate/White 高雅配色、簡潔清晰卡片分層與放鬆目視質感。",
-      "desc_en": "Slate/White 高雅配色、簡潔清晰卡片分層與放鬆目視質感。",
+      "desc_en": "Slate/White",
       "triggers_zh": "nordique, 北歐清爽, clean slate",
       "triggers_en": "nordique, clean slate"
     },
@@ -1061,7 +1061,7 @@
       "name_zh": "Cyber Metallic Slate (賽博金屬板岩)",
       "name_en": "Cyber",
       "desc_zh": "拉絲鋼鐵板岩冷灰底、湛藍指示燈亮點與極度堅固感。",
-      "desc_en": "拉絲鋼鐵板岩冷灰底、湛藍指示燈亮點與極度堅固感。",
+      "desc_en": "",
       "triggers_zh": "metallic slate, 金屬板岩, 硬核科技",
       "triggers_en": "metallic slate"
     }
@@ -1076,7 +1076,7 @@
       "name_zh": "editorial-serif (典雅雜誌明朝)",
       "name_en": "editorial-serif",
       "desc_zh": "暖紙白底、高雅 serif 大字體標題、1.8x 行高、適用品牌故事與精品的極致空氣感",
-      "desc_en": "暖紙白底、高雅 serif 大字體標題、1.8x 行高、適用品牌故事與精品的極致空氣感",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Playfair Display ).",
       "triggers_en": "hallmark, editorial-serif"
     },
     {
@@ -1088,7 +1088,7 @@
       "name_zh": "neubrutalism-vivid (高對比蠻荒)",
       "name_en": "neubrutalism-vivid",
       "desc_zh": "純黑 4px 重硬邊框、硬塊陰影 (box-shadow: 4px 4px #000)、高飽和黃紅青撞色",
-      "desc_en": "純黑 4px 重硬邊框、硬塊陰影 (box-shadow: 4px 4px #000)、高飽和黃紅青撞色",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Space Grotesk ).",
       "triggers_en": "hallmark, neubrutalism-vivid"
     },
     {
@@ -1100,7 +1100,7 @@
       "name_zh": "cyber-terminal (深空科技終端)",
       "name_en": "cyber-terminal",
       "desc_zh": "單色綠字黑底、矩陣光暈邊框、等寬字體、命令提示列符號與戰術數據面板",
-      "desc_en": "單色綠字黑底、矩陣光暈邊框、等寬字體、命令提示列符號與戰術數據面板",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (JetBrains Mono ).",
       "triggers_en": "hallmark, cyber-terminal"
     },
     {
@@ -1112,7 +1112,7 @@
       "name_zh": "bento-dark-lux (暗黑奢華便當盒)",
       "name_en": "bento-dark-lux",
       "desc_zh": "OLED 純黑底、1px 微暗邊框、Linear/Apple 式高質感微卡片佈局與 subtle hover 光暈",
-      "desc_en": "OLED 純黑底、1px 微暗邊框、Linear/Apple 式高質感微卡片佈局與 subtle hover 光暈",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Inter ).",
       "triggers_en": "hallmark, bento-dark-lux"
     },
     {
@@ -1124,7 +1124,7 @@
       "name_zh": "glass-aurora (極光毛玻璃)",
       "name_en": "glass-aurora",
       "desc_zh": "彌散光暈漸變背景、毛玻璃虛化邊框、Specular 高光頂邊與夢幻質感",
-      "desc_en": "彌散光暈漸變背景、毛玻璃虛化邊框、Specular 高光頂邊與夢幻質感",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Satoshi ).",
       "triggers_en": "hallmark, glass-aurora"
     },
     {
@@ -1136,7 +1136,7 @@
       "name_zh": "nordique-clean (北歐極簡清爽)",
       "name_en": "nordique-clean",
       "desc_zh": "高雅 Slate 暖白底色、湛藍點睛色、極簡 1px 邊框與舒適閱讀卡片與高透氣感",
-      "desc_en": "高雅 Slate 暖白底色、湛藍點睛色、極簡 1px 邊框與舒適閱讀卡片與高透氣感",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Inter ).",
       "triggers_en": "hallmark, nordique-clean"
     },
     {
@@ -1148,7 +1148,7 @@
       "name_zh": "japanese-editorial (日式和風質感)",
       "name_en": "japanese-editorial",
       "desc_zh": "莫蘭迪紙張色系、日式留白、竪排視覺標題與空氣感體驗",
-      "desc_en": "莫蘭迪紙張色系、日式留白、竪排視覺標題與空氣感體驗",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Yu Mincho ).",
       "triggers_en": "hallmark, japanese-editorial"
     },
     {
@@ -1160,7 +1160,7 @@
       "name_zh": "industrial-steel (工業鋼鐵硬核)",
       "name_en": "industrial-steel",
       "desc_zh": "金屬網格底紋、警示橘紅邊框、純硬塊線條與堅毅工程感知",
-      "desc_en": "金屬網格底紋、警示橘紅邊框、純硬塊線條與堅毅工程感知",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Roboto Mono ).",
       "triggers_en": "hallmark, industrial-steel"
     },
     {
@@ -1172,7 +1172,7 @@
       "name_zh": "vision-spatial (蘋果空間懸浮)",
       "name_en": "vision-spatial",
       "desc_zh": "動態懸浮光效、Specular Highlight 高光頂邊與微立態層次落差",
-      "desc_en": "動態懸浮光效、Specular Highlight 高光頂邊與微立態層次落差",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (SF Pro ).",
       "triggers_en": "hallmark, vision-spatial"
     },
     {
@@ -1184,7 +1184,7 @@
       "name_zh": "clay-pastel (馬卡龍黏土)",
       "name_en": "clay-pastel",
       "desc_zh": "軟萌雙向雙層內陰影、軟膠浮雕質感與療癒互動觸感",
-      "desc_en": "軟萌雙向雙層內陰影、軟膠浮雕質感與療癒互動觸感",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Fredoka ).",
       "triggers_en": "hallmark, clay-pastel"
     },
     {
@@ -1196,7 +1196,7 @@
       "name_zh": "retro-win95 (95 懷舊復古)",
       "name_en": "retro-win95",
       "desc_zh": "經典灰底 3D 凸起框 (outset)、深藍視窗標題列與懷舊視窗美學",
-      "desc_en": "經典灰底 3D 凸起框 (outset)、深藍視窗標題列與懷舊視窗美學",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (MS Sans Serif ).",
       "triggers_en": "hallmark, retro-win95"
     },
     {
@@ -1208,7 +1208,7 @@
       "name_zh": "vapor-neon (蒸汽波懷舊)",
       "name_en": "vapor-neon",
       "desc_zh": "80 年代霓虹粉青雙色漸變、日落太陽幾何與復古浪漫",
-      "desc_en": "80 年代霓虹粉青雙色漸變、日落太陽幾何與復古浪漫",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Outfit ).",
       "triggers_en": "hallmark, vapor-neon"
     },
     {
@@ -1220,7 +1220,7 @@
       "name_zh": "monochrome-minimal (單色極簡)",
       "name_en": "monochrome-minimal",
       "desc_zh": "純黑白二值對比、無任何干擾多餘色彩與純粹資訊力量",
-      "desc_en": "純黑白二值對比、無任何干擾多餘色彩與純粹資訊力量",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Space Mono ).",
       "triggers_en": "hallmark, monochrome-minimal"
     },
     {
@@ -1232,7 +1232,7 @@
       "name_zh": "biophilic-emerald (綠意翡翠)",
       "name_en": "biophilic-emerald",
       "desc_zh": "翡翠深綠配色、自然有機曲線邊框與植感呼吸感",
-      "desc_en": "翡翠深綠配色、自然有機曲線邊框與植感呼吸感",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Plus Jakarta ).",
       "triggers_en": "hallmark, biophilic-emerald"
     },
     {
@@ -1244,7 +1244,7 @@
       "name_zh": "holo-chromatic (彩虹全息)",
       "name_en": "holo-chromatic",
       "desc_zh": "彩虹全息流光金屬漸變、高奢科技感與未來流行美學",
-      "desc_en": "彩虹全息流光金屬漸變、高奢科技感與未來流行美學",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Syne ).",
       "triggers_en": "hallmark, holo-chromatic"
     },
     {
@@ -1256,7 +1256,7 @@
       "name_zh": "eink-reader (電子紙閱讀)",
       "name_en": "eink-reader",
       "desc_zh": "無彩度純灰階抖動網點、高對比書籍閱讀質感與低壓視覺",
-      "desc_en": "無彩度純灰階抖動網點、高對比書籍閱讀質感與低壓視覺",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Lora ).",
       "triggers_en": "hallmark, eink-reader"
     },
     {
@@ -1268,7 +1268,7 @@
       "name_zh": "genz-deconstruct (Z 世代解構)",
       "name_en": "genz-deconstruct",
       "desc_zh": "傾斜貼紙字體、打破網格與高張力撞色幾何活力",
-      "desc_en": "傾斜貼紙字體、打破網格與高張力撞色幾何活力",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Cabinet Grotesk ).",
       "triggers_en": "hallmark, genz-deconstruct"
     },
     {
@@ -1280,7 +1280,7 @@
       "name_zh": "hud-tactical (戰術抬頭顯示)",
       "name_en": "hud-tactical",
       "desc_zh": "十字準星、座標數據圖例、動態括號與軍事科技面",
-      "desc_en": "十字準星、座標數據圖例、動態括號與軍事科技面",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Fira Code ).",
       "triggers_en": "hallmark, hud-tactical"
     },
     {
@@ -1292,7 +1292,7 @@
       "name_zh": "mesh-gradient (彌散網格)",
       "name_en": "mesh-gradient",
       "desc_zh": "多色流體漸變、光學彌散背景與現代高視覺號召",
-      "desc_en": "多色流體漸變、光學彌散背景與現代高視覺號召",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Clash Display ).",
       "triggers_en": "hallmark, mesh-gradient"
     },
     {
@@ -1304,7 +1304,7 @@
       "name_zh": "luxe-noir (黑金高奢)",
       "name_en": "luxe-noir",
       "desc_zh": "曜石黑底、拉絲黃金高光線條與極致尊榮奢華感知",
-      "desc_en": "曜石黑底、拉絲黃金高光線條與極致尊榮奢華感知",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Cinzel ).",
       "triggers_en": "hallmark, luxe-noir"
     }
   ],
@@ -1484,7 +1484,7 @@
       "name_zh": "slidev-markdown-exporter",
       "name_en": "slidev-markdown-exporter",
       "desc_zh": "轉譯完整 Slidev (slides.md)，含 v-clicks 動畫與 Mermaid 圖表。",
-      "desc_en": "轉譯完整 Slidev (slides.md)，含 v-clicks 動畫與 Mermaid 圖表。",
+      "desc_en": "16:9 Live Presentation Slide Deck Spec (16:9 · Slidev AST Engine).",
       "triggers_zh": "slidev export, slidev markdown, slides.md",
       "triggers_en": "slidev export, slidev markdown, slides.md",
       "ratio_en": "16:9 · Slidev AST Engine"
