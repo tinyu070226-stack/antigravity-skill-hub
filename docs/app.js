@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   let currentLang = 'zh';
 
   try {
-    const res = await fetch('skills_data.json?v=1.0.5');
+    const res = await fetch('skills_data.json?v=1.0.8');
     skillsData = await res.json();
     handleRoute();
   } catch (err) {
@@ -61,6 +61,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
       backBtn.textContent = '← 返回主頁 (Home)';
       detailSearch.placeholder = '在目前技能內部搜尋風格、HEX 色票或觸發詞...';
+
+      const homeTitle = document.querySelector('.home-hero-title');
+      const homeDesc = document.querySelector('.home-hero-desc');
+      if (homeTitle) homeTitle.textContent = 'Antigravity 4 大整合技能集展覽館';
+      if (homeDesc) homeDesc.textContent = '點擊下方大卡片進入個別技能的內部運作圖文原理、70+ 種風格 live 展演、色票卡與觸發清單。';
 
       const masterCards = document.querySelectorAll ? document.querySelectorAll('.master-card') : [];
       if (masterCards.length >= 4) {
@@ -167,8 +172,10 @@ document.addEventListener('DOMContentLoaded', async () => {
           mediaHtml = `<div style="margin-top:16px; border:1px solid #e2e8f0; border-radius:12px; overflow:hidden;"><img src="${pImg}" alt="${pTitle}" style="width:100%; height:auto; display:block;" /></div>`;
         }
 
-        // Custom styled box for Presentation Master Prompt with explicit HTML paragraph blocks (100% left-aligned, tight top border)
-        if (masterId === 'presentation-skill') {
+        // Only render the copyable grey box for actual Master Prompt template cards
+        const isMasterPromptCard = masterId === 'presentation-skill' && (pTitle.includes('Master Prompt') || pTitle.includes('提示詞範例'));
+
+        if (isMasterPromptCard) {
           const tooltipLabel = currentLang === 'en' ? 'Copy Master Prompt' : '複製 Master Prompt 提示詞';
           const introLabel = currentLang === 'en' ? 'In presentation tasks, click the top-right icon to copy the full prompt:' : '進行簡報製作任務時，可直接點擊右上方圖示複製完整提示詞：';
           
