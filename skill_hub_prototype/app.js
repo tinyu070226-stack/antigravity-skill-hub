@@ -114,20 +114,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     setTimeout(() => {
       toast.classList.remove('show');
     }, 2000);
-  }
-
-  window.copyText = (text, type = 'Trigger') => {
-    navigator.clipboard.writeText(text);
-    let toastMsg = '';
-    if (type === 'Master Prompt') {
-      toastMsg = currentLang === 'en' ? '📋 Master Prompt Copied Successfully' : '📋 提示詞範例複製成功';
-    } else if (type === 'CSS') {
-      toastMsg = currentLang === 'en' ? '📋 CSS Style Code Copied' : '📋 CSS 樣式代碼複製成功';
-    } else if (type === 'HEX Swatch') {
-      toastMsg = currentLang === 'en' ? `📋 HEX Color Copied: ${text}` : `📋 HEX 色票複製成功: ${text}`;
-    } else {
-      toastMsg = currentLang === 'en' ? '📋 Trigger Copied Successfully' : '📋 觸發詞複製成功';
-    }
     showToast(toastMsg);
   };
 
@@ -253,7 +239,7 @@ document.addEventListener('DOMContentLoaded', async () => {
               btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                copyText(cleanPromptText, 'Master Prompt');
+                copyText(cleanPromptText, 'Master Prompt', btn);
               });
             }
           }, 50);
