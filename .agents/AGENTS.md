@@ -91,3 +91,17 @@ Antigravity 具備高階架構規劃、UI/UX 美學設計與系統引導能力�
   2. **UI 樣式雙重驗證門禁 (Visual Layout Verification Protocol)**：
      - 當使用者回報 UI 位置跑掉或樣式無變化時，**嚴禁連續猜測 CSS Padding/Margin 或單純歸咎於快取**。
      - 必須第一時間檢查資料源 (`JSON/DOM Data Source`) 是否夾帶不可見字元，並於背景驗證確保修改後在視覺上完全符合預期。
+
+---
+
+## 📚 本地知識庫低 Context 漸進檢索協定 (kb-retriever Protocol)
+
+- **知識庫與大檔案檢索規則 (永久生效)**：
+  1. **分層索引導航 (`data_structure.md`)**：
+     - 當使用者要求「從知識庫/文檔目錄查資料」時，優先定位 `knowledge/`（或指定目錄）。
+     - **禁止一次讀取整份檔案**！必須先閱讀根目錄與子目錄的 `data_structure.md` 索引檔，了解領域目錄地圖後，再沿著最相關的檔案路徑下鑽。
+  2. **先學習再處理原則 (Learn-Before-Process)**：
+     - 遇到 PDF / Excel 等二進位檔案時，必須先確認或調用專用提取工具 (`pdftotext`, `pdfplumber`, `pandas`) 結構化文本，禁止直接盲目 grep 原始二進位。
+  3. **5 輪收斂與出處標註 (Source Attribution)**：
+     - 搜尋上限嚴格限制為 5 輪，回答時必須明確附帶檔案相對路徑與行號出處。
+
