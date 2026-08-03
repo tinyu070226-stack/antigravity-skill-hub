@@ -15,11 +15,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   let currentLang = 'zh';
 
   try {
-    const res = await fetch('skills_data.json?v=1.0.8');
+    const res = await fetch('skills_data.json?v=1.0.9');
     skillsData = await res.json();
     handleRoute();
   } catch (err) {
     console.error('Failed to load skills_data.json', err);
+  }
+
+  // Helper to strip any remaining CJK characters from English text
+  function cleanEnglishText(text) {
+    if (!text) return '';
+    const cleaned = text.replace(/[\u4e00-\u9fff\u3000-\u303f\uff00-\uffef]/g, '').trim();
+    return cleaned.replace(/^,|,$/g, '').trim();
   }
 
   // Language Toggle Switcher
@@ -261,7 +268,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   function matchesQuery(item, query) {
     if (!query) return true;
     const nameStr = (item.name_en || item.name_zh || item.name || '').toLowerCase();
-    const trigStr = (currentLang === 'en' ? item.triggers_en : item.triggers_zh) || item.triggers || '';
+    const rawTrig = (currentLang === 'en' ? item.triggers_en : item.triggers_zh) || item.triggers || '';
+    const trigStr = currentLang === 'en' ? cleanEnglishText(rawTrig) : rawTrig;
     const descStr = (currentLang === 'en' ? item.desc_en : item.desc_zh) || item.desc || '';
     return nameStr.includes(query) || trigStr.toLowerCase().includes(query) || descStr.toLowerCase().includes(query);
   }
@@ -269,7 +277,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   function createRichStyleMockupCard(item) {
     const card = document.createElement('div');
     card.className = 'card';
-    const trigStr = (currentLang === 'en' ? (item.triggers_en || item.triggers_zh) : item.triggers_zh) || item.triggers || '';
+    const rawTrig = (currentLang === 'en' ? item.triggers_en : item.triggers_zh) || item.triggers || '';
+    const trigStr = currentLang === 'en' ? cleanEnglishText(rawTrig) : rawTrig;
     const mainTrig = trigStr.split(',')[0].trim();
     const [c1, c2, c3] = item.hex || ['#ffffff', '#000000', '#0284c7'];
     const nameStr = currentLang === 'en' ? (item.name_en || item.name_zh) : (item.name_zh || item.name);
@@ -336,6 +345,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const clickTestText = currentLang === 'en' ? '(Click to test)' : '(點擊測試狀態)';
     const copyBtnText = currentLang === 'en' ? 'Copy Trigger' : '複製觸發詞';
     const subtextStr = currentLang === 'en' ? `Unique Theme Visual Mockup · Font (${fontName})` : `獨特視覺氣質 UI 範例 · 字體配對 (${fontName})`;
+    const rawTrig = (currentLang === 'en' ? item.triggers_en : item.triggers_zh) || item.triggers || '';
+    const trigStr = currentLang === 'en' ? cleanEnglishText(rawTrig) : rawTrig;
+    const mainTrig = trigStr.split(',')[0].trim();
 
     card.innerHTML = `
       <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
@@ -380,8 +392,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       <div style="font-size:11.5px; color:#64748b; margin-bottom:8px;">${fontLabel} <code style="font-family:monospace; background:#f1f5f9; padding:2px 6px; border-radius:4px;">${fontName}</code></div>
       <div class="trigger-group">
-        <span class="trigger-text">hallmark, ${nameStr.split(' ')[0]}</span>
-        <button class="copy-btn" onclick="copyText('hallmark', '${copyBtnText}')">${copyBtnText}</button>
+        <span class="trigger-text">${trigStr}</span>
+        <button class="copy-btn" onclick="copyText('${mainTrig}', '${copyBtnText}')">${copyBtnText}</button>
       </div>
     `;
     return card;
@@ -529,7 +541,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   function createPresentation16x9SlideCard(item) {
     const card = document.createElement('div');
     card.className = 'card';
-    const trigStr = (currentLang === 'en' ? (item.triggers_en || item.triggers_zh) : item.triggers_zh) || item.triggers || '';
+    const rawTrig = (currentLang === 'en' ? item.triggers_en : item.triggers_zh) || item.triggers || '';
+    const trigStr = currentLang === 'en' ? cleanEnglishText(rawTrig) : rawTrig;
     const mainTrig = trigStr.split(',')[0].trim();
     const nameStr = currentLang === 'en' ? (item.name_en || item.name_zh) : (item.name_zh || item.name);
     const descStr = currentLang === 'en' ? (item.desc_en || item.desc_zh) : (item.desc_zh || item.desc);
@@ -538,6 +551,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const slideSub = item.slide_sub || descStr;
     const slideBadge = item.slide_badge || 'SPEC SLIDE';
     const bgAccent = item.bg_accent || '#0284c7';
+    const ratioStr = currentLang === 'en' ? (item.ratio_en || cleanEnglishText(item.ratio)) : item.ratio;
     const ratioLabel = currentLang === 'en' ? 'Ratio / Spec:' : '比例/特徵:';
     const copyBtnText = currentLang === 'en' ? 'Copy Trigger' : '複製觸發詞';
 
@@ -572,7 +586,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         </div>
       </div>
 
-      <div style="font-size:11.5px; color:#64748b; margin-bottom:8px;">${ratioLabel} <code style="font-family:monospace; background:#f1f5f9; padding:2px 6px; border-radius:4px;">${item.ratio}</code></div>
+      <div style="font-size:11.5px; color:#64748b; margin-bottom:8px;">${ratioLabel} <code style="font-family:monospace; background:#f1f5f9; padding:2px 6px; border-radius:4px;">${ratioStr}</code></div>
       <div class="trigger-group">
         <span class="trigger-text">${trigStr}</span>
         <button class="copy-btn" onclick="copyText('${mainTrig}', '${copyBtnText}')">${copyBtnText}</button>

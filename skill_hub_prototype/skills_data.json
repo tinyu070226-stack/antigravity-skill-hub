@@ -231,7 +231,7 @@
       "desc_zh": "高飽和撞色、重黑粗線條邊框與硬塊陰影 (box-shadow: 4px 4px #000)。",
       "desc_en": "高飽和撞色、重黑粗線條邊框與硬塊陰影 (box-shadow: 4px 4px #000)。",
       "triggers_zh": "neubrutalism, 新蠻荒, raw brutal",
-      "triggers_en": "neubrutalism, 新蠻荒, raw brutal"
+      "triggers_en": "neubrutalism, raw brutal"
     },
     {
       "name": "Swiss Grid (瑞士網格國際風格)",
@@ -248,7 +248,7 @@
       "desc_zh": "嚴格 12 欄網格對齊、非對稱無襯線大字體、絕對理性與現代主義排版。",
       "desc_en": "嚴格 12 欄網格對齊、非對稱無襯線大字體、絕對理性與現代主義排版。",
       "triggers_zh": "swiss style, 瑞士風格, grid layout",
-      "triggers_en": "swiss style, 瑞士風格, grid layout"
+      "triggers_en": "swiss style, grid layout"
     },
     {
       "name": "Japanese Editorial (日式雜誌風)",
@@ -265,7 +265,7 @@
       "desc_zh": "暖色紙張材質 (Ivory Paper)、竪排文字 (writing-mode)、極致留白與優雅空氣感。",
       "desc_en": "暖色紙張材質 (Ivory Paper)、竪排文字 (writing-mode)、極致留白與優雅空氣感。",
       "triggers_zh": "japanese, 日式風格, 雜誌風, 和風",
-      "triggers_en": "japanese, 日式風格, 雜誌風, 和風"
+      "triggers_en": "japanese"
     },
     {
       "name": "Glassmorphism (新玻璃擬物)",
@@ -282,7 +282,7 @@
       "desc_zh": "毛玻璃背景虛化 (backdrop-filter: blur)、半透明邊框與光感漸變。",
       "desc_en": "毛玻璃背景虛化 (backdrop-filter: blur)、半透明邊框與光感漸變。",
       "triggers_zh": "glassmorphism, 玻璃擬物, glass ui",
-      "triggers_en": "glassmorphism, 玻璃擬物, glass ui"
+      "triggers_en": "glassmorphism, glass ui"
     },
     {
       "name": "Bento Grid 2.0 (便當盒網格)",
@@ -299,7 +299,7 @@
       "desc_zh": "Apple/Linear 風格微卡片組合、多尺寸方格、極細 1px 邊框與內置微小動效。",
       "desc_en": "Apple/Linear 風格微卡片組合、多尺寸方格、極細 1px 邊框與內置微小動效。",
       "triggers_zh": "bento, bento grid, 便當盒佈局",
-      "triggers_en": "bento, bento grid, 便當盒佈局"
+      "triggers_en": "bento, bento grid"
     },
     {
       "name": "Cyberpunk 2077 (賽博朋克)",
@@ -316,7 +316,7 @@
       "desc_zh": "高對比霓虹青紫黃、故障風 (Glitch Effect)、科技切角與發光邊框。",
       "desc_en": "高對比霓虹青紫黃、故障風 (Glitch Effect)、科技切角與發光邊框。",
       "triggers_zh": "cyberpunk, 賽博朋克, 霓虹霓光",
-      "triggers_en": "cyberpunk, 賽博朋克, 霓虹霓光"
+      "triggers_en": "cyberpunk"
     },
     {
       "name": "VisionOS Spatial (蘋果空間UI)",
@@ -333,7 +333,7 @@
       "desc_zh": "動態懸浮光效、Specular Highlight 高光邊緣、懸停深淺景深。",
       "desc_en": "動態懸浮光效、Specular Highlight 高光邊緣、懸停深淺景深。",
       "triggers_zh": "visionos, spatial ui, 空間UI",
-      "triggers_en": "visionos, spatial ui, 空間UI"
+      "triggers_en": "visionos, spatial ui, UI"
     },
     {
       "name": "Aurora UI (極光動態漸變)",
@@ -350,7 +350,7 @@
       "desc_zh": "彌散色彩斑塊、動態 Blur 漸變背景、夢幻光暈與現代高質感。",
       "desc_en": "彌散色彩斑塊、動態 Blur 漸變背景、夢幻光暈與現代高質感。",
       "triggers_zh": "aurora, 極光風格, fluid gradient",
-      "triggers_en": "aurora, 極光風格, fluid gradient"
+      "triggers_en": "aurora, fluid gradient"
     },
     {
       "name": "Neumorphism (新擬物柔和風格)",
@@ -367,7 +367,7 @@
       "desc_zh": "同色系雙向陰影 (light/dark shadow)、凸起與凹陷的微立體觸感。",
       "desc_en": "同色系雙向陰影 (light/dark shadow)、凸起與凹陷的微立體觸感。",
       "triggers_zh": "neumorphism, 軟UI, soft ui",
-      "triggers_en": "neumorphism, 軟UI, soft ui"
+      "triggers_en": "neumorphism, UI, soft ui"
     },
     {
       "name": "Industrial Brutalism (工業蠻荒)",
@@ -384,7 +384,7 @@
       "desc_zh": "裸露混凝土感、金屬網格底紋、警示黃橙色與粗獷鋼鐵線條。",
       "desc_en": "裸露混凝土感、金屬網格底紋、警示黃橙色與粗獷鋼鐵線條。",
       "triggers_zh": "industrial, 工業風, raw concrete",
-      "triggers_en": "industrial, 工業風, raw concrete"
+      "triggers_en": "industrial, raw concrete"
     },
     {
       "name": "Claymorphism (黏土擬物風格)",
@@ -401,7 +401,7 @@
       "desc_zh": "圓潤蓬鬆雙內陰影、軟萌 3D 黏土造型與可愛浮雕感。",
       "desc_en": "圓潤蓬鬆雙內陰影、軟萌 3D 黏土造型與可愛浮雕感。",
       "triggers_zh": "claymorphism, 黏土風格, 3d clay",
-      "triggers_en": "claymorphism, 黏土風格, 3d clay"
+      "triggers_en": "claymorphism, 3d clay"
     },
     {
       "name": "Dark OLED Obsidian (深空黑曜石)",
@@ -418,7 +418,7 @@
       "desc_zh": "發光二極體純黑底、高鮮豔發光文字與省電極致視覺。",
       "desc_en": "發光二極體純黑底、高鮮豔發光文字與省電極致視覺。",
       "triggers_zh": "dark oled, 黑曜石, pure black",
-      "triggers_en": "dark oled, 黑曜石, pure black"
+      "triggers_en": "dark oled, pure black"
     },
     {
       "name": "Retro Win95 (95年代復古網頁)",
@@ -435,7 +435,7 @@
       "desc_zh": "灰底凸起三維框 (border 2px inset/outset)、青綠桌面與傳統視窗標題列。",
       "desc_en": "灰底凸起三維框 (border 2px inset/outset)、青綠桌面與傳統視窗標題列。",
       "triggers_zh": "retro 95, 95復古, classic win",
-      "triggers_en": "retro 95, 95復古, classic win"
+      "triggers_en": "retro 95, 95, classic win"
     },
     {
       "name": "Kinfolk Editorial (Kinfolk 雜誌風格)",
@@ -452,7 +452,7 @@
       "desc_zh": "極大比例留白、明朝體 Serif、莫蘭迪低飽和大地色與高級沉靜感。",
       "desc_en": "極大比例留白、明朝體 Serif、莫蘭迪低飽和大地色與高級沉靜感。",
       "triggers_zh": "kinfolk, 雜誌編輯, 暖白紙色",
-      "triggers_en": "kinfolk, 雜誌編輯, 暖白紙色"
+      "triggers_en": "kinfolk"
     },
     {
       "name": "Vaporwave (美式蒸汽波)",
@@ -469,7 +469,7 @@
       "desc_zh": "80 年代粉紫青漸變、棕櫚樹網格、復古雕像與懷舊浪漫。",
       "desc_en": "80 年代粉紫青漸變、棕櫚樹網格、復古雕像與懷舊浪漫。",
       "triggers_zh": "vaporwave, 蒸汽波, 復古霓虹",
-      "triggers_en": "vaporwave, 蒸汽波, 復古霓虹"
+      "triggers_en": "vaporwave"
     },
     {
       "name": "Flat Design 2.0 (現代扁平 2.0)",
@@ -486,7 +486,7 @@
       "desc_zh": "取消純硬線條，加入極輕柔單層微陰影與鮮明品牌幾何圖形。",
       "desc_en": "取消純硬線條，加入極輕柔單層微陰影與鮮明品牌幾何圖形。",
       "triggers_zh": "flat design, 現代扁平, minimalist flat",
-      "triggers_en": "flat design, 現代扁平, minimalist flat"
+      "triggers_en": "flat design, minimalist flat"
     },
     {
       "name": "Minimal Dark Terminal (黑客終端)",
@@ -503,7 +503,7 @@
       "desc_zh": "GitHub Dark 與黑客終端等寬字體、綠色 Status 點與指令提示符。",
       "desc_en": "GitHub Dark 與黑客終端等寬字體、綠色 Status 點與指令提示符。",
       "triggers_zh": "terminal, 黑客風格, cli ui",
-      "triggers_en": "terminal, 黑客風格, cli ui"
+      "triggers_en": "terminal, cli ui"
     },
     {
       "name": "Biomimetic Nature (仿生自然風格)",
@@ -520,7 +520,7 @@
       "desc_zh": "葉脈曲線、苔蘚深綠、有機弧線邊框與大地自然氣息。",
       "desc_en": "葉脈曲線、苔蘚深綠、有機弧線邊框與大地自然氣息。",
       "triggers_zh": "biomimetic, 自然風格, 森林綠",
-      "triggers_en": "biomimetic, 自然風格, 森林綠"
+      "triggers_en": "biomimetic"
     },
     {
       "name": "Chromatic Holographic (全息光澤)",
@@ -537,7 +537,7 @@
       "desc_zh": "金屬全息反射、彩虹光澤流動感與未來流行主義。",
       "desc_en": "金屬全息反射、彩虹光澤流動感與未來流行主義。",
       "triggers_zh": "holographic, 全息彩虹, chrome shine",
-      "triggers_en": "holographic, 全息彩虹, chrome shine"
+      "triggers_en": "holographic, chrome shine"
     },
     {
       "name": "E-Ink Paper (電子墨水屏)",
@@ -554,7 +554,7 @@
       "desc_zh": "無高調彩度、雙色灰階動態抖動網點、極致無負擔閱讀體驗。",
       "desc_en": "無高調彩度、雙色灰階動態抖動網點、極致無負擔閱讀體驗。",
       "triggers_zh": "eink, 電子紙, Kindle風格",
-      "triggers_en": "eink, 電子紙, Kindle風格"
+      "triggers_en": "eink, Kindle"
     },
     {
       "name": "Gen-Z Chaos (Z世代解構主義)",
@@ -571,7 +571,7 @@
       "desc_zh": "傾斜貼紙文字、貼紙手繪插畫、打破慣例框框與高彩活力爆發。",
       "desc_en": "傾斜貼紙文字、貼紙手繪插畫、打破慣例框框與高彩活力爆發。",
       "triggers_zh": "genz, z世代, 拼貼解構",
-      "triggers_en": "genz, z世代, 拼貼解構"
+      "triggers_en": "genz, z"
     },
     {
       "name": "Tactile Skeuomorphism (經典擬物觸感)",
@@ -588,7 +588,7 @@
       "desc_zh": "縫線皮革、金屬按鈕紋理、實體微立體感與工藝重現。",
       "desc_en": "縫線皮革、金屬按鈕紋理、實體微立體感與工藝重現。",
       "triggers_zh": "skeuomorphism, 經典擬物, 皮革木紋",
-      "triggers_en": "skeuomorphism, 經典擬物, 皮革木紋"
+      "triggers_en": "skeuomorphism"
     },
     {
       "name": "Voxel 3D (體素積木風)",
@@ -605,7 +605,7 @@
       "desc_zh": "3D 立體方塊像素、階梯網格與幾何趣味。",
       "desc_en": "3D 立體方塊像素、階梯網格與幾何趣味。",
       "triggers_zh": "voxel, 體素積木, Minecraft風格",
-      "triggers_en": "voxel, 體素積木, Minecraft風格"
+      "triggers_en": "voxel, Minecraft"
     },
     {
       "name": "HUD Military Tech (戰術抬頭顯示)",
@@ -622,7 +622,7 @@
       "desc_zh": "十字準星、座標數據圖例、動態邊角括號與軍事科技風格。",
       "desc_en": "十字準星、座標數據圖例、動態邊角括號與軍事科技風格。",
       "triggers_zh": "hud, 抬頭顯示, 戰術科技",
-      "triggers_en": "hud, 抬頭顯示, 戰術科技"
+      "triggers_en": "hud"
     },
     {
       "name": "Gradient Mesh 3.0 (高階色彩網格)",
@@ -639,7 +639,7 @@
       "desc_zh": "3 色以上流體漸變、多維立體光源與高端科技流體。",
       "desc_en": "3 色以上流體漸變、多維立體光源與高端科技流體。",
       "triggers_zh": "gradient mesh, 漸變網格, 彌散光學",
-      "triggers_en": "gradient mesh, 漸變網格, 彌散光學"
+      "triggers_en": "gradient mesh"
     },
     {
       "name": "Accessible High-Contrast (無障礙高對比)",
@@ -656,7 +656,7 @@
       "desc_zh": "符合 WCAG AAA 最高標準、純黑底純黃字與極度清晰識別度。",
       "desc_en": "符合 WCAG AAA 最高標準、純黑底純黃字與極度清晰識別度。",
       "triggers_zh": "a11y high contrast, 高對比無障礙, WCAG AAA",
-      "triggers_en": "a11y high contrast, 高對比無障礙, WCAG AAA"
+      "triggers_en": "a11y high contrast, WCAG AAA"
     },
     {
       "name": "Memphis Group 80s (孟菲斯波普風格)",
@@ -673,7 +673,7 @@
       "desc_zh": "波浪紋、黑白波點幾何塊、彩線拋物線與快樂波普風格。",
       "desc_en": "波浪紋、黑白波點幾何塊、彩線拋物線與快樂波普風格。",
       "triggers_zh": "memphis, 孟菲斯, 波點幾何",
-      "triggers_en": "memphis, 孟菲斯, 波點幾何"
+      "triggers_en": "memphis"
     },
     {
       "name": "Scandinavian Hygge (北歐溫馨簡約)",
@@ -690,7 +690,7 @@
       "desc_zh": "極簡燕麥色底、柔和木質色調、極高舒適度與放鬆家居質感。",
       "desc_en": "極簡燕麥色底、柔和木質色調、極高舒適度與放鬆家居質感。",
       "triggers_zh": "hygge, scandinavian, 北歐極簡",
-      "triggers_en": "hygge, scandinavian, 北歐極簡"
+      "triggers_en": "hygge, scandinavian"
     },
     {
       "name": "Kinetic Typography (動態字體風格)",
@@ -707,7 +707,7 @@
       "desc_zh": "超大尺寸字體溢出邊框、滾動字幕與流動文字視覺號召。",
       "desc_en": "超大尺寸字體溢出邊框、滾動字幕與流動文字視覺號召。",
       "triggers_zh": "kinetic, 動態排版, 大字體流動",
-      "triggers_en": "kinetic, 動態排版, 大字體流動"
+      "triggers_en": "kinetic"
     },
     {
       "name": "Dimensional Papercut (立體剪紙)",
@@ -724,7 +724,7 @@
       "desc_zh": "多層紙張堆疊立體影、陰影落差與溫馨工藝質感。",
       "desc_en": "多層紙張堆疊立體影、陰影落差與溫馨工藝質感。",
       "triggers_zh": "papercut, 剪紙風格, 疊層影子",
-      "triggers_en": "papercut, 剪紙風格, 疊層影子"
+      "triggers_en": "papercut"
     },
     {
       "name": "Retro Future 80s (80年代未來的遐想)",
@@ -741,7 +741,7 @@
       "desc_zh": "霓虹網格線延伸至地平線、夕陽太陽圓盤與電子合成器風格。",
       "desc_en": "霓虹網格線延伸至地平線、夕陽太陽圓盤與電子合成器風格。",
       "triggers_zh": "retro future, 復古未來, synthwave",
-      "triggers_en": "retro future, 復古未來, synthwave"
+      "triggers_en": "retro future, synthwave"
     },
     {
       "name": "Micro-Interaction Focus (微互動導向)",
@@ -758,7 +758,7 @@
       "desc_zh": "每一個組件懸停均有 3D 浮動、點擊微彈簧與精緻反饋。",
       "desc_en": "每一個組件懸停均有 3D 浮動、點擊微彈簧與精緻反饋。",
       "triggers_zh": "micro interaction, 微互動, 靈動微動",
-      "triggers_en": "micro interaction, 微互動, 靈動微動"
+      "triggers_en": "micro interaction"
     },
     {
       "name": "Liquid Motion (流體水波)",
@@ -775,7 +775,7 @@
       "desc_zh": "有機液體波動邊框、藍色清澈漸變與流暢水潤感知。",
       "desc_en": "有機液體波動邊框、藍色清澈漸變與流暢水潤感知。",
       "triggers_zh": "liquid motion, 流體質感, 水波動態",
-      "triggers_en": "liquid motion, 流體質感, 水波動態"
+      "triggers_en": "liquid motion"
     },
     {
       "name": "Zero-Margin Maximalism (極致滿版極多主義)",
@@ -792,7 +792,7 @@
       "desc_zh": "充滿畫面的色彩圖塊、無留白、撞擊感與爆炸資訊視覺。",
       "desc_en": "充滿畫面的色彩圖塊、無留白、撞擊感與爆炸資訊視覺。",
       "triggers_zh": "maximalism, 極多主義, 零留白",
-      "triggers_en": "maximalism, 極多主義, 零留白"
+      "triggers_en": "maximalism"
     },
     {
       "name": "Raw Concrete Monolith (巨石水泥風)",
@@ -809,7 +809,7 @@
       "desc_zh": "深灰巨石塊面、堅硬幾何與現代建築感質感。",
       "desc_en": "深灰巨石塊面、堅硬幾何與現代建築感質感。",
       "triggers_zh": "monolith, 巨石建築, 原始水泥",
-      "triggers_en": "monolith, 巨石建築, 原始水泥"
+      "triggers_en": "monolith"
     },
     {
       "name": "Soft Pastel UI (柔和馬卡龍粉彩)",
@@ -826,7 +826,7 @@
       "desc_zh": "淡粉淡藍馬卡龍配色、低對比無壓迫感與療癒氛圍。",
       "desc_en": "淡粉淡藍馬卡龍配色、低對比無壓迫感與療癒氛圍。",
       "triggers_zh": "pastel, 馬卡龍, 柔色彩彩",
-      "triggers_en": "pastel, 馬卡龍, 柔色彩彩"
+      "triggers_en": "pastel"
     },
     {
       "name": "Cyber Gothic (賽博哥特風格)",
@@ -843,7 +843,7 @@
       "desc_zh": "深黑銀灰襯線字體、尖角金屬框邊與冷峻神秘科技感。",
       "desc_en": "深黑銀灰襯線字體、尖角金屬框邊與冷峻神秘科技感。",
       "triggers_zh": "cyber gothic, 暗黑哥特, 黑銀科技",
-      "triggers_en": "cyber gothic, 暗黑哥特, 黑銀科技"
+      "triggers_en": "cyber gothic"
     },
     {
       "name": "Vintage Film Grain (復古底片顆粒)",
@@ -860,7 +860,7 @@
       "desc_zh": "細緻雜訊噪點底紋、舊照片暖色調與懷舊底片藝術。",
       "desc_en": "細緻雜訊噪點底紋、舊照片暖色調與懷舊底片藝術。",
       "triggers_zh": "film grain, 復古底片, 膠片質感",
-      "triggers_en": "film grain, 復古底片, 膠片質感"
+      "triggers_en": "film grain"
     },
     {
       "name": "Spatial Floating Cards (懸浮景深卡片)",
@@ -877,7 +877,7 @@
       "desc_zh": "三層 z-index 陰影落差、滾動時層次浮動視覺。",
       "desc_en": "三層 z-index 陰影落差、滾動時層次浮動視覺。",
       "triggers_zh": "floating ui, 景深懸浮, 3d level",
-      "triggers_en": "floating ui, 景深懸浮, 3d level"
+      "triggers_en": "floating ui, 3d level"
     },
     {
       "name": "Voice AI Responsive (語音波形響應)",
@@ -894,7 +894,7 @@
       "desc_zh": "動態音波起伏條、Siri/Gemini 風格流光邊框。",
       "desc_en": "動態音波起伏條、Siri/Gemini 風格流光邊框。",
       "triggers_zh": "voice ui, 語音波形, ai assistant",
-      "triggers_en": "voice ui, 語音波形, ai assistant"
+      "triggers_en": "voice ui, ai assistant"
     },
     {
       "name": "Extreme Minimalism (極致極簡主義)",
@@ -911,7 +911,7 @@
       "desc_zh": "除文字與單線條外無任何多餘裝飾、回歸純粹資訊。",
       "desc_en": "除文字與單線條外無任何多餘裝飾、回歸純粹資訊。",
       "triggers_zh": "extreme minimalism, 極簡純白, ultra clean",
-      "triggers_en": "extreme minimalism, 極簡純白, ultra clean"
+      "triggers_en": "extreme minimalism, ultra clean"
     },
     {
       "name": "Biophilic Greenhouse (綠意溫室風)",
@@ -928,7 +928,7 @@
       "desc_zh": "植物綠與暖日光配色、自然和諧感。",
       "desc_en": "植物綠與暖日光配色、自然和諧感。",
       "triggers_zh": "greenhouse, 綠意溫室, 植物系",
-      "triggers_en": "greenhouse, 綠意溫室, 植物系"
+      "triggers_en": "greenhouse"
     },
     {
       "name": "3D Hyper-Realism (超寫實 3D 渲染)",
@@ -945,7 +945,7 @@
       "desc_zh": "光線追蹤金屬光澤、球體玻璃反射質感。",
       "desc_en": "光線追蹤金屬光澤、球體玻璃反射質感。",
       "triggers_zh": "hyper 3d, 寫實3d, 光線追蹤",
-      "triggers_en": "hyper 3d, 寫實3d, 光線追蹤"
+      "triggers_en": "hyper 3d, 3d"
     },
     {
       "name": "Bauhaus Geometric (包浩斯幾何風格)",
@@ -962,7 +962,7 @@
       "desc_zh": "三原色 (紅黃藍) 圓形正方形三角構造、經典工業美學。",
       "desc_en": "三原色 (紅黃藍) 圓形正方形三角構造、經典工業美學。",
       "triggers_zh": "bauhaus, 包浩斯, 原色幾何",
-      "triggers_en": "bauhaus, 包浩斯, 原色幾何"
+      "triggers_en": "bauhaus"
     },
     {
       "name": "AI Native Glass (AI 原生智能介面)",
@@ -979,7 +979,7 @@
       "desc_zh": "智能漸變光暈跟隨滑鼠、自動卡片佈局與科技感知。",
       "desc_en": "智能漸變光暈跟隨滑鼠、自動卡片佈局與科技感知。",
       "triggers_zh": "ai native, ai 介面, 智能流光",
-      "triggers_en": "ai native, ai 介面, 智能流光"
+      "triggers_en": "ai native, ai"
     },
     {
       "name": "Soft Pastel Neumorphic (柔彩軟擬物)",
@@ -996,7 +996,7 @@
       "desc_zh": "馬卡龍色彩結合軟凝膠質感凹凸細節。",
       "desc_en": "馬卡龍色彩結合軟凝膠質感凹凸細節。",
       "triggers_zh": "pastel neumorphism, 柔彩軟擬物",
-      "triggers_en": "pastel neumorphism, 柔彩軟擬物"
+      "triggers_en": "pastel neumorphism"
     },
     {
       "name": "Brutalist Mono Terminal (蠻荒單色終端)",
@@ -1012,7 +1012,7 @@
       "desc_zh": "純黑白粗體等寬字、粗框無陰影黑白二值視覺。",
       "desc_en": "純黑白粗體等寬字、粗框無陰影黑白二值視覺。",
       "triggers_zh": "mono brutalist, 單色蠻荒",
-      "triggers_en": "mono brutalist, 單色蠻荒"
+      "triggers_en": "mono brutalist"
     },
     {
       "name": "Luxe Gold Noir (黑金奢華暗黑風)",
@@ -1029,7 +1029,7 @@
       "desc_zh": "純黑亮面背景、拉絲黃金高光線條邊框與極致尊榮質感。",
       "desc_en": "純黑亮面背景、拉絲黃金高光線條邊框與極致尊榮質感。",
       "triggers_zh": "luxe gold, 黑金奢華, 高級金",
-      "triggers_en": "luxe gold, 黑金奢華, 高級金"
+      "triggers_en": "luxe gold"
     },
     {
       "name": "Clean Nordique (北歐極簡清爽)",
@@ -1046,7 +1046,7 @@
       "desc_zh": "Slate/White 高雅配色、簡潔清晰卡片分層與放鬆目視質感。",
       "desc_en": "Slate/White 高雅配色、簡潔清晰卡片分層與放鬆目視質感。",
       "triggers_zh": "nordique, 北歐清爽, clean slate",
-      "triggers_en": "nordique, 北歐清爽, clean slate"
+      "triggers_en": "nordique, clean slate"
     },
     {
       "name": "Cyber Metallic Slate (賽博金屬板岩)",
@@ -1063,7 +1063,7 @@
       "desc_zh": "拉絲鋼鐵板岩冷灰底、湛藍指示燈亮點與極度堅固感。",
       "desc_en": "拉絲鋼鐵板岩冷灰底、湛藍指示燈亮點與極度堅固感。",
       "triggers_zh": "metallic slate, 金屬板岩, 硬核科技",
-      "triggers_en": "metallic slate, 金屬板岩, 硬核科技"
+      "triggers_en": "metallic slate"
     }
   ],
   "hallmark_themes_20": [
@@ -1076,7 +1076,8 @@
       "name_zh": "editorial-serif (典雅雜誌明朝)",
       "name_en": "editorial-serif",
       "desc_zh": "暖紙白底、高雅 serif 大字體標題、1.8x 行高、適用品牌故事與精品的極致空氣感",
-      "desc_en": "暖紙白底、高雅 serif 大字體標題、1.8x 行高、適用品牌故事與精品的極致空氣感"
+      "desc_en": "暖紙白底、高雅 serif 大字體標題、1.8x 行高、適用品牌故事與精品的極致空氣感",
+      "triggers_en": "hallmark, editorial-serif"
     },
     {
       "name": "neubrutalism-vivid (高對比蠻荒)",
@@ -1087,7 +1088,8 @@
       "name_zh": "neubrutalism-vivid (高對比蠻荒)",
       "name_en": "neubrutalism-vivid",
       "desc_zh": "純黑 4px 重硬邊框、硬塊陰影 (box-shadow: 4px 4px #000)、高飽和黃紅青撞色",
-      "desc_en": "純黑 4px 重硬邊框、硬塊陰影 (box-shadow: 4px 4px #000)、高飽和黃紅青撞色"
+      "desc_en": "純黑 4px 重硬邊框、硬塊陰影 (box-shadow: 4px 4px #000)、高飽和黃紅青撞色",
+      "triggers_en": "hallmark, neubrutalism-vivid"
     },
     {
       "name": "cyber-terminal (深空科技終端)",
@@ -1098,7 +1100,8 @@
       "name_zh": "cyber-terminal (深空科技終端)",
       "name_en": "cyber-terminal",
       "desc_zh": "單色綠字黑底、矩陣光暈邊框、等寬字體、命令提示列符號與戰術數據面板",
-      "desc_en": "單色綠字黑底、矩陣光暈邊框、等寬字體、命令提示列符號與戰術數據面板"
+      "desc_en": "單色綠字黑底、矩陣光暈邊框、等寬字體、命令提示列符號與戰術數據面板",
+      "triggers_en": "hallmark, cyber-terminal"
     },
     {
       "name": "bento-dark-lux (暗黑奢華便當盒)",
@@ -1109,7 +1112,8 @@
       "name_zh": "bento-dark-lux (暗黑奢華便當盒)",
       "name_en": "bento-dark-lux",
       "desc_zh": "OLED 純黑底、1px 微暗邊框、Linear/Apple 式高質感微卡片佈局與 subtle hover 光暈",
-      "desc_en": "OLED 純黑底、1px 微暗邊框、Linear/Apple 式高質感微卡片佈局與 subtle hover 光暈"
+      "desc_en": "OLED 純黑底、1px 微暗邊框、Linear/Apple 式高質感微卡片佈局與 subtle hover 光暈",
+      "triggers_en": "hallmark, bento-dark-lux"
     },
     {
       "name": "glass-aurora (極光毛玻璃)",
@@ -1120,7 +1124,8 @@
       "name_zh": "glass-aurora (極光毛玻璃)",
       "name_en": "glass-aurora",
       "desc_zh": "彌散光暈漸變背景、毛玻璃虛化邊框、Specular 高光頂邊與夢幻質感",
-      "desc_en": "彌散光暈漸變背景、毛玻璃虛化邊框、Specular 高光頂邊與夢幻質感"
+      "desc_en": "彌散光暈漸變背景、毛玻璃虛化邊框、Specular 高光頂邊與夢幻質感",
+      "triggers_en": "hallmark, glass-aurora"
     },
     {
       "name": "nordique-clean (北歐極簡清爽)",
@@ -1131,7 +1136,8 @@
       "name_zh": "nordique-clean (北歐極簡清爽)",
       "name_en": "nordique-clean",
       "desc_zh": "高雅 Slate 暖白底色、湛藍點睛色、極簡 1px 邊框與舒適閱讀卡片與高透氣感",
-      "desc_en": "高雅 Slate 暖白底色、湛藍點睛色、極簡 1px 邊框與舒適閱讀卡片與高透氣感"
+      "desc_en": "高雅 Slate 暖白底色、湛藍點睛色、極簡 1px 邊框與舒適閱讀卡片與高透氣感",
+      "triggers_en": "hallmark, nordique-clean"
     },
     {
       "name": "japanese-editorial (日式和風質感)",
@@ -1142,7 +1148,8 @@
       "name_zh": "japanese-editorial (日式和風質感)",
       "name_en": "japanese-editorial",
       "desc_zh": "莫蘭迪紙張色系、日式留白、竪排視覺標題與空氣感體驗",
-      "desc_en": "莫蘭迪紙張色系、日式留白、竪排視覺標題與空氣感體驗"
+      "desc_en": "莫蘭迪紙張色系、日式留白、竪排視覺標題與空氣感體驗",
+      "triggers_en": "hallmark, japanese-editorial"
     },
     {
       "name": "industrial-steel (工業鋼鐵硬核)",
@@ -1153,7 +1160,8 @@
       "name_zh": "industrial-steel (工業鋼鐵硬核)",
       "name_en": "industrial-steel",
       "desc_zh": "金屬網格底紋、警示橘紅邊框、純硬塊線條與堅毅工程感知",
-      "desc_en": "金屬網格底紋、警示橘紅邊框、純硬塊線條與堅毅工程感知"
+      "desc_en": "金屬網格底紋、警示橘紅邊框、純硬塊線條與堅毅工程感知",
+      "triggers_en": "hallmark, industrial-steel"
     },
     {
       "name": "vision-spatial (蘋果空間懸浮)",
@@ -1164,7 +1172,8 @@
       "name_zh": "vision-spatial (蘋果空間懸浮)",
       "name_en": "vision-spatial",
       "desc_zh": "動態懸浮光效、Specular Highlight 高光頂邊與微立態層次落差",
-      "desc_en": "動態懸浮光效、Specular Highlight 高光頂邊與微立態層次落差"
+      "desc_en": "動態懸浮光效、Specular Highlight 高光頂邊與微立態層次落差",
+      "triggers_en": "hallmark, vision-spatial"
     },
     {
       "name": "clay-pastel (馬卡龍黏土)",
@@ -1175,7 +1184,8 @@
       "name_zh": "clay-pastel (馬卡龍黏土)",
       "name_en": "clay-pastel",
       "desc_zh": "軟萌雙向雙層內陰影、軟膠浮雕質感與療癒互動觸感",
-      "desc_en": "軟萌雙向雙層內陰影、軟膠浮雕質感與療癒互動觸感"
+      "desc_en": "軟萌雙向雙層內陰影、軟膠浮雕質感與療癒互動觸感",
+      "triggers_en": "hallmark, clay-pastel"
     },
     {
       "name": "retro-win95 (95 懷舊復古)",
@@ -1186,7 +1196,8 @@
       "name_zh": "retro-win95 (95 懷舊復古)",
       "name_en": "retro-win95",
       "desc_zh": "經典灰底 3D 凸起框 (outset)、深藍視窗標題列與懷舊視窗美學",
-      "desc_en": "經典灰底 3D 凸起框 (outset)、深藍視窗標題列與懷舊視窗美學"
+      "desc_en": "經典灰底 3D 凸起框 (outset)、深藍視窗標題列與懷舊視窗美學",
+      "triggers_en": "hallmark, retro-win95"
     },
     {
       "name": "vapor-neon (蒸汽波懷舊)",
@@ -1197,7 +1208,8 @@
       "name_zh": "vapor-neon (蒸汽波懷舊)",
       "name_en": "vapor-neon",
       "desc_zh": "80 年代霓虹粉青雙色漸變、日落太陽幾何與復古浪漫",
-      "desc_en": "80 年代霓虹粉青雙色漸變、日落太陽幾何與復古浪漫"
+      "desc_en": "80 年代霓虹粉青雙色漸變、日落太陽幾何與復古浪漫",
+      "triggers_en": "hallmark, vapor-neon"
     },
     {
       "name": "monochrome-minimal (單色極簡)",
@@ -1208,7 +1220,8 @@
       "name_zh": "monochrome-minimal (單色極簡)",
       "name_en": "monochrome-minimal",
       "desc_zh": "純黑白二值對比、無任何干擾多餘色彩與純粹資訊力量",
-      "desc_en": "純黑白二值對比、無任何干擾多餘色彩與純粹資訊力量"
+      "desc_en": "純黑白二值對比、無任何干擾多餘色彩與純粹資訊力量",
+      "triggers_en": "hallmark, monochrome-minimal"
     },
     {
       "name": "biophilic-emerald (綠意翡翠)",
@@ -1219,7 +1232,8 @@
       "name_zh": "biophilic-emerald (綠意翡翠)",
       "name_en": "biophilic-emerald",
       "desc_zh": "翡翠深綠配色、自然有機曲線邊框與植感呼吸感",
-      "desc_en": "翡翠深綠配色、自然有機曲線邊框與植感呼吸感"
+      "desc_en": "翡翠深綠配色、自然有機曲線邊框與植感呼吸感",
+      "triggers_en": "hallmark, biophilic-emerald"
     },
     {
       "name": "holo-chromatic (彩虹全息)",
@@ -1230,7 +1244,8 @@
       "name_zh": "holo-chromatic (彩虹全息)",
       "name_en": "holo-chromatic",
       "desc_zh": "彩虹全息流光金屬漸變、高奢科技感與未來流行美學",
-      "desc_en": "彩虹全息流光金屬漸變、高奢科技感與未來流行美學"
+      "desc_en": "彩虹全息流光金屬漸變、高奢科技感與未來流行美學",
+      "triggers_en": "hallmark, holo-chromatic"
     },
     {
       "name": "eink-reader (電子紙閱讀)",
@@ -1241,7 +1256,8 @@
       "name_zh": "eink-reader (電子紙閱讀)",
       "name_en": "eink-reader",
       "desc_zh": "無彩度純灰階抖動網點、高對比書籍閱讀質感與低壓視覺",
-      "desc_en": "無彩度純灰階抖動網點、高對比書籍閱讀質感與低壓視覺"
+      "desc_en": "無彩度純灰階抖動網點、高對比書籍閱讀質感與低壓視覺",
+      "triggers_en": "hallmark, eink-reader"
     },
     {
       "name": "genz-deconstruct (Z 世代解構)",
@@ -1252,7 +1268,8 @@
       "name_zh": "genz-deconstruct (Z 世代解構)",
       "name_en": "genz-deconstruct",
       "desc_zh": "傾斜貼紙字體、打破網格與高張力撞色幾何活力",
-      "desc_en": "傾斜貼紙字體、打破網格與高張力撞色幾何活力"
+      "desc_en": "傾斜貼紙字體、打破網格與高張力撞色幾何活力",
+      "triggers_en": "hallmark, genz-deconstruct"
     },
     {
       "name": "hud-tactical (戰術抬頭顯示)",
@@ -1263,7 +1280,8 @@
       "name_zh": "hud-tactical (戰術抬頭顯示)",
       "name_en": "hud-tactical",
       "desc_zh": "十字準星、座標數據圖例、動態括號與軍事科技面",
-      "desc_en": "十字準星、座標數據圖例、動態括號與軍事科技面"
+      "desc_en": "十字準星、座標數據圖例、動態括號與軍事科技面",
+      "triggers_en": "hallmark, hud-tactical"
     },
     {
       "name": "mesh-gradient (彌散網格)",
@@ -1274,7 +1292,8 @@
       "name_zh": "mesh-gradient (彌散網格)",
       "name_en": "mesh-gradient",
       "desc_zh": "多色流體漸變、光學彌散背景與現代高視覺號召",
-      "desc_en": "多色流體漸變、光學彌散背景與現代高視覺號召"
+      "desc_en": "多色流體漸變、光學彌散背景與現代高視覺號召",
+      "triggers_en": "hallmark, mesh-gradient"
     },
     {
       "name": "luxe-noir (黑金高奢)",
@@ -1285,7 +1304,8 @@
       "name_zh": "luxe-noir (黑金高奢)",
       "name_en": "luxe-noir",
       "desc_zh": "曜石黑底、拉絲黃金高光線條與極致尊榮奢華感知",
-      "desc_en": "曜石黑底、拉絲黃金高光線條與極致尊榮奢華感知"
+      "desc_en": "曜石黑底、拉絲黃金高光線條與極致尊榮奢華感知",
+      "triggers_en": "hallmark, luxe-noir"
     }
   ],
   "presentation_specs_10": [
@@ -1304,7 +1324,8 @@
       "desc_zh": "3 色限量色盤、10:1 標題/副標字體跳躍率、技術圖紙與前衛拼貼感。",
       "desc_en": "3 色限量色盤、10:1 標題/副標字體跳躍率、技術圖紙與前衛拼貼感。",
       "triggers_zh": "霓虹拼貼, neon collage, 構築主義",
-      "triggers_en": "霓虹拼貼, neon collage, 構築主義"
+      "triggers_en": "neon collage",
+      "ratio_en": "16:9 · 10:1 Font scaling"
     },
     {
       "name": "premium-apple-mockup-designer",
@@ -1321,7 +1342,8 @@
       "desc_zh": "Studio Display, iPhone, MacBook 3D 裁切佈局展示。",
       "desc_en": "Studio Display, iPhone, MacBook 3D 裁切佈局展示。",
       "triggers_zh": "premium mockup, apple mockup, 裝置模型",
-      "triggers_en": "premium mockup, apple mockup, 裝置模型"
+      "triggers_en": "premium mockup, apple mockup",
+      "ratio_en": "16:9 · 3D Device Framing"
     },
     {
       "name": "sculpture-pop-remix",
@@ -1338,7 +1360,8 @@
       "desc_zh": "古典石膏像結合高對比雙色調與蒸汽波美學。",
       "desc_en": "古典石膏像結合高對比雙色調與蒸汽波美學。",
       "triggers_zh": "sculpture pop, remix pop, 石膏撞色",
-      "triggers_en": "sculpture pop, remix pop, 石膏撞色"
+      "triggers_en": "sculpture pop, remix pop",
+      "ratio_en": "16:9 · Vaporwave Pop"
     },
     {
       "name": "modern-editorial-designer",
@@ -1355,7 +1378,8 @@
       "desc_zh": "暖白紙色 (#f1f0ea)、明朝體 (Serif)、大面積留白與空氣感。",
       "desc_en": "暖白紙色 (#f1f0ea)、明朝體 (Serif)、大面積留白與空氣感。",
       "triggers_zh": "editorial, 雜誌風, kinfolk",
-      "triggers_en": "editorial, 雜誌風, kinfolk"
+      "triggers_en": "editorial, kinfolk",
+      "ratio_en": "16:9 · Ivory Paper 1.8x"
     },
     {
       "name": "new-economy-editorial-director",
@@ -1372,7 +1396,8 @@
       "desc_zh": "【嚴格禁止 Markdown 符號】純文字非對稱構圖、10:1 巨型標題。",
       "desc_en": "【嚴格禁止 Markdown 符號】純文字非對稱構圖、10:1 巨型標題。",
       "triggers_zh": "swiss style, new economy, bauhaus",
-      "triggers_en": "swiss style, new economy, bauhaus"
+      "triggers_en": "swiss style, new economy, bauhaus",
+      "ratio_en": "16:9 · STRICT NO MARKDOWN"
     },
     {
       "name": "dark-mode-bento-architect",
@@ -1389,7 +1414,8 @@
       "desc_zh": "深色便當盒佈局、高對比發光文字與模組化卡片分區。",
       "desc_en": "深色便當盒佈局、高對比發光文字與模組化卡片分區。",
       "triggers_zh": "bento presentation, 暗黑便當簡報, oled slide",
-      "triggers_en": "bento presentation, 暗黑便當簡報, oled slide"
+      "triggers_en": "bento presentation, oled slide",
+      "ratio_en": "16:9 · OLED Dark Grid"
     },
     {
       "name": "cyberpunk-glitch-presenter",
@@ -1406,7 +1432,8 @@
       "desc_zh": "高對比青紫霓虹撞色、故障線條與前衛戰術科技感。",
       "desc_en": "高對比青紫霓虹撞色、故障線條與前衛戰術科技感。",
       "triggers_zh": "cyberpunk slide, 賽博簡報, 故障風簡報",
-      "triggers_en": "cyberpunk slide, 賽博簡報, 故障風簡報"
+      "triggers_en": "cyberpunk slide",
+      "ratio_en": "16:9 · High Contrast Neon"
     },
     {
       "name": "glassmorphism-aurora-slide",
@@ -1423,7 +1450,8 @@
       "desc_zh": "彌散漸變極光背景、毛玻璃卡片與高光邊緣構圖。",
       "desc_en": "彌散漸變極光背景、毛玻璃卡片與高光邊緣構圖。",
       "triggers_zh": "glass slide, 極光簡報, 毛玻璃簡報",
-      "triggers_en": "glass slide, 極光簡報, 毛玻璃簡報"
+      "triggers_en": "glass slide",
+      "ratio_en": "16:9 · Blur 20px Specular"
     },
     {
       "name": "minimalist-typographic-deck",
@@ -1440,7 +1468,8 @@
       "desc_zh": "無任何多餘圖片裝飾、100% 依賴字體層級與理性視覺落差。",
       "desc_en": "無任何多餘圖片裝飾、100% 依賴字體層級與理性視覺落差。",
       "triggers_zh": "typographic deck, 文字簡報, 極簡簡報",
-      "triggers_en": "typographic deck, 文字簡報, 極簡簡報"
+      "triggers_en": "typographic deck",
+      "ratio_en": "16:9 · Pure Typography"
     },
     {
       "name": "slidev-markdown-exporter",
@@ -1457,7 +1486,8 @@
       "desc_zh": "轉譯完整 Slidev (slides.md)，含 v-clicks 動畫與 Mermaid 圖表。",
       "desc_en": "轉譯完整 Slidev (slides.md)，含 v-clicks 動畫與 Mermaid 圖表。",
       "triggers_zh": "slidev export, slidev markdown, slides.md",
-      "triggers_en": "slidev export, slidev markdown, slides.md"
+      "triggers_en": "slidev export, slidev markdown, slides.md",
+      "ratio_en": "16:9 · Slidev AST Engine"
     }
   ]
 }
