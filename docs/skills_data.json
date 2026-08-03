@@ -156,6 +156,16 @@
       "sub_modules_en": [
         "10 Presentation Specs Routing: Neon Collage, Apple 3D Mockup, Kinfolk Editorial, Swiss Commercial (No Markdown), etc.",
         "Slidev & Felo Exporter: Translates to standard Slidev (slides.md) with v-clicks animations and Mermaid diagrams"
+      ],
+      "principles": [
+        {
+          "title_zh": "📝 簡報製作 Master Prompt 提示詞範例 (Standard Master Prompt)",
+          "title_en": "📝 Standard Master Prompt Template for Presentation Creation",
+          "desc_zh": "在調用 presentation-skill 製作簡報前，請參考以下標準提示詞範例進行任務發起與規範約束：\n\n【標準提示詞模板】\n我要在這個對話進行「(某某簡報製作任務)」。請以「(某某檔案)」的內容為材料，嚴格遵守「(某某風格)」的規則和風格，製作可編輯的 ppt 簡報。\n\n請先不要直接執行 ppt 的製作，而是先寫出「簡報規劃的計畫書」，計畫書中要寫出「大標題」內容、「小標題」內容、大致的內文要寫什麼、需不需要使用 ai 圖片生成，或是可以去網路上搜尋下載圖片。\n\n【紅線 (嚴格遵守)】\n1. 簡報請完整呈現「(某某檔案)」的完整內容，不要有曲解、誇大其辭、用詞太過激昂的情況。\n2. 圖片請不要調整原有的圖片比例，只允許對圖片進行「裁切」、「縮小」、「放大」。\n3. 無論是大標題小標題或內文、圖片，請都不要與其他文字或圖片有重疊，也不要有貼到畫面過於邊緣的地方。",
+          "desc_en": "Before generating slides with presentation-skill, use the following standardized Master Prompt template to set clear scope and hard constraints:\n\n[Master Prompt Template]\nI want to initiate a '(Presentation Task Name)' in this conversation. Please use the content of '(Source File)' as material, strictly adhere to the rules and aesthetics of '(Specific Style)', and create an editable presentation deck.\n\nPlease DO NOT create the slides directly. First write a 'Presentation Planning Document' specifying the main title, subtitle, outline content, whether AI image generation is needed, or if web image download is preferred.\n\n[Red Lines (Strict Constraints)]\n1. Presentation must faithfully present the complete content of '(Source File)' without distortion, hyperbole, or overly dramatic tone.\n2. Images must preserve original aspect ratio; only cropping, scaling down, or scaling up are permitted.\n3. Text elements (headlines, subheads, body) and images must NEVER overlap each other, nor touch extreme outer edges.",
+          "img_url_zh": "",
+          "img_url_en": ""
+        }
       ]
     }
   ],

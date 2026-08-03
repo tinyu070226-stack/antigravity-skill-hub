@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (homeTitle) homeTitle.textContent = 'Antigravity 4 大整合技能集展覽館';
       if (homeDesc) homeDesc.textContent = '點擊下方大卡片進入個別技能的內部運作圖文原理、70+ 種風格 live 展演、色票卡與觸發清單。';
 
-      const masterCards = document.querySelectorSelectAll ? document.querySelectorAll('.master-card') : [];
+      const masterCards = document.querySelectorAll ? document.querySelectorAll('.master-card') : [];
       if (masterCards.length >= 4) {
         masterCards[0].querySelector('.master-card-desc').textContent = '底層協同與工程門禁引擎。包含雙主 Agent (Antigravity × OpenCode) 運作圖解、grill-with-docs 詰問對齊流程與 open-code-review 門禁。';
         masterCards[0].querySelector('.count-tag').textContent = '運作圖解 + 5個核心子模組';
@@ -215,7 +215,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
       });
     } else if (masterId === 'ui-motion-skill') {
-      // Create rich live interactive demo cards for all 3 motion modules
       detailGrid.appendChild(createAnimeJsDemoCard());
       detailGrid.appendChild(createLottieDemoCard());
       detailGrid.appendChild(createReactBitsDemoCard());
