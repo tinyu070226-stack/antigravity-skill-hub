@@ -27,7 +27,16 @@ Antigravity 具備高階架構規劃、UI/UX 美學設計與系統引導能力�
 
 ### 📍 模式 1：CLI / Run 直連協同 (即時單次任務與自動除錯)
 - **硬性觸發斷路器 (Hard Circuit Breaker Rule - 依靠 `.agents/state.json` 實體狀態)**：
-  - **狀態持久化原則 (Persistent State Gate)**：模型嚴禁靠記憶猜測失敗或退回次數！必須讀取 `.agents/state.json` 中的明確數字：
+  - **狀態持久化與客觀判定原則 (Persistent State & Event Classification Gate)**：
+    - **嚴禁靠記憶或主觀猜測！** 模型必須讀取 `.agents/state.json` 中的實體數字，並嚴格遵循客觀觸發與歸零規則：
+    - **`consecutive_bug_failures +1` 客觀條件**：出現編譯器/型態檢查 Error，或使用者訊息包含 `「報錯/跑不出來/失敗/修復失敗/還是有 bug」`。
+    - **`aesthetic_rejections +1` 客觀條件**：使用者訊息包含 `「太丑/不好看/重做/換個風格/感覺不對/重新設計/退回」`。
+    - **鋼鐵歸零機制 (Lifecycle Reset Rule)**：
+      - 測試通過或使用者表示 `「修好了/OK/可以」` ➔ `consecutive_bug_failures` 強制歸零 (`0`)。
+      - 組件合併完成或使用者表示 `「風格不錯/OK/滿意」` ➔ `aesthetic_rejections` 強制歸零 (`0`)。
+      - 開啟全新獨立任務時 ➔ 所有計數器強制初始化歸零 (`0`)！
+    - **原子讀寫標準 (Atomic Read-Modify-Write)**：寫入 `state.json` 時必須先讀取最新 JSON ➔ 記憶體內運算 ➔ 覆蓋寫入，杜絕 Race Condition。
+
   - **🚫 嚴禁觸發 OpenCode (3 NOs)**：
     1. 單純的文字修改、色票更換或單一檔案的低風險微小修正。
     2. 未發生編譯報錯、未連錯 2 次（`consecutive_bug_failures < 2`）且未涉及高風險複雜度時。
@@ -66,10 +75,10 @@ Antigravity 具備高階架構規劃、UI/UX 美學設計與系統引導能力�
      - 資料流向 (Data Flow)、API 合約、Props 介面、State 狀態管理、Forms/ARIA 語意結構具備最高否決權。Claude 嚴禁變更 Data Contract。
   2. **Visual Sub-DOM & CSS 由 Claude (視覺總監) 說了算**：
      - 為了達成頂級美學 (如 Glassmorphism 遮罩層、Bento 邊框 Wrap、Motion Container)，Claude 預設採用「非破壞性包裹 (Visual Wrapper Sub-DOM)」。
-  3. **DOM 結構變更提案與單次熔斷降級機制 (Single-Pass Arbitration Fallback)**：
+  3. **DOM 結構變更提案、單次熔斷與降級日誌機制 (Single-Pass Arbitration & Audit Trail)**：
      - **結構調整提案**：若 Claude 判斷必須調整 Non-data 的 DOM 結構順序才能達到頂級美學（如 Bento Grid 響應式重排、Z-index 堆疊順序），可輸出 `DOM Structural Proposal`。
      - **1 次仲裁熔斷條款 (Single-Pass Limit)**：Gemini 進行仲裁審核。若**首次通過**則立即批准合併；若**首次否決**，**嚴禁進行第二輪提案對話**！
-     - **強制降級 (Mandatory Fallback)**：否決後立刻強制降級為 **Non-Breaking Wrap (非破壞性包裹) 方案**，銷毀 Claude Subagent，徹底封殺 Agent 間的對話拉鋸與 Token 洩漏！
+     - **強制降級與日誌寫入 (Mandatory Fallback & Log)**：否決後立刻強制降級為 **Non-Breaking Wrap (非破壞性包裹) 方案**，將本次降級事件寫入 `state.json` 的 `arbitration_history` 陣列（方便人類回顧追蹤），並銷毀 Claude Subagent，徹底封殺 Agent 間的對話拉鋸與 Token 洩漏！
 
 ---
 
