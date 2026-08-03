@@ -223,8 +223,8 @@ document.addEventListener('DOMContentLoaded', async () => {
           const tooltipLabel = currentLang === 'en' ? 'Copy Master Prompt' : '複製 Master Prompt 提示詞';
           const introLabel = currentLang === 'en' ? 'In presentation tasks, click the top-right icon to copy the full prompt:' : '進行簡報製作任務時，可直接點擊右上方圖示複製完整提示詞：';
           
-          const rawLines = pDesc.trim().split('\n').map(l => l.trim()).filter(l => l.length > 0);
           const cleanPromptText = pDesc.trim();
+          const rawLines = cleanPromptText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
 
           let promptBodyHtml = '';
           rawLines.forEach(line => {
@@ -237,14 +237,26 @@ document.addEventListener('DOMContentLoaded', async () => {
               <p style="font-size:14px; color:#475569; text-align:left; margin:0;">${introLabel}</p>
             </div>
 
-            <div style="position:relative; background:#f1f5f9; color:#0f172a; border:1px solid #cbd5e1; border-radius:14px; padding:16px 52px 4px 20px; font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif; text-align:left; display:block; margin-top:12px;">
-              <button class="copy-btn" title="${tooltipLabel}" style="position:absolute; top:14px; right:14px; background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; width:34px; height:34px; display:inline-flex; align-items:center; justify-content:center; padding:0; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,0.05); font-size:15px; line-height:1; transition:all 0.15s ease;" onclick="copyText(\`${cleanPromptText.replace(/`/g, '\\`')}\`, 'Master Prompt')" onmouseenter="this.style.background='#e0f2fe'; this.style.borderColor='#0284c7';" onmouseleave="this.style.background='#ffffff'; this.style.borderColor='#cbd5e1';">
+            <div style="position:relative; background:#f1f5f9; color:#0f172a; border:1px solid #cbd5e1; border-radius:14px; padding:18px 52px 8px 20px; font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif; text-align:left; display:block; margin-top:12px;">
+              <button id="master-prompt-copy-btn" title="${tooltipLabel}" style="position:absolute; top:14px; right:14px; background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; width:34px; height:34px; display:inline-flex; align-items:center; justify-content:center; padding:0; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,0.05); font-size:15px; line-height:1; transition:all 0.15s ease;" onmouseenter="this.style.background='#e0f2fe'; this.style.borderColor='#0284c7';" onmouseleave="this.style.background='#ffffff'; this.style.borderColor='#cbd5e1';">
                 <span style="display:inline-block; transform:translateY(-1px);">📋</span>
               </button>
               ${promptBodyHtml}
             </div>
             ${mediaHtml}
           `;
+
+          // Attach robust event listener after DOM node creation
+          setTimeout(() => {
+            const btn = pBox.querySelector('#master-prompt-copy-btn');
+            if (btn) {
+              btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                copyText(cleanPromptText, 'Master Prompt');
+              });
+            }
+          }, 50);
         } else {
           const formattedDesc = pDesc.replace(/\n/g, '<br/>');
           pBox.innerHTML = `
