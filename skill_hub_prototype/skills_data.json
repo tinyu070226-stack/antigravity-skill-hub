@@ -64,19 +64,23 @@
         "emil-skills",
         "ui-skills",
         "前端風格",
-        "反slop"
+        "反slop",
+        "web-design-engineer",
+        "design-read"
       ],
-      "description_zh": "整合 50 種經典與現代網頁設計風格知識庫、Nutlope Hallmark 反 AI 模板化防禦機制 (20 主題 catalog、8-State 組件寫滿、Pre-emit 6 軸自我評分) 以及 Emil Kowalski 8 大設計工程體系。",
-      "description_en": "Integrates 50 Web Design Styles KB, Nutlope Hallmark anti-slop rules (20 themes, 8-state validation, 6-axis scoring), and Emil Kowalski design engineering.",
+      "description_zh": "整合 50 種經典與現代網頁設計風格知識庫、Nutlope Hallmark 反 AI 模板化防禦機制、web-design-engineer 5-dial 視覺決策與 25 品牌錨定風格配方（Linear, Stripe Press, Aesop, Bloomberg 終端機等）及品牌資產法則 (Asset > Spec)。",
+      "description_en": "Integrates 50 Web Design Styles KB, Nutlope Hallmark anti-slop rules, web-design-engineer 5-dial Design Read decision system, 25 anchored style recipes (Linear, Stripe Press, Aesop, Bloomberg), and Brand Asset Protocol.",
       "sub_modules_zh": [
         "50 Web Design Styles KB: 50 種網頁設計體系 (Hex 色票、邊框陰影、材質、Typography)",
         "Nutlope Hallmark: 20 視覺主題輪替、8 種組件狀態寫滿、Pre-emit 6 軸自我評分",
+        "web-design-engineer: 5-dial 視覺校準 (Variance, Motion, Density, Asset, Brand) + 25 品牌錨定風格配方 (Linear, Stripe Press, Aesop, Bloomberg 終端機等) + 品牌資產法則 (Asset > Spec)",
         "Emil Kowalski 設計工程: Apple 質感細節、Easing/Spring 動態詞彙、60 FPS 效能審查",
         "UI-Skills 路由: OKLCH 色彩 (better-colors)、瑞士排版 (swiss-design)、A11y (build-primitive)"
       ],
       "sub_modules_en": [
         "50 Web Design Styles KB: 50 Frontend design style systems (Hex palettes, borders, textures, typography)",
         "Nutlope Hallmark: 20 Visual theme catalog, 8 component state coverage, pre-emit 6-axis self-scoring",
+        "web-design-engineer: 5-dial Design Read (Variance, Motion, Density, Asset, Brand) + 25 Anchored Style Recipes (Linear, Stripe Press, Aesop, Bloomberg) + Brand Asset Protocol (Asset > Spec)",
         "Emil Kowalski Engineering: Apple-grade tactile details, Easing/Spring motion, 60 FPS performance review",
         "UI-Skills Routing: OKLCH color space (better-colors), Swiss typography (swiss-design), A11y (build-primitive)"
       ],
@@ -86,6 +90,14 @@
           "title_en": "🛡️ Nutlope Hallmark Anti-AI Slop Defense Protocol",
           "desc_zh": "Nutlope Hallmark 是防止生成式 AI 產出同質化、平庸藍灰模板 (Slop UI) 的強效防禦體系。其包含三大核心支柱：\n1. 20 主題氣質輪替 (Theme Catalog)：打破預設 AI 藍白介面，隨機或依語境套用 20 種獨特美學氣質（如古雅明朝、賽博終端、暗黑便當盒等）。\n2. 8-State 組件寫滿 (8-State Completeness)：強制所有 UI 組件必須實作 Default、Hover、Active、Focus、Loading、Success、Error、Disabled 完整 8 種狀態，防止互動空洞。\n3. Pre-emit 6 軸自我評分 (6-Axis Self-Scoring)：在輸出程式碼前，針對層次感、對比度、留白、觸感細節、效能與響應式進行 6 軸打分，確保最高 Production 品質。",
           "desc_en": "Nutlope Hallmark is a robust defense framework against bland, repetitive AI-generated interfaces (Slop UI). Built on 3 core pillars:\n1. 20 Aesthetic Theme Catalog: Replaces generic AI blue/grey themes with 20 distinct visual signatures (e.g., Editorial Serif, Cyber Terminal, Bento Dark Lux).\n2. 8-State Component Completeness: Enforces full implementation of Default, Hover, Active, Focus, Loading, Success, Error, and Disabled states on all interactive controls.\n3. Pre-emit 6-Axis Self-Scoring: Evaluates hierarchy, contrast, whitespace, tactile details, 60fps performance, and responsiveness before emitting production code.",
+          "img_url_zh": "",
+          "img_url_en": ""
+        },
+        {
+          "title_zh": "🎨 web-design-engineer 5-Dial 視覺決策與 25 品牌錨定風格配方",
+          "title_en": "🎨 web-design-engineer 5-Dial Design Read & 25 Anchored Style Recipes",
+          "desc_zh": "web-design-engineer 是極致前端設計工程師的設計思維體系，核心包含三大部分：\n1. 5-Dial 視覺旋鈕校準 (Design Read)：在撰寫程式碼前，先針對「視覺變異度 (Variance)」、「動效強度 (Motion)」、「資訊密度 (Density)」、「資產依賴 (Asset Dependence)」與「品牌忠誠度 (Brand Fidelity)」進行 1-10 旋鈕定位，決策佈局方向。\n2. 25 品牌錨定風格配方 (25 Style Recipes)：涵蓋 Linear 極致黑、Stripe Press 印藝、Aesop 藥劑師哲學、Bloomberg 交易終端、Monocle 雜誌刊物、MUJI 原研哉極簡、Apple HIG 等 25 種業界大師級色彩、字體配對與 DNA 簽名動作 (Signature Moves)。\n3. 品牌資產至上法則 (Asset > Spec)：嚴禁使用偽手繪或替代品取代真實品牌 Logo 與產品照。強調「Logo 非談判項目，真實產品照優於 Hex 色票」，絕不產出同質化的 AI 藍紫漸層模板！",
+          "desc_en": "web-design-engineer elevates AI generated frontends with design engineer principles:\n1. 5-Dial Design Read Calibration: Calibrates Visual Variance, Motion Intensity, Information Density, Asset Dependence, and Brand Fidelity (1-10 dials) before coding.\n2. 25 Anchored Style Recipes: Includes Linear Dark, Stripe Press Typography, Aesop Apothecary, Bloomberg Terminal, Monocle Magazine, MUJI Kenya Hara, and Apple HIG, each with palette, fonts, and signature moves.\n3. Brand Asset Protocol (Asset > Spec): Enforces real logos and product imagery over generic hex codes. Forbids synthetic AI blue gradients or CSS silhouettes in brand work.",
           "img_url_zh": "",
           "img_url_en": ""
         }
