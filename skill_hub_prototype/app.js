@@ -118,7 +118,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   window.copyText = (text, type = 'Trigger') => {
     navigator.clipboard.writeText(text);
-    const toastMsg = currentLang === 'en' ? `Copied ${type}: ${text}` : `已複製${type}: ${text}`;
+    let toastMsg = '';
+    if (type === 'Master Prompt') {
+      toastMsg = currentLang === 'en' ? '📋 Master Prompt Copied Successfully' : '📋 提示詞範例複製成功';
+    } else if (type === 'CSS') {
+      toastMsg = currentLang === 'en' ? '📋 CSS Style Code Copied' : '📋 CSS 樣式代碼複製成功';
+    } else if (type === 'HEX Swatch') {
+      toastMsg = currentLang === 'en' ? `📋 HEX Color Copied: ${text}` : `📋 HEX 色票複製成功: ${text}`;
+    } else {
+      toastMsg = currentLang === 'en' ? '📋 Trigger Copied Successfully' : '📋 觸發詞複製成功';
+    }
     showToast(toastMsg);
   };
 
