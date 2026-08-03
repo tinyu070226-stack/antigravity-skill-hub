@@ -288,9 +288,9 @@
       "name": "Bento Grid 2.0 (便當盒網格)",
       "triggers": "bento, bento grid, 便當盒佈局",
       "hex": [
-        "#09090B",
-        "#18181B",
-        "#27272A"
+        "#090d16",
+        "#ffffff",
+        "#38bdf8"
       ],
       "desc": "Apple/Linear 風格微卡片組合、多尺寸方格、極細 1px 邊框與內置微小動效。",
       "css": "background: #09090B; border: 1px solid #27272A; border-radius: 16px; color: #FAFAFA;",
