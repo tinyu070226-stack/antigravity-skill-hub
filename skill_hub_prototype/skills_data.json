@@ -1322,7 +1322,7 @@
       "name_zh": "neon-collage-architect",
       "name_en": "neon-collage-architect",
       "desc_zh": "3 色限量色盤、10:1 標題/副標字體跳躍率、技術圖紙與前衛拼貼感。",
-      "desc_en": "3 色限量色盤、10:1 標題/副標字體跳躍率、技術圖紙與前衛拼貼感。",
+      "desc_en": "3 limited colorways, 10:1 header scale, blueprint graph grid, and tech collage aesthetic.",
       "triggers_zh": "霓虹拼貼, neon collage, 構築主義",
       "triggers_en": "neon collage",
       "ratio_en": "16:9 · 10:1 Font scaling"
@@ -1340,7 +1340,7 @@
       "name_zh": "premium-apple-mockup-designer",
       "name_en": "premium-apple-mockup-designer",
       "desc_zh": "Studio Display, iPhone, MacBook 3D 裁切佈局展示。",
-      "desc_en": "Studio Display, iPhone, MacBook 3D 裁切佈局展示。",
+      "desc_en": "Studio Display, iPhone, and MacBook 3D device framing layouts.",
       "triggers_zh": "premium mockup, apple mockup, 裝置模型",
       "triggers_en": "premium mockup, apple mockup",
       "ratio_en": "16:9 · 3D Device Framing"
@@ -1358,7 +1358,7 @@
       "name_zh": "sculpture-pop-remix",
       "name_en": "sculpture-pop-remix",
       "desc_zh": "古典石膏像結合高對比雙色調與蒸汽波美學。",
-      "desc_en": "古典石膏像結合高對比雙色調與蒸汽波美學。",
+      "desc_en": "Classical marble sculpture aesthetics combined with high-contrast vaporwave neon tones.",
       "triggers_zh": "sculpture pop, remix pop, 石膏撞色",
       "triggers_en": "sculpture pop, remix pop",
       "ratio_en": "16:9 · Vaporwave Pop"
@@ -1376,7 +1376,7 @@
       "name_zh": "modern-editorial-designer",
       "name_en": "modern-editorial-designer",
       "desc_zh": "暖白紙色 (#f1f0ea)、明朝體 (Serif)、大面積留白與空氣感。",
-      "desc_en": "暖白紙色 (#f1f0ea)、明朝體 (Serif)、大面積留白與空氣感。",
+      "desc_en": "Warm paper background (#f1f0ea), Mincho Serif typography, and Kinfolk quiet luxury airiness.",
       "triggers_zh": "editorial, 雜誌風, kinfolk",
       "triggers_en": "editorial, kinfolk",
       "ratio_en": "16:9 · Ivory Paper 1.8x"
@@ -1394,7 +1394,7 @@
       "name_zh": "new-economy-editorial-director",
       "name_en": "new-economy-editorial-director",
       "desc_zh": "【嚴格禁止 Markdown 符號】純文字非對稱構圖、10:1 巨型標題。",
-      "desc_en": "【嚴格禁止 Markdown 符號】純文字非對稱構圖、10:1 巨型標題。",
+      "desc_en": "Strict no-markdown pure text asymmetric layout with 10:1 colossal Swiss titles.",
       "triggers_zh": "swiss style, new economy, bauhaus",
       "triggers_en": "swiss style, new economy, bauhaus",
       "ratio_en": "16:9 · STRICT NO MARKDOWN"
@@ -1412,7 +1412,7 @@
       "name_zh": "dark-mode-bento-architect",
       "name_en": "dark-mode-bento-architect",
       "desc_zh": "深色便當盒佈局、高對比發光文字與模組化卡片分區。",
-      "desc_en": "深色便當盒佈局、高對比發光文字與模組化卡片分區。",
+      "desc_en": "OLED pitch black bento grid layout, high-contrast glowing text, and modular card partitions.",
       "triggers_zh": "bento presentation, 暗黑便當簡報, oled slide",
       "triggers_en": "bento presentation, oled slide",
       "ratio_en": "16:9 · OLED Dark Grid"
@@ -1430,7 +1430,7 @@
       "name_zh": "cyberpunk-glitch-presenter",
       "name_en": "cyberpunk-glitch-presenter",
       "desc_zh": "高對比青紫霓虹撞色、故障線條與前衛戰術科技感。",
-      "desc_en": "高對比青紫霓虹撞色、故障線條與前衛戰術科技感。",
+      "desc_en": "High-voltage cyan/magenta neon contrast, glitch line effects, and tactical tech vibe.",
       "triggers_zh": "cyberpunk slide, 賽博簡報, 故障風簡報",
       "triggers_en": "cyberpunk slide",
       "ratio_en": "16:9 · High Contrast Neon"
@@ -1448,7 +1448,7 @@
       "name_zh": "glassmorphism-aurora-slide",
       "name_en": "glassmorphism-aurora-slide",
       "desc_zh": "彌散漸變極光背景、毛玻璃卡片與高光邊緣構圖。",
-      "desc_en": "彌散漸變極光背景、毛玻璃卡片與高光邊緣構圖。",
+      "desc_en": "Diffuse fluid aurora background gradients, frosted glass cards, and specular rim lights.",
       "triggers_zh": "glass slide, 極光簡報, 毛玻璃簡報",
       "triggers_en": "glass slide",
       "ratio_en": "16:9 · Blur 20px Specular"
@@ -1466,7 +1466,7 @@
       "name_zh": "minimalist-typographic-deck",
       "name_en": "minimalist-typographic-deck",
       "desc_zh": "無任何多餘圖片裝飾、100% 依賴字體層級與理性視覺落差。",
-      "desc_en": "無任何多餘圖片裝飾、100% 依賴字體層級與理性視覺落差。",
+      "desc_en": "Zero graphic clutter, 100% font scale hierarchy, and pure rational layout contrast.",
       "triggers_zh": "typographic deck, 文字簡報, 極簡簡報",
       "triggers_en": "typographic deck",
       "ratio_en": "16:9 · Pure Typography"
