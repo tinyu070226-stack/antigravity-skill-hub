@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (homeTitle) homeTitle.textContent = 'Antigravity 4 大整合技能集展覽館';
       if (homeDesc) homeDesc.textContent = '點擊下方大卡片進入個別技能的內部運作圖文原理、70+ 種風格 live 展演、色票卡與觸發清單。';
 
-      const masterCards = document.querySelectorAll('.master-card');
+      const masterCards = document.querySelectorSelectAll ? document.querySelectorAll('.master-card') : [];
       if (masterCards.length >= 4) {
         masterCards[0].querySelector('.master-card-desc').textContent = '底層協同與工程門禁引擎。包含雙主 Agent (Antigravity × OpenCode) 運作圖解、grill-with-docs 詰問對齊流程與 open-code-review 門禁。';
         masterCards[0].querySelector('.count-tag').textContent = '運作圖解 + 5個核心子模組';
@@ -172,9 +172,11 @@ document.addEventListener('DOMContentLoaded', async () => {
           mediaHtml = `<div style="margin-top:16px; border:1px solid #e2e8f0; border-radius:12px; overflow:hidden;"><img src="${pImg}" alt="${pTitle}" style="width:100%; height:auto; display:block;" /></div>`;
         }
 
+        const formattedDesc = pDesc.replace(/\n/g, '<br/>');
+
         pBox.innerHTML = `
           <h3 style="font-size:18px; font-weight:700; color:#0f172a; margin-bottom:10px; letter-spacing:-0.3px;">${pTitle}</h3>
-          <p style="font-size:14.5px; color:#475569; line-height:1.65;">${pDesc}</p>
+          <p style="font-size:14.5px; color:#475569; line-height:1.65;">${formattedDesc}</p>
           ${mediaHtml}
         `;
         detailPrinciples.appendChild(pBox);
@@ -213,25 +215,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
       });
     } else if (masterId === 'ui-motion-skill') {
-      const subList = currentLang === 'en' ? (masterInfo.sub_modules_en || masterInfo.sub_modules) : (masterInfo.sub_modules_zh || masterInfo.sub_modules);
-      subList.forEach((sm, idx) => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        const motionIcons = ['⚡', '🎬', '🧩'];
-        const copyBtnText = currentLang === 'en' ? 'Copy Trigger' : '複製觸發詞';
-        card.innerHTML = `
-          <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-            <span style="font-size:22px;">${motionIcons[idx % motionIcons.length]}</span>
-            <h3 class="card-title" style="margin:0;">${sm.split(':')[0]}</h3>
-          </div>
-          <p class="card-desc">${sm.split(':')[1] || ''}</p>
-          <div class="trigger-group">
-            <span class="trigger-text">@ui-motion-skill</span>
-            <button class="copy-btn" onclick="copyText('@ui-motion-skill', '${copyBtnText}')">${copyBtnText}</button>
-          </div>
-        `;
-        detailGrid.appendChild(card);
-      });
+      // Create rich live interactive demo cards for all 3 motion modules
+      detailGrid.appendChild(createAnimeJsDemoCard());
+      detailGrid.appendChild(createLottieDemoCard());
+      detailGrid.appendChild(createReactBitsDemoCard());
     } else if (masterId === 'presentation-skill') {
       skillsData.presentation_specs_10.forEach(item => {
         if (matchesQuery(item, query)) {
@@ -367,6 +354,145 @@ document.addEventListener('DOMContentLoaded', async () => {
         <button class="copy-btn" onclick="copyText('hallmark', '${copyBtnText}')">${copyBtnText}</button>
       </div>
     `;
+    return card;
+  }
+
+  function createAnimeJsDemoCard() {
+    const card = document.createElement('div');
+    card.className = 'card';
+    const titleStr = currentLang === 'en' ? '⚡ Anime.js Timeline & Spring Physics' : '⚡ Anime.js 時間軸與彈簧物理動效';
+    const descStr = currentLang === 'en' ? 'Staggered grid physics, spring easing, and GPU-accelerated transform timeline engineering.' : 'Stagger 交錯陣列物理彈簧緩動、時間軸控制與 GPU Transform 加速優化範例。';
+    const btnText = currentLang === 'en' ? '▶ Trigger Stagger Spring Physics' : '▶ 觸發交錯物理彈簧動畫';
+
+    card.innerHTML = `
+      <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <h3 class="card-title" style="margin:0; font-size:15px; font-weight:700;">${titleStr}</h3>
+        <span style="font-size:10px; background:#ccfbf1; color:#0f766e; padding:2px 6px; border-radius:4px; font-weight:600;">Anime.js Engine</span>
+      </div>
+      <p class="card-desc">${descStr}</p>
+      
+      <div style="background:#0f172a; border-radius:12px; padding:16px; margin-bottom:14px; text-align:center;">
+        <div id="stagger-grid-demo" style="display:grid; grid-template-columns:repeat(5, 1fr); gap:8px; width:180px; margin:0 auto 12px;">
+          ${Array(15).fill(0).map((_, i) => `<div class="stagger-dot" style="width:24px; height:24px; background:#38bdf8; border-radius:6px; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;"></div>`).join('')}
+        </div>
+        <button id="trigger-anime-btn" style="background:#0284c7; color:#fff; border:none; padding:8px 16px; border-radius:6px; font-size:11.5px; font-weight:600; cursor:pointer; transition:all 0.2s ease;">${btnText}</button>
+      </div>
+
+      <div class="trigger-group">
+        <span class="trigger-text">hyperframes@animejs</span>
+        <button class="copy-btn" onclick="copyText('hyperframes@animejs', 'Trigger')">${currentLang === 'en' ? 'Copy Trigger' : '複製觸發詞'}</button>
+      </div>
+    `;
+
+    setTimeout(() => {
+      const btn = card.querySelector('#trigger-anime-btn');
+      const dots = card.querySelectorAll('.stagger-dot');
+      if (btn && dots) {
+        btn.addEventListener('click', () => {
+          dots.forEach((dot, idx) => {
+            setTimeout(() => {
+              dot.style.transform = 'scale(1.4) translateY(-8px)';
+              dot.style.background = '#e11d48';
+              setTimeout(() => {
+                dot.style.transform = 'scale(1) translateY(0)';
+                dot.style.background = '#38bdf8';
+              }, 400);
+            }, idx * 45);
+          });
+        });
+      }
+    }, 100);
+
+    return card;
+  }
+
+  function createLottieDemoCard() {
+    const card = document.createElement('div');
+    card.className = 'card';
+    const titleStr = currentLang === 'en' ? '🎬 LottieFiles & Text-to-Lottie Vectors' : '🎬 LottieFiles 向量動效與 Text-to-Lottie 生成';
+    const descStr = currentLang === 'en' ? 'Pure vector JSON dynamic rendering, point path optimization, and interactive state playback.' : '純向量 JSON 動態繪製點位優化、輕量級效能與即時動態播控範例。';
+    const btnText = currentLang === 'en' ? '⏸ Pause / Play Vector Pulse' : '⏸ 暫停 / 播放向量脈動';
+
+    card.innerHTML = `
+      <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <h3 class="card-title" style="margin:0; font-size:15px; font-weight:700;">${titleStr}</h3>
+        <span style="font-size:10px; background:#f3e8ff; color:#7c3aed; padding:2px 6px; border-radius:4px; font-weight:600;">Vector Lottie</span>
+      </div>
+      <p class="card-desc">${descStr}</p>
+      
+      <div style="background:#090d16; border-radius:12px; padding:18px; margin-bottom:14px; text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <div id="lottie-spinner" style="width:48px; height:48px; border:4px solid rgba(56,189,248,0.2); border-top:4px solid #38bdf8; border-right:4px solid #e11d48; border-radius:50%; margin-bottom:12px; animation: lottieSpin 1s linear infinite;"></div>
+        <button id="toggle-lottie-btn" style="background:#7c3aed; color:#fff; border:none; padding:8px 16px; border-radius:6px; font-size:11.5px; font-weight:600; cursor:pointer;">${btnText}</button>
+      </div>
+
+      <style>
+        @keyframes lottieSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+      </style>
+
+      <div class="trigger-group">
+        <span class="trigger-text">LottieFiles, Text-to-Lottie</span>
+        <button class="copy-btn" onclick="copyText('Text-to-Lottie', 'Trigger')">${currentLang === 'en' ? 'Copy Trigger' : '複製觸發詞'}</button>
+      </div>
+    `;
+
+    setTimeout(() => {
+      const btn = card.querySelector('#toggle-lottie-btn');
+      const spinner = card.querySelector('#lottie-spinner');
+      let isPlaying = true;
+      if (btn && spinner) {
+        btn.addEventListener('click', () => {
+          isPlaying = !isPlaying;
+          spinner.style.animationPlayState = isPlaying ? 'running' : 'paused';
+          showToast(isPlaying ? 'Lottie Animation: Playing' : 'Lottie Animation: Paused');
+        });
+      }
+    }, 100);
+
+    return card;
+  }
+
+  function createReactBitsDemoCard() {
+    const card = document.createElement('div');
+    card.className = 'card';
+    const titleStr = currentLang === 'en' ? '🧩 React Bits (shadcn CLI Primitive Component Suite)' : '🧩 React Bits (shadcn CLI 官方元件庫規範)';
+    const descStr = currentLang === 'en' ? 'Official shadcn download mode including SplitText, BlurText, MagnetLines, and SoftAurora primitives.' : '包含 SplitText、BlurText 模糊文字動態、MagnetLines 磁吸滑鼠跟隨與 SoftAurora 質感光暈實體組件。';
+    const hoverText = currentLang === 'en' ? 'Hover or Click to Reveal BlurText' : '將滑鼠移至上方或點擊以觸發 BlurText 動效';
+
+    card.innerHTML = `
+      <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <h3 class="card-title" style="margin:0; font-size:15px; font-weight:700;">${titleStr}</h3>
+        <span style="font-size:10px; background:#e0f2fe; color:#0284c7; padding:2px 6px; border-radius:4px; font-weight:600;">shadcn CLI</span>
+      </div>
+      <p class="card-desc">${descStr}</p>
+      
+      <div id="reactbits-box" style="background:linear-gradient(135deg, #1e1b4b, #0f172a); border-radius:12px; padding:18px; margin-bottom:14px; text-align:center; cursor:pointer;" onclick="showToast('React Bits: BlurText Triggered')">
+        <div id="blur-text-element" style="font-size:18px; font-weight:800; color:#38bdf8; filter:blur(6px); transition:filter 0.5s ease, transform 0.4s ease; margin-bottom:6px;">
+          React Bits :: BlurText Animation
+        </div>
+        <div style="font-size:11px; color:#94a3b8;">${hoverText}</div>
+      </div>
+
+      <div class="trigger-group">
+        <span class="trigger-text">React Bits, shadcn CLI</span>
+        <button class="copy-btn" onclick="copyText('React Bits', 'Trigger')">${currentLang === 'en' ? 'Copy Trigger' : '複製觸發詞'}</button>
+      </div>
+    `;
+
+    setTimeout(() => {
+      const box = card.querySelector('#reactbits-box');
+      const textEl = card.querySelector('#blur-text-element');
+      if (box && textEl) {
+        box.addEventListener('mouseenter', () => {
+          textEl.style.filter = 'blur(0px)';
+          textEl.style.transform = 'scale(1.05)';
+        });
+        box.addEventListener('mouseleave', () => {
+          textEl.style.filter = 'blur(6px)';
+          textEl.style.transform = 'scale(1)';
+        });
+      }
+    }, 100);
+
     return card;
   }
 
