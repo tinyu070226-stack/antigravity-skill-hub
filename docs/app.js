@@ -1,3 +1,84 @@
+
+window.showToast = function(message) {
+  let toast = document.getElementById('toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'toast';
+    document.body.appendChild(toast);
+  }
+  toast.innerText = message;
+  toast.classList.add('show');
+  if (window.toastTimer) clearTimeout(window.toastTimer);
+  window.toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2000);
+};
+
+window.copyText = function(text, triggerName, btnElement) {
+  if (!text) return;
+  const isEn = window.currentLang === 'en';
+
+  const doCopy = () => {
+    let toastMsg = '';
+    if (triggerName === 'Master Prompt') {
+      toastMsg = isEn ? '📋 Master Prompt Copied' : '📋 提示詞範例複製成功';
+    } else if (triggerName === 'CSS') {
+      toastMsg = isEn ? '📋 CSS Style Copied' : '📋 CSS 樣式複製成功';
+    } else {
+      toastMsg = isEn ? `📋 Copied: "${triggerName}"` : `📋 已複製觸發詞：「${triggerName}」`;
+    }
+    
+    if (window.showToast) window.showToast(toastMsg);
+
+    // Micro animation
+    if (btnElement) {
+      const origHtml = btnElement.innerHTML;
+      btnElement.style.transition = 'all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+      btnElement.style.transform = 'scale(0.85)';
+      
+      setTimeout(() => {
+        btnElement.style.transform = 'scale(1.15)';
+        btnElement.innerHTML = '<span style="color:#10b981; display:inline-block;">✅</span>';
+        
+        setTimeout(() => {
+          btnElement.style.transform = 'scale(1)';
+          setTimeout(() => {
+            btnElement.innerHTML = origHtml;
+            btnElement.style.transform = '';
+            btnElement.style.transition = '';
+          }, 800);
+        }, 200);
+      }, 100);
+    }
+  };
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(doCopy).catch(() => {
+      fallbackCopy(text);
+      doCopy();
+    });
+  } else {
+    fallbackCopy(text);
+    doCopy();
+  }
+};
+
+function fallbackCopy(text) {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  textArea.style.position = "fixed";
+  textArea.style.left = "-9999px";
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  try {
+    document.execCommand('copy');
+  } catch (err) {
+    console.error('Fallback copy failed', err);
+  }
+  document.body.removeChild(textArea);
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   const homeView = document.getElementById('home-view');
   const detailView = document.getElementById('detail-view');
@@ -273,7 +354,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <p class="card-desc">${sm.split(':')[1] || ''}</p>
           <div class="trigger-group">
             <span class="trigger-text">@core-synergy-skill</span>
-            <button class="copy-btn" onclick="copyText('@core-synergy-skill', '${copyBtnText}')">${copyBtnText}</button>
+            <button class="copy-btn" onclick="copyText('@core-synergy-skill', '${copyBtnText}', this)">${copyBtnText}</button>
           </div>
         `;
         detailGrid.appendChild(card);
@@ -335,7 +416,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
       <p class="card-desc">${descStr}</p>
       
-      <div style="${item.css} padding: 18px 20px; border-radius: 12px; margin-bottom: 14px; min-height: 140px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden;" onclick="copyText('${item.css}', 'CSS')" title="Click to copy CSS style">
+      <div style="${item.css} padding: 18px 20px; border-radius: 12px; margin-bottom: 14px; min-height: 140px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden;" onclick="copyText('${item.css}', 'CSS', this)" title="Click to copy CSS style">
         <div style="display:flex; justify-content:space-between; align-items:center;">
           <span style="background: ${c3 || c2}; color: ${c1}; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px;">
             ${nameStr.split(' ')[0]} SPEC
@@ -364,11 +445,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       <div class="trigger-group">
         <span class="trigger-text">${trigStr}</span>
-        <button class="copy-btn" onclick="copyText('${mainTrig}', '${copyBtnText}')">${copyBtnText}</button>
+        <button class="copy-btn" onclick="copyText('${mainTrig}', '${copyBtnText}', this)">${copyBtnText}</button>
       </div>
 
       <div class="swatches" style="margin-top:10px;">
-        ${item.hex.map(h => `<div class="swatch" style="background: ${h};" title="Click to copy HEX: ${h}" onclick="copyText('${h}', 'HEX Swatch')"></div>`).join('')}
+        ${item.hex.map(h => `<div class="swatch" style="background: ${h};" title="Click to copy HEX: ${h}" onclick="copyText('${h}', 'HEX Swatch', this)"></div>`).join('')}
       </div>
     `;
     return card;
@@ -441,7 +522,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div style="font-size:11.5px; color:#64748b; margin-bottom:8px;">${fontLabel} <code style="font-family:monospace; background:#f1f5f9; padding:2px 6px; border-radius:4px;">${fontName}</code></div>
       <div class="trigger-group">
         <span class="trigger-text">${trigStr}</span>
-        <button class="copy-btn" onclick="copyText('${mainTrig}', '${copyBtnText}')">${copyBtnText}</button>
+        <button class="copy-btn" onclick="copyText('${mainTrig}', '${copyBtnText}', this)">${copyBtnText}</button>
       </div>
     `;
     return card;
@@ -470,7 +551,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       <div class="trigger-group">
         <span class="trigger-text">hyperframes@animejs</span>
-        <button class="copy-btn" onclick="copyText('hyperframes@animejs', 'Trigger')">${currentLang === 'en' ? 'Copy Trigger' : '複製觸發詞'}</button>
+        <button class="copy-btn" onclick="copyText('hyperframes@animejs', 'Trigger', this)">${currentLang === 'en' ? 'Copy Trigger' : '複製觸發詞'}</button>
       </div>
     `;
 
@@ -521,7 +602,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       <div class="trigger-group">
         <span class="trigger-text">LottieFiles, Text-to-Lottie</span>
-        <button class="copy-btn" onclick="copyText('Text-to-Lottie', 'Trigger')">${currentLang === 'en' ? 'Copy Trigger' : '複製觸發詞'}</button>
+        <button class="copy-btn" onclick="copyText('Text-to-Lottie', 'Trigger', this)">${currentLang === 'en' ? 'Copy Trigger' : '複製觸發詞'}</button>
       </div>
     `;
 
@@ -564,7 +645,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       <div class="trigger-group">
         <span class="trigger-text">React Bits, shadcn CLI</span>
-        <button class="copy-btn" onclick="copyText('React Bits', 'Trigger')">${currentLang === 'en' ? 'Copy Trigger' : '複製觸發詞'}</button>
+        <button class="copy-btn" onclick="copyText('React Bits', 'Trigger', this)">${currentLang === 'en' ? 'Copy Trigger' : '複製觸發詞'}</button>
       </div>
     `;
 
@@ -614,7 +695,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
       <p class="card-desc">${descStr}</p>
       
-      <div style="${cssStyle} width:100%; aspect-ratio: 16/9; border-radius: 12px; padding: 18px; margin-bottom: 14px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" onclick="copyText('${mainTrig}', '${copyBtnText}')" title="16:9 Live Slide Deck Spec">
+      <div style="${cssStyle} width:100%; aspect-ratio: 16/9; border-radius: 12px; padding: 18px; margin-bottom: 14px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" onclick="copyText('${mainTrig}', '${copyBtnText}', this)" title="16:9 Live Slide Deck Spec">
         <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
           <span style="background:${bgAccent}; color:#fff; font-size:9.5px; font-weight:900; padding:2px 8px; border-radius:4px; text-transform:uppercase; letter-spacing:0.5px;">
             ${slideBadge}
@@ -641,7 +722,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div style="font-size:11.5px; color:#64748b; margin-bottom:8px;">${ratioLabel} <code style="font-family:monospace; background:#f1f5f9; padding:2px 6px; border-radius:4px;">${ratioStr}</code></div>
       <div class="trigger-group">
         <span class="trigger-text">${trigStr}</span>
-        <button class="copy-btn" onclick="copyText('${mainTrig}', '${copyBtnText}')">${copyBtnText}</button>
+        <button class="copy-btn" onclick="copyText('${mainTrig}', '${copyBtnText}', this)">${copyBtnText}</button>
       </div>
     `;
     return card;
