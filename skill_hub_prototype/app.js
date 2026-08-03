@@ -62,11 +62,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       backBtn.textContent = '← 返回主頁 (Home)';
       detailSearch.placeholder = '在目前技能內部搜尋風格、HEX 色票或觸發詞...';
 
-      const homeTitle = document.querySelector('.home-hero-title');
-      const homeDesc = document.querySelector('.home-hero-desc');
-      if (homeTitle) homeTitle.textContent = 'Antigravity 4 大整合技能集展覽館';
-      if (homeDesc) homeDesc.textContent = '點擊下方大卡片進入個別技能的內部運作圖文原理、70+ 種風格 live 展演、色票卡與觸發清單。';
-
       const masterCards = document.querySelectorAll ? document.querySelectorAll('.master-card') : [];
       if (masterCards.length >= 4) {
         masterCards[0].querySelector('.master-card-desc').textContent = '底層協同與工程門禁引擎。包含雙主 Agent (Antigravity × OpenCode) 運作圖解、grill-with-docs 詰問對齊流程與 open-code-review 門禁。';
@@ -172,23 +167,23 @@ document.addEventListener('DOMContentLoaded', async () => {
           mediaHtml = `<div style="margin-top:16px; border:1px solid #e2e8f0; border-radius:12px; overflow:hidden;"><img src="${pImg}" alt="${pTitle}" style="width:100%; height:auto; display:block;" /></div>`;
         }
 
-        // Custom styled box for Presentation Master Prompt: Top padding reduced to 8px, margin-top 14px to pull top border down right above text
+        // Custom styled box for Presentation Master Prompt: Strip all leading white space/newlines to pull text directly to top border
         if (masterId === 'presentation-skill') {
           const tooltipLabel = currentLang === 'en' ? 'Copy Master Prompt' : '複製 Master Prompt 提示詞';
           const introLabel = currentLang === 'en' ? 'In presentation tasks, click the top-right icon to copy the full prompt:' : '進行簡報製作任務時，可直接點擊右上方圖示複製完整提示詞：';
           
-          const cleanPromptText = pDesc.trim();
+          const cleanPromptText = pDesc.replace(/^[\s\r\n]+/, '').replace(/[\s\r\n]+$/, '');
 
           pBox.innerHTML = `
-            <div style="margin-bottom:12px; text-align:left;">
+            <div style="margin-bottom:14px; text-align:left;">
               <h3 style="font-size:18px; font-weight:800; color:#0f172a; margin-bottom:6px; text-align:left;">${pTitle}</h3>
               <p style="font-size:14px; color:#475569; text-align:left; margin:0;">${introLabel}</p>
             </div>
 
-            <div style="position:relative; background:#f1f5f9; color:#0f172a; border:1px solid #cbd5e1; border-radius:14px; padding:8px 52px 14px 20px; font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-size:13.5px; line-height:1.75; text-align:left; white-space:pre-wrap; display:block; margin-top:14px;">
-              <button class="copy-btn" title="${tooltipLabel}" style="position:absolute; top:8px; right:12px; background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; width:34px; height:34px; display:inline-flex; align-items:center; justify-content:center; padding:0; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,0.05); font-size:15px; line-height:1; transition:all 0.15s ease;" onclick="copyText(\`${cleanPromptText.replace(/`/g, '\\`')}\`, 'Master Prompt')" onmouseenter="this.style.background='#e0f2fe'; this.style.borderColor='#0284c7';" onmouseleave="this.style.background='#ffffff'; this.style.borderColor='#cbd5e1';">
+            <div style="position:relative; background:#f1f5f9; color:#0f172a; border:1px solid #cbd5e1; border-radius:14px; padding:16px 52px 16px 20px; font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-size:13.5px; line-height:1.75; text-align:left; white-space:pre-wrap; display:block; margin-top:10px;">
+              <button class="copy-btn" title="${tooltipLabel}" style="position:absolute; top:12px; right:12px; background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; width:34px; height:34px; display:inline-flex; align-items:center; justify-content:center; padding:0; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,0.05); font-size:15px; line-height:1; transition:all 0.15s ease;" onclick="copyText(\`${cleanPromptText.replace(/`/g, '\\`')}\`, 'Master Prompt')" onmouseenter="this.style.background='#e0f2fe'; this.style.borderColor='#0284c7';" onmouseleave="this.style.background='#ffffff'; this.style.borderColor='#cbd5e1';">
                 <span style="display:inline-block; transform:translateY(-1px);">📋</span>
-              </button><div style="text-align:left; display:block; margin:0; padding:0;">${cleanPromptText}</div></div>
+              </button>${cleanPromptText}</div>
             ${mediaHtml}
           `;
         } else {
