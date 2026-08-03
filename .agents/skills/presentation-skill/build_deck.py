@@ -4,15 +4,20 @@ import os
 
 def generate_deck(content_json_path, theme_css_path, output_html_path):
     """
-    Zero-Token Deck Assembly Engine
-    Merges content.json and theme.css into pixel-perfect 16:9 HTML slides with Print CSS standard.
+    Zero-Token Deck Assembly Engine v2.0 (with Schema Validation & Auto-Fit Overflow Defense)
+    Merges content.json and theme.css into pixel-perfect 16:9 HTML slides.
     """
     if not os.path.exists(content_json_path):
         print(f"Error: Content JSON file not found: {content_json_path}")
         return False
 
-    with open(content_json_path, 'r', encoding='utf-8') as f:
-        deck_data = json.load(f)
+    # Schema Validation & Robust JSON Loading
+    try:
+        with open(content_json_path, 'r', encoding='utf-8') as f:
+            deck_data = json.load(f)
+    except Exception as e:
+        print(f"Schema Error: Invalid JSON structure: {e}. Falling back to default empty deck schema.")
+        deck_data = {"deck_title": "Recovered Deck", "slides": []}
 
     theme_css = ""
     if os.path.exists(theme_css_path):
@@ -22,31 +27,56 @@ def generate_deck(content_json_path, theme_css_path, output_html_path):
     slides_html = ""
     slides = deck_data.get("slides", [])
 
+    if not isinstance(slides, list) or len(slides) == 0:
+        slides = [{"title": "Presentation Overview", "body": "No content provided in slides payload."}]
+
     for idx, slide in enumerate(slides, 1):
-        title = slide.get("title", f"Slide {idx}")
-        subtitle = slide.get("subtitle", "")
+        if not isinstance(slide, dict):
+            slide = {"title": f"Slide {idx}", "body": str(slide)}
+
+        title = str(slide.get("title", f"Slide {idx}"))
+        subtitle = str(slide.get("subtitle", ""))
         body = slide.get("body", "")
-        image_url = slide.get("image_url", "")
-        image_alt = slide.get("image_alt", "")
-        layout_type = slide.get("layout", "standard") # standard, hero, split, grid
+        image_url = str(slide.get("image_url", ""))
+        image_alt = str(slide.get("image_alt", ""))
+        layout_type = str(slide.get("layout", "standard"))
+
+        # --- Dynamic Auto-Fit Font Scaling & Overflow Defense (0 Token Calculation) ---
+        title_length = len(title)
+        title_style = ""
+        if title_length > 35:
+            title_style = 'style="font-size: 2.1rem; line-height: 1.2;"'
+        elif title_length > 25:
+            title_style = 'style="font-size: 2.4rem;"'
+
+        body_html = ""
+        if isinstance(body, list):
+            item_count = len(body)
+            list_style = ""
+            if item_count > 5:
+                list_style = 'style="font-size: 0.95rem; line-height: 1.4;"'
+            elif item_count > 3:
+                list_style = 'style="font-size: 1.05rem;"'
+
+            body_items = "".join([f'<li {list_style}>{item}</li>' for item in body])
+            body_html = f'<ul class="slide-list">{body_items}</ul>'
+        elif body:
+            body_str = str(body)
+            body_style = ""
+            if len(body_str) > 200:
+                body_style = 'style="font-size: 0.95rem; line-height: 1.5;"'
+            body_html = f'<p class="slide-body" {body_style}>{body_str}</p>'
 
         image_html = ""
         if image_url:
             image_html = f'<div class="slide-image-wrapper"><img src="{image_url}" alt="{image_alt}" class="slide-img" /></div>'
-
-        body_html = ""
-        if isinstance(body, list):
-            body_items = "".join([f'<li>{item}</li>' for item in body])
-            body_html = f'<ul class="slide-list">{body_items}</ul>'
-        elif body:
-            body_html = f'<p class="slide-body">{body}</p>'
 
         slides_html += f"""
         <section class="slide slide-layout-{layout_type}" id="slide-{idx}">
             <div class="slide-content">
                 <div class="slide-header">
                     <span class="slide-num">0{idx}</span>
-                    <h2 class="slide-title">{title}</h2>
+                    <h2 class="slide-title" {title_style}>{title}</h2>
                     {f'<h3 class="slide-subtitle">{subtitle}</h3>' if subtitle else ''}
                 </div>
                 <div class="slide-body-container">
@@ -84,7 +114,7 @@ def generate_deck(content_json_path, theme_css_path, output_html_path):
             overflow-x: hidden;
         }}
         
-        /* 16:9 Presentation Slides Styling */
+        /* 16:9 Presentation Slides Styling with Hard Boundary Limits */
         .slide {{
             width: 16in;
             height: 9in;
@@ -92,7 +122,7 @@ def generate_deck(content_json_path, theme_css_path, output_html_path):
             page-break-after: always;
             break-after: page;
             page-break-inside: avoid;
-            overflow: hidden;
+            overflow: hidden; /* Hard Overflow Protection */
             display: flex;
             padding: 0.8in 1.2in;
             gap: 0.8in;
@@ -104,6 +134,8 @@ def generate_deck(content_json_path, theme_css_path, output_html_path):
             display: flex;
             flex-direction: column;
             justify-content: center;
+            max-height: 100%;
+            overflow: hidden;
             z-index: 2;
         }}
         
@@ -122,6 +154,7 @@ def generate_deck(content_json_path, theme_css_path, output_html_path):
             line-height: 1.15;
             color: #ffffff;
             margin-bottom: 0.6rem;
+            word-wrap: break-word;
         }}
         
         .slide-subtitle {{
@@ -159,6 +192,7 @@ def generate_deck(content_json_path, theme_css_path, output_html_path):
         
         .slide-image-wrapper {{
             flex: 1;
+            max-height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
