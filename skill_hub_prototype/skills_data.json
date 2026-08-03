@@ -172,17 +172,28 @@
         "slidev",
         "簡報風格",
         "簡報導出",
-        "slides.md"
+        "slides.md",
+        "beautiful-article",
+        "reacticle",
+        "tufte",
+        "vignelli",
+        "bodoni",
+        "網頁文章",
+        "刊物排版"
       ],
-      "description_zh": "定義 10 大客製化簡報視覺 Specs 規範 (含霓虹拼貼, Apple 3D Mockup, Kinfolk 雜誌風, 瑞士商業風純文字等) 與 Felo / Slidev (slides.md) 語法導出器。",
-      "description_en": "Defines 10 custom presentation visual specs with Felo Slides and Slidev (slides.md) exporter.",
+      "description_zh": "本技能定義 10 大客製化 16:9 簡報視覺 Specs、Slidev/Felo 導出器，以及 beautiful-article 10 大文章保留率類型與 11 大大師排版主題（Tufte, Bodoni, Vignelli 等）。",
+      "description_en": "Defines 10 custom 16:9 presentation specs, Slidev/Felo exporters, and beautiful-article 10 retention models with 11 master typography themes (Tufte, Bodoni, Vignelli).",
       "sub_modules_zh": [
-        "10 大簡報視覺 Specs 路由: 霓虹拼貼, Apple 3D Mockup, Kinfolk 雜誌風, 瑞士商業 (無Markdown符號) 等",
-        "Slidev & Felo 導出器: 自動轉譯標準 Slidev (slides.md)，含 v-clicks 動畫與 Mermaid 圖表"
+        "Standard Master Prompt: 標準提示詞模板卡片、兩階段計畫書要求與 3 大紅線原則",
+        "10 簡報 Specs: 霓虹拼貼, Apple 3D Mockup, Kinfolk 雜誌風, 瑞士商業風等 16:9 簡報規範",
+        "beautiful-article 排版: 10 大文章保留率模型 (Longform 100%, Tutorial 90%, Report 80%, Briefing 50%) + 11 大大師排版主題 (Tufte, Bodoni, Vignelli)",
+        "Slidev / Felo 導出器: 自動將簡報與文章導出為可編輯的 slides.md 與 HTML 頁面"
       ],
       "sub_modules_en": [
-        "10 Presentation Specs Routing: Neon Collage, Apple 3D Mockup, Kinfolk Editorial, Swiss Commercial (No Markdown), etc.",
-        "Slidev & Felo Exporter: Translates to standard Slidev (slides.md) with v-clicks animations and Mermaid diagrams"
+        "Standard Master Prompt: Prompt template card, 2-stage planning requirement, and 3 Red-Line rules",
+        "10 Presentation Specs: 16:9 Live deck specs (Neon Collage, Apple 3D Mockup, Kinfolk, Swiss)",
+        "beautiful-article Editorial: 10 Article retention models (Longform 100%, Report 80%, Briefing 50%) + 11 Master typography themes (Tufte, Bodoni, Vignelli)",
+        "Slidev / Felo Exporters: Exports decks and articles to editable slides.md and HTML files"
       ],
       "principles": [
         {
@@ -190,6 +201,14 @@
           "title_en": "📝 Standard Master Prompt Template for Presentation Creation",
           "desc_zh": "我要在這個對話進行「(某某簡報製作任務)」。請以「(某某檔案)」的內容為材料，嚴格遵守「(某某風格)」的規則和風格，製作可編輯的 ppt 簡報。\n\n請先不要直接執行 ppt 的製作，而是先寫出「簡報規劃的計畫書」，計畫書中要寫出：總共會有幾頁、每一頁的「大標題」內容、「小標題」內容、大致的內文要寫什麼、需不需要使用 ai 圖片生成，或是可以去網路上搜尋下載圖片。\n\n【紅線 (嚴格遵守)】\n\n1. 簡報請完整呈現「(某某檔案)」的完整內容，不要有曲解、誇大其辭、用詞太過激昂的情況。\n\n2. 圖片請不要調整原有的圖片比例，只允許對圖片進行「裁切」、「縮小」、「放大」。\n\n3. 無論是大標題小標題或內文、圖片，請都不要與其他文字或圖片有重疊，也不要有貼到畫面過於邊緣的地方。",
           "desc_en": "I want to initiate a '(Presentation Task Name)' in this conversation. Please use the content of '(Source File)' as material, strictly adhere to the rules and aesthetics of '(Specific Style)', and create an editable presentation deck.\n\nPlease DO NOT create the slides directly. First write a 'Presentation Planning Document' specifying: total slide count, each slide's 'main title', 'subtitle', outline content, whether AI image generation is needed, or if web image download is preferred.\n\n[Red Lines (Strict Constraints)]\n\n1. Presentation must faithfully present the complete content of '(Source File)' without distortion, hyperbole, or overly dramatic tone.\n\n2. Images must preserve original aspect ratio; only cropping, scaling down, or scaling up are permitted.\n\n3. Text elements (headlines, subheads, body) and images must NEVER overlap each other, nor touch extreme outer edges.",
+          "img_url_zh": "",
+          "img_url_en": ""
+        },
+        {
+          "title_zh": "📰 beautiful-article 10 大文章保留率模型與 11 大排版主題",
+          "title_en": "📰 beautiful-article 10 Article Retention Models & 11 Master Themes",
+          "desc_zh": "beautiful-article 是將原始素材（URL/PDF/DOCX/筆記）重構並排版為高品質單頁網頁文章的編輯引擎：\n1. 10 大文章保留率模型：支援深度長文 (Longform 100%)、實作教學 (Tutorial 90%)、完整報告 (Report 80%)、摘要簡報 (Briefing 50%) 到視覺文章 (Visual Essay 40%)，可依閱讀目的嚴格精準控制資訊密度。\n2. 11 大大師排版主題 (Theme Profiles)：涵蓋 Tufte (學術邊註風格)、Bodoni (經典時尚刊物)、Vignelli (網格系統)、Press (新聞編輯)、Knuth (數學排版) 等 11 種出版物等級的字體與版面氣質。\n3. Reacticle 語意組件與 3:4 書籍封面：採用 Hero / Lead / Quote / Callout / Raw 語意層與 3:4 書本風格封面，搭配自動生成 TOC 目錄，打造離線亦可完美閱讀與分享的排版作品。",
+          "desc_en": "beautiful-article converts raw documents (URL/PDF/DOCX/notes) into publication-grade single-file HTML web articles:\n1. 10 Article Retention Models: Supports Longform (100%), Tutorial (90%), Full Report (80%), Briefing (50%), and Visual Essay (40%) to control information density precisely.\n2. 11 Master Theme Profiles: Includes Tufte (academic marginalia), Bodoni (classic editorial), Vignelli (grid system), Press (news editorial), and Knuth (math publishing).\n3. Reacticle Component Protocol & 3:4 Cover: Uses prose-first semantic components (Hero, Lead, Quote, Callout, Raw layer) with a 3:4 book cover and auto TOC for offline reading and sharing.",
           "img_url_zh": "",
           "img_url_en": ""
         }
