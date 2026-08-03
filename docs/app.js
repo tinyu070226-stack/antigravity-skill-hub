@@ -210,8 +210,14 @@ document.addEventListener('DOMContentLoaded', async () => {
           mediaHtml = `<div style="margin-top:16px; border:1px solid #e2e8f0; border-radius:12px; overflow:hidden;"><img src="${pImg}" alt="${pTitle}" style="width:100%; height:auto; display:block;" /></div>`;
         }
 
-        // Only render the copyable grey box for actual Master Prompt template cards
-        const isMasterPromptCard = masterId === 'presentation-skill' && (pTitle.includes('Master Prompt') || pTitle.includes('提示詞範例'));
+        // Render the copyable grey box for actual Master Prompt template cards
+        const isMasterPromptCard = masterId === 'presentation-skill' && (
+          pTitle.includes('Master Prompt') || 
+          pTitle.includes('提示詞範例') || 
+          pTitle.includes('Prompt') || 
+          pTitle.includes('提示詞') ||
+          pTitle.includes('Standard Master Prompt')
+        );
 
         if (isMasterPromptCard) {
           const tooltipLabel = currentLang === 'en' ? 'Copy Master Prompt' : '複製 Master Prompt 提示詞';
