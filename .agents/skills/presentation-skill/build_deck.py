@@ -2,21 +2,33 @@ import json
 import sys
 import os
 
+def get_visual_width(text):
+    """
+    CJK Character Width Calculator (0 Token)
+    Weights non-ASCII (CJK Chinese/Japanese/Korean) characters as 1.8x width relative to Latin text.
+    """
+    if not text:
+        return 0
+    return sum(1.8 if ord(c) > 127 else 1.0 for c in str(text))
+
 def generate_deck(content_json_path, theme_css_path, output_html_path):
     """
-    Zero-Token Deck Assembly Engine v2.0 (with Schema Validation & Auto-Fit Overflow Defense)
-    Merges content.json and theme.css into pixel-perfect 16:9 HTML slides.
+    Zero-Token Deck Assembly Engine v2.1 (with CJK Visual Width Weighting & Fallback Warning Log)
     """
     if not os.path.exists(content_json_path):
         print(f"Error: Content JSON file not found: {content_json_path}")
         return False
+
+    warnings = []
 
     # Schema Validation & Robust JSON Loading
     try:
         with open(content_json_path, 'r', encoding='utf-8') as f:
             deck_data = json.load(f)
     except Exception as e:
-        print(f"Schema Error: Invalid JSON structure: {e}. Falling back to default empty deck schema.")
+        msg = f"Schema Error: Invalid JSON structure: {e}. Falling back to default empty deck schema."
+        warnings.append(msg)
+        print(f"[Warning] {msg}")
         deck_data = {"deck_title": "Recovered Deck", "slides": []}
 
     theme_css = ""
@@ -28,26 +40,35 @@ def generate_deck(content_json_path, theme_css_path, output_html_path):
     slides = deck_data.get("slides", [])
 
     if not isinstance(slides, list) or len(slides) == 0:
+        msg = "Slides array missing or empty. Inserted fallback introduction slide."
+        warnings.append(msg)
         slides = [{"title": "Presentation Overview", "body": "No content provided in slides payload."}]
 
     for idx, slide in enumerate(slides, 1):
         if not isinstance(slide, dict):
             slide = {"title": f"Slide {idx}", "body": str(slide)}
 
-        title = str(slide.get("title", f"Slide {idx}"))
+        raw_title = slide.get("title")
+        if not raw_title:
+            msg = f"Slide {idx} title missing. Applied fallback title."
+            warnings.append(msg)
+            title = f"Slide {idx}"
+        else:
+            title = str(raw_title)
+
         subtitle = str(slide.get("subtitle", ""))
         body = slide.get("body", "")
         image_url = str(slide.get("image_url", ""))
         image_alt = str(slide.get("image_alt", ""))
         layout_type = str(slide.get("layout", "standard"))
 
-        # --- Dynamic Auto-Fit Font Scaling & Overflow Defense (0 Token Calculation) ---
-        title_length = len(title)
+        # --- Dynamic CJK Auto-Fit Font Scaling (0 Token CJK Calculator) ---
+        title_visual_width = get_visual_width(title)
         title_style = ""
-        if title_length > 35:
-            title_style = 'style="font-size: 2.1rem; line-height: 1.2;"'
-        elif title_length > 25:
-            title_style = 'style="font-size: 2.4rem;"'
+        if title_visual_width > 40:
+            title_style = 'style="font-size: 2.0rem; line-height: 1.2;"'
+        elif title_visual_width > 26:
+            title_style = 'style="font-size: 2.3rem;"'
 
         body_html = ""
         if isinstance(body, list):
@@ -62,8 +83,9 @@ def generate_deck(content_json_path, theme_css_path, output_html_path):
             body_html = f'<ul class="slide-list">{body_items}</ul>'
         elif body:
             body_str = str(body)
+            body_visual_width = get_visual_width(body_str)
             body_style = ""
-            if len(body_str) > 200:
+            if body_visual_width > 220:
                 body_style = 'style="font-size: 0.95rem; line-height: 1.5;"'
             body_html = f'<p class="slide-body" {body_style}>{body_str}</p>'
 
@@ -228,6 +250,13 @@ def generate_deck(content_json_path, theme_css_path, output_html_path):
 """
     with open(output_html_path, 'w', encoding='utf-8') as f:
         f.write(full_html)
+
+    # Save Warnings Log if any schema fallbacks occurred
+    if warnings:
+        log_path = os.path.join(os.path.dirname(output_html_path), "deck_assembly_warnings.json")
+        with open(log_path, 'w', encoding='utf-8') as f:
+            json.dump({"timestamp": os.path.getmtime(output_html_path), "warnings": warnings}, f, ensure_ascii=False, indent=2)
+        print(f"[Notice] {len(warnings)} assembly fallbacks logged to: {log_path}")
 
     print(f"Successfully generated 16:9 HTML presentation deck at: {output_html_path}")
     return True
