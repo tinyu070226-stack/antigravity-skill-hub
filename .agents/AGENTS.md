@@ -78,7 +78,7 @@ Antigravity 具備高階架構規劃、UI/UX 美學設計與系統引導能力�
   1. **`core-synergy-skill`**：整合 `agent-skills`, `grill-with-docs`, OpenCode 4大協同模式, `team-mode` 多模型路由與 `open-code-review` 二方門禁。
   2. **`design-system-skill`**：整合前端 50 種設計風格 KB、Nutlope Hallmark (20主題, 8-State驗證, 6軸打分) + Emil Kowalski 8大質感與 OKLCHBetter-colors。
   3. **`ui-motion-skill`**：整合 Anime.js 時間軸彈簧物理、LottieFiles 向量動效、Text-to-Lottie 生成與 React Bits (shadcn CLI) 組件庫規範。
-  4. **`presentation-skill`**：整合 10 大客製化 16:9 簡報視覺風格 Specs (含 1. 霓虹拼貼 10:1, 2. Apple 3D Mockup, 3. 石膏 Pop 撞色, 4. Kinfolk 雜誌風, 5. 瑞士新經濟無 Markdown, 6. 極簡作品集 60% 留白, 7. 沉靜科技 Living Artifact, 8. 溫柔扁平插畫, 9. Slidev 導出器, 10. 美食品牌海報)、兩階段簡報計畫書門禁 (2-Stage Deck Plan Gate: 強制先寫 `presentation_plan.md` 經確認後才寫簡報代碼)、簡報 4 大紅線原則（含紅線 4：圖片必須直觀精準相關、嚴禁抽象隱喻）、Slidev 導出器以及 `beautiful-article` 10 大文章保留率類型與 11 大排版主題。
+  4. **`presentation-skill`**：整合 10 大客製化 16:9 簡報視覺風格 Specs (含 1. 霓虹拼貼 10:1, 2. Apple 3D Mockup, 3. 石膏 Pop 撞色, 4. Kinfolk 雜誌風, 5. 瑞士新經濟無 Markdown, 6. 極簡作品集 60% 留白, 7. 沉靜科技 Living Artifact, 8. 溫柔扁平插畫, 9. Slidev 導出器, 10. 美食品牌海報)、兩階段簡報計畫書門禁 (2-Stage Deck Plan Gate: 強制先寫 `presentation_plan.md` 經確認後才寫簡報代碼)、簡報 5 大紅線原則（含紅線 4：圖片直觀精準相關、紅線 5：圖片必須嚴格符合選擇的簡報風格，嚴禁視覺斷層與突兀圖像）、Slidev 導出器以及 `beautiful-article` 10 大文章保留率類型與 11 大排版主題。
 
 ---
 
