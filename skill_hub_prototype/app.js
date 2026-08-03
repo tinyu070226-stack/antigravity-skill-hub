@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
           let promptBodyHtml = '';
           rawLines.forEach(line => {
-            promptBodyHtml += `<p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a;">${line}</p>`;
+            promptBodyHtml += `<p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">${line}</p>`;
           });
 
           pBox.innerHTML = `
@@ -304,8 +304,8 @@ document.addEventListener('DOMContentLoaded', async () => {
               <p style="font-size:14px; color:#475569; text-align:left; margin:0;">${introLabel}</p>
             </div>
 
-            <div style="position:relative; background:#f1f5f9; color:#0f172a; border:1px solid #cbd5e1; border-radius:14px; padding:18px 52px 8px 20px; font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif; text-align:left; display:block; margin-top:12px;">
-              <button id="master-prompt-copy-btn" title="${tooltipLabel}" style="position:absolute; top:14px; right:14px; background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; width:34px; height:34px; display:inline-flex; align-items:center; justify-content:center; padding:0; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,0.05); font-size:15px; line-height:1; transition:all 0.15s ease;" onmouseenter="this.style.background='#e0f2fe'; this.style.borderColor='#0284c7';" onmouseleave="this.style.background='#ffffff'; this.style.borderColor='#cbd5e1';">
+            <div style="position:relative; background:#f1f5f9; color:#0f172a; border:1px solid #cbd5e1; border-radius:14px; padding:18px 68px 8px 20px; font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif; text-align:left; display:block; margin-top:12px;">
+              <button id="master-prompt-copy-btn" title="${tooltipLabel}" style="position:absolute; top:14px; right:14px; background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; padding:0; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,0.05); font-size:15px; line-height:1; transition:all 0.15s ease;" onmouseenter="this.style.background='#e0f2fe'; this.style.borderColor='#0284c7';" onmouseleave="this.style.background='#ffffff'; this.style.borderColor='#cbd5e1';">
                 <span style="display:inline-block; transform:translateY(-1px);">📋</span>
               </button>
               ${promptBodyHtml}
