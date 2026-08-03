@@ -12,11 +12,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   const toast = document.getElementById('toast');
 
   let skillsData = null;
-  let currentLang = 'zh';
+
+  // DEFAULT LANGUAGE SET TO ENGLISH
+  let currentLang = 'en';
+
+  // Set initial button text to switch to Traditional Chinese
+  langBtn.innerHTML = '🌐 切換至 繁體中文';
 
   try {
-    const res = await fetch('skills_data.json?v=1.0.9');
+    const res = await fetch('skills_data.json?v=1.1.3');
     skillsData = await res.json();
+    updateStaticText();
     handleRoute();
   } catch (err) {
     console.error('Failed to load skills_data.json', err);
@@ -162,17 +168,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     const masterInfo = skillsData.master_skills.find(m => m.id === masterId);
     if (!masterInfo) return;
 
-    detailTitle.textContent = currentLang === 'zh' ? (masterInfo.title_zh || masterInfo.title) : (masterInfo.title_en || masterInfo.title);
-    detailDesc.textContent = currentLang === 'zh' ? (masterInfo.description_zh || masterInfo.description) : (masterInfo.description_en || masterInfo.description);
+    const rawTitle = currentLang === 'zh' ? (masterInfo.title_zh || masterInfo.title) : (masterInfo.title_en || masterInfo.title);
+    const rawDesc = currentLang === 'zh' ? (masterInfo.description_zh || masterInfo.description) : (masterInfo.description_en || masterInfo.description);
+
+    detailTitle.textContent = currentLang === 'en' ? cleanEnglishText(rawTitle) : rawTitle;
+    detailDesc.textContent = currentLang === 'en' ? cleanEnglishText(rawDesc) : rawDesc;
 
     if (masterInfo.principles && masterInfo.principles.length > 0 && detailPrinciples) {
       masterInfo.principles.forEach(p => {
         const pBox = document.createElement('div');
         pBox.style.cssText = 'background:#ffffff; border:1px solid #e2e8f0; border-radius:16px; padding:28px; margin-bottom:28px; box-shadow:0 1px 3px rgba(15,23,42,0.04); text-align:left;';
         
-        const pTitle = currentLang === 'zh' ? (p.title_zh || p.title) : (p.title_en || p.title);
-        const pDesc = currentLang === 'zh' ? (p.desc_zh || p.desc) : (p.desc_en || p.desc);
+        const rawPTitle = currentLang === 'zh' ? (p.title_zh || p.title) : (p.title_en || p.title);
+        const rawPDesc = currentLang === 'zh' ? (p.desc_zh || p.desc) : (p.desc_en || p.desc);
         const pImg = currentLang === 'zh' ? (p.img_url_zh || p.img_url) : (p.img_url_en || p.img_url);
+
+        const pTitle = currentLang === 'en' ? cleanEnglishText(rawPTitle) : rawPTitle;
+        const pDesc = currentLang === 'en' ? cleanEnglishText(rawPDesc) : rawPDesc;
 
         let mediaHtml = '';
         if (pImg) {
@@ -222,7 +234,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     if (masterId === 'core-synergy-skill') {
-      const subList = currentLang === 'en' ? (masterInfo.sub_modules_en || masterInfo.sub_modules) : (masterInfo.sub_modules_zh || masterInfo.sub_modules);
+      const rawSubList = currentLang === 'en' ? (masterInfo.sub_modules_en || masterInfo.sub_modules) : (masterInfo.sub_modules_zh || masterInfo.sub_modules);
+      const subList = currentLang === 'en' ? rawSubList.map(sm => cleanEnglishText(sm)) : rawSubList;
+
       subList.forEach((sm, idx) => {
         const card = document.createElement('div');
         card.className = 'card';
@@ -281,8 +295,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const trigStr = currentLang === 'en' ? cleanEnglishText(rawTrig) : rawTrig;
     const mainTrig = trigStr.split(',')[0].trim();
     const [c1, c2, c3] = item.hex || ['#ffffff', '#000000', '#0284c7'];
-    const nameStr = currentLang === 'en' ? (item.name_en || item.name_zh) : (item.name_zh || item.name);
-    const descStr = currentLang === 'en' ? (item.desc_en || item.desc_zh) : (item.desc_zh || item.desc);
+    const rawName = currentLang === 'en' ? (item.name_en || item.name_zh) : (item.name_zh || item.name);
+    const rawDesc = currentLang === 'en' ? (item.desc_en || item.desc_zh) : (item.desc_zh || item.desc);
+    
+    const nameStr = currentLang === 'en' ? cleanEnglishText(rawName) : rawName;
+    const descStr = currentLang === 'en' ? cleanEnglishText(rawDesc) : rawDesc;
+
     const copyBtnText = currentLang === 'en' ? 'Copy Trigger' : '複製觸發詞';
     const subtextStr = currentLang === 'en' ? 'High-Fidelity Component Mockup · All 3 Colorways Rendered' : '高保真美學組件範例 · 湊齊全 3 色票主副色系與對應裝飾';
     const colorwayLabel = currentLang === 'en' ? '3 Colorways Palette:' : '三色全齊展示:';
@@ -338,13 +356,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     card.className = 'card';
     const cssStyle = item.css || 'background:#f8fafc; color:#0f172a; border:1px solid #e2e8f0;';
     const fontName = item.font || 'Inter';
-    const nameStr = currentLang === 'en' ? (item.name_en || item.name_zh) : (item.name_zh || item.name);
-    const descStr = currentLang === 'en' ? (item.desc_en || item.desc_zh) : (item.desc_zh || item.desc);
+
+    const rawName = currentLang === 'en' ? (item.name_en || item.name_zh) : (item.name_zh || item.name);
+    const rawDesc = currentLang === 'en' ? (item.desc_en || item.desc_zh) : (item.desc_zh || item.desc);
+    
+    const nameStr = currentLang === 'en' ? cleanEnglishText(rawName) : rawName;
+    const descStr = currentLang === 'en' ? cleanEnglishText(rawDesc) : rawDesc;
+
     const fontLabel = currentLang === 'en' ? 'Font Pairing:' : '字體配對:';
     const matrixTitle = currentLang === 'en' ? '⚡ Hallmark 8-State Anti-Slop Validation Matrix:' : '⚡ Hallmark 8-State 反 Slop 互動驗證矩陣:';
     const clickTestText = currentLang === 'en' ? '(Click to test)' : '(點擊測試狀態)';
     const copyBtnText = currentLang === 'en' ? 'Copy Trigger' : '複製觸發詞';
     const subtextStr = currentLang === 'en' ? `Unique Theme Visual Mockup · Font (${fontName})` : `獨特視覺氣質 UI 範例 · 字體配對 (${fontName})`;
+    
     const rawTrig = (currentLang === 'en' ? item.triggers_en : item.triggers_zh) || item.triggers || '';
     const trigStr = currentLang === 'en' ? cleanEnglishText(rawTrig) : rawTrig;
     const mainTrig = trigStr.split(',')[0].trim();
@@ -544,8 +568,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const rawTrig = (currentLang === 'en' ? item.triggers_en : item.triggers_zh) || item.triggers || '';
     const trigStr = currentLang === 'en' ? cleanEnglishText(rawTrig) : rawTrig;
     const mainTrig = trigStr.split(',')[0].trim();
-    const nameStr = currentLang === 'en' ? (item.name_en || item.name_zh) : (item.name_zh || item.name);
-    const descStr = currentLang === 'en' ? (item.desc_en || item.desc_zh) : (item.desc_zh || item.desc);
+    const rawName = currentLang === 'en' ? (item.name_en || item.name_zh) : (item.name_zh || item.name);
+    const rawDesc = currentLang === 'en' ? (item.desc_en || item.desc_zh) : (item.desc_zh || item.desc);
+    
+    const nameStr = currentLang === 'en' ? cleanEnglishText(rawName) : rawName;
+    const descStr = currentLang === 'en' ? cleanEnglishText(rawDesc) : rawDesc;
+
     const cssStyle = item.css || 'background:#0f172a; color:#38bdf8; border:1px solid #1e293b;';
     const slideTitle = item.slide_title || nameStr;
     const slideSub = item.slide_sub || descStr;
