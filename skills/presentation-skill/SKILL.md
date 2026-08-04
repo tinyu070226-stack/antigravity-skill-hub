@@ -152,20 +152,99 @@ description: |
 
 ---
 
-## 5. 10 大 16:9 簡報視覺 Specs 快查
+## 5. 10 大 16:9 簡報視覺 Specs 完整規範條款
 
-| 編號 | 風格名稱 | 特色 |
-|---|---|---|
-| 1 | 霓虹貼片（Neon 10:1） | 螢光色高對比，暗色底，賽博龐克感 |
-| 2 | Apple 3D Mockup | 設備展示框、光感陰影、純淨白底 |
-| 3 | 野獸 Pop 配色 | 飽和撞色、粗體、大膽幾何 |
-| 4 | Kinfolk 雜誌 | 米白底、細線分隔、攝影圖主導 |
-| 5 | 彩虹漸層貼片 | 多色漸層卡片、毛玻璃效果 |
-| 6 | 字型排版宣言 | 字型即設計、超大標題、報紙風 |
-| 7 | 極光玻璃 | Aurora 背景漸層、Glass 卡片 |
-| 8 | 復古印刷 | 舊報紙質感、棕色調、紙質紋理 |
-| 9 | 技術藍圖 | 深藍底、青色線稿、座標網格 |
-| 10 | 企業精緻版 | 深海軍藍 + 金色、Sans-serif 精準 |
+當實作簡報的 `deck_theme.css` 時，必須 100% 依據以下規格套用樣式：
+
+### SPEC #01：霓虹拼貼 / 構築主義 (neon-collage-architect)
+- **觸發字**：`霓虹拼貼`, `neon collage`, `構築主義`
+- **比例與字級**：`16:9` · `10:1 Font scaling`
+- **基礎 CSS**：`background: #0D0E15; color: #00F0FF; border: 2px solid #FF0055; font-family: sans-serif;`
+- **視覺規範**：3 色限量色盤、10:1 標題/副標字體跳躍率、技術圖紙與前衛拼貼感。
+- **標準預覽標題**：`NEON ARCHITECTURE 2050`
+- **標準預覽副標**：`Constructivism & Tech Diagram Layout`
+- **徽章標記**：`SPEC #01` (強烈強調色: `#FF0055`)
+
+### SPEC #02：Apple 裝置模型 (premium-apple-mockup-designer)
+- **觸發字**：`premium mockup`, `apple mockup`, `裝置模型`
+- **比例與字級**：`16:9` · `3D Device Framing`
+- **基礎 CSS**：`background: #000000; color: #F5F5F7; border: 1px solid #333336; font-family: -apple-system, sans-serif;`
+- **視覺規範**：Studio Display, iPhone, MacBook 3D 實物截圖與裝置裁切佈局展示。
+- **標準預覽標題**：`Pro Display XDR Specs`
+- **標準預覽副標**：`Extreme Dynamic Range & 6K Precision`
+- **徽章標記**：`MOCKUP 3D` (強烈強調色: `#2997FF`)
+
+### SPEC #03：石膏 Pop 撞色 / 蒸汽波 (sculpture-pop-remix)
+- **觸發字**：`sculpture pop`, `remix pop`, `石膏撞色`
+- **比例與字級**：`16:9` · `Vaporwave Pop`
+- **基礎 CSS**：`background: linear-gradient(135deg, #FF71CE, #01CDFE); color: #FFFFFF; font-family: sans-serif; font-weight: 800;`
+- **視覺規範**：古典石膏像結合高對比雙色調與蒸汽波 (Vaporwave) 霓虹美學。
+- **標準預覽標題**：`SCULPTURE POP REMIX`
+- **標準預覽副標**：`Classical Aesthetics meets Cyberpunk Contrast`
+- **徽章標記**：`VAPOR POP` (強烈強調色: `#05FFA1`)
+
+### SPEC #04：雜誌編輯風 / Kinfolk (modern-editorial-designer)
+- **觸發字**：`editorial`, `雜誌風`, `kinfolk`
+- **比例與字級**：`16:9` · `Ivory Paper 1.8x`
+- **基礎 CSS**：`background: #F4F1EA; color: #2B2927; border: 1px solid #E2DED4; font-family: Georgia, serif;`
+- **視覺規範**：暖白紙色背景 (`#F4F1EA`)、明朝體 (Serif)、大面積留白與空氣感。
+- **標準預覽標題**：`Kinfolk & Quiet Luxury`
+- **標準預覽副標**：`Minimalist Editorial Layout with High Air Quality`
+- **徽章標記**：`EDITORIAL` (強烈強調色: `#8C8275`)
+
+### SPEC #05：瑞士新經濟 / 包浩斯 (new-economy-editorial-director)
+- **觸發字**：`swiss style`, `new economy`, `bauhaus`
+- **比例與字級**：`16:9` · `STRICT NO MARKDOWN`
+- **基礎 CSS**：`background: #F4F4F5; color: #18181B; border-top: 5px solid #FF3B30; font-family: Helvetica, sans-serif;`
+- **視覺規範**：【特別警告：嚴格禁止 Markdown 符號】純文字非對稱構圖、10:1 瑞士國際字體排版主義巨型標題。
+- **標準預覽標題**：`NEW ECONOMY 2050`
+- **標準預覽副標**：`Swiss International Typographic Alignment`
+- **徽章標記**：`NO MARKDOWN` (強烈強調色: `#FF3B30`)
+
+### SPEC #06：暗黑便當簡報 (dark-mode-bento-architect)
+- **觸發字**：`bento presentation`, `暗黑便當簡報`, `oled slide`
+- **比例與字級**：`16:9` · `OLED Dark Grid`
+- **基礎 CSS**：`background: #09090B; color: #FAFAFA; border: 1px solid #27272A; font-family: sans-serif;`
+- **視覺規範**：深色便當盒佈局、高對比發光文字與模組化卡片分區，輔以微妙的發光邊框。
+- **標準預覽標題**：`Linear Bento Slide Deck`
+- **標準預覽副標**：`Modular Grid Cards with Subtle Glowing Borders`
+- **徽章標記**：`BENTO OLED` (強烈強調色: `#38BDF8`)
+
+### SPEC #07：賽博故障風 (cyberpunk-glitch-presenter)
+- **觸發字**：`cyberpunk slide`, `賽博簡報`, `故障風簡報`
+- **比例與字級**：`16:9` · `High Contrast Neon`
+- **基礎 CSS**：`background: #05050A; color: #00F0FF; border: 1px solid #FF0055; font-family: monospace;`
+- **視覺規範**：高對比青紫霓虹撞色、故障線條與前衛戰術科技感，使用等寬字體。
+- **標準預覽標題**：`CYBERPUNK GLITCH PROTOCOL`
+- **標準預覽副標**：`High Voltage Neon & Tactical Grid Lines`
+- **徽章標記**：`GLITCH 2077` (強烈強調色: `#FF0055`)
+
+### SPEC #08：毛玻璃極光風 (glassmorphism-aurora-slide)
+- **觸發字**：`glass slide`, `極光簡報`, `毛玻璃簡報`
+- **比例與字級**：`16:9` · `Blur 20px Specular`
+- **基礎 CSS**：`background: linear-gradient(135deg, rgba(121,40,202,0.8), rgba(255,0,128,0.8)); color: #FFFFFF; backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.4);`
+- **視覺規範**：彌散漸變流體極光背景、毛玻璃卡片與高光邊緣構圖，強調空間感與高光外發光。
+- **標準預覽標題**：`Aurora Spatial Presentation`
+- **標準預覽副標**：`Diffuse Fluid Gradient with Specular Rim Light`
+- **徽章標記**：`AURORA GLASS` (強烈強調色: `#00DFD8`)
+
+### SPEC #09：極簡文字風格 (minimalist-typographic-deck)
+- **觸發字**：`typographic deck`, `文字簡報`, `極簡簡報`
+- **比例與字級**：`16:9` · `Pure Typography`
+- **基礎 CSS**：`background: #FFFFFF; color: #0F172A; border-bottom: 3px solid #0F172A; font-family: sans-serif; font-weight: 900;`
+- **視覺規範**：無任何多餘圖片裝飾、100% 依賴字體粗細與大小的理性視覺落差，排版追求絕對精密。
+- **標準預覽標題**：`PURE TYPOGRAPHY SLIDE`
+- **標準預覽副標**：`Zero Graphic Clutter · 100% Font Hierarchy Precision`
+- **徽章標記**：`TYPO 100%` (強烈強調色: `#0F172A`)
+
+### SPEC #10：Slidev Exporter (slidev-markdown-exporter)
+- **觸發字**：`slidev export`, `slidev markdown`, `slides.md`
+- **比例與字級**：`16:9` · `Slidev AST Engine`
+- **基礎 CSS**：`background: #1E1E1E; color: #4EC9B0; border: 1px solid #333; font-family: monospace;`
+- **視覺規範**：轉譯為標準 Slidev Markdown (slides.md) 規格，支援 v-clicks 點擊與 Mermaid 流程圖語法。
+- **標準預覽標題**：`slides.md AST Exporter`
+- **標準預覽副標**：`Native Slidev Syntax & Mermaid Diagrams`
+- **徽章標記**：`SLIDEV AST` (強烈強調色: `#CE9178`)
 
 ---
 
