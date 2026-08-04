@@ -26,3 +26,22 @@
      - **動態字級 Auto-Fit 溢出防禦 (Font Scaling Overflow Defense)**：Python 在 0 秒內根據字數與列表數量動態調降 font-size 與 line-height，並配合 `overflow: hidden; max-height: 100%;`，0 Token 保證絕不溢出 16:9 框界！
   4. **Phase 4: 輕量 CLI 執行與 PDF 導出 (OpenCode)**：
      - OpenCode 僅在 Terminal 跑 1 行指令（0 長 Context 負擔）。
+
+
+---
+
+## 🛡️ 程式碼修改與冪等性注入硬規範 (Idempotency & Injection Hard Rules)
+
+1. **嚴禁使用子字串比對進行語意/函數存在性檢查 (No Substring Matching for AST/Function Existence)**：
+   - ❌ **嚴禁寫法**：`if "function_name" not in file_content:` (容易被 `onclick=""`、註解、其他字串誤判，導致假陰性成功)。
+   - ✅ **標準規範**：必須使用**精確正則語法** (例如：`re.search(r'function\s+function_name\s*\(', content)`)，或使用**唯一冪等性標記註解 (Idempotency Anchor Tag)** (例如：`// __INJECTED_FEATURE_TAG_V1__`) 作為注入判斷依據。
+
+2. **機械化斷言清單驗收協定 (Mechanical Assertion Verification Protocol)**：
+   - **定義 expected_behavior.json**：進行 UI 互動或核心邏輯變更時，必須在 `scratch/` 產出機械化斷言檔案，明確定義：
+     - 觸發條件 (`selector` / `event`)
+     - 預期結果 (`expected_dom_property` / `expected_text` / `expected_style`)
+   - **Playwright 自動化比對**：由 OpenCode 或驗證腳本在 Terminal 執行 Playwright 測試，機械化比對斷言是否 100% 通過，嚴禁僅靠主觀截圖判斷。
+
+3. **假陰性 (False Negative) 失敗判定機制**：
+   - 腳本 Exit Code 0 僅代表語法執行完成，不代表業務邏輯正確。
+   - 凡是 Playwright 斷言失敗、Console 噴出 Uncaught ReferenceError / TypeError，一律視為**硬性 failure**，計入失敗上限。
