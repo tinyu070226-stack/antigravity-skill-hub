@@ -199,7 +199,7 @@
         {
           "title_zh": "📝 簡報製作 Master Prompt 提示詞範例 (Standard Master Prompt)",
           "title_en": "📝 Standard Master Prompt Template for Presentation Creation",
-          "desc_zh": "我要在這個對話進行「(......簡報製作任務)」。請以(\"......檔案路徑\")的內容為材料，採取並嚴格遵守(\"......簡報風格\")的規則和風格，製作 16:9 /(或)A4 Slidev， HTML / (或)可編輯的 ppt 簡報。\n\n請先不要直接執行簡報的製作，而是先寫出「簡報規劃的計畫書」，計畫書中要寫出：總共會有幾頁、每一頁的「大標題」內容、「小標題」內容、大致的內文要寫什麼、需不需要使用 ai 圖片生成，或是可以去網路上搜尋下載圖片。\n\n【6個紅線 (嚴格遵守)】\n\n1. 簡報請完整呈現「(某某檔案)」的完整內容，不要有曲解、誇大其辭、用詞太過激昂的情況。\n2. 圖片請不要調整原有的圖片比例，只允許對圖片進行「裁切」、「縮小」、「放大」。\n3. 無論是大標題小標題或內文、圖片，請都不要與其他文字或圖片有重疊，也不要有貼到畫面過於邊緣的地方(但若圖片是打算沒有空白縫隙的貼緊邊緣，則沒有此限制)。\n4. 保證網路搜尋或自行生成的圖片絕對都要與當前簡報頁面的內容直接高度相關，嚴禁使用抽象隱喻、幾何符號或高深意象圖，必須選用一眼就能直觀看懂、與簡報內文精準對應的具體實物或情境圖片。\n5. 保證網路搜尋或生成的圖片絕對都要符合當前選擇的整體簡報風格，嚴禁出現與整體簡報風格相比顯得突兀或視覺風格斷層的圖片。\n6. 簡報的每一頁都必須同時包含「圖片」與「文字」（圖文並茂），且每一頁的視覺佈局與結構必須變化多元，嚴禁連續多頁重複使用完全相同的範本或視覺排版結構。",
+          "desc_zh": "我要在這個對話進行「(......簡報製作任務)」。請以(\"......檔案路徑\")的內容為材料，採取並嚴格遵守(\"......簡報風格\")的規則和風格，製作 16:9 /(或)A4 Slidev， HTML / (或)可編輯的 ppt 簡報。\n\n請先不要直接執行簡報的製作，而是先寫出「簡報規劃的計畫書」，計畫書中要寫出：總共會有幾頁、每一頁的「大標題」內容、「小標題」內容、大致的內文要寫什麼、需不需要使用 ai 圖片生成，或是可以去網路上搜尋下載圖片。\n\n【6個紅線 (嚴格遵守)】\n\n1. 簡報請完整呈現「(某某檔案)」的完整內容。撰寫內容時請不要克制，頁數不用省、內文也可以寫多一點。並且不要有曲解、誇大其辭、用詞太過激昂的情況。\n2. 圖片請不要調整原有的圖片比例，只允許對圖片進行「裁切」、「縮小」、「放大」。\n3. 無論是大標題小標題或內文、圖片，請都不要與其他文字或圖片有重疊，也不要有貼到畫面過於邊緣的地方(但若圖片是打算沒有空白縫隙的貼緊邊緣，則沒有此限制)。\n4. 保證網路搜尋或自行生成的圖片絕對都要與當前簡報頁面的內容直接高度相關，嚴禁使用抽象隱喻、幾何符號或高深意象圖，必須選用一眼就能直觀看懂、與簡報內文精準對應的具體實物或情境圖片。\n5. 保證網路搜尋或生成的圖片絕對都要符合當前選擇的整體簡報風格，嚴禁出現與整體簡報風格相比顯得突兀或視覺風格斷層的圖片。\n6. 簡報的每一頁都必須同時包含「圖片」與「文字」（圖文並茂），且每一頁的視覺佈局與結構必須變化多元，嚴禁連續多頁重複使用完全相同的範本或視覺排版結構。",
           "desc_en": "I would like to conduct a \"(...Presentation Deck Task)\". Using the material from (\"...File Path\"), adopt and strictly follow the rules and style of (\"...Presentation Style\") to produce 16:9 /(or)A4 Slidev, HTML / (or) editable ppt slides.\n\nDO NOT execute slide deck creation directly! You MUST first write a \"Presentation Plan Document\" outlining: total slide count, main header, subheader, key body text summary, and whether AI image generation or online image download is required.\n\n【6 RED-LINE RULES (STRICT)】\n\n1. Preserve 100% full text fidelity of \"(...Source File)\". Do not distort, exaggerate, or use overly aggressive phrasing.\n2. Never distort image aspect ratios. Only crop, shrink, or enlarge.\n3. Zero text/image overlaps and zero unintended edge clipping. Keep generous margin buffers (except for full-bleed images intended to fit edge-to-edge without gaps).\n4. All searched or generated images MUST be directly, intuitively relevant to the current slide's topic. Pure abstract metaphors or vague geometric graphics are strictly forbidden; use easily understandable, explicit real-world or situational imagery.\n5. All searched or generated images MUST strictly match the chosen presentation visual style. Images that clash visually or break style consistency are strictly forbidden.\n6. Every single slide MUST contain both images and text (rich text-image pairing). Slide layout structures MUST vary dynamically across pages; repeating identical layout templates across multiple consecutive slides is strictly forbidden.",
           "img_url_zh": "",
           "img_url_en": ""
@@ -212,7 +212,22 @@
           "img_url_zh": "",
           "img_url_en": ""
         }
-      ]
+      ],
+      "prompt_scenarios": {
+        "standard": {
+          "name": "📌 標準全新簡報製作 (預設)",
+          "instruction": "請以「(某某檔案)」的內容為材料，採取並嚴格遵守「(某風格)」的規則和風格，製作 16:9 HTML 簡報。並把做出的所有檔案放在「(某資料夾)」資料夾。"
+        },
+        "same_style_new_content": {
+          "name": "🔄 同風格套用新內容 (極速模式)",
+          "instruction": "請以「(某某檔案)」的內容為材料，依照我們標準的 0-Token 簡報流水線 Phase 1，幫我產出 deck_content.json。請繼續使用「(現有風格，如 Kinfolk)」風格，並幫我安排好 Hero、Split、Quote Card、Timeline、Bento 這 5 種 Layout 屬性。產出後請直接執行 build_deck.py 生成簡報！"
+        },
+        "diff_style_new_content": {
+          "name": "🎨 換風格套用新內容 (樣式分流模式)",
+          "instruction": "請以「(某某檔案)」的內容為材料製作成 16:9 HTML 簡報。這次視覺風格請採用「(新風格，如 Typographic Deck)」規範！請先產出 deck_content.json 與對應的 deck_theme.css，然後跑 Phase 3 的 build_deck.py 自動裝配成 HTML 簡報！"
+        }
+      },
+      "master_prompt": ""
     }
   ],
   "web_styles_50": [
