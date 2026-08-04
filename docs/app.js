@@ -875,3 +875,84 @@ function fallbackCopyText(text) {
     } catch (err) {}
     document.body.removeChild(textArea);
 }
+
+// ============================================================
+// PROMPT SCENARIO SWITCHER - GLOBAL WINDOW FUNCTIONS
+// (Called via inline onclick in isMasterPromptCard HTML block)
+// ============================================================
+
+window.promptScenarioIntros = {
+    standard: '我要在這個對話進行「(......簡報製作任務)」。請以("(......檔案路徑)")的內容為材料，採取並嚴格遵守("(......簡報風格)")的規則和風格，製作 16:9 /(或)A4 Slidev， HTML /(或)可編輯的 ppt 簡報。',
+    same_style_new_content: '我要在這個對話進行「(......簡報製作任務)」。請以("(......檔案路徑)")的內容為材料，依照我們標準的 0-Token 簡報流水線 Phase 1，幫我產出 deck_content.json。請繼續使用「(現有風格，如 Kinfolk)」風格，並幫我安排好 Hero、Split、Quote Card、Timeline、Bento 這 5 種 Layout 屬性。產出後請直接執行 build_deck.py 生成簡報！',
+    diff_style_new_content: '我要在這個對話進行「(......簡報製作任務)」。請以("(......檔案路徑)")的內容為材料製作成 16:9 HTML 簡報。這次視覺風格請採用「(新風格，如 Typographic Deck)」規範！請先產出 deck_content.json 與對應的 deck_theme.css，然後跑 Phase 3 的 build_deck.py 自動裝配成 HTML 簡報！'
+};
+
+window.promptCommonBody = [
+    '請先不要直接執行簡報的製作，而是先寫出「簡報規劃的計畫書」，計畫書中要寫出：總共會有幾頁、每一頁的「大標題」內容、「小標題」內容、大致的內文要寫什麼、需不需要使用 ai 圖片生成，或是可以去網路上搜尋下載圖片。',
+    '【6個紅線 (嚴格遵守)】',
+    '1. 簡報請完整呈現「(某某檔案)」的完整內容。撰寫內容時請不要克制，頁數不用省、內文也可以寫多一點。並且不要有曲解、誇大其辭、用詞太過激昂的情況。',
+    '2. 圖片請不要調整原有的圖片比例，只允許對圖片進行「裁切」、「縮小」、「放大」。',
+    '3. 無論是大標題小標題或內文、圖片，請都不要與其他文字或圖片有重疊，也不要有貼到畫面過於邊緣的地方(但若圖片是打算沒有空白縫隙的貼緊邊緣，則沒有此限制)。',
+    '4. 保證網路搜尋或自行生成的圖片絕對都要與當前簡報頁面的內容直接高度相關，嚴禁使用抽象隱喻、幾何符號或高深意象圖，必須選用一眼就能直觀看懂、與簡報內文精準對應的具體實物或情境圖片。',
+    '5. 保證網路搜尋或生成的圖片絕對都要符合當前選擇的整體簡報風格，嚴禁出現與整體簡報風格相比顯得突兀或視覺風格斷層的圖片。',
+    '6. 簡報的每一頁都必須同時包含「圖片」與「文字」（圖文並茂），且每一頁的視覺佈局與結構必須變化多元，嚴禁連續多頁重複使用完全相同的範本或視覺排版結構。'
+];
+
+window.activeScenarioKey = 'standard';
+
+window.doSwitchScenario = function(key, evt) {
+    if (evt) { evt.preventDefault(); evt.stopPropagation(); }
+    window.activeScenarioKey = key;
+
+    ['standard', 'same_style_new_content', 'diff_style_new_content'].forEach(function(t) {
+        var btn = document.getElementById('btn-tab-' + t);
+        if (btn) {
+            if (t === key) {
+                btn.style.background = '#0f172a';
+                btn.style.color = '#ffffff';
+                btn.style.border = 'none';
+            } else {
+                btn.style.background = '#f1f5f9';
+                btn.style.color = '#334155';
+                btn.style.border = '1px solid #cbd5e1';
+            }
+        }
+    });
+
+    var bodyEl = document.getElementById('master-prompt-card-body');
+    if (bodyEl) {
+        var html = '<p style="margin:0 0 12px 0;line-height:1.75;font-size:13.5px;color:#0f172a;">' + window.promptScenarioIntros[key] + '</p>';
+        window.promptCommonBody.forEach(function(line) {
+            html += '<p style="margin:0 0 12px 0;line-height:1.75;font-size:13.5px;color:#0f172a;">' + line + '</p>';
+        });
+        bodyEl.innerHTML = html;
+    }
+};
+
+window.doCopyPrompt = function(evt) {
+    if (evt) { evt.preventDefault(); evt.stopPropagation(); }
+    var key = window.activeScenarioKey || 'standard';
+    var fullText = window.promptScenarioIntros[key] + '\n\n' + window.promptCommonBody.join('\n\n');
+
+    function flash() {
+        var btn = document.getElementById('master-prompt-copy-btn-classic');
+        if (btn) {
+            btn.innerHTML = '✅';
+            btn.style.background = '#10b981';
+            btn.style.borderColor = '#10b981';
+            setTimeout(function() {
+                btn.innerHTML = '📋';
+                btn.style.background = '#ffffff';
+                btn.style.borderColor = '#cbd5e1';
+            }, 2000);
+        }
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(fullText).then(flash).catch(function() {
+            fallbackCopyText(fullText); flash();
+        });
+    } else {
+        fallbackCopyText(fullText); flash();
+    }
+};
