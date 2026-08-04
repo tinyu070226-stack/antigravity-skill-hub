@@ -296,32 +296,35 @@ document.addEventListener('DOMContentLoaded', async () => {
               
               <!-- 3-Scenario Interactive Tab Switcher -->
               <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid #e2e8f0;">
-                <button type="button" data-scenario="standard" class="prompt-tab-btn" style="padding:7px 15px; font-size:12px; font-weight:700; border-radius:8px; background:#0f172a; color:#ffffff; border:none; cursor:pointer; transition:all 0.2s;">
+                <button type="button" id="btn-tab-standard" onclick="event.stopPropagation(); window.handleScenarioSwitch('standard')" style="padding:8px 16px; font-size:12.5px; font-weight:700; border-radius:8px; background:#0f172a; color:#ffffff; border:none; cursor:pointer; shadow:0 1px 2px rgba(0,0,0,0.1);">
                   📌 標準全新簡報製作 (預設)
                 </button>
-                <button type="button" data-scenario="same_style_new_content" class="prompt-tab-btn" style="padding:7px 15px; font-size:12px; font-weight:700; border-radius:8px; background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; cursor:pointer; transition:all 0.2s;">
+                <button type="button" id="btn-tab-same_style_new_content" onclick="event.stopPropagation(); window.handleScenarioSwitch('same_style_new_content')" style="padding:8px 16px; font-size:12.5px; font-weight:700; border-radius:8px; background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; cursor:pointer;">
                   🔄 同風格換內容 (極速 0-Token 模式)
                 </button>
-                <button type="button" data-scenario="diff_style_new_content" class="prompt-tab-btn" style="padding:7px 15px; font-size:12px; font-weight:700; border-radius:8px; background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; cursor:pointer; transition:all 0.2s;">
+                <button type="button" id="btn-tab-diff_style_new_content" onclick="event.stopPropagation(); window.handleScenarioSwitch('diff_style_new_content')" style="padding:8px 16px; font-size:12.5px; font-weight:700; border-radius:8px; background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; cursor:pointer;">
                   🎨 換風格換內容 (樣式分流模式)
                 </button>
               </div>
             </div>
 
-            <div style="position:relative; background:#f8fafc; color:#0f172a; border:1px solid #cbd5e1; border-radius:14px; padding:20px 68px 12px 20px; font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif; text-align:left; display:block; margin-top:12px;">
-              <button id="master-prompt-copy-btn" class="prompt-copy-btn-action" style="position:absolute; top:18px; right:18px; background:#ffffff; border:1px solid #cbd5e1; border-radius:10px; width:38px; height:38px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 1px 3px rgba(0,0,0,0.08); transition:all 0.2s; padding:0; line-height:1;">
-                <span id="copy-btn-icon" style="font-size:16px; display:inline-block; line-height:1;">📋</span>
-              </button>
+            <div style="position:relative; background:#f8fafc; color:#0f172a; border:1px solid #cbd5e1; border-radius:14px; padding:20px 20px 14px 20px; font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif; text-align:left; display:block; margin-top:12px;">
+              <div style="display:flex; justify-content:flex-end; margin-bottom:8px;">
+                <button id="btn-copy-prompt-main" type="button" onclick="event.stopPropagation(); window.handleMasterPromptCopy()" style="background:#f59e0b; color:#0f172a; font-weight:800; border:none; border-radius:10px; padding:8px 16px; font-size:13px; display:inline-flex; align-items:center; gap:6px; cursor:pointer; box-shadow:0 2px 4px rgba(0,0,0,0.1); transition:all 0.2s;">
+                  <span id="copy-btn-icon-inner">📋</span> <span id="copy-btn-text-inner">複製完整提示詞</span>
+                </button>
+              </div>
+
               <div id="master-prompt-card-body">
-                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">我要在這個對話進行「(......簡報製作任務)」。請以("(......檔案路徑)")的內容為材料，採取並嚴格遵守("(......簡報風格)")的規則和風格，製作 16:9 /(或)A4 Slidev， HTML /(或)可編輯的 ppt 簡報。</p>
-                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">請先不要直接執行簡報的製作，而是先寫出「簡報規劃的計畫書」，計畫書中要寫出：總共會有幾頁、每一頁的「大標題」內容、「小標題」內容、大致的內文要寫什麼、需不需要使用 ai 圖片生成，或是可以去網路上搜尋下載圖片。</p>
-                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">【6個紅線 (嚴格遵守)】</p>
-                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">1. 簡報請完整呈現「(某某檔案)」的完整內容。撰寫內容時請不要克制，頁數不用省、內文也可以寫多一點。並且不要有曲解、誇大其辭、用詞太過激昂的情況。</p>
-                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">2. 圖片請不要調整原有的圖片比例，只允許對圖片進行「裁切」、「縮小」、「放大」。</p>
-                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">3. 無論是大標題小標題或內文、圖片，請都不要與其他文字或圖片有重疊，也不要有貼到畫面過於邊緣的地方(但若圖片是打算沒有空白縫隙的貼緊邊緣，則沒有此限制)。</p>
-                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">4. 保證網路搜尋或自行生成的圖片絕對都要與當前簡報頁面的內容直接高度相關，嚴禁使用抽象隱喻、幾何符號或高深意象圖，必須選用一眼就能直觀看懂、與簡報內文精準對應的具體實物或情境圖片。</p>
-                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">5. 保證網路搜尋或生成的圖片絕對都要符合當前選擇的整體簡報風格，嚴禁出現與整體簡報風格相比顯得突兀或視覺風格斷層的圖片。</p>
-                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">6. 簡報的每一頁都必須同時包含「圖片」與「文字」（圖文並茂），且每一頁的視覺佈局與結構必須變化多元，嚴禁連續多頁重複使用完全相同的範本或視覺排版結構。</p>
+                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a;">我要在這個對話進行「(......簡報製作任務)」。請以("(......檔案路徑)")的內容為材料，採取並嚴格遵守("(......簡報風格)")的規則和風格，製作 16:9 /(或)A4 Slidev， HTML /(或)可編輯的 ppt 簡報。</p>
+                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a;">請先不要直接執行簡報的製作，而是先寫出「簡報規劃的計畫書」，計畫書中要寫出：總共會有幾頁、每一頁的「大標題」內容、「小標題」內容、大致的內文要寫什麼、需不需要使用 ai 圖片生成，或是可以去網路上搜尋下載圖片。</p>
+                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a;">【6個紅線 (嚴格遵守)】</p>
+                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a;">1. 簡報請完整呈現「(某某檔案)」的完整內容。撰寫內容時請不要克制，頁數不用省、內文也可以寫多一點。並且不要有曲解、誇大其辭、用詞太過激昂的情況。</p>
+                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a;">2. 圖片請不要調整原有的圖片比例，只允許對圖片進行「裁切」、「縮小」、「放大」。</p>
+                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a;">3. 無論是大標題小標題或內文、圖片，請都不要與其他文字或圖片有重疊，也不要有貼到畫面過於邊緣的地方(但若圖片是打算沒有空白縫隙的貼緊邊緣，則沒有此限制)。</p>
+                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a;">4. 保證網路搜尋或自行生成的圖片絕對都要與當前簡報頁面的內容直接高度相關，嚴禁使用抽象隱喻、幾何符號或高深意象圖，必須選用一眼就能直觀看懂、與簡報內文精準對應的具體實物或情境圖片。</p>
+                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a;">5. 保證網路搜尋或生成的圖片絕對都要符合當前選擇的整體簡報風格，嚴禁出現與整體簡報風格相比顯得突兀或視覺風格斷層的圖片。</p>
+                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a;">6. 簡報的每一頁都必須同時包含「圖片」與「文字」（圖文並茂），且每一頁的視覺佈局與結構必須變化多元，嚴禁連續多頁重複使用完全相同的範本或視覺排版結構。</p>
               </div>
             </div>
           `;
