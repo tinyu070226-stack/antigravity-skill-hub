@@ -45,3 +45,29 @@
 3. **假陰性 (False Negative) 失敗判定機制**：
    - 腳本 Exit Code 0 僅代表語法執行完成，不代表業務邏輯正確。
    - 凡是 Playwright 斷言失敗、Console 噴出 Uncaught ReferenceError / TypeError，一律視為**硬性 failure**，計入失敗上限。
+
+
+---
+
+## 🔁 假陰性失敗與 TDD 驗證閉環補強 Protocol (False-Negative Closure & TDD Protocol)
+
+1. **Playwright 斷言失敗直連 `consecutive_bug_failures` 計數器**：
+   - **雙觸發來源 (Dual Trigger Sources)**：`consecutive_bug_failures` 的 `+1` 判定來源擴充為以下兩者（滿足任一即觸發）：
+     - 來源 A (語意)：使用者自然語言回報 Bug / 報錯 / 行為異常。
+     - 來源 B (機械)：Playwright 自動化測試 `assert` 失敗、Console 噴出未捕獲異常、或 Exit Code != 0。
+   - **自動觸發校驗**：當 `consecutive_bug_failures >= 2` 時，自動觸發二次審查機制，禁止繼續盲目修改同一個檔案。
+
+2. **斷言先行 (Test-Driven Assertions Pre-Production Rule)**：
+   - **嚴禁自證清白 (No Post-Implementation Self-Attestation)**：`expected_behavior.json` 必須在**撰寫任何實作程式碼「之前」**（Phase 1 計畫書階段）先產出。
+   - **可追溯性欄位 (Traceability Field)**：斷言檔案中每一項驗證必須包含 `user_requirement_ref`，強行比對原始需求，例如：
+     ```json
+     {
+       "assertion_id": "test_scenario_switcher",
+       "user_requirement_ref": "對應使用者需求：點擊選單按鈕應切換提示詞範例內文",
+       "target_selector": "#btn-tab-same_style_new_content",
+       "trigger_event": "click",
+       "expected_dom_property": "innerText",
+       "expected_contain_text": "deck_content.json"
+     }
+     ```
+   - 確保斷言是根據「原始需求」定義，而非根據「已寫壞的程式碼」順水推舟。
