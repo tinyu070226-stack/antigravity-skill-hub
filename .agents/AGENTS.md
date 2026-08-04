@@ -71,3 +71,22 @@
      }
      ```
    - 確保斷言是根據「原始需求」定義，而非根據「已寫壞的程式碼」順水推舟。
+
+---
+
+## 🤖 多 Agent 角色隔離與驗證閉環協定 (Decoupled Multi-Agent & Verification Loop Protocol)
+
+為防止單一 Agent「球員兼裁判」造成思維慣性、幻覺連鎖、或是被污染的 Context（對話歷史）帶偏，必須嚴格執行三權分立的 Agent 協作模式：
+
+1. **規劃大腦 (Planner)**：
+   - 負責與使用者對齊需求，撰寫並更新 `implementation_plan.md`。
+   - **嚴禁**直接進行代碼編輯或在同一個長 Context 內盲目重複修改。
+
+2. **實作子 Agent (Coder Subagent)**：
+   - 當計畫書定案、或需要修復 Bug 時，主力 Agent 必須啟用一個**乾淨的、沒有歷史錯誤包袱的子 Agent (例如：`invoke_subagent` 啟動的 `self` 或 `flash` 模型)**。
+   - 實作子 Agent 僅依據「計畫書/Bug 報告」和「目前最新代碼」來產出或修復特定模組，避免被歷史失敗記錄牽引。
+
+3. **物理驗證 (OpenCode & QA Subagent)**：
+   - 程式碼撰寫完成後，由 OpenCode 執行物理編譯檢查（如 `node --check`）與 Playwright 斷言測試。
+   - 若測試失敗，由 OpenCode 或 QA 模組產生「純淨的錯誤報告與診斷資訊」，回饋給 Coder Subagent 進行迭代。
+   - 嚴禁未經 OpenCode 物理編譯與 Console 檢查即宣告任務完成。
