@@ -50,6 +50,13 @@
 │   └── skills/                 # 本地安裝之 Custom Agent Skills
 │       ├── beautify-github-readme/
 │       └── mengto-animation-systems/
+├── skills/                     # ✨ 可安裝的 4 大 Master Skills（標準 SKILL.md 格式）
+│   ├── core-synergy-skill/     # 底層協同與工程門禁
+│   ├── design-system-skill/    # 視覺美學與 Anti-Slop
+│   ├── ui-motion-skill/        # 前端動效開發全套
+│   └── presentation-skill/     # 簡報製作工作流
+├── rules/                      # ✨ 跨 Agent 可用的工程規則包
+│   └── engineering-guardrails.md  # TDD / 假陰性防禦 / 熔斷機制（Codex 相容）
 ├── assets/                     # 專案視覺資源 (如 README Hero banner)
 ├── docs/                       # 前端靜態網頁（GitHub Pages 部署目錄）
 │   ├── index.html              # 互動式門戶主頁
@@ -57,6 +64,31 @@
 │   └── skills_data.json        # 4 大 Master Skills 的結構化 JSON 資料庫
 └── skill_hub_prototype/        # 本地原型開發目錄
 ```
+
+---
+
+## 📦 一鍵安裝 Skills（Codex / Antigravity 通用）
+
+本 Repo 的 `skills/` 目錄包含所有 4 大 Master Skills 的標準可安裝格式（`SKILL.md` 規範）。
+
+### 方法 A：Antigravity CLI（推薦）
+```bash
+npx skills add tinyu070226-stack/antigravity-skill-hub
+```
+
+### 方法 B：手動安裝（所有 Agent 通用）
+從本 Repo 下載 `skills/` 底下的任一子資料夾，放入你的 Workspace 的 `.agents/skills/` 目錄：
+```
+.agents/skills/
+├── core-synergy-skill/    ← 底層協同與工程門禁
+├── design-system-skill/   ← 視覺美學與 Anti-Slop
+├── ui-motion-skill/       ← 前端動效開發全套
+└── presentation-skill/    ← 簡報製作工作流
+```
+
+### 方法 C：Codex CLI（AGENTS.md 方式）
+將 `rules/engineering-guardrails.md` 的內容合併至你的專案根目錄 `AGENTS.md`，
+Codex 會在啟動時自動讀取並遵守工程鐵律。
 
 ---
 
