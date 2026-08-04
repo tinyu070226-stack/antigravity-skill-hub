@@ -288,48 +288,43 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (isMasterPromptCard) {
           const tooltipLabel = currentLang === 'en' ? 'Copy Master Prompt' : '複製 Master Prompt 提示詞';
-          const introLabel = currentLang === 'en' ? 'In presentation tasks, click the top-right icon to copy the full prompt:' : '進行簡報製作任務時，可直接點擊右上方圖示複製完整提示詞：';
-          
-          const cleanPromptText = pDesc.trim();
-          const rawLines = cleanPromptText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
-
-          let promptBodyHtml = '';
-          rawLines.forEach(line => {
-            promptBodyHtml += `<p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">${line}</p>`;
-          });
+          const introLabel = currentLang === 'en' ? 'Select a scenario below to switch the prompt. Click top-right button to copy:' : '請點擊下方 3 個選單按鈕切換不同情境的提示詞範例，複製時自動保留 6 大紅線與計畫書審核：';
 
           pBox.innerHTML = `
             <div style="margin-bottom:12px; text-align:left;">
               <h3 style="font-size:18px; font-weight:800; color:#0f172a; margin-bottom:6px; text-align:left;">${pTitle}</h3>
-              <p style="font-size:14px; color:#475569; text-align:left; margin:0;">${introLabel}</p>
+              <p style="font-size:13px; color:#475569; text-align:left; margin:0 0 12px 0;">${introLabel}</p>
+              
+              <!-- 3-Scenario Interactive Tab Switcher -->
+              <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid #e2e8f0;">
+                <button type="button" onclick="switchPromptScenarioCard('standard')" id="btn-card-standard" style="padding:6px 14px; font-size:12px; font-weight:700; border-radius:8px; background:#0f172a; color:#ffffff; border:none; cursor:pointer; transition:all 0.2s;">
+                  📌 標準全新簡報製作 (預設)
+                </button>
+                <button type="button" onclick="switchPromptScenarioCard('same_style_new_content')" id="btn-card-same_style_new_content" style="padding:6px 14px; font-size:12px; font-weight:700; border-radius:8px; background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; cursor:pointer; transition:all 0.2s;">
+                  🔄 同風格換內容 (極速 0-Token 模式)
+                </button>
+                <button type="button" onclick="switchPromptScenarioCard('diff_style_new_content')" id="btn-card-diff_style_new_content" style="padding:6px 14px; font-size:12px; font-weight:700; border-radius:8px; background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; cursor:pointer; transition:all 0.2s;">
+                  🎨 換風格換內容 (樣式分流模式)
+                </button>
+              </div>
             </div>
 
-            <div style="position:relative; background:#f1f5f9; color:#0f172a; border:1px solid #cbd5e1; border-radius:14px; padding:18px 68px 8px 20px; font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif; text-align:left; display:block; margin-top:12px;">
-              <button id="master-prompt-copy-btn" title="${tooltipLabel}" style="position:absolute; top:14px; right:14px; background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; padding:0; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,0.05); font-size:15px; line-height:1; transition:all 0.15s ease;" onmouseenter="this.style.background='#e0f2fe'; this.style.borderColor='#0284c7';" onmouseleave="this.style.background='#ffffff'; this.style.borderColor='#cbd5e1';">
-                <span style="display:inline-block; transform:translateY(-1px);">📋</span>
+            <div style="position:relative; background:#f8fafc; color:#0f172a; border:1px solid #cbd5e1; border-radius:14px; padding:18px 68px 8px 20px; font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif; text-align:left; display:block; margin-top:12px;">
+              <button id="master-prompt-copy-btn" title="${tooltipLabel}" style="position:absolute; top:14px; right:14px; background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; width:36px; height:36px; display:flex; align-items:center; justify-center:center; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,0.05); transition:all 0.2s;" onclick="copyMasterPromptFromCard()">
+                📋
               </button>
-              ${promptBodyHtml}
+              <div id="master-prompt-card-body">
+                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">我要在這個對話進行「(......簡報製作任務)」。請以("(......檔案路徑)")的內容為材料，採取並嚴格遵守("(......簡報風格)")的規則和風格，製作 16:9 /(或)A4 Slidev， HTML /(或)可編輯的 ppt 簡報。</p>
+                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">請先不要直接執行簡報的製作，而是先寫出「簡報規劃的計畫書」，計畫書中要寫出：總共會有幾頁、每一頁的「大標題」內容、「小標題」內容、大致的內文要寫什麼、需不需要使用 ai 圖片生成，或是可以去網路上搜尋下載圖片。</p>
+                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">【6個紅線 (嚴格遵守)】</p>
+                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">1. 簡報請完整呈現「(某某檔案)」的完整內容。撰寫內容時請不要克制，頁數不用省、內文也可以寫多一點。並且不要有曲解、誇大其辭、用詞太過激昂的情況。</p>
+                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">2. 圖片請不要調整原有的圖片比例，只允許對圖片進行「裁切」、「縮小」、「放大」。</p>
+                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">3. 無論是大標題小標題或內文、圖片，請都不要與其他文字或圖片有重疊，也不要有貼到畫面過於邊緣的地方(但若圖片是打算沒有空白縫隙的貼緊邊緣，則沒有此限制)。</p>
+                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">4. 保證網路搜尋或自行生成的圖片絕對都要與當前簡報頁面的內容直接高度相關，嚴禁使用抽象隱喻、幾何符號或高深意象圖，必須選用一眼就能直觀看懂、與簡報內文精準對應的具體實物或情境圖片。</p>
+                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">5. 保證網路搜尋或生成的圖片絕對都要符合當前選擇的整體簡報風格，嚴禁出現與整體簡報風格相比顯得突兀或視覺風格斷層的圖片。</p>
+                <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">6. 簡報的每一頁都必須同時包含「圖片」與「文字」（圖文並茂），且每一頁的視覺佈局與結構必須變化多元，嚴禁連續多頁重複使用完全相同的範本或視覺排版結構。</p>
+              </div>
             </div>
-            ${mediaHtml}
-          `;
-
-          // Attach robust event listener after DOM node creation
-          setTimeout(() => {
-            const btn = pBox.querySelector('#master-prompt-copy-btn');
-            if (btn) {
-              btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                copyText(cleanPromptText, 'Master Prompt', btn);
-              });
-            }
-          }, 50);
-        } else {
-          const formattedDesc = pDesc.replace(/\n/g, '<br/>');
-          pBox.innerHTML = `
-            <h3 style="font-size:18px; font-weight:700; color:#0f172a; margin-bottom:10px; letter-spacing:-0.3px; text-align:left;">${pTitle}</h3>
-            <p style="font-size:14.5px; color:#475569; line-height:1.65; text-align:left;">${formattedDesc}</p>
-            ${mediaHtml}
           `;
         }
 
@@ -759,6 +754,36 @@ function switchMasterPromptScenario(key) {
     pres.forEach(pre => {
         if (pre.innerText.includes('簡報製作任務') || pre.innerText.includes('deck_content.json') || pre.innerText.includes('Typographic Deck')) {
             pre.innerText = masterScenariosMap[key] + masterCommonTail;
+        }
+    });
+}
+
+
+const masterScenariosMapInDesc = {
+    standard: `我要在這個對話進行「(......簡報製作任務)」。請以("(......檔案路徑)")的內容為材料，採取並嚴格遵守("(......簡報風格)")的規則和風格，製作 16:9 /(或)A4 Slidev， HTML /(或)可編輯的 ppt 簡報。`,
+    same_style_new_content: `我要在這個對話進行「(......簡報製作任務)」。請以("(......檔案路徑)")的內容為材料，依照我們標準的 0-Token 簡報流水線 Phase 1，幫我產出 deck_content.json。請繼續使用「(現有風格，如 Kinfolk)」風格，並幫我安排好 Hero、Split、Quote Card、Timeline、Bento 這 5 種 Layout 屬性。產出後請直接執行 build_deck.py 生成簡報！`,
+    diff_style_new_content: `我要在這個對話進行「(......簡報製作任務)」。請以("(......檔案路徑)")的內容為材料製作成 16:9 HTML 簡報。這次視覺風格請採用「(新風格，如 Typographic Deck)」規範！請先產出 deck_content.json 與對應的 deck_theme.css，然後跑 Phase 3 的 build_deck.py 自動裝配成 HTML 簡報！`
+};
+
+const masterCommonTailInDesc = `\n\n請先不要直接執行簡報的製作，而是先寫出「簡報規劃的計畫書」，計畫書中要寫出：總共會有幾頁、每一頁的「大標題」內容、「小標題」內容、大致的內文要寫什麼、需不需要使用 ai 圖片生成，或是可以去網路上搜尋下載圖片。\n\n【6個紅線 (嚴格遵守)】\n\n1. 簡報請完整呈現「(某某檔案)」的完整內容。撰寫內容時請不要克制，頁數不用省、內文也可以寫多一點。並且不要有曲解、誇大其辭、用詞太過激昂的情況。\n2. 圖片請不要調整原有的圖片比例，只允許對圖片進行「裁切」、「縮小」、「放大」。\n3. 無論是大標題小標題或內文、圖片，請都不要與其他文字或圖片有重疊，也不要有貼到畫面過於邊緣的地方(但若圖片是打算沒有空白縫隙的貼緊邊緣，則沒有此限制)。\n4. 保證網路搜尋或自行生成的圖片絕對都要與當前簡報頁面的內容直接高度相關，嚴禁使用抽象隱喻、幾何符號或高深意象圖，必須選用一眼就能直觀看懂、與簡報內文精準對應的具體實物或情境圖片。\n5. 保證網路搜尋或生成的圖片絕對都要符合當前選擇的整體簡報風格，嚴禁出現與整體簡報風格相比顯得突兀或視覺風格斷層的圖片。\n6. 簡報的每一頁都必須同時包含「圖片」與「文字」（圖文並茂），且每一頁的視覺佈局與結構必須變化多元，嚴禁連續多頁重複使用完全相同的範本或視覺排版結構。`;
+
+function switchPromptScenarioInDesc(key) {
+    const tabs = ['standard', 'same_style_new_content', 'diff_style_new_content'];
+    tabs.forEach(t => {
+        const btn = document.getElementById(`desc-tab-${t}`);
+        if (btn) {
+            if (t === key) {
+                btn.className = "scenario-tab px-3 py-1.5 text-xs font-bold rounded-lg bg-stone-900 text-white dark:bg-amber-500 dark:text-stone-950 shadow-sm transition cursor-pointer";
+            } else {
+                btn.className = "scenario-tab px-3 py-1.5 text-xs font-bold rounded-lg bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-stone-200 hover:bg-stone-300 dark:hover:bg-stone-700 transition cursor-pointer";
+            }
+        }
+    });
+
+    const pres = document.querySelectorAll('pre, .font-mono');
+    pres.forEach(pre => {
+        if (pre.innerText.includes('簡報製作任務') || pre.innerText.includes('deck_content.json') || pre.innerText.includes('Typographic Deck')) {
+            pre.innerText = masterScenariosMapInDesc[key] + masterCommonTailInDesc;
         }
     });
 }
