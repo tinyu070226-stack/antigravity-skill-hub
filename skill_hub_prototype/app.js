@@ -911,6 +911,19 @@ window.doSwitchScenario = function(key, evt) {
     if (evt) { evt.preventDefault(); evt.stopPropagation(); }
     window.activeScenarioKey = key;
 
+    // Click press animation on the clicked button
+    var clickedBtn = document.getElementById('btn-tab-' + key);
+    if (clickedBtn) {
+        clickedBtn.style.transition = 'transform 0.12s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        clickedBtn.style.transform = 'scale(0.92)';
+        setTimeout(function() {
+            clickedBtn.style.transform = 'scale(1.04)';
+            setTimeout(function() {
+                clickedBtn.style.transform = 'scale(1)';
+            }, 120);
+        }, 100);
+    }
+
     ['standard', 'same_style_new_content', 'diff_style_new_content'].forEach(function(t) {
         var btn = document.getElementById('btn-tab-' + t);
         if (btn) {
@@ -940,18 +953,36 @@ window.doCopyPrompt = function(evt) {
     if (evt) { evt.preventDefault(); evt.stopPropagation(); }
     var key = window.activeScenarioKey || 'standard';
     var fullText = window.promptScenarioIntros[key] + '\n\n' + window.promptCommonBody.join('\n\n');
+    var isEn = window.currentLang === 'en';
 
     function flash() {
+        // Top toast notification
+        if (window.showToast) {
+            window.showToast(isEn ? '📋 Master Prompt Copied!' : '📋 提示詞複製成功');
+        }
+
+        // Button press + green flash animation
         var btn = document.getElementById('master-prompt-copy-btn-classic');
         if (btn) {
-            btn.innerHTML = '✅';
-            btn.style.background = '#10b981';
-            btn.style.borderColor = '#10b981';
+            btn.style.transition = 'all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            btn.style.transform = 'scale(0.88)';
             setTimeout(function() {
-                btn.innerHTML = '📋';
-                btn.style.background = '#ffffff';
-                btn.style.borderColor = '#cbd5e1';
-            }, 2000);
+                btn.innerHTML = '✅';
+                btn.style.background = '#10b981';
+                btn.style.borderColor = '#10b981';
+                btn.style.color = '#ffffff';
+                btn.style.transform = 'scale(1.1)';
+                setTimeout(function() {
+                    btn.style.transform = 'scale(1)';
+                    setTimeout(function() {
+                        btn.innerHTML = '📋';
+                        btn.style.background = '#ffffff';
+                        btn.style.borderColor = '#cbd5e1';
+                        btn.style.color = '';
+                        btn.style.transition = '';
+                    }, 1600);
+                }, 150);
+            }, 100);
         }
     }
 
