@@ -297,20 +297,20 @@ document.addEventListener('DOMContentLoaded', async () => {
               
               <!-- 3-Scenario Interactive Tab Switcher -->
               <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid #e2e8f0;">
-                <button type="button" onclick="switchPromptScenarioCard('standard')" id="btn-card-standard" style="padding:6px 14px; font-size:12px; font-weight:700; border-radius:8px; background:#0f172a; color:#ffffff; border:none; cursor:pointer; transition:all 0.2s;">
+                <button type="button" onclick="event.stopPropagation(); window.switchPromptScenarioCard('standard')" id="btn-card-standard" style="padding:6px 14px; font-size:12px; font-weight:700; border-radius:8px; background:#0f172a; color:#ffffff; border:none; cursor:pointer; transition:all 0.2s;">
                   📌 標準全新簡報製作 (預設)
                 </button>
-                <button type="button" onclick="switchPromptScenarioCard('same_style_new_content')" id="btn-card-same_style_new_content" style="padding:6px 14px; font-size:12px; font-weight:700; border-radius:8px; background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; cursor:pointer; transition:all 0.2s;">
+                <button type="button" onclick="event.stopPropagation(); window.switchPromptScenarioCard('same_style_new_content')" id="btn-card-same_style_new_content" style="padding:6px 14px; font-size:12px; font-weight:700; border-radius:8px; background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; cursor:pointer; transition:all 0.2s;">
                   🔄 同風格換內容 (極速 0-Token 模式)
                 </button>
-                <button type="button" onclick="switchPromptScenarioCard('diff_style_new_content')" id="btn-card-diff_style_new_content" style="padding:6px 14px; font-size:12px; font-weight:700; border-radius:8px; background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; cursor:pointer; transition:all 0.2s;">
+                <button type="button" onclick="event.stopPropagation(); window.switchPromptScenarioCard('diff_style_new_content')" id="btn-card-diff_style_new_content" style="padding:6px 14px; font-size:12px; font-weight:700; border-radius:8px; background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; cursor:pointer; transition:all 0.2s;">
                   🎨 換風格換內容 (樣式分流模式)
                 </button>
               </div>
             </div>
 
             <div style="position:relative; background:#f8fafc; color:#0f172a; border:1px solid #cbd5e1; border-radius:14px; padding:18px 68px 8px 20px; font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif; text-align:left; display:block; margin-top:12px;">
-              <button id="master-prompt-copy-btn" title="${tooltipLabel}" style="position:absolute; top:14px; right:14px; background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; width:36px; height:36px; display:flex; align-items:center; justify-center:center; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,0.05); transition:all 0.2s;" onclick="copyMasterPromptFromCard()">
+              <button id="master-prompt-copy-btn" title="${tooltipLabel}" style="position:absolute; top:14px; right:14px; background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; width:36px; height:36px; display:flex; align-items:center; justify-center:center; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,0.05); transition:all 0.2s;" onclick="event.stopPropagation(); window.copyMasterPromptFromCard()">
                 📋
               </button>
               <div id="master-prompt-card-body">
