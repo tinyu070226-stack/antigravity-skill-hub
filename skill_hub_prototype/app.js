@@ -297,13 +297,13 @@ document.addEventListener('DOMContentLoaded', async () => {
               
               <!-- 3-Scenario Interactive Tab Switcher -->
               <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid #e2e8f0;">
-                <button type="button" id="btn-tab-standard" onclick="window.doSwitchScenario('standard', event)" style="padding:6px 14px; font-size:12px; font-weight:700; border-radius:8px; background:#0f172a; color:#ffffff; border:none; cursor:pointer; shadow:0 1px 2px rgba(0,0,0,0.1);">
+                <button type="button" id="btn-tab-standard" onclick="window.doSwitchScenario('standard', event)" class="scenario-btn" style="background:#0f172a; color:#ffffff; border:none; shadow:0 1px 2px rgba(0,0,0,0.1);">
                   📌 標準全新簡報製作 (預設)
                 </button>
-                <button type="button" id="btn-tab-same_style_new_content" onclick="window.doSwitchScenario('same_style_new_content', event)" style="padding:6px 14px; font-size:12px; font-weight:700; border-radius:8px; background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; cursor:pointer;">
+                <button type="button" id="btn-tab-same_style_new_content" onclick="window.doSwitchScenario('same_style_new_content', event)" class="scenario-btn" style="background:#f1f5f9; color:#334155; border:1px solid #cbd5e1;">
                   🔄 同風格換內容 (極速 0-Token 模式)
                 </button>
-                <button type="button" id="btn-tab-diff_style_new_content" onclick="window.doSwitchScenario('diff_style_new_content', event)" style="padding:6px 14px; font-size:12px; font-weight:700; border-radius:8px; background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; cursor:pointer;">
+                <button type="button" id="btn-tab-diff_style_new_content" onclick="window.doSwitchScenario('diff_style_new_content', event)" class="scenario-btn" style="background:#f1f5f9; color:#334155; border:1px solid #cbd5e1;">
                   🎨 換風格換內容 (樣式分流模式)
                 </button>
               </div>
@@ -910,19 +910,6 @@ window.activeScenarioKey = 'standard';
 window.doSwitchScenario = function(key, evt) {
     if (evt) { evt.preventDefault(); evt.stopPropagation(); }
     window.activeScenarioKey = key;
-
-    // Click press animation on the clicked button
-    var clickedBtn = document.getElementById('btn-tab-' + key);
-    if (clickedBtn) {
-        clickedBtn.style.transition = 'transform 0.12s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-        clickedBtn.style.transform = 'scale(0.92)';
-        setTimeout(function() {
-            clickedBtn.style.transform = 'scale(1.04)';
-            setTimeout(function() {
-                clickedBtn.style.transform = 'scale(1)';
-            }, 120);
-        }, 100);
-    }
 
     ['standard', 'same_style_new_content', 'diff_style_new_content'].forEach(function(t) {
         var btn = document.getElementById('btn-tab-' + t);
