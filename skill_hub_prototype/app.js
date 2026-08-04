@@ -287,7 +287,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         );
 
         if (isMasterPromptCard) {
-          const tooltipLabel = currentLang === 'en' ? 'Copy Master Prompt' : '複製 Master Prompt 提示詞';
           const introLabel = currentLang === 'en' ? 'Select a scenario below to switch the prompt. Click top-right button to copy:' : '請點擊下方 3 個選單按鈕切換不同情境的提示詞範例，複製時自動保留 6 大紅線與計畫書審核：';
 
           pBox.innerHTML = `
@@ -296,22 +295,22 @@ document.addEventListener('DOMContentLoaded', async () => {
               <p style="font-size:13px; color:#475569; text-align:left; margin:0 0 12px 0;">${introLabel}</p>
               
               <!-- 3-Scenario Interactive Tab Switcher -->
-              <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid #e2e8f0;">
-                <button type="button" onclick="event.stopPropagation(); window.switchPromptScenarioCard('standard')" id="btn-card-standard" style="padding:6px 14px; font-size:12px; font-weight:700; border-radius:8px; background:#0f172a; color:#ffffff; border:none; cursor:pointer; transition:all 0.2s;">
+              <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid #e2e8f0;">
+                <button type="button" data-scenario="standard" class="prompt-tab-btn" style="padding:7px 15px; font-size:12px; font-weight:700; border-radius:8px; background:#0f172a; color:#ffffff; border:none; cursor:pointer; transition:all 0.2s;">
                   📌 標準全新簡報製作 (預設)
                 </button>
-                <button type="button" onclick="event.stopPropagation(); window.switchPromptScenarioCard('same_style_new_content')" id="btn-card-same_style_new_content" style="padding:6px 14px; font-size:12px; font-weight:700; border-radius:8px; background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; cursor:pointer; transition:all 0.2s;">
+                <button type="button" data-scenario="same_style_new_content" class="prompt-tab-btn" style="padding:7px 15px; font-size:12px; font-weight:700; border-radius:8px; background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; cursor:pointer; transition:all 0.2s;">
                   🔄 同風格換內容 (極速 0-Token 模式)
                 </button>
-                <button type="button" onclick="event.stopPropagation(); window.switchPromptScenarioCard('diff_style_new_content')" id="btn-card-diff_style_new_content" style="padding:6px 14px; font-size:12px; font-weight:700; border-radius:8px; background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; cursor:pointer; transition:all 0.2s;">
+                <button type="button" data-scenario="diff_style_new_content" class="prompt-tab-btn" style="padding:7px 15px; font-size:12px; font-weight:700; border-radius:8px; background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; cursor:pointer; transition:all 0.2s;">
                   🎨 換風格換內容 (樣式分流模式)
                 </button>
               </div>
             </div>
 
-            <div style="position:relative; background:#f8fafc; color:#0f172a; border:1px solid #cbd5e1; border-radius:14px; padding:18px 68px 8px 20px; font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif; text-align:left; display:block; margin-top:12px;">
-              <button id="master-prompt-copy-btn" title="${tooltipLabel}" style="position:absolute; top:14px; right:14px; background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; width:36px; height:36px; display:flex; align-items:center; justify-center:center; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,0.05); transition:all 0.2s;" onclick="event.stopPropagation(); window.copyMasterPromptFromCard()">
-                📋
+            <div style="position:relative; background:#f8fafc; color:#0f172a; border:1px solid #cbd5e1; border-radius:14px; padding:20px 68px 12px 20px; font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif; text-align:left; display:block; margin-top:12px;">
+              <button id="master-prompt-copy-btn" class="prompt-copy-btn-action" style="position:absolute; top:18px; right:18px; background:#ffffff; border:1px solid #cbd5e1; border-radius:10px; width:38px; height:38px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 1px 3px rgba(0,0,0,0.08); transition:all 0.2s; padding:0; line-height:1;">
+                <span id="copy-btn-icon" style="font-size:16px; display:inline-block; line-height:1;">📋</span>
               </button>
               <div id="master-prompt-card-body">
                 <p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">我要在這個對話進行「(......簡報製作任務)」。請以("(......檔案路徑)")的內容為材料，採取並嚴格遵守("(......簡報風格)")的規則和風格，製作 16:9 /(或)A4 Slidev， HTML /(或)可編輯的 ppt 簡報。</p>
@@ -786,4 +785,91 @@ function switchPromptScenarioInDesc(key) {
             pre.innerText = masterScenariosMapInDesc[key] + masterCommonTailInDesc;
         }
     });
+}
+
+
+// Robust Global Event Delegation for Prompt Switcher and Copy Button
+document.addEventListener('click', function(e) {
+    // 1. Handle Tab Switcher Clicks
+    const tabBtn = e.target.closest('.prompt-tab-btn');
+    if (tabBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const scenario = tabBtn.getAttribute('data-scenario');
+        if (!scenario || !window.promptScenarioIntros[scenario]) return;
+
+        window.currentCardScenarioKey = scenario;
+
+        // Update button styles
+        document.querySelectorAll('.prompt-tab-btn').forEach(btn => {
+            if (btn.getAttribute('data-scenario') === scenario) {
+                btn.style.background = '#0f172a';
+                btn.style.color = '#ffffff';
+                btn.style.border = 'none';
+            } else {
+                btn.style.background = '#f1f5f9';
+                btn.style.color = '#334155';
+                btn.style.border = '1px solid #cbd5e1';
+            }
+        });
+
+        // Update body text
+        const bodyEl = document.getElementById('master-prompt-card-body');
+        if (bodyEl) {
+            let htmlContent = `<p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">${window.promptScenarioIntros[scenario]}</p>`;
+            window.promptCommonBody.forEach(line => {
+                htmlContent += `<p style="margin:0 0 12px 0; text-align:left; line-height:1.75; font-size:13.5px; color:#0f172a; padding-right:16px;">${line}</p>`;
+            });
+            bodyEl.innerHTML = htmlContent;
+        }
+        return;
+    }
+
+    // 2. Handle Copy Button Click
+    const copyBtn = e.target.closest('.prompt-copy-btn-action, #master-prompt-copy-btn');
+    if (copyBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const activeKey = window.currentCardScenarioKey || 'standard';
+        const fullText = window.promptScenarioIntros[activeKey] + '\n\n' + window.promptCommonBody.join('\n\n');
+
+        function showSuccessUI() {
+            const iconEl = document.getElementById('copy-btn-icon') || copyBtn;
+            iconEl.innerHTML = '✅';
+            copyBtn.style.background = '#10b981';
+            copyBtn.style.color = '#ffffff';
+            setTimeout(() => {
+                iconEl.innerHTML = '📋';
+                copyBtn.style.background = '#ffffff';
+                copyBtn.style.color = '#0f172a';
+            }, 2000);
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(fullText).then(showSuccessUI).catch(err => {
+                fallbackCopyText(fullText);
+                showSuccessUI();
+            });
+        } else {
+            fallbackCopyText(fullText);
+            showSuccessUI();
+        }
+        return;
+    }
+}, true);
+
+function fallbackCopyText(text) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";
+    textArea.style.left = "-9999px";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+        document.execCommand('copy');
+    } catch (err) {}
+    document.body.removeChild(textArea);
 }
