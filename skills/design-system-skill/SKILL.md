@@ -1,93 +1,32 @@
 ---
 name: design-system-skill
-description: |
-  視覺美學與 Anti-Slop 防禦系統。包含 50 種現代網頁設計風格知識庫、Nutlope Hallmark 20 主題輪替防呆、
-  web-design-engineer 5-Dial 視覺決策框架、Emil Kowalski Apple 品質細節標準、以及 UI-Skills 路由系統。
-  觸發時機：設計新 UI、重構視覺系統、選擇設計風格、審查是否為 AI 模板 Slop。
+description: 整合 50 種經典與現代網頁設計風格知識庫、Nutlope Hallmark 反 AI 模板化防禦機制、web-design-engineer 5-dial 視覺決策與 25 品牌錨定風格配方（Linear, Stripe Press, Aesop, Bloomberg 終端機等）及品牌資產法則 (Asset > Spec)。
 ---
 
-# Design System Skill（視覺美學 & Anti-Slop 防禦）
+# design-system-skill (視覺美學與反 Slop 全集)
 
-本 Skill 確保所有 UI 產出達到**生產級品質**，杜絕 AI 模板化的 Slop 設計。
+## 觸發字 (Triggers)
+@design-system-skill, 50-styles, hallmark, emil-skills, ui-skills, 前端風格, 反slop, web-design-engineer, design-read
 
----
+## 子模組核心描述
+- 50 Web Design Styles KB: 50 種網頁設計體系 (Hex 色票、邊框陰影、材質、Typography)
+- Nutlope Hallmark: 20 視覺主題輪替、8 種組件狀態寫滿、Pre-emit 6 軸自我評分
+- web-design-engineer: 5-dial 視覺校準 (Variance, Motion, Density, Asset, Brand) + 25 品牌錨定風格配方 (Linear, Stripe Press, Aesop, Bloomberg 終端機等) + 品牌資產法則 (Asset > Spec)
+- Emil Kowalski 設計工程: Apple 質感細節、Easing/Spring 動態詞彙、60 FPS 效能審查
+- UI-Skills 路由: OKLCH 色彩 (better-colors)、瑞士排版 (swiss-design)、A11y (build-primitive)
 
-## 1. Anti-Slop Defense Protocol（Nutlope Hallmark）
 
-Nutlope Hallmark 是防止 AI 產出平庸模板 UI（Slop UI）的強制防禦體系，包含三大支柱：
+## 核心設計與工程原則 (Principles)
+### 原則 1：🛡️ Nutlope Hallmark 反 AI 模板化防禦機制 (Anti-Slop Defense Protocol)
+Nutlope Hallmark 是防止生成式 AI 產出同質化、平庸藍灰模板 (Slop UI) 的強效防禦體系。其包含三大核心支柱：
+1. 20 主題氣質輪替 (Theme Catalog)：打破預設 AI 藍白介面，隨機或依語境套用 20 種獨特美學氣質（如古雅明朝、賽博終端、暗黑便當盒等）。
+2. 8-State 組件寫滿 (8-State Completeness)：強制所有 UI 組件必須實作 Default、Hover、Active、Focus、Loading、Success、Error、Disabled 完整 8 種狀態，防止互動空洞。
+3. Pre-emit 6 軸自我評分 (6-Axis Self-Scoring)：在輸出程式碼前，針對層次感、對比度、留白、觸感細節、效能與響應式進行 6 軸打分，確保最高 Production 品質。
 
-### 支柱一：20 主題氣質輪替（Theme Catalog）
-**禁止使用** AI 白底灰卡片預設介面。必須根據情境從以下方向擇一：
-古典學術、賽博龐克、復古報章、暗黑 OLED、奶油紙質、霓虹熒光、日系極簡、包浩斯幾何、生物仿生、瑞士網格…等。
+### 原則 2：🎨 web-design-engineer 5-Dial 視覺決策與 25 品牌錨定風格配方
+web-design-engineer 是極致前端設計工程師的設計思維體系，核心包含三大部分：
+1. 5-Dial 視覺旋鈕校準 (Design Read)：在撰寫程式碼前，先針對「視覺變異度 (Variance)」、「動效強度 (Motion)」、「資訊密度 (Density)」、「資產依賴 (Asset Dependence)」與「品牌忠誠度 (Brand Fidelity)」進行 1-10 旋鈕定位，決策佈局方向。
+2. 25 品牌錨定風格配方 (25 Style Recipes)：涵蓋 Linear 極致黑、Stripe Press 印藝、Aesop 藥劑師哲學、Bloomberg 交易終端、Monocle 雜誌刊物、MUJI 原研哉極簡、Apple HIG 等 25 種業界大師級色彩、字體配對與 DNA 簽名動作 (Signature Moves)。
+3. 品牌資產至上法則 (Asset > Spec)：嚴禁使用偽手繪或替代品取代真實品牌 Logo 與產品照。強調「Logo 非談判項目，真實產品照優於 Hex 色票」，絕不產出同質化的 AI 藍紫漸層模板！
 
-### 支柱二：8-State 組件寫滿
-每個 UI 組件必須定義完整的 8 種狀態：
-`default` / `hover` / `focus` / `active` / `disabled` / `loading` / `error` / `success`
 
-### 支柱三：Pre-emit 6 軸自動多樣性
-在產出任何 UI 之前，強制聲明以下 6 個維度的設計選擇（不允許 N/A）：
-1. **色彩體系**：主色調（OKLCH 色值） + 輔色 + 強調色
-2. **排版系統**：字型家族 + 字型比例尺
-3. **間距節奏**：基準單位（如 4px / 8px）
-4. **邊框與圓角**：邊框寬度 + 圓角半徑規則
-5. **陰影層次**：0-4 層陰影定義
-6. **動效基調**：Duration Range + Easing Curve
-
----
-
-## 2. web-design-engineer 5-Dial 視覺決策框架
-
-**在撰寫任何代碼前**，必須先對這 5 個維度進行 1-10 評分，並在注釋或計畫書中聲明：
-
-| 刻度盤 | 說明 | 低分 | 高分 |
-|---|---|---|---|
-| **Variance（多樣性）** | 顏色/尺寸/形狀的變化程度 | 極簡一色 | 豐富多變 |
-| **Motion（動效強度）** | 動畫量與互動感 | 純靜態 | 大量動效 |
-| **Density（資訊密度）** | 每屏的資訊量 | 留白極多 | 緊湊資訊流 |
-| **Asset Dependence（素材依賴）** | 是否依賴圖片/插畫 | 純代碼 | 重度素材 |
-| **Brand Fidelity（品牌忠誠度）** | 是否需要精確還原品牌視覺 | 自由創作 | 嚴格還原 |
-
-### 25 大設計風格方案索引
-詳見 `references/50-styles-index.md`，包含 50 種風格的色票、字型、陰影、邊框的精確規格。
-
-常用速查：
-- `Linear Style`：OLED 黑背景 + 紫色/藍色漸層 + Inter 字型 + 無邊框卡片
-- `Stripe Press`：白底 + 超大 Gilroy 標題 + 精緻分隔線 + 微陰影
-- `Apple Product`：SF Pro + 大留白 + 微妙漸層 + 60fps 彈簧動畫
-- `Neo-Brutalism`：高對比 + 粗黑邊框 + 偏移陰影 + 飽和色
-- `Glassmorphism`：frosted glass + backdrop-filter blur + 半透明邊框
-
----
-
-## 3. Emil Kowalski Apple 品質細節標準
-
-參考 Emil 的設計工具哲學，每個互動組件必須達到：
-
-- **Easing/Spring 詞彙精確**：使用物理彈簧 `spring(mass, stiffness, damping)` 而非線性 `ease-in-out`
-- **60 FPS 性能審查**：所有動畫必須使用 GPU 加速屬性（`transform`, `opacity`），禁止動畫 `width`/`height`/`top`/`left`
-- **細節密度**：按鈕按下有 `scale(0.97)` 回饋、卡片懸停有 `translateY(-2px)` 浮起、焦點有明確 `ring` 樣式
-
----
-
-## 4. UI-Skills 路由系統
-
-根據具體設計需求，路由到對應的專業子 Skill：
-
-| 需求 | 路由到 |
-|---|---|
-| 顏色系統 / OKLCH 色彩 | `better-colors` Skill |
-| 瑞士網格 / Helvetica 系排版 | `swiss-design` Skill |
-| 無障礙 / ARIA 合規 | `build-primitive` Skill |
-| 完整 UI 工程規範 | `frontend-ui-engineering` Skill |
-| 動效系統 | `ui-motion-skill`（本套件） |
-| GitHub README 美化 | `beautify-github-readme` Skill |
-
----
-
-## 5. 禁止事項（Anti-patterns）
-
-- 禁止使用純 Hex 描述顏色而不定義語意 Token（如 `--color-primary`, `--color-surface`）
-- 禁止「白底灰卡片 + 藍色按鈕」預設配色（AI Slop 特徵）
-- 禁止在不知道 5-Dial 評分的情況下直接寫 CSS
-- 禁止讓 8 種組件狀態中有任何一種未定義（即使視覺相同也要明確聲明繼承）
-- 禁止動畫 `width`、`height`、`margin`、`padding`（效能殺手）
