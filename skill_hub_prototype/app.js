@@ -327,6 +327,13 @@ document.addEventListener('DOMContentLoaded', async () => {
               </div>
             </div>
           `;
+        } else {
+          // Standard principle card for core-synergy-skill, design-system-skill, ui-motion-skill
+          pBox.innerHTML = `
+            <h3 style="font-size:17px; font-weight:800; color:#0f172a; margin-bottom:10px; text-align:left;">${pTitle}</h3>
+            <p style="font-size:14px; color:#475569; line-height:1.75; text-align:left; margin:0;">${pDesc}</p>
+            ${mediaHtml}
+          `;
         }
 
         detailPrinciples.appendChild(pBox);
