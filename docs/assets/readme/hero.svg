@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100%" height="auto" viewBox="0 0 1200 380"
+     role="img" aria-labelledby="title desc">
+  <title id="title">Antigravity Skill Hub</title>
+  <desc id="desc">An interactive visual index showcasing the 4 core master skills, design tokens, UI motion presets, and presentation pipelines.</desc>
+  
+  <defs>
+    <!-- Technical grid pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.75"/>
+    </pattern>
+    
+    <!-- Accent gradients -->
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#0369a1" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="cyanGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f5ff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#008b8b" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="roseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#be123c" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="tealGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#0f766e" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#7e22ce" stop-opacity="0.85"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Deep dark space background -->
+  <rect width="1200" height="380" rx="20" fill="#0b0f19"/>
+  
+  <!-- Overlay technical blueprint grid -->
+  <rect width="1200" height="380" rx="20" fill="url(#grid)" opacity="0.75"/>
+  
+  <!-- Left Side: Title and Value Proposition -->
+  <g id="title-block" transform="translate(60, 0)">
+    <!-- Category framework label -->
+    <rect y="48" width="220" height="26" rx="6" fill="#1e293b" opacity="0.8"/>
+    <text x="12" y="65" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="10" font-weight="700" fill="#38bdf8" letter-spacing="1">ANTIGRAVITY FRAMEWORK</text>
+    
+    <!-- Title -->
+    <text x="0" y="125" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="44" font-weight="800" fill="#ffffff" letter-spacing="-1">Skill Hub Prototype</text>
+    
+    <!-- Description -->
+    <text x="0" y="175" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="400" fill="#94a3b8" line-height="1.5">
+      <tspan x="0" dy="0">Unified interactive showroom mapping 4 Master Skills, 50 Web UI styles,</tspan>
+      <tspan x="0" dy="24">high-fidelity web motion templates, and Slidev presentation pipelines.</tspan>
+    </text>
+    
+    <!-- Metadata Badges -->
+    <g transform="translate(0, 240)">
+      <!-- Badge 1: Core -->
+      <rect x="0" y="0" width="105" height="28" rx="8" fill="#1e293b" stroke="#f43f5e" stroke-width="1"/>
+      <text x="12" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#f43f5e">⚙️ Core Synergy</text>
+      
+      <!-- Badge 2: Design -->
+      <rect x="117" y="0" width="115" height="28" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+      <text x="129" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#38bdf8">🎨 Design System</text>
+      
+      <!-- Badge 3: Motion -->
+      <rect x="244" y="0" width="100" height="28" rx="8" fill="#1e293b" stroke="#2dd4bf" stroke-width="1"/>
+      <text x="256" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#2dd4bf">⚡ UI Motion</text>
+      
+      <!-- Badge 4: Exporter -->
+      <rect x="356" y="0" width="125" height="28" rx="8" fill="#1e293b" stroke="#a855f7" stroke-width="1"/>
+      <text x="368" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#a855f7">🎬 Slide Exporter</text>
+    </g>
+  </g>
+  
+  <!-- Right Side: Architectural Blueprint Diagram -->
+  <g id="project-proof" transform="translate(680, 20)">
+    <!-- Central Hub: Synergy Center -->
+    <rect x="160" y="130" width="140" height="80" rx="14" fill="#0f172a" stroke="url(#cyanGradient)" stroke-width="2" filter="drop-shadow(0 4px 12px rgba(0,245,255,0.15))"/>
+    <text x="230" y="170" font-family="ui-monospace, monospace" font-size="13" font-weight="800" fill="#00f5ff" text-anchor="middle" letter-spacing="1">SYNERGY HUB</text>
+    <text x="230" y="188" font-family="-apple-system, sans-serif" font-size="9" font-weight="600" fill="#64748b" text-anchor="middle">ANTIGRAVITY &amp; OPENCODE</text>
+
+    <!-- Connectors -->
+    <!-- M 160 170 Q 80 170 80 90 -->
+    <path d="M 160 170 Q 70 170 70 110" fill="none" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="4,4"/>
+    <!-- M 300 170 Q 380 170 380 90 -->
+    <path d="M 300 170 Q 390 170 390 110" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
+    <!-- M 160 170 Q 80 170 80 250 -->
+    <path d="M 160 170 Q 70 170 70 230" fill="none" stroke="#2dd4bf" stroke-width="1.5"/>
+    <!-- M 300 170 Q 380 170 380 250 -->
+    <path d="M 300 170 Q 390 170 390 230" fill="none" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="4,4"/>
+    
+    <!-- Skill Node 1: Core Synergy (Top-Left) -->
+    <g transform="translate(0, 50)">
+      <rect x="0" y="0" width="140" height="60" rx="10" fill="#0f172a" stroke="#f43f5e" stroke-width="1.5"/>
+      <circle cx="24" cy="30" r="14" fill="#f43f5e" fill-opacity="0.1"/>
+      <text x="24" y="34" font-family="-apple-system, sans-serif" font-size="12" text-anchor="middle">⚙️</text>
+      <text x="48" y="28" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" fill="#f8fafc">Core Synergy</text>
+      <text x="48" y="42" font-family="ui-monospace, monospace" font-size="9" fill="#f43f5e">core-synergy</text>
+    </g>
+
+    <!-- Skill Node 2: Design System (Top-Right) -->
+    <g transform="translate(320, 50)">
+      <rect x="0" y="0" width="140" height="60" rx="10" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+      <circle cx="24" cy="30" r="14" fill="#38bdf8" fill-opacity="0.1"/>
+      <text x="24" y="34" font-family="-apple-system, sans-serif" font-size="12" text-anchor="middle">🎨</text>
+      <text x="48" y="28" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" fill="#f8fafc">Design Specs</text>
+      <text x="48" y="42" font-family="ui-monospace, monospace" font-size="9" fill="#38bdf8">design-system</text>
+    </g>
+
+    <!-- Skill Node 3: UI Motion (Bottom-Left) -->
+    <g transform="translate(0, 230)">
+      <rect x="0" y="0" width="140" height="60" rx="10" fill="#0f172a" stroke="#2dd4bf" stroke-width="1.5"/>
+      <circle cx="24" cy="30" r="14" fill="#2dd4bf" fill-opacity="0.1"/>
+      <text x="24" y="34" font-family="-apple-system, sans-serif" font-size="12" text-anchor="middle">⚡</text>
+      <text x="48" y="28" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" fill="#f8fafc">Motion Library</text>
+      <text x="48" y="42" font-family="ui-monospace, monospace" font-size="9" fill="#2dd4bf">ui-motion</text>
+    </g>
+
+    <!-- Skill Node 4: Slide Exporter (Bottom-Right) -->
+    <g transform="translate(320, 230)">
+      <rect x="0" y="0" width="140" height="60" rx="10" fill="#0f172a" stroke="#a855f7" stroke-width="1.5"/>
+      <circle cx="24" cy="30" r="14" fill="#a855f7" fill-opacity="0.1"/>
+      <text x="24" y="34" font-family="-apple-system, sans-serif" font-size="12" text-anchor="middle">🎬</text>
+      <text x="48" y="28" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" fill="#f8fafc">Slide Exporter</text>
+      <text x="48" y="42" font-family="ui-monospace, monospace" font-size="9" fill="#a855f7">presentation</text>
+    </g>
+    
+    <!-- Pulse signal markers -->
+    <circle cx="230" cy="110" r="4" fill="#00f5ff"/>
+    <circle cx="115" cy="170" r="4" fill="#f43f5e"/>
+    <circle cx="345" cy="170" r="4" fill="#38bdf8"/>
+  </g>
+</svg>
