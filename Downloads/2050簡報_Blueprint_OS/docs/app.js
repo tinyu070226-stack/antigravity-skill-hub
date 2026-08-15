@@ -386,7 +386,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             </div>
           `;
         } else {
-          // Standard principle card with rich multi-line and bullet point formatting
+          // Clean, comfortable reading layout (balanced weights, no heavy bold clutter)
           let formattedDesc = '';
           try {
             const descLines = (pDesc || '').split('\n');
@@ -394,32 +394,31 @@ document.addEventListener('DOMContentLoaded', async () => {
               const line = (rawLine || '').trim();
               if (!line) return '<div style="height: 6px;"></div>';
               
-              // Major sections like 一、 🎯 or 1. 🎯
-              if (/^[一二三四五六七八九十]、|^\d+\.\s*[🎯🧪🔬🛡️🎨✨📚]/.test(line)) {
-                return '<div style="font-size: 15px; font-weight: 800; color: #0f172a; margin-top: 14px; margin-bottom: 6px; padding-bottom: 4px; border-bottom: 1px dashed #e2e8f0;">' + line + '</div>';
+              // Major sections like 一、 🎯 or 二、 🧪
+              if (/^[一二三四五六七八九十]、/.test(line)) {
+                return '<div style="font-size: 14.5px; font-weight: 700; color: #0f172a; margin-top: 14px; margin-bottom: 6px; padding-bottom: 4px; border-bottom: 1px dashed #e2e8f0;">' + line + '</div>';
               }
               
               // Sub-bullets for when/how to use
               if (line.includes('• 何時用') || line.includes('• 怎麼用') || line.includes('• Use when') || line.includes('• Trigger with')) {
                 let content = line.replace(/^[•*\-\s]+/, '');
-                content = content.replace(/`([^`]+)`/g, '<code style="background:#f1f5f9; color:#0f172a; padding:2px 6px; border-radius:4px; font-family:monospace; font-size:12.5px;">$1</code>');
-                content = content.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-                return '<div style="margin-left: 20px; font-size: 13.5px; color: #334155; line-height: 1.65; margin-bottom: 4px;"><span style="color:#0284c7; font-weight:700;">• </span>' + content + '</div>';
+                content = content.replace(/`([^`]+)`/g, '<code style="background:#f1f5f9; color:#0f172a; padding:2px 5px; border-radius:4px; font-family:monospace; font-size:12px;">$1</code>');
+                // Clean regular styling for sub-bullets
+                return '<div style="margin-left: 20px; font-size: 13.5px; color: #475569; font-weight: 400; line-height: 1.7; margin-bottom: 3px;"><span style="color:#0284c7;">• </span>' + content + '</div>';
               }
 
-              // Numbered items or emoji subitems like 1. 🍖
+              // Numbered items or subitems (e.g. 1. 🍖 grill-with-docs, 1. 20 主題氣質)
               if (/^(\d+\.|•|\*)\s+/.test(line)) {
-                let heading = line.replace(/`([^`]+)`/g, '<code style="background:#f1f5f9; color:#0f172a; padding:2px 6px; border-radius:4px; font-family:monospace; font-size:12.5px;">$1</code>');
-                return '<div style="margin-left: 4px; font-size: 14px; font-weight: 700; color: #0f172a; line-height: 1.7; margin-top: 8px; margin-bottom: 2px;">' + heading + '</div>';
+                let content = line.replace(/`([^`]+)`/g, '<code style="background:#f1f5f9; color:#0f172a; padding:2px 5px; border-radius:4px; font-family:monospace; font-size:12px;">$1</code>');
+                return '<div style="margin-left: 4px; font-size: 13.5px; font-weight: 400; color: #334155; line-height: 1.7; margin-top: 6px; margin-bottom: 3px;">' + content + '</div>';
               }
               
               // Standard regular text line
-              let safeLine = line.replace(/`([^`]+)`/g, '<code style="background:#f1f5f9; color:#0f172a; padding:2px 6px; border-radius:4px; font-family:monospace; font-size:12.5px;">$1</code>');
-              safeLine = safeLine.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-              return '<p style="font-size: 14px; color: #475569; line-height: 1.75; margin: 0 0 6px 0;">' + safeLine + '</p>';
+              let safeLine = line.replace(/`([^`]+)`/g, '<code style="background:#f1f5f9; color:#0f172a; padding:2px 5px; border-radius:4px; font-family:monospace; font-size:12px;">$1</code>');
+              return '<p style="font-size: 13.5px; font-weight: 400; color: #475569; line-height: 1.75; margin: 0 0 6px 0;">' + safeLine + '</p>';
             }).join('');
           } catch(e) {
-            formattedDesc = '<p style="font-size: 14px; color: #475569; line-height: 1.75; margin: 0;">' + (pDesc || '') + '</p>';
+            formattedDesc = '<p style="font-size: 13.5px; font-weight: 400; color: #475569; line-height: 1.75; margin: 0;">' + (pDesc || '') + '</p>';
           }
 
           pBox.innerHTML = `
