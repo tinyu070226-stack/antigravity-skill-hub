@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const homeTitle = document.querySelector('.home-hero-title');
       const homeDesc = document.querySelector('.home-hero-desc');
-      if (homeTitle) homeTitle.textContent = 'Antigravity 4 大整合技能集展覽館';
+      if (homeTitle) homeTitle.textContent = 'Antigravity 5 大整合技能集展覽館';
       if (homeDesc) homeDesc.textContent = '點擊下方大卡片進入個別技能的內部運作圖文原理、70+ 種風格 live 展演、色票卡與觸發清單。';
 
       const masterCards = document.querySelectorAll ? document.querySelectorAll('.master-card') : [];
@@ -191,6 +191,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         masterCards[3].querySelector('.master-card-desc').textContent = '簡報視覺與 Slidev 導出器。包含 10 大客製化簡報視覺 Specs (霓虹拼貼, Apple Mockup, Kinfolk 雜誌風, 瑞士商業風等) 與 Felo / Slidev 導出器。';
         masterCards[3].querySelector('.count-tag').textContent = '10 大簡報 Specs';
         masterCards[3].querySelector('.enter-btn').textContent = '進入簡報展演館 →';
+
+        if (masterCards.length >= 5) {
+          masterCards[4].querySelector('.master-card-desc').textContent = '社論級純代碼圖表設計引擎。包含系統架構圖、時序圖、2x2 決策矩陣、成長飛輪等 27 種純 HTML/CSS/SVG 原生圖表規格。';
+          masterCards[4].querySelector('.count-tag').textContent = '27 種純代碼圖表';
+          masterCards[4].querySelector('.enter-btn').textContent = '進入圖表展演館 →';
+        }
       }
     }
   }
