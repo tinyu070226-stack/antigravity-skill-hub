@@ -383,6 +383,13 @@ document.addEventListener('DOMContentLoaded', async () => {
           detailGrid.appendChild(createPresentation16x9SlideCard(item));
         }
       });
+      if (skillsData.diagram_designs_27) {
+        skillsData.diagram_designs_27.forEach(item => {
+          if (matchesQuery(item, query)) {
+            detailGrid.appendChild(createRichStyleMockupCard(item));
+          }
+        });
+      }
     }
   }
 
