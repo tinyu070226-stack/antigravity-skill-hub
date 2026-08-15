@@ -380,10 +380,41 @@ document.addEventListener('DOMContentLoaded', async () => {
             </div>
           `;
         } else {
-          // Standard principle card for core-synergy-skill, design-system-skill, ui-motion-skill
+          // Standard principle card with rich multi-line and bullet point formatting
+          const formattedDesc = pDesc
+            .split('\n')
+            .map(line => {
+              line = line.trim();
+              if (!line) return '<div style="height: 8px;"></div>';
+              
+              // Major sections like 一、 🎯 or 1. 🎯
+              if (/^[一二三四五六七八九十]、|^\d+\.\s*[🎯🧪🔬🛡️🎨✨📚]/.test(line)) {
+                return `<div style="font-size: 15px; font-weight: 800; color: #0f172a; margin-top: 14px; margin-bottom: 6px; padding-bottom: 4px; border-bottom: 1px dashed #e2e8f0;">${line}</div>`;
+              }
+              
+              // Numbered items or emoji subitems like 1. 🍖 or •
+              if (/^\d+\.\s*|•\s*|\*\s*/.test(line)) {
+                // Bold the tool name before colon
+                let content = line.replace(/^([•*]|\d+\.)\s*/, '');
+                content = content.replace(/(`[^`]+`)/g, '<code style="background:#f1f5f9; color:#0f172a; padding:2px 6px; border-radius:4px; font-family:monospace; font-size:12.5px;">$1</code>').replace(/`//g, '');
+                content = content.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+                
+                if (line.includes('• 何時用') || line.includes('• 怎麼用') || line.includes('• Use when') || line.includes('• Trigger with')) {
+                  return `<div style="margin-left: 20px; font-size: 13.5px; color: #334155; line-height: 1.65; margin-bottom: 4px;"><span style="color:#0284c7; font-weight:700;">• </span>${content}</div>`;
+                }
+                return `<div style="margin-left: 8px; font-size: 14px; font-weight: 700; color: #0f172a; line-height: 1.7; margin-top: 8px; margin-bottom: 2px;">${line}</div>`;
+              }
+              
+              // Standard line
+              let safeLine = line.replace(/(`[^`]+`)/g, '<code style="background:#f1f5f9; color:#0f172a; padding:2px 6px; border-radius:4px; font-family:monospace; font-size:12.5px;">$1</code>').replace(/`//g, '');
+              safeLine = safeLine.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+              return `<p style="font-size: 14px; color: #475569; line-height: 1.75; margin: 0 0 6px 0;">${safeLine}</p>`;
+            })
+            .join('');
+
           pBox.innerHTML = `
-            <h3 style="font-size:17px; font-weight:800; color:#0f172a; margin-bottom:10px; text-align:left;">${pTitle}</h3>
-            <p style="font-size:14px; color:#475569; line-height:1.75; text-align:left; margin:0;">${pDesc}</p>
+            <h3 style="font-size:17px; font-weight:800; color:#0f172a; margin-bottom:12px; text-align:left;">${pTitle}</h3>
+            <div style="text-align:left;">${formattedDesc}</div>
             ${mediaHtml}
           `;
         }
