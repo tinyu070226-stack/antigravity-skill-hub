@@ -1,0 +1,14 @@
+{
+  "hooks": [
+    {
+      "event": "on_verification_failure",
+      "action": "execute_command",
+      "command": "opencode run \"測試或驗證失敗，請讀取最新的 error.log 並修復對應的程式碼。\""
+    },
+    {
+      "event": "on_task_created",
+      "action": "execute_command",
+      "command": "opencode run \"請檢查最新建立的 .antigravity/tasks/ 檔案並準備執行。\""
+    }
+  ]
+}

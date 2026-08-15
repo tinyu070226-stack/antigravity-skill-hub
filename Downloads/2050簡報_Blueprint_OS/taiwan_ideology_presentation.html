@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>台灣意識形態分析：多重詢喚結構與方法論反思</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+TC:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Editorial Theme Tokens */
+    :root {
+      --bg-paper: #F7F5F0;
+      --bg-surface: #FFFFFF;
+      --bg-surface-alt: #EFECE6;
+      --ink-primary: #1A1917;
+      --ink-muted: #66625D;
+      --ink-light: #88837C;
+      --editorial-accent: #8C2727;
+      --editorial-ochre: #C45A11;
+      --border-line: #D8D3CA;
+      --border-dark: #1A1917;
+      
+      --font-serif: 'Playfair Display', 'Noto Serif TC', serif;
+      --font-sans: 'Inter', 'PingFang TC', 'Noto Sans TC', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: #111110;
+    }
+
+    body {
+      background-color: #111110;
+      color: var(--ink-primary);
+      font-family: var(--font-sans);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 0;
+    }
+
+    /* Vertical Scroll Deck Wrapper */
+    .deck-container {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      width: 100vw;
+      max-width: 1600px;
+      padding: 0 1.5rem;
+    }
+
+    /* Each Slide Section (Fixed 16:9 Aspect Ratio) */
+    .slide {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background-color: var(--bg-paper);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      padding: 3rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      border: 1px solid var(--border-line);
+    }
+
+    /* Header Bar */
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid var(--border-line);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .slide-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--editorial-accent);
+      font-weight: 500;
+    }
+
+    .slide-title {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--ink-primary);
+      line-height: 1.2;
+    }
+
+    .slide-subtitle {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      color: var(--ink-muted);
+      margin-top: 0.25rem;
+      font-weight: 400;
+    }
+
+    /* Footer Bar */
+    .slide-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border-line);
+      padding-top: 0.75rem;
+      margin-top: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--ink-light);
+    }
+
+    /* Common Card Styles */
+    .card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-line);
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    .card-title {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ink-primary);
+      margin-bottom: 0.5rem;
+      border-left: 3px solid var(--editorial-accent);
+      padding-left: 0.6rem;
+    }
+
+    .card-text {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--ink-muted);
+      text-align: left;
+    }
+
+    .highlight-box {
+      background-color: var(--bg-surface-alt);
+      border-left: 3px solid var(--editorial-accent);
+      padding: 1rem 1.25rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--ink-primary);
+      margin-top: 0.75rem;
+    }
+
+    /* Media Containers */
+    .img-container {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border: 1px solid var(--border-line);
+      position: relative;
+      background-color: var(--bg-surface-alt);
+    }
+
+    .img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: contrast(1.05) brightness(0.98);
+    }
+
+    /* Layout Variations */
+    .cover-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3rem;
+      height: 100%;
+      align-items: center;
+    }
+
+    .cover-title-main {
+      font-family: var(--font-serif);
+      font-size: 2.8rem;
+      font-weight: 900;
+      line-height: 1.15;
+      color: var(--ink-primary);
+      margin-bottom: 1rem;
+    }
+
+    .cover-subtitle-main {
+      font-size: 1.15rem;
+      color: var(--editorial-accent);
+      font-family: var(--font-sans);
+      margin-bottom: 2rem;
+      font-weight: 500;
+    }
+
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      height: 100%;
+    }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.5rem;
+      height: 100%;
+    }
+
+    .bento-subgrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+      height: 100%;
+    }
+
+    .spotlight-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 2.5rem;
+      height: 100%;
+    }
+
+    .quote-box {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--editorial-accent);
+      border-top: 2px solid var(--editorial-accent);
+      border-bottom: 1px solid var(--border-line);
+      padding: 1rem 0;
+      margin-bottom: 1rem;
+    }
+
+    /* Fixed Navigation Helper */
+    .nav-floating {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: rgba(247, 245, 240, 0.95);
+      border: 1px solid var(--border-dark);
+      padding: 0.6rem 1.2rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--ink-primary);
+      z-index: 1000;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="deck-container">
+
+    <!-- SLIDE 1: Cover -->
+    <section class="slide" id="slide-1">
+      <div class="slide-header">
+        <div class="slide-tag">EDITORIAL ESSAY / 台灣意識形態分析</div>
+        <div style="font-family: var(--font-mono); font-size: 0.75rem;">VOL. 01 — VERTICAL DECK</div>
+      </div>
+      <div class="cover-grid" style="flex: 1;">
+        <div style="display: flex; flex-direction: column; justify-content: center;">
+          <h1 class="cover-title-main">台灣意識形態分析：<br>多重詢喚結構與方法論反思</h1>
+          <p class="cover-subtitle-main">從馬克思、阿爾都塞到齊澤克的理論重構與在地場域剖析</p>
+          <div class="card" style="background: var(--bg-surface-alt);">
+            <p class="card-text" style="font-size: 0.9rem; color: var(--ink-primary);">
+              <strong>核心命題：</strong>本簡報探討台灣因鎮壓性國家機器 (RSA) 未定而產生的特殊意識形態國家機器 (ISA) 運作狀態。台灣非單一連貫意識形態的滲透，而是幾組彼此獨立、相互抵觸的多重詢喚源在同一主體上的競爭與交疊。
+            </p>
+          </div>
+        </div>
+        <div class="img-container" style="height: 90%;">
+          <img src="ppt_images/taiwan_map.png" alt="台灣整體地圖">
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>PRESENTATION DECK</span>
+        <span>PAGE 01 / 15</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: 導論一 -->
+    <section class="slide" id="slide-2">
+      <div class="slide-header">
+        <div>
+          <div class="slide-tag">CHAPTER 01 / 導論分析</div>
+          <h2 class="slide-title">古典 ISA 理論的隱性前提與台灣的打穿處境</h2>
+          <p class="slide-subtitle">穩定 RSA 的缺席如何解構了阿爾都塞的預設</p>
+        </div>
+      </div>
+      <div class="grid-2col" style="flex: 1; align-items: center;">
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div class="card">
+            <h3 class="card-title">阿爾都塞的隱性前提</h3>
+            <p class="card-text">古典 ISA（學校、媒體、法律）之所以能「去政治化」運作，背後依賴單一、合法性不受挑戰的鎮壓性國家機器 (RSA) 劃定邊界。ISA 處理「如何成為服從主體」，而非「國家究竟是否存在」。</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">台灣的「打穿處境」</h3>
+            <p class="card-text">台灣主權懸而未決，面臨外部併吞威脅與內部國號正當性分歧。RSA 本身尚未穩定，ISA 無法安穩退居「非政治」位置，連「國家」本身都是持續被爭奪的政治議程。</p>
+          </div>
+          <div class="highlight-box">
+            我們觀察到的不是「一套連貫意識形態的滲透」，而是幾組彼此獨立甚至抵觸的詢喚工程，同時作用於同一群住民。
+          </div>
+        </div>
+        <div class="img-container" style="height: 90%;">
+          <img src="ppt_images/court_rsa.png" alt="法庭與 RSA 國家機器">
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>CHAPTER 1: INTRODUCTION</span>
+        <span>PAGE 02 / 15</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: 導論二 -->
+    <section class="slide" id="slide-3">
+      <div class="slide-header">
+        <div>
+          <div class="slide-tag">CHAPTER 01 / 多重詢喚</div>
+          <h2 class="slide-title">台灣多重詢喚結構的五大競爭源</h2>
+          <p class="slide-subtitle">同一主體身上並存且衝突的主體召喚</p>
+        </div>
+      </div>
+      <div class="bento-grid" style="flex: 1;">
+        <div class="bento-subgrid">
+          <div class="card">
+            <h3 class="card-title" style="font-size: 1rem;">1. 中華民國史觀</h3>
+            <p class="card-text">以 1912 建國與大陸法統為座標，將住民詢喚為「中華民國國民」。</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title" style="font-size: 1rem;">2. 台灣本土主體性</h3>
+            <p class="card-text">以島嶼四百年史為座標，認同與大陸敘事保持距離或斷裂。</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title" style="font-size: 1rem;">3. 中共「終須統一」敘事</h3>
+            <p class="card-text">從島外滲入，試圖將住民詢喚為預先設定於未來時態的「中國人」。</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title" style="font-size: 1rem;">4. 美式自由民主陣營</h3>
+            <p class="card-text">透過安全與文化，召喚為地緣政治上自由世界對抗威權的一員。</p>
+          </div>
+          <div class="card" style="grid-column: span 2; background: var(--bg-surface-alt);">
+            <h3 class="card-title" style="font-size: 1rem;">5. 原住民轉型正義視角</h3>
+            <p class="card-text">指認前述四者皆為後來者的殖民敘事，對「誰才是這塊土地正當主體」提出根本質疑。</p>
+          </div>
+        </div>
+        <div class="img-container">
+          <img src="ppt_images/survey_identity.png" alt="多重認同現場與投票箱照片">
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>MULTIPLE INTERPELLATIONS</span>
+        <span>PAGE 03 / 15</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: 導論三 -->
+    <section class="slide" id="slide-4">
+      <div class="slide-header">
+        <div>
+          <div class="slide-tag">CHAPTER 01 / 方法論</div>
+          <h2 class="slide-title">方法論立場：追問結構性條件而非單一內容</h2>
+          <p class="slide-subtitle">打破單一系統框架，靈活調用古典理論工具</p>
+        </div>
+      </div>
+      <div class="grid-2col" style="flex: 1; align-items: center;">
+        <div class="img-container" style="height: 90%;">
+          <img src="ppt_images/school_document.png" alt="文獻與研究檔案照片">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+          <div class="card">
+            <h3 class="card-title">1. 核心追問的轉移</h3>
+            <p class="card-text">不追問「台灣意識形態內容是什麼」，而追問「多重詢喚源並存」的結構條件如何使傳統單一框架失效。</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">2. 理論工具非互斥</h3>
+            <p class="card-text">馬克思、阿爾都塞、齊澤克非三選一，而是同一個核心問題（意識形態如何生產想像性關係）在資本主義不同歷史階段的展開。</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">3. 場域精準調用</h3>
+            <p class="card-text">依教育、身分/階級錯位、兩岸修辭等場域性質，調用最能捕捉其運作機制的分析層次。</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>METHODOLOGY POSITION</span>
+        <span>PAGE 04 / 15</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: 理論一 -->
+    <section class="slide" id="slide-5">
+      <div class="slide-header">
+        <div>
+          <div class="slide-tag">CHAPTER 02 / 理論演變</div>
+          <h2 class="slide-title">意識形態概念的歷史展開總覽</h2>
+          <p class="slide-subtitle">資本主義三個歷史階段與三大理論家之對應</p>
+        </div>
+      </div>
+      <div class="timeline-grid" style="flex: 1; align-items: stretch;">
+        <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <span style="font-family: var(--font-mono); color: var(--editorial-accent); font-weight: bold;">STAGE 01</span>
+            <h3 class="card-title" style="margin-top: 0.5rem;">自由競爭資本主義</h3>
+            <p class="card-text" style="margin-top: 1rem;"><strong>卡爾·馬克思</strong><br>拜物教模型：意識形態內建於商品交換的客觀運作結構，非單純認知錯誤。</p>
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-light);">客觀結構效果</div>
+        </div>
+
+        <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; border-top: 3px solid var(--editorial-accent);">
+          <div>
+            <span style="font-family: var(--font-mono); color: var(--editorial-accent); font-weight: bold;">STAGE 02</span>
+            <h3 class="card-title" style="margin-top: 0.5rem;">國家壟斷資本主義</h3>
+            <p class="card-text" style="margin-top: 1rem;"><strong>路易·阿爾都塞</strong><br>ISA 與詢喚：意識形態具物質存在，透過學校與機構儀式將個體召喚為主體。</p>
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-light);">機構化儀式與主體生產</div>
+        </div>
+
+        <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <span style="font-family: var(--font-mono); color: var(--editorial-accent); font-weight: bold;">STAGE 03</span>
+            <h3 class="card-title" style="margin-top: 0.5rem;">晚期資本主義 / 後福特</h3>
+            <p class="card-text" style="margin-top: 1rem;"><strong>斯拉沃熱·齊澤克</strong><br>犬儒理性與幻想：主體看穿了反諷，「知道歸知道但依然照做」，支點在幻想。</p>
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-light);">幻想架構與犬儒實踐</div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>THEORETICAL CONTINUITY</span>
+        <span>PAGE 05 / 15</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: 理論二 (馬克思) -->
+    <section class="slide" id="slide-6">
+      <div class="slide-header">
+        <div>
+          <div class="slide-tag">CHAPTER 02 / 馬克思</div>
+          <h2 class="slide-title">馬克思：自由競爭階段與商品拜物教客觀結構</h2>
+          <p class="slide-subtitle">從「暗箱成像」到內建於生產方式的客觀必然</p>
+        </div>
+      </div>
+      <div class="spotlight-grid" style="flex: 1; align-items: center;">
+        <div class="img-container" style="height: 90%;">
+          <img src="ppt_images/marx.jpg" alt="Karl Marx Photo">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div class="quote-box">
+            「人與人的社會關係，在商品交換中必然呈現為物與物的關係。」
+          </div>
+          <div class="card">
+            <h3 class="card-title">澄清「虛假意識」誤植</h3>
+            <p class="card-text">「虛假意識」非馬克思文本，而是恩格斯晚年表述。《德意志意識形態》中使用暗箱成像說明觀念顛倒，但更深層的是《資本論》拜物教分析。</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">雙層結構</h3>
+            <p class="card-text">一是經濟基礎/上層建築下的觀念性意識形態；二是拜物教模型下內建於客觀運作結構、不因認識論揭露而自動消失的結構性效果。</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>KARL MARX: COMMODITY FETISHISM</span>
+        <span>PAGE 06 / 15</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: 理論三 (阿爾都塞) -->
+    <section class="slide" id="slide-7">
+      <div class="slide-header">
+        <div>
+          <div class="slide-tag">CHAPTER 02 / 阿爾都塞</div>
+          <h2 class="slide-title">阿爾都塞：國家壟斷階段與機構化詢喚實踐</h2>
+          <p class="slide-subtitle">物質性儀式與「先下跪，你就會相信」</p>
+        </div>
+      </div>
+      <div class="spotlight-grid" style="flex: 1; align-items: center;">
+        <div class="img-container" style="height: 90%;">
+          <img src="ppt_images/althusser.jpg" alt="Louis Althusser Photo">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div class="quote-box">
+            「先下跪，你就會相信 —— 身體的實踐儀式先於並生產了信念。」
+          </div>
+          <div class="card">
+            <h3 class="card-title">意識形態具有物質存在</h3>
+            <p class="card-text">意識形態不住在腦中觀念，而是住在機構 (ISA) 及其實踐中，由儀式規定。在成熟資本主義中，學校取代教會成為主導性 ISA。</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">詢喚 (Interpellation)</h3>
+            <p class="card-text">意識形態透過將個體召喚為主體來運作（如警察在街上喊「喂，你！」）。「個體總已經是主體」，位置早已預先準備好。</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>LOUIS ALTHUSSER: ISA & INTERPELLATION</span>
+        <span>PAGE 07 / 15</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: 理論四 (齊澤克) -->
+    <section class="slide" id="slide-8">
+      <div class="slide-header">
+        <div>
+          <div class="slide-tag">CHAPTER 02 / 齊澤克</div>
+          <h2 class="slide-title">齊澤克：晚期資本主義與犬儒理性下的幻想架構</h2>
+          <p class="slide-subtitle">「他們完全清楚自己在做什麼，但依然照做」</p>
+        </div>
+      </div>
+      <div class="spotlight-grid" style="flex: 1; align-items: center;">
+        <div class="img-container" style="height: 90%;">
+          <img src="ppt_images/zizek.jpg" alt="Slavoj Zizek Photo">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div class="quote-box">
+            「當代犬儒主體看穿了意識形態的反諷，但實踐依然按幻想運行。」
+          </div>
+          <div class="card">
+            <h3 class="card-title">犬儒理性的挑戰</h3>
+            <p class="card-text">當代主體不再是「不知道而做」，而是「完全清楚自己在做什麼，但依然照做」。啟蒙式揭露不再自動解除魔咒。</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">支點從「知識」轉向「幻想」</h3>
+            <p class="card-text">意識形態不靠主體認知層面的「相信」，而是日常實踐預設了幻想結構來支撐慾望經濟。看穿反而成為新型免疫形式。</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>SLAVOJ ZIZEK: CYNICAL REASON</span>
+        <span>PAGE 08 / 15</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 9: 理論五 (連續性) -->
+    <section class="slide" id="slide-9">
+      <div class="slide-header">
+        <div>
+          <div class="slide-tag">CHAPTER 02 / 連續性論證</div>
+          <h2 class="slide-title">連續性論證：同一問題的歷史性自我展開</h2>
+          <p class="slide-subtitle">非典範替代，而是分析精度的層層疊加</p>
+        </div>
+      </div>
+      <div class="grid-2col" style="flex: 1; align-items: center;">
+        <div class="card" style="height: 90%; display: flex; flex-direction: column; justify-content: center;">
+          <h3 class="card-title" style="font-size: 1.25rem;">三層分析精度的疊加</h3>
+          <ul style="margin-left: 1.2rem; margin-top: 1rem; line-height: 2; font-size: 0.95rem; color: var(--ink-muted);">
+            <li><strong>客觀結構效果 (馬克思)</strong>：商品拜物教與生產關係必然性。</li>
+            <li><strong>機構化儀式與主體 (阿爾都塞)</strong>：ISA 機器與日常重複實踐。</li>
+            <li><strong>幻想支撐的犬儒 (齊澤克)</strong>：看穿反諷與慾望經濟。</li>
+          </ul>
+          <div class="highlight-box" style="margin-top: 1.5rem;">
+            台灣的個案證明三個理論層次在同一具體社會場域中，可作為不同精度的分析工具同時運作。
+          </div>
+        </div>
+        <div class="img-container" style="height: 90%;">
+          <img src="ppt_images/books_trio.png" alt="三大理論著作照片">
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>CONTINUITY & OVERLAY</span>
+        <span>PAGE 09 / 15</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 10: 分析一 (教育) -->
+    <section class="slide" id="slide-10">
+      <div class="slide-header">
+        <div>
+          <div class="slide-tag">CHAPTER 03 / 教育場域</div>
+          <h2 class="slide-title">教育機構場域：「日治」與「日據」的用詞爭奪史</h2>
+          <p class="slide-subtitle">符號暴力與教材作為國家機器的日常儀式</p>
+        </div>
+      </div>
+      <div class="grid-2col" style="flex: 1; align-items: center;">
+        <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+          <div class="card">
+            <h3 class="card-title">符號暴力與機構儀式</h3>
+            <p class="card-text">教材透過重複（考試作答、記誦）生產主體位置。布迪厄的符號暴力讓特定敘事顯得「中立客觀、理所當然」。</p>
+          </div>
+          <div class="card" style="background: var(--bg-surface-alt);">
+            <h3 class="card-title">四階段用詞轉換</h3>
+            <p class="card-text" style="font-size: 0.82rem; line-height: 1.5;">
+              • <strong>1951/1952</strong>: 改造會與行政院公文強制稱「日據」，明言防止泯滅國族意識。<br>
+              • <strong>1990s/1997</strong>: 學界自發改用，《認識台灣》採用「日治」。<br>
+              • <strong>2013</strong>: 馬政府試圖改回「日據」，後妥協為公文與教材雙軌。<br>
+              • <strong>108 課綱</strong>: 清一色統稱「日治」，中國史納入「中國與東亞」。
+            </p>
+          </div>
+        </div>
+        <div class="img-container" style="height: 90%;">
+          <img src="ppt_images/school_document.png" alt="教科書與公文檔案照片">
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>FIELD 1: EDUCATION</span>
+        <span>PAGE 10 / 15</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 11: 分析二 (身分與階級) -->
+    <section class="slide" id="slide-11">
+      <div class="slide-header">
+        <div>
+          <div class="slide-tag">CHAPTER 03 / 身分與階級</div>
+          <h2 class="slide-title">身分與階級錯位：國安詢喚對階級議題的動態覆蓋</h2>
+          <p class="slide-subtitle">文化/身分政治左傾與階級/分配政治右傾的成因</p>
+        </div>
+      </div>
+      <div class="grid-2col" style="flex: 1; align-items: center;">
+        <div class="img-container" style="height: 90%;">
+          <img src="ppt_images/labor_strike.png" alt="勞工動員與遊行照片">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div class="card">
+            <h3 class="card-title">歷史成因與結構起因</h3>
+            <p class="card-text">工會組織率僅約 7.6%（遠低於韓日美）。源自 1953 年戒嚴體制將工會限縮為代辦勞保，防止重演大陸失敗經驗。</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">2017-2020 時序覆蓋機制</h3>
+            <p class="card-text">一例一休修法引發勞工不滿 ➔ 2019 香港反送中與國安法催生「亡國感」 ➔ 2020 大選國安詢喚成功結構性覆蓋階級動員能量。</p>
+          </div>
+          <div class="highlight-box">
+            居住正義等訴求常被扣上「國安威脅/中共同路人」標籤，體現無須統一指揮的結構性轉譯效果。
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>FIELD 2: IDENTITY & CLASS</span>
+        <span>PAGE 11 / 15</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 12: 分析三 (兩岸修辭) -->
+    <section class="slide" id="slide-12">
+      <div class="slide-header">
+        <div>
+          <div class="slide-tag">CHAPTER 03 / 兩岸修辭</div>
+          <h2 class="slide-title">兩岸修辭場域：中國官方對「左」能指的佔用與影響</h2>
+          <p class="slide-subtitle">犬儒修辭下的能指污染與本土政治詞彙庫限縮</p>
+        </div>
+      </div>
+      <div class="grid-2col" style="flex: 1; align-items: center;">
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div class="card">
+            <h3 class="card-title">中共修辭的犬儒結構</h3>
+            <p class="card-text">以馬列與「共同富裕」為名，實則行國家資本主義。2018 年佳士工運鎮壓聲援馬克思主義學生，暴露「明知脫節卻照常使用」的齊澤克式犬儒運作。</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">台灣本土詞彙庫限縮</h3>
+            <p class="card-text">左翼語彙被中國官方佔用與污染，導致台灣公共討論中動用馬克思主義工具易被扣上「親中/幫中共說話」標籤，被迫套進親中/抗中高階對抗。</p>
+          </div>
+        </div>
+        <div class="img-container" style="height: 90%;">
+          <img src="ppt_images/parliament_media.png" alt="媒體與新聞採訪照片">
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>FIELD 3: RHETORIC OF THE LEFT</span>
+        <span>PAGE 12 / 15</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 13: 結論一 -->
+    <section class="slide" id="slide-13">
+      <div class="slide-header">
+        <div>
+          <div class="slide-tag">CHAPTER 04 / 綜合論點</div>
+          <h2 class="slide-title">三個場域的內在統一：非孤立現象而是同一結構展現</h2>
+          <p class="slide-subtitle">缺乏穩定 RSA 下的多重詢喚場域展現</p>
+        </div>
+      </div>
+      <div class="bento-grid" style="flex: 1;">
+        <div style="display: flex; flex-direction: column; gap: 1rem; justify-content: center;">
+          <div class="card">
+            <h3 class="card-title">教育機構</h3>
+            <p class="card-text">RSA 未定致使能指（日治/日據）在歷次政權更迭中被迫重複成為政治議程。</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">身分與階級</h3>
+            <p class="card-text">主權未定狀態使國安詢喚得以隨時被重新啟動，結構性覆蓋日常階級矛盾。</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">兩岸修辭</h3>
+            <p class="card-text">關係性劃界邏輯致使左翼詞彙庫受到結構性篩選與限縮。</p>
+          </div>
+        </div>
+        <div class="card" style="background: var(--bg-surface-alt); display: flex; flex-direction: column; justify-content: center;">
+          <h3 class="card-title" style="font-size: 1.25rem;">核心總結</h3>
+          <p class="card-text" style="font-size: 0.95rem; line-height: 1.7; margin-top: 1rem; color: var(--ink-primary);">
+            台灣意識形態場域最根本的特殊性，不在於某套具體意識形態內容的對錯評判，而在於<strong>這個場域本身缺乏一個能讓「哪些矛盾可被公開討論、哪些必須讓位」穩定下來的整合機制</strong>。
+          </p>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>SYNTHESIS: STRUCTURAL INTEGRATION</span>
+        <span>PAGE 13 / 15</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 14: 結論二 -->
+    <section class="slide" id="slide-14">
+      <div class="slide-header">
+        <div>
+          <div class="slide-tag">CHAPTER 04 / 理論回應</div>
+          <h2 class="slide-title">理論回應：為何三位理論家必須同時在場</h2>
+          <p class="slide-subtitle">具體社會場域中不同分析精度的並存與交織</p>
+        </div>
+      </div>
+      <div class="grid-2col" style="flex: 1; align-items: center;">
+        <div class="img-container" style="height: 90%;">
+          <img src="ppt_images/books_trio.png" alt="三大理論家著作照片">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div class="card">
+            <h3 class="card-title">教育場域</h3>
+            <p class="card-text">需要阿爾都塞的機構儀式，但也夾帶馬克思式赤裸裸的公文意圖。</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">階級錯位</h3>
+            <p class="card-text">需要阿爾都塞的結構效果，也需要齊澤克的犬儒理性解釋為何看穿卻依然有效。</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">兩岸修辭</h3>
+            <p class="card-text">中共運作屬齊澤克犬儒教科書，但對台灣詞彙庫的排除機制則是阿爾都塞式的。</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>THEORETICAL RESPONSE</span>
+        <span>PAGE 14 / 15</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 15: 結語與限度 -->
+    <section class="slide" id="slide-15">
+      <div class="slide-header">
+        <div>
+          <div class="slide-tag">CHAPTER 04 / 反身性警覺</div>
+          <h2 class="slide-title">結語與限度：分析框架的反身性警覺與原住民視角</h2>
+          <p class="slide-subtitle">警惕總體性敘事陷阱，保持自我批判的距離</p>
+        </div>
+      </div>
+      <div class="grid-2col" style="flex: 1; align-items: center;">
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div class="card">
+            <h3 class="card-title">框架本身的限度</h3>
+            <p class="card-text">若台灣不存在單一整合意識形態，本分析框架亦不可被奉為涵蓋一切的總體性真理。</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">原住民視角的再思考</h3>
+            <p class="card-text">五大詢喚源中的原住民轉型正義視角在實證場域中常被前四大敘事工具化與邊緣化。</p>
+          </div>
+          <div class="highlight-box">
+            意識形態最有效的運作方式，從來不是需要被戳破的謊言，而是讓某些選項在結構上直接消失於可討論範圍之外。
+          </div>
+        </div>
+        <div class="img-container" style="height: 90%;">
+          <img src="ppt_images/indigenous_land.png" alt="原住民部落與土地照片">
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>LIMITATIONS & REFLEXIVITY</span>
+        <span>PAGE 15 / 15</span>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav-floating">
+    SCROLL TO VIEW ALL 15 SLIDES
+  </div>
+
+</body>
+</html>
