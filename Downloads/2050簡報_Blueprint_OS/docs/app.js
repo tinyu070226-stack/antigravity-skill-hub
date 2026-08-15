@@ -245,6 +245,52 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  function createDiagramRealSvgCard(item) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.display = 'flex';
+    card.style.flexDirection = 'column';
+    card.style.justifyContent = 'space-between';
+
+    const rawName = currentLang === 'en' ? (item.name_en || item.name_zh) : (item.name_zh || item.name);
+    const rawDesc = currentLang === 'en' ? (item.desc_en || item.desc_zh) : (item.desc_zh || item.desc);
+    const rawTrig = (currentLang === 'en' ? item.triggers_en : item.triggers_zh) || item.triggers || '';
+    const trigStr = currentLang === 'en' ? cleanEnglishText(rawTrig) : rawTrig;
+    const mainTrig = trigStr.split(',')[0].trim();
+    const promptText = currentLang === 'en' ? (item.copy_prompt_en || item.copy_prompt_zh || mainTrig) : (item.copy_prompt_zh || mainTrig);
+
+    const svgContainer = item.real_svg ? `
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-bottom: 14px; overflow: hidden; max-height: 220px; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);">
+        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; transform: scale(0.95); transform-origin: center;">
+          ${item.real_svg}
+        </div>
+      </div>
+    ` : `
+      <div style="${item.css} padding: 20px; border-radius: 10px; margin-bottom: 14px; height: 160px; display: flex; align-items: center; justify-content: center;">
+        <span style="font-weight: 800; font-size: 14px;">${rawName}</span>
+      </div>
+    `;
+
+    card.innerHTML = `
+      <div>
+        <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <h3 class="card-title" style="margin:0; font-size:15px; font-weight:700;">📐 ${rawName}</h3>
+          <span style="font-size:10px; background:#fef3c7; color:#d97706; padding:2px 6px; border-radius:4px; font-weight:600;">Editorial SVG</span>
+        </div>
+        <p class="card-desc">${rawDesc}</p>
+        ${svgContainer}
+      </div>
+
+      <div>
+        <div class="trigger-group">
+          <span class="trigger-text">${trigStr}</span>
+          <button class="copy-btn" onclick="copyText(decodeURIComponent('${encodeURIComponent(promptText)}'), '${currentLang === 'en' ? 'Prompt Copied' : '已複製提示詞'}', this)">${currentLang === 'en' ? 'Copy Prompt' : '複製指令'}</button>
+        </div>
+      </div>
+    `;
+    return card;
+  }
+
   function renderRoute(masterId, shouldScrollTop = true) {
     homeView.style.display = 'none';
     detailView.style.display = 'block';
@@ -393,7 +439,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (skillsData.diagram_designs_27) {
         skillsData.diagram_designs_27.forEach(item => {
           if (matchesQuery(item, query)) {
-            detailGrid.appendChild(createRichStyleMockupCard(item));
+            detailGrid.appendChild(createDiagramRealSvgCard(item));
           }
         });
       }
