@@ -158,6 +158,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         masterCards[3].querySelector('.master-card-desc').textContent = 'Presentation visual specs & Slidev suite. Includes 10 custom 16:9 presentation specs (Neon Collage, Apple Mockup, Kinfolk, Swiss) and Felo/Slidev exporter.';
         masterCards[3].querySelector('.count-tag').textContent = '10 Presentation Specs';
         masterCards[3].querySelector('.enter-btn').textContent = 'Enter Presentation Gallery →';
+
+        if (masterCards.length >= 5) {
+          masterCards[4].querySelector('.master-card-desc').textContent = 'Editorial diagram design engine by Cathryn Lavery. 27 pure HTML/CSS/SVG visual types (Architecture, Sequence, 2x2 Matrix, Flywheel Loop).';
+          masterCards[4].querySelector('.count-tag').textContent = '27 Pure Code Diagrams';
+          masterCards[4].querySelector('.enter-btn').textContent = 'Enter Diagram Gallery →';
+        }
       }
     } else {
       backBtn.textContent = '← 返回主頁 (Home)';
@@ -214,7 +220,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function handleRoute(shouldScrollTop = true) {
     const hash = window.location.hash.replace('#', '');
-    if (hash && ['core-synergy-skill', 'design-system-skill', 'ui-motion-skill', 'presentation-skill'].includes(hash)) {
+    if (hash && ['core-synergy-skill', 'design-system-skill', 'ui-motion-skill', 'presentation-skill', 'diagram-design'].includes(hash)) {
       renderRoute(hash, shouldScrollTop);
     } else {
       renderHome();
@@ -383,6 +389,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           detailGrid.appendChild(createPresentation16x9SlideCard(item));
         }
       });
+    } else if (masterId === 'diagram-design') {
       if (skillsData.diagram_designs_27) {
         skillsData.diagram_designs_27.forEach(item => {
           if (matchesQuery(item, query)) {

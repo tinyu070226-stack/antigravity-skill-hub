@@ -233,6 +233,50 @@
         }
       },
       "master_prompt": ""
+    },
+    {
+      "id": "diagram-design",
+      "name": "diagram-design",
+      "title_zh": "diagram-design (27 種社論級純代碼圖表全集)",
+      "title_en": "diagram-design (27 Editorial Diagram Types)",
+      "category": "Master Skills",
+      "badge": "按需觸發",
+      "badge_type": "diagram",
+      "triggers": [
+        "@diagram-design",
+        "diagram",
+        "圖表",
+        "架構圖",
+        "流程圖",
+        "時序圖",
+        "四象限",
+        "飛輪圖",
+        "甘特圖"
+      ],
+      "description_zh": "由設計師 Cathryn Lavery 打造的社論級（Editorial）純代碼圖表庫。涵蓋 27 種專業圖表類型，100% 純 HTML/CSS/SVG 原生代碼生成，零外部依賴、零破圖，自帶極簡白/暗黑/全社論 3 種主題與品牌色彩自動吸取能力。",
+      "description_en": "Editorial diagram engine with 27 visual types by Cathryn Lavery. 100% pure HTML/CSS/SVG output without external image dependencies, featuring Minimal Light, Minimal Dark, and Full Editorial themes.",
+      "sub_modules_zh": [
+        "27 種專業圖表類型: 系統架構圖、時序圖、狀態機、四象限矩陣、成長飛輪、泳道圖、甘特圖等",
+        "3 種靜態主題輪替: Minimal Light (極簡白), Minimal Dark (極簡黑), Full Editorial (全社論風)",
+        "Onboarding 品牌色自動吸取: 讀取網站自動映射 paper, ink, muted, accent, link 色彩角色",
+        "純代碼 0 依賴保證: 100% 純 HTML + CSS / SVG 輸出，可直接嵌入簡報與網頁"
+      ],
+      "sub_modules_en": [
+        "27 Visual Diagram Types: Architecture, Sequence, State Machine, 2x2 Matrix, Flywheel Loop, Swimlane, Gantt, etc.",
+        "3 Static Themes: Minimal Light, Minimal Dark, and Full Editorial.",
+        "Brand Color Auto-Onboarding: Extracts brand palette and maps to paper, ink, muted, and accent roles.",
+        "Pure Code Zero-Dependency: 100% pure HTML/CSS/SVG output ready to embed in decks and web apps."
+      ],
+      "principles": [
+        {
+          "title_zh": "📊 diagram-design 27 種社論級純代碼圖表 Live 展演",
+          "title_en": "📊 diagram-design 27 Editorial Visual Types Showcase",
+          "desc_zh": "下方展示全部 27 種社論級圖表規格。點擊卡片可複製專屬代碼或一鍵複製高精度繪製 Prompt！",
+          "desc_en": "Below are all 27 editorial diagram types. Click cards to copy CSS or high-precision prompt templates!",
+          "img_url_zh": "",
+          "img_url_en": ""
+        }
+      ]
     }
   ],
   "web_styles_50": [
@@ -1713,71 +1757,489 @@
   "diagram_designs_27": [
     {
       "name": "Architecture (系統架構圖)",
-      "name_zh": "Architecture (系統架構圖)",
-      "name_en": "Architecture Diagram",
-      "desc_zh": "純 HTML/CSS/SVG 代碼繪製端到端組件、微服務與資料流通訊連線。",
-      "desc_en": "Pure HTML/CSS/SVG end-to-end service components and communication links.",
-      "triggers_zh": "架構圖, architecture diagram, 系統圖",
-      "triggers_en": "architecture diagram, system diagram",
+      "name_en": "Architecture",
+      "desc_zh": "組件架構、服務連線與系統邊界圖",
+      "desc_en": "Components, service connections, and system boundaries",
+      "triggers": "architecture, 系統架構圖",
       "hex": [
         "#0f172a",
         "#38bdf8",
         "#f8fafc"
       ],
-      "css": "background: #0f172a; color: #f8fafc; border: 1px solid #334155; font-family: 'JetBrains Mono', monospace;",
-      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 繪製高質感的「系統架構圖 (Architecture Diagram)」，包含核心服務組件與通訊連線！",
-      "copy_prompt_en": "Please use diagram-design editorial standards to create a clean HTML/CSS/SVG 'Architecture Diagram' showing core services and data links!"
+      "name_zh": "Architecture (系統架構圖)",
+      "triggers_zh": "architecture, 系統架構圖",
+      "triggers_en": "architecture",
+      "css": "background: #0f172a; color: #f8fafc; border: 1px solid #38bdf8; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Architecture (系統架構圖)」，嚴格遵循色票（#0f172a, #38bdf8, #f8fafc）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Architecture' without external dependencies!"
     },
     {
-      "name": "Consultant 2x2 Matrix (商業四象限矩陣)",
-      "name_zh": "Consultant 2x2 Matrix (商業四象限矩陣)",
-      "name_en": "Consultant 2x2 Matrix",
-      "desc_zh": "麥肯錫級雙軸定位矩陣、命名單元格與策略落點標籤，清晰傳遞決策情境。",
-      "desc_en": "McKinsey-grade two-axis strategy matrix with named cells and quadrant tags.",
-      "triggers_zh": "四象限, 2x2 矩陣, consultant matrix",
-      "triggers_en": "2x2 matrix, quadrant chart, strategy matrix",
+      "name": "Flowchart (邏輯決策流程圖)",
+      "name_en": "Flowchart",
+      "desc_zh": "條件分支、判斷節點與執行流程",
+      "desc_en": "Decision logic, branching nodes, and execution flow",
+      "triggers": "flowchart, 流程圖",
       "hex": [
         "#ffffff",
-        "#e11d48",
-        "#1e293b"
+        "#0284c7",
+        "#0f172a"
       ],
-      "css": "background: #ffffff; color: #1e293b; border: 2px solid #e2e8f0; font-family: Inter, sans-serif;",
-      "copy_prompt_zh": "請使用 diagram-design 規範，繪製專業的「商業四象限決策矩陣 (2x2 Matrix)」，清楚標記雙軸維度與象限落點！",
-      "copy_prompt_en": "Please use diagram-design standards to generate a professional 'Consultant 2x2 Matrix' with clear axis labels and quadrant tags!"
+      "name_zh": "Flowchart (邏輯決策流程圖)",
+      "triggers_zh": "flowchart, 流程圖",
+      "triggers_en": "flowchart",
+      "css": "background: #ffffff; color: #0f172a; border: 1px solid #0284c7; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Flowchart (邏輯決策流程圖)」，嚴格遵循色票（#ffffff, #0284c7, #0f172a）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Flowchart' without external dependencies!"
     },
     {
-      "name": "Flywheel Loop (商業成長飛輪/循環圖)",
-      "name_zh": "Flywheel Loop (商業成長飛輪/循環圖)",
-      "name_en": "Flywheel Loop Diagram",
-      "desc_zh": "以共享核心為中樞的環形飛輪動能站點，標示循環增強迴路與反饋流向。",
-      "desc_en": "Circular flywheel stations around a shared core, illustrating reinforcing feedback loops.",
-      "triggers_zh": "飛輪圖, 循環圖, flywheel loop",
-      "triggers_en": "flywheel loop, reinforcing loop, cycle diagram",
-      "hex": [
-        "#09090b",
-        "#10b981",
-        "#27272a"
-      ],
-      "css": "background: #09090b; color: #fafafa; border: 1px solid #27272a; border-radius: 50%;",
-      "copy_prompt_zh": "請使用 diagram-design 規範，以純代碼繪製「商業成長飛輪 (Flywheel Loop)」循環圖表，展示各節點的自增強反饋流！",
-      "copy_prompt_en": "Please use diagram-design specs to render a pure code 'Flywheel Loop' showing reinforcing feedback stations around a core!"
-    },
-    {
-      "name": "Sequence Diagram (時序呼叫流程圖)",
-      "name_zh": "Sequence Diagram (時序呼叫流程圖)",
-      "name_en": "Sequence Diagram",
-      "desc_zh": "依時間軸垂直展開之角色訊息傳遞、同步/非同步呼叫與生命週期線條。",
-      "desc_en": "Actor message passing, sync/async RPC calls, and lifelines along a vertical timeline.",
-      "triggers_zh": "時序圖, 呼叫流程, sequence diagram",
-      "triggers_en": "sequence diagram, message flow, lifeline",
+      "name": "Sequence (時序呼叫流程圖)",
+      "name_en": "Sequence",
+      "desc_zh": "依時間順序的角色通訊與生命線",
+      "desc_en": "Messages and lifelines over time",
+      "triggers": "sequence, 時序圖",
       "hex": [
         "#18181b",
         "#a855f7",
         "#fafafa"
       ],
-      "css": "background: #18181b; color: #fafafa; border: 1px solid #3f3f46; font-family: monospace;",
-      "copy_prompt_zh": "請使用 diagram-design 規範，繪製精美的「時序呼叫流程圖 (Sequence Diagram)」，標示角色生命線與訊息傳遞！",
-      "copy_prompt_en": "Please use diagram-design standards to generate a clean 'Sequence Diagram' detailing lifelines and message passing!"
+      "name_zh": "Sequence (時序呼叫流程圖)",
+      "triggers_zh": "sequence, 時序圖",
+      "triggers_en": "sequence",
+      "css": "background: #18181b; color: #fafafa; border: 1px solid #a855f7; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Sequence (時序呼叫流程圖)」，嚴格遵循色票（#18181b, #a855f7, #fafafa）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Sequence' without external dependencies!"
+    },
+    {
+      "name": "State Machine (狀態機轉換圖)",
+      "name_en": "State Machine",
+      "desc_zh": "系統狀態、事件觸發與狀態遷移",
+      "desc_en": "States, triggers, and state transitions",
+      "triggers": "state machine, 狀態機",
+      "hex": [
+        "#09090b",
+        "#10b981",
+        "#fafafa"
+      ],
+      "name_zh": "State Machine (狀態機轉換圖)",
+      "triggers_zh": "state machine, 狀態機",
+      "triggers_en": "state machine",
+      "css": "background: #09090b; color: #fafafa; border: 1px solid #10b981; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「State Machine (狀態機轉換圖)」，嚴格遵循色票（#09090b, #10b981, #fafafa）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'State Machine' without external dependencies!"
+    },
+    {
+      "name": "ER / Data Model (實體關聯模型)",
+      "name_en": "ER / Data Model",
+      "desc_zh": "資料庫實體、欄位型態與關聯鍵",
+      "desc_en": "Entities, field types, and relational keys",
+      "triggers": "er diagram, 資料模型",
+      "hex": [
+        "#ffffff",
+        "#6366f1",
+        "#1e293b"
+      ],
+      "name_zh": "ER / Data Model (實體關聯模型)",
+      "triggers_zh": "er diagram, 資料模型",
+      "triggers_en": "er / data model",
+      "css": "background: #ffffff; color: #1e293b; border: 1px solid #6366f1; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「ER / Data Model (實體關聯模型)」，嚴格遵循色票（#ffffff, #6366f1, #1e293b）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'ER / Data Model' without external dependencies!"
+    },
+    {
+      "name": "Timeline (時序演進軸)",
+      "name_en": "Timeline",
+      "desc_zh": "時間軸事件里程碑與階段進展",
+      "desc_en": "Events and milestone progression on an axis",
+      "triggers": "timeline, 時間軸, 里程碑",
+      "hex": [
+        "#f8fafc",
+        "#f59e0b",
+        "#0f172a"
+      ],
+      "name_zh": "Timeline (時序演進軸)",
+      "triggers_zh": "timeline, 時間軸, 里程碑",
+      "triggers_en": "timeline",
+      "css": "background: #f8fafc; color: #0f172a; border: 1px solid #f59e0b; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Timeline (時序演進軸)」，嚴格遵循色票（#f8fafc, #f59e0b, #0f172a）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Timeline' without external dependencies!"
+    },
+    {
+      "name": "Swimlane (跨部門泳道圖)",
+      "name_en": "Swimlane",
+      "desc_zh": "多角色/部門協同之跨職能工作流",
+      "desc_en": "Cross-functional workflow across roles/teams",
+      "triggers": "swimlane, 泳道圖",
+      "hex": [
+        "#ffffff",
+        "#06b6d4",
+        "#1e293b"
+      ],
+      "name_zh": "Swimlane (跨部門泳道圖)",
+      "triggers_zh": "swimlane, 泳道圖",
+      "triggers_en": "swimlane",
+      "css": "background: #ffffff; color: #1e293b; border: 1px solid #06b6d4; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Swimlane (跨部門泳道圖)」，嚴格遵循色票（#ffffff, #06b6d4, #1e293b）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Swimlane' without external dependencies!"
+    },
+    {
+      "name": "Quadrant (雙軸定位矩陣)",
+      "name_en": "Quadrant Matrix",
+      "desc_zh": "雙維度座標評估與落點分析",
+      "desc_en": "Two-axis positioning and scenario evaluation",
+      "triggers": "quadrant, 四象限矩陣",
+      "hex": [
+        "#ffffff",
+        "#e11d48",
+        "#1e293b"
+      ],
+      "name_zh": "Quadrant (雙軸定位矩陣)",
+      "triggers_zh": "quadrant, 四象限矩陣",
+      "triggers_en": "quadrant matrix",
+      "css": "background: #ffffff; color: #1e293b; border: 1px solid #e11d48; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Quadrant (雙軸定位矩陣)」，嚴格遵循色票（#ffffff, #e11d48, #1e293b）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Quadrant Matrix' without external dependencies!"
+    },
+    {
+      "name": "Nested / Container (層級包含圖)",
+      "name_en": "Nested Containment",
+      "desc_zh": "以空間包含表示之模組層級邊界",
+      "desc_en": "Module hierarchy defined by spatial containment",
+      "triggers": "nested, 包含層級圖",
+      "hex": [
+        "#0f172a",
+        "#38bdf8",
+        "#334155"
+      ],
+      "name_zh": "Nested / Container (層級包含圖)",
+      "triggers_zh": "nested, 包含層級圖",
+      "triggers_en": "nested containment",
+      "css": "background: #0f172a; color: #334155; border: 1px solid #38bdf8; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Nested / Container (層級包含圖)」，嚴格遵循色票（#0f172a, #38bdf8, #334155）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Nested Containment' without external dependencies!"
+    },
+    {
+      "name": "Tree (樹狀階層圖)",
+      "name_en": "Tree Hierarchy",
+      "desc_zh": "父子節點分支與組織分類體系",
+      "desc_en": "Parent-to-child branches and taxonomy hierarchy",
+      "triggers": "tree diagram, 樹狀圖",
+      "hex": [
+        "#ffffff",
+        "#10b981",
+        "#0f172a"
+      ],
+      "name_zh": "Tree (樹狀階層圖)",
+      "triggers_zh": "tree diagram, 樹狀圖",
+      "triggers_en": "tree hierarchy",
+      "css": "background: #ffffff; color: #0f172a; border: 1px solid #10b981; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Tree (樹狀階層圖)」，嚴格遵循色票（#ffffff, #10b981, #0f172a）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Tree Hierarchy' without external dependencies!"
+    },
+    {
+      "name": "Org Chart (組織架構圖)",
+      "name_en": "Org Chart",
+      "desc_zh": "團隊管理權責、指揮鏈與路由",
+      "desc_en": "Team ownership, management hierarchy, and routing",
+      "triggers": "org chart, 組織圖",
+      "hex": [
+        "#f8fafc",
+        "#0284c7",
+        "#1e293b"
+      ],
+      "name_zh": "Org Chart (組織架構圖)",
+      "triggers_zh": "org chart, 組織圖",
+      "triggers_en": "org chart",
+      "css": "background: #f8fafc; color: #1e293b; border: 1px solid #0284c7; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Org Chart (組織架構圖)」，嚴格遵循色票（#f8fafc, #0284c7, #1e293b）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Org Chart' without external dependencies!"
+    },
+    {
+      "name": "Venn Diagram (文氏交集圖)",
+      "name_en": "Venn Diagram",
+      "desc_zh": "多維概念重疊、交集與共識區域",
+      "desc_en": "Set overlaps, intersections, and shared domains",
+      "triggers": "venn, 文氏圖",
+      "hex": [
+        "#ffffff",
+        "#8b5cf6",
+        "#ec4899"
+      ],
+      "name_zh": "Venn Diagram (文氏交集圖)",
+      "triggers_zh": "venn, 文氏圖",
+      "triggers_en": "venn diagram",
+      "css": "background: #ffffff; color: #ec4899; border: 1px solid #8b5cf6; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Venn Diagram (文氏交集圖)」，嚴格遵循色票（#ffffff, #8b5cf6, #ec4899）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Venn Diagram' without external dependencies!"
+    },
+    {
+      "name": "Layer Stack (抽象分層堆疊圖)",
+      "name_en": "Layer Stack",
+      "desc_zh": "架構抽象層、OSI/分層協定堆疊",
+      "desc_en": "Stacked abstraction layers and protocol stacks",
+      "triggers": "layer stack, 分層架構",
+      "hex": [
+        "#09090b",
+        "#3b82f6",
+        "#fafafa"
+      ],
+      "name_zh": "Layer Stack (抽象分層堆疊圖)",
+      "triggers_zh": "layer stack, 分層架構",
+      "triggers_en": "layer stack",
+      "css": "background: #09090b; color: #fafafa; border: 1px solid #3b82f6; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Layer Stack (抽象分層堆疊圖)」，嚴格遵循色票（#09090b, #3b82f6, #fafafa）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Layer Stack' without external dependencies!"
+    },
+    {
+      "name": "Pyramid / Funnel (金字塔/漏斗圖)",
+      "name_en": "Pyramid / Funnel",
+      "desc_zh": "等級劃分、轉化漏斗與流失率階層",
+      "desc_en": "Ranked hierarchy, conversion funnels, and drop-off",
+      "triggers": "pyramid, funnel, 金字塔, 漏斗圖",
+      "hex": [
+        "#ffffff",
+        "#f97316",
+        "#1e293b"
+      ],
+      "name_zh": "Pyramid / Funnel (金字塔/漏斗圖)",
+      "triggers_zh": "pyramid, funnel, 金字塔, 漏斗圖",
+      "triggers_en": "pyramid / funnel",
+      "css": "background: #ffffff; color: #1e293b; border: 1px solid #f97316; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Pyramid / Funnel (金字塔/漏斗圖)」，嚴格遵循色票（#ffffff, #f97316, #1e293b）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Pyramid / Funnel' without external dependencies!"
+    },
+    {
+      "name": "Consultant 2x2 (顧問 2x2 決策矩陣)",
+      "name_en": "Consultant 2x2",
+      "desc_zh": "麥肯錫級情境矩陣、命名單元格與策略標籤",
+      "desc_en": "Scenario matrix with named cells and strategic tags",
+      "triggers": "consultant matrix, 2x2 矩陣",
+      "hex": [
+        "#ffffff",
+        "#e11d48",
+        "#1e293b"
+      ],
+      "name_zh": "Consultant 2x2 (顧問 2x2 決策矩陣)",
+      "triggers_zh": "consultant matrix, 2x2 矩陣",
+      "triggers_en": "consultant 2x2",
+      "css": "background: #ffffff; color: #1e293b; border: 1px solid #e11d48; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Consultant 2x2 (顧問 2x2 決策矩陣)」，嚴格遵循色票（#ffffff, #e11d48, #1e293b）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Consultant 2x2' without external dependencies!"
+    },
+    {
+      "name": "Radar / Spider (多維雷達圖)",
+      "name_en": "Radar Chart",
+      "desc_zh": "多軸向能力評估與方案覆蓋度比較",
+      "desc_en": "Multi-axis comparison and capability spider chart",
+      "triggers": "radar chart, 雷達圖, 蜘蛛圖",
+      "hex": [
+        "#0f172a",
+        "#06b6d4",
+        "#f8fafc"
+      ],
+      "name_zh": "Radar / Spider (多維雷達圖)",
+      "triggers_zh": "radar chart, 雷達圖, 蜘蛛圖",
+      "triggers_en": "radar chart",
+      "css": "background: #0f172a; color: #f8fafc; border: 1px solid #06b6d4; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Radar / Spider (多維雷達圖)」，嚴格遵循色票（#0f172a, #06b6d4, #f8fafc）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Radar Chart' without external dependencies!"
+    },
+    {
+      "name": "Loop / Flywheel (飛輪/共享中樞循環圖)",
+      "name_en": "Loop / Flywheel",
+      "desc_zh": "以共享記憶/中樞為核心之自增強飛輪迴路",
+      "desc_en": "Flywheel stations around a shared-memory core hub",
+      "triggers": "loop, flywheel, 飛輪圖, 循環圖",
+      "hex": [
+        "#09090b",
+        "#10b981",
+        "#fafafa"
+      ],
+      "name_zh": "Loop / Flywheel (飛輪/共享中樞循環圖)",
+      "triggers_zh": "loop, flywheel, 飛輪圖, 循環圖",
+      "triggers_en": "loop / flywheel",
+      "css": "background: #09090b; color: #fafafa; border: 1px solid #10b981; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Loop / Flywheel (飛輪/共享中樞循環圖)」，嚴格遵循色票（#09090b, #10b981, #fafafa）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Loop / Flywheel' without external dependencies!"
+    },
+    {
+      "name": "IT State Landscape (IT 現狀架構圖)",
+      "name_en": "IT Current State",
+      "desc_zh": "現代化改造、遺留系統與演進地圖",
+      "desc_en": "Legacy landscape, modern stack, and migration paths",
+      "triggers": "it state, it 架構圖",
+      "hex": [
+        "#ffffff",
+        "#64748b",
+        "#0f172a"
+      ],
+      "name_zh": "IT State Landscape (IT 現狀架構圖)",
+      "triggers_zh": "it state, it 架構圖",
+      "triggers_en": "it current state",
+      "css": "background: #ffffff; color: #0f172a; border: 1px solid #64748b; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「IT State Landscape (IT 現狀架構圖)」，嚴格遵循色票（#ffffff, #64748b, #0f172a）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'IT Current State' without external dependencies!"
+    },
+    {
+      "name": "High-Level Stack (全景技術堆疊圖)",
+      "name_en": "High-Level Stack",
+      "desc_zh": "叢集全景、端到端架構全貌總覽",
+      "desc_en": "End-to-end stack on an infrastructure cluster",
+      "triggers": "high level stack, 技術全景圖",
+      "hex": [
+        "#0f172a",
+        "#818cf8",
+        "#f8fafc"
+      ],
+      "name_zh": "High-Level Stack (全景技術堆疊圖)",
+      "triggers_zh": "high level stack, 技術全景圖",
+      "triggers_en": "high-level stack",
+      "css": "background: #0f172a; color: #f8fafc; border: 1px solid #818cf8; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「High-Level Stack (全景技術堆疊圖)」，嚴格遵循色票（#0f172a, #818cf8, #f8fafc）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'High-Level Stack' without external dependencies!"
+    },
+    {
+      "name": "Bar Chart (柱狀對比圖)",
+      "name_en": "Bar Chart",
+      "desc_zh": "純 SVG 社論級類別數據指標比較",
+      "desc_en": "Categorical metric comparison in editorial SVG",
+      "triggers": "bar chart, 柱狀圖",
+      "hex": [
+        "#ffffff",
+        "#0284c7",
+        "#1e293b"
+      ],
+      "name_zh": "Bar Chart (柱狀對比圖)",
+      "triggers_zh": "bar chart, 柱狀圖",
+      "triggers_en": "bar chart",
+      "css": "background: #ffffff; color: #1e293b; border: 1px solid #0284c7; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Bar Chart (柱狀對比圖)」，嚴格遵循色票（#ffffff, #0284c7, #1e293b）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Bar Chart' without external dependencies!"
+    },
+    {
+      "name": "Line Chart (趨勢折線圖)",
+      "name_en": "Line Chart",
+      "desc_zh": "時間序列指標演進與成長趨勢",
+      "desc_en": "Metric evolution and trends over time",
+      "triggers": "line chart, 折線圖",
+      "hex": [
+        "#ffffff",
+        "#10b981",
+        "#1e293b"
+      ],
+      "name_zh": "Line Chart (趨勢折線圖)",
+      "triggers_zh": "line chart, 折線圖",
+      "triggers_en": "line chart",
+      "css": "background: #ffffff; color: #1e293b; border: 1px solid #10b981; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Line Chart (趨勢折線圖)」，嚴格遵循色票（#ffffff, #10b981, #1e293b）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Line Chart' without external dependencies!"
+    },
+    {
+      "name": "Gantt (專案甘特時程圖)",
+      "name_en": "Gantt Chart",
+      "desc_zh": "專案任務依賴、里程碑與階段排期",
+      "desc_en": "Tasks, milestones, and phase schedules on a timeline",
+      "triggers": "gantt, 甘特圖",
+      "hex": [
+        "#ffffff",
+        "#f59e0b",
+        "#1e293b"
+      ],
+      "name_zh": "Gantt (專案甘特時程圖)",
+      "triggers_zh": "gantt, 甘特圖",
+      "triggers_en": "gantt chart",
+      "css": "background: #ffffff; color: #1e293b; border: 1px solid #f59e0b; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Gantt (專案甘特時程圖)」，嚴格遵循色票（#ffffff, #f59e0b, #1e293b）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Gantt Chart' without external dependencies!"
+    },
+    {
+      "name": "Scatter Plot (散布分布圖)",
+      "name_en": "Scatter Plot",
+      "desc_zh": "二維相關性、聚類與離散分布觀察",
+      "desc_en": "Distribution, clustering, and correlation analysis",
+      "triggers": "scatter plot, 散布圖",
+      "hex": [
+        "#ffffff",
+        "#8b5cf6",
+        "#1e293b"
+      ],
+      "name_zh": "Scatter Plot (散布分布圖)",
+      "triggers_zh": "scatter plot, 散布圖",
+      "triggers_en": "scatter plot",
+      "css": "background: #ffffff; color: #1e293b; border: 1px solid #8b5cf6; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Scatter Plot (散布分布圖)」，嚴格遵循色票（#ffffff, #8b5cf6, #1e293b）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Scatter Plot' without external dependencies!"
+    },
+    {
+      "name": "Process (多角色循序工作流)",
+      "name_en": "Process Workflow",
+      "desc_zh": "多角色階段性協同與循序執行流程",
+      "desc_en": "Multi-actor sequential workflow pipeline",
+      "triggers": "process, 流程圖, 工作流",
+      "hex": [
+        "#ffffff",
+        "#0284c7",
+        "#1e293b"
+      ],
+      "name_zh": "Process (多角色循序工作流)",
+      "triggers_zh": "process, 流程圖, 工作流",
+      "triggers_en": "process workflow",
+      "css": "background: #ffffff; color: #1e293b; border: 1px solid #0284c7; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Process (多角色循序工作流)」，嚴格遵循色票（#ffffff, #0284c7, #1e293b）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Process Workflow' without external dependencies!"
+    },
+    {
+      "name": "Medallion Data (分層數據湖架構)",
+      "name_en": "Medallion Architecture",
+      "desc_zh": "銅(原始) / 銀(清洗) / 金(聚合) 數據管道",
+      "desc_en": "Bronze (raw) / Silver (cleaned) / Gold (aggregated) lake",
+      "triggers": "medallion, 數據湖架構",
+      "hex": [
+        "#cd7f32",
+        "#c0c0c0",
+        "#ffd700"
+      ],
+      "name_zh": "Medallion Data (分層數據湖架構)",
+      "triggers_zh": "medallion, 數據湖架構",
+      "triggers_en": "medallion architecture",
+      "css": "background: #cd7f32; color: #ffd700; border: 1px solid #c0c0c0; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Medallion Data (分層數據湖架構)」，嚴格遵循色票（#cd7f32, #c0c0c0, #ffd700）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Medallion Architecture' without external dependencies!"
+    },
+    {
+      "name": "Data Flow (數據流管道圖)",
+      "name_en": "Data Flow",
+      "desc_zh": "角色作用域、數據萃取與傳遞管線",
+      "desc_en": "Role-scoped pipeline steps and stream flows",
+      "triggers": "data flow, 數據流圖",
+      "hex": [
+        "#0f172a",
+        "#38bdf8",
+        "#f8fafc"
+      ],
+      "name_zh": "Data Flow (數據流管道圖)",
+      "triggers_zh": "data flow, 數據流圖",
+      "triggers_en": "data flow",
+      "css": "background: #0f172a; color: #f8fafc; border: 1px solid #38bdf8; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「Data Flow (數據流管道圖)」，嚴格遵循色票（#0f172a, #38bdf8, #f8fafc）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Data Flow' without external dependencies!"
+    },
+    {
+      "name": "DP Security Matrix (數據權限安全矩陣)",
+      "name_en": "Security Matrix",
+      "desc_zh": "角色存取控制 (RBAC) 與安全許可矩陣",
+      "desc_en": "Per-role access permissions and RBAC matrix",
+      "triggers": "security matrix, 安全矩陣, 權限矩陣",
+      "hex": [
+        "#ffffff",
+        "#e11d48",
+        "#0f172a"
+      ],
+      "name_zh": "DP Security Matrix (數據權限安全矩陣)",
+      "triggers_zh": "security matrix, 安全矩陣, 權限矩陣",
+      "triggers_en": "security matrix",
+      "css": "background: #ffffff; color: #0f172a; border: 1px solid #e11d48; font-family: 'JetBrains Mono', Inter, monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 代碼繪製「DP Security Matrix (數據權限安全矩陣)」，嚴格遵循色票（#ffffff, #e11d48, #0f172a）與純代碼無外部圖片依賴！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to code a clean HTML/CSS/SVG 'Security Matrix' without external dependencies!"
     }
   ]
 }
