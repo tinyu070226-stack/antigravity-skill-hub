@@ -13,6 +13,8 @@ description: 本技能定義 10 大客製化 16:9 簡報視覺風格 Specs、強
 - Print CSS 完美列印規範 (Ctrl+P另存PDF): 強制 @page { size: 16in 9in; margin: 0; } 鎖死16:9消白邊、容器改成 display: block 防 Flexbox 跨頁穿插、清除 UI 浮動按鈕與 shadow 雜訊。
 - 10 大 16:9 簡報視覺 Specs 完整條款: 霓虹拼貼 (Neon 10:1), Apple 3D Mockup, 石膏 Pop 撞色, Kinfolk 雜誌風, 瑞士新經濟 (嚴禁 Markdown 符號), 沉靜黑夜 Living Artifact, 溫柔扁平插畫, Slidev 導出器等。
 - 簡報 6 大紅線原則: (1) 100% 完整呈現原文 (2) 不改變圖片比例 (3) 嚴禁文字圖片重疊貼邊 (4) 圖片直觀對應 (5) 圖片符合風格 (6) 每頁皆須圖文並茂且排版多樣不重複。
+- ppt-master 微軟原生 PowerPoint 生成: 支援原生母版 (Slide Master)、可編輯形狀、數據驅動圖表、動畫轉場與旁白音檔，直出原生 .pptx 檔案。
+- editorial-vision-studio 視覺總監: 具備 10 大雜誌封面/海報級 AI 提示詞編譯大腦，為簡報自動構思絕不違和的高質感配圖 Prompt。
 
 
 ## 10 大 16:9 簡報視覺 Specs 完整規格條款
@@ -125,6 +127,28 @@ description: 本技能定義 10 大客製化 16:9 簡報視覺風格 Specs、強
 - **徽章 (Badge)**: `SLIDEV AST`
 - **強調色 (Accent)**: `#CE9178`
 - **詳細描述**: 轉譯完整 Slidev (slides.md)，含 v-clicks 動畫與 Mermaid 圖表。
+
+### SPEC #11：PPT-Master Native Office (微軟原生 PPTX)
+- **名稱 (Name)**: `PPT-Master Native Office (微軟原生 PPTX)`
+- **觸發字 (Triggers)**: `ppt-master, 原生pptx, powerpoint export`
+- **比例尺寸 (Ratio)**: `16:9 · Native Office PPTX`
+- **樣式 (CSS)**: `background: #D24726; color: #FFFFFF; border: 2px solid #A83318; font-family: Calibri, sans-serif; font-weight: 700;`
+- **標準預覽標題**: `Native PowerPoint PPTX`
+- **標準預覽副標**: `100% Fully Editable Objects & Master Layouts`
+- **徽章 (Badge)**: `NATIVE PPTX`
+- **強調色 (Accent)**: `#D24726`
+- **詳細描述**: 原生微軟 PowerPoint 格式生成，支援母版 Slide Master、可自由拉伸形狀與數據圖表。
+
+### SPEC #12：Editorial Vision Studio (雜誌封面配圖總監)
+- **名稱 (Name)**: `Editorial Vision Studio (雜誌封面配圖總監)`
+- **觸發字 (Triggers)**: `editorial vision, 藝術總監, 配圖總監, image prompt`
+- **比例尺寸 (Ratio)**: `16:9 · Art Director Image Prompts`
+- **樣式 (CSS)**: `background: #1C1917; color: #F5F5F4; border: 1px solid #78716C; font-family: 'Times New Roman', serif;`
+- **標準預覽標題**: `Editorial Vision Art Director`
+- **標準預覽副標**: `Bespoke Magazine-Grade Image Prompts for Slides`
+- **徽章 (Badge)**: `VISION AI`
+- **強調色 (Accent)**: `#E7E5E4`
+- **詳細描述**: AI 視覺總監大腦，為簡報各頁面自動構思 Swiss, Kinfolk, Brutalist 等社論級精準生圖 Prompt。
 
 
 

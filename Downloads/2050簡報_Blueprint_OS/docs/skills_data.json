@@ -1,0 +1,1783 @@
+{
+  "master_skills": [
+    {
+      "id": "core-synergy-skill",
+      "name": "core-synergy-skill",
+      "title_zh": "core-synergy-skill (底層協同與工程門禁全集)",
+      "title_en": "core-synergy-skill (Core Synergy & Gate Suite)",
+      "category": "Master Skills",
+      "badge": "默認開啟",
+      "badge_type": "core",
+      "triggers": [
+        "@core-synergy-skill",
+        "agent-skills",
+        "grill-with-docs",
+        "opencode",
+        "team-mode",
+        "open-code-review",
+        "kb-retriever",
+        "knowledge",
+        "data_structure.md",
+        "查資料",
+        "知識庫"
+      ],
+      "description_zh": "本技能定義 Antigravity 與 OpenCode 雙 Agent 協同架構、多模型分工策略、grill-with-docs 領域模型審核、kb-retriever 本地知識庫漸進式檢索與自動化二方代碼門禁。",
+      "description_en": "Defines Antigravity & OpenCode dual-agent architecture, multi-model delegation, domain grilling, kb-retriever progressive knowledge base search, and automated code review gate.",
+      "principles": [
+        {
+          "title_zh": "雙主 Agent (Antigravity × OpenCode) 與多 LLM 戰隊分工原理",
+          "title_en": "Dual-Leader Architecture (Antigravity × OpenCode) & Multi-LLM Delegation",
+          "desc_zh": "Antigravity 作為「主 Agent」，為內嵌的各個 LLM 派發工作。具體由 Gemini (Pro/Flash) 負責系統架構規劃與邏輯測試；Claude 專責 UI/UX 與美感建立（且 Claude 僅在「初次建立視覺」時啟用一次，後續微調與修復一律禁用以保護配額）。在需要時（如遇到問題或驗證代碼），Antigravity 會自主呼叫 OpenCode 進行「雙主 Agent 協同」。OpenCode 同樣能調度 LLM 作為子 Agent，當執行特定任務（如搜尋 20 個檔案並修改）時，OpenCode 會開啟全新的獨立 Subagent 上下文視窗處理，大幅降低整個專案開發過程中的總 Token 消耗！",
+          "desc_en": "Antigravity acts as the primary leader agent, assigning work to embedded LLM subagents. Gemini models handle system architecture and logic testing. Claude is dedicated to initial UI/UX aesthetic creation (strictly enabled ONLY once during initial creation to conserve quota). When verification or error resolution is needed, Antigravity autonomously invokes OpenCode for dual-leader synergy. OpenCode also dispatches LLM subagents in isolated subagent context windows for multi-file operations (e.g., searching and editing 20 files), dramatically reducing overall token consumption across project development!",
+          "img_url_zh": "assets/synergy_diagram_custom_zh.jpg",
+          "img_url_en": "assets/synergy_diagram_custom_en.jpg"
+        },
+        {
+          "title_zh": "工作流程：grill-with-docs 領域模型與架構對齊機制",
+          "title_en": "Workflow: grill-with-docs Domain Modeling & Architecture Alignment",
+          "desc_zh": "當輸入包含「架構」、「規劃」、「設計」等意圖關鍵字時，系統自動啟動需求對齊程序。透過結構化問答釐清領域模型 (Domain Modeling) 與系統邊界，確定無誤後生成 `.antigravity/tasks/task-xxx.md` 任務看板檔，再交由 OpenCode 進行非互動式執行與驗證。",
+          "desc_en": "When keywords like 'architecture' or 'planning' are detected, system initiates domain grilling to clarify boundaries and outputs task board files (.antigravity/tasks/*.md) for OpenCode execution.",
+          "img_url_zh": "assets/grill_diagram_zh.jpg",
+          "img_url_en": "assets/grill_diagram.jpg"
+        },
+        {
+          "title_zh": "📚 kb-retriever 本地知識庫分層索引與低 Context 漸進檢索機制",
+          "title_en": "📚 kb-retriever Hierarchical Indexing & Low-Context Progressive Retrieval",
+          "desc_zh": "kb-retriever 是高效探索本機知識庫（如 `knowledge/` 或指定文檔目錄）的探針演算法，解決巨型文檔擠爆 Context Window 的痛點：\n1. 分层索引導航 (data_structure.md Tree)：從根目錄與子目錄的 `data_structure.md` 索引檔開始閱讀，先了解領域地圖與目錄用途，不盲目讀取整份檔案。\n2. 先學習再處理原則 (Learn-Before-Process)：遇到 PDF/Excel 等二進位文檔時，強制先讀取解構指南（pdftotext, pdfplumber, pandas），將結構化提取完成後才進行文字檢索。\n3. 5 輪上限漸進搜尋 (5-Round Bounded Search)：結合 `grep` 關鍵字搜尋與局部視窗讀取 (Windowed Read)，最多 5 輪收斂候選集合，回答時強制附帶檔案相對路徑與段落出處標註 (Source Attribution)。",
+          "desc_en": "kb-retriever is a precision retrieval algorithm for local knowledge bases (e.g. `knowledge/` directory), preventing LLM context window overflow:\n1. Hierarchical Index Tree Navigation: Reads `data_structure.md` index files at root and subdirectories to understand domain maps before inspecting file contents.\n2. Learn-Before-Process Rule: Enforces reading extraction references (pdftotext, pdfplumber, pandas) before processing binary PDF/Excel documents.\n3. 5-Round Bounded Search: Combines `grep` and windowed line reads within a strict 5-round limit, always citing relative file paths and line ranges in final answers.",
+          "img_url_zh": "",
+          "img_url_en": ""
+        }
+      ],
+      "sub_modules_zh": [
+        "agent-skills: 生產級代碼品質評估、重構與輔助除錯工具集",
+        "grill-with-docs: 領域模型詰問與架構意圖對齊程序 (關鍵字: 「計劃」、「設計」、「架構」、「grill me」)",
+        "kb-retriever: 本地知識庫分層索引 (data_structure.md) 漸進檢索 (5輪上限、低 Context 消耗、來源出處標註)",
+        "Antigravity × OpenCode 協同模式: CLI 直連、Task Board 檔案看板、JSON Hooks 攔截、open-code-review 門禁",
+        "team-mode: 依任務難度調度 Pro (高難度架構) 與 Flash (檔案檢索) 模型子 Agent",
+        "OpenCode 多模型戰隊分工 Protocol: 美學與前端首選 Claude 3.7/3.5、邏輯與除錯首選 o3-mini/o1、長文與批量重構首選 Qwen-3-Coder/DeepSeek-R1",
+        "Matt Pocock 頂級工程套件: /grill-with-docs 需求詰問與 ADR 架構決策、domain-modeling 專案術語字典 (CONTEXT.md)、tdd 測試驅動開發與 diagnosing-bugs 科學除錯。"
+      ],
+      "sub_modules_en": [
+        "agent-skills: Production-grade code quality evaluation, refactoring, and debugging suite",
+        "grill-with-docs: Domain modeling interview and architectural alignment protocol (Triggers: 'plan', 'design', 'architecture')",
+        "kb-retriever: Hierarchical index navigation (data_structure.md), progressive 5-round search, low-token context, source attribution",
+        "Antigravity × OpenCode Synergy: Direct CLI, Task Board markdown, JSON Hooks, and open-code-review gate",
+        "team-mode: Dynamic dispatch of Pro (Complex Architecture) and Flash (Search) model subagents",
+        "Matt Pocock Engineering Suite: /grill-with-docs domain interview & ADR architecture decisions, domain-modeling ubiquitous language (CONTEXT.md), tdd testing, and diagnosing-bugs."
+      ]
+    },
+    {
+      "id": "design-system-skill",
+      "name": "design-system-skill",
+      "title_zh": "design-system-skill (視覺美學與反 Slop 全集)",
+      "title_en": "design-system-skill (Design System & Anti-Slop)",
+      "category": "Master Skills",
+      "badge": "默認開啟",
+      "badge_type": "core",
+      "triggers": [
+        "@design-system-skill",
+        "50-styles",
+        "hallmark",
+        "emil-skills",
+        "ui-skills",
+        "前端風格",
+        "反slop",
+        "web-design-engineer",
+        "design-read"
+      ],
+      "description_zh": "整合 50 種經典與現代網頁設計風格知識庫、Nutlope Hallmark 反 AI 模板化防禦機制、web-design-engineer 5-dial 視覺決策與 25 品牌錨定風格配方（Linear, Stripe Press, Aesop, Bloomberg 終端機等）及品牌資產法則 (Asset > Spec)。",
+      "description_en": "Integrates 50 Web Design Styles KB, Nutlope Hallmark anti-slop rules, web-design-engineer 5-dial Design Read decision system, 25 anchored style recipes (Linear, Stripe Press, Aesop, Bloomberg), and Brand Asset Protocol.",
+      "sub_modules_zh": [
+        "50 Web Design Styles KB: 50 種網頁設計體系 (Hex 色票、邊框陰影、材質、Typography)",
+        "Nutlope Hallmark: 20 視覺主題輪替、8 種組件狀態寫滿、Pre-emit 6 軸自我評分",
+        "web-design-engineer: 5-dial 視覺校準 (Variance, Motion, Density, Asset, Brand) + 25 品牌錨定風格配方 (Linear, Stripe Press, Aesop, Bloomberg 終端機等) + 品牌資產法則 (Asset > Spec)",
+        "Emil Kowalski 設計工程: Apple 質感細節、Easing/Spring 動態詞彙、60 FPS 效能審查",
+        "UI-Skills 路由: OKLCH 色彩 (better-colors)、瑞士排版 (swiss-design)、A11y (build-primitive)"
+      ],
+      "sub_modules_en": [
+        "50 Web Design Styles KB: 50 Frontend design style systems (Hex palettes, borders, textures, typography)",
+        "Nutlope Hallmark: 20 Visual theme catalog, 8 component state coverage, pre-emit 6-axis self-scoring",
+        "web-design-engineer: 5-dial Design Read (Variance, Motion, Density, Asset, Brand) + 25 Anchored Style Recipes (Linear, Stripe Press, Aesop, Bloomberg) + Brand Asset Protocol (Asset > Spec)",
+        "Emil Kowalski Engineering: Apple-grade tactile details, Easing/Spring motion, 60 FPS performance review",
+        "UI-Skills Routing: OKLCH color space (better-colors), Swiss typography (swiss-design), A11y (build-primitive)"
+      ],
+      "principles": [
+        {
+          "title_zh": "🛡️ Nutlope Hallmark 反 AI 模板化防禦機制 (Anti-Slop Defense Protocol)",
+          "title_en": "🛡️ Nutlope Hallmark Anti-AI Slop Defense Protocol",
+          "desc_zh": "Nutlope Hallmark 是防止生成式 AI 產出同質化、平庸藍灰模板 (Slop UI) 的強效防禦體系。其包含三大核心支柱：\n1. 20 主題氣質輪替 (Theme Catalog)：打破預設 AI 藍白介面，隨機或依語境套用 20 種獨特美學氣質（如古雅明朝、賽博終端、暗黑便當盒等）。\n2. 8-State 組件寫滿 (8-State Completeness)：強制所有 UI 組件必須實作 Default、Hover、Active、Focus、Loading、Success、Error、Disabled 完整 8 種狀態，防止互動空洞。\n3. Pre-emit 6 軸自我評分 (6-Axis Self-Scoring)：在輸出程式碼前，針對層次感、對比度、留白、觸感細節、效能與響應式進行 6 軸打分，確保最高 Production 品質。",
+          "desc_en": "Nutlope Hallmark is a robust defense framework against bland, repetitive AI-generated interfaces (Slop UI). Built on 3 core pillars:\n1. 20 Aesthetic Theme Catalog: Replaces generic AI blue/grey themes with 20 distinct visual signatures (e.g., Editorial Serif, Cyber Terminal, Bento Dark Lux).\n2. 8-State Component Completeness: Enforces full implementation of Default, Hover, Active, Focus, Loading, Success, Error, and Disabled states on all interactive controls.\n3. Pre-emit 6-Axis Self-Scoring: Evaluates hierarchy, contrast, whitespace, tactile details, 60fps performance, and responsiveness before emitting production code.",
+          "img_url_zh": "",
+          "img_url_en": ""
+        },
+        {
+          "title_zh": "🎨 web-design-engineer 5-Dial 視覺決策與 25 品牌錨定風格配方",
+          "title_en": "🎨 web-design-engineer 5-Dial Design Read & 25 Anchored Style Recipes",
+          "desc_zh": "web-design-engineer 是極致前端設計工程師的設計思維體系，核心包含三大部分：\n1. 5-Dial 視覺旋鈕校準 (Design Read)：在撰寫程式碼前，先針對「視覺變異度 (Variance)」、「動效強度 (Motion)」、「資訊密度 (Density)」、「資產依賴 (Asset Dependence)」與「品牌忠誠度 (Brand Fidelity)」進行 1-10 旋鈕定位，決策佈局方向。\n2. 25 品牌錨定風格配方 (25 Style Recipes)：涵蓋 Linear 極致黑、Stripe Press 印藝、Aesop 藥劑師哲學、Bloomberg 交易終端、Monocle 雜誌刊物、MUJI 原研哉極簡、Apple HIG 等 25 種業界大師級色彩、字體配對與 DNA 簽名動作 (Signature Moves)。\n3. 品牌資產至上法則 (Asset > Spec)：嚴禁使用偽手繪或替代品取代真實品牌 Logo 與產品照。強調「Logo 非談判項目，真實產品照優於 Hex 色票」，絕不產出同質化的 AI 藍紫漸層模板！",
+          "desc_en": "web-design-engineer elevates AI generated frontends with design engineer principles:\n1. 5-Dial Design Read Calibration: Calibrates Visual Variance, Motion Intensity, Information Density, Asset Dependence, and Brand Fidelity (1-10 dials) before coding.\n2. 25 Anchored Style Recipes: Includes Linear Dark, Stripe Press Typography, Aesop Apothecary, Bloomberg Terminal, Monocle Magazine, MUJI Kenya Hara, and Apple HIG, each with palette, fonts, and signature moves.\n3. Brand Asset Protocol (Asset > Spec): Enforces real logos and product imagery over generic hex codes. Forbids synthetic AI blue gradients or CSS silhouettes in brand work.",
+          "img_url_zh": "",
+          "img_url_en": ""
+        }
+      ]
+    },
+    {
+      "id": "ui-motion-skill",
+      "name": "ui-motion-skill",
+      "title_zh": "ui-motion-skill (前端動效與向量動畫全集)",
+      "title_en": "ui-motion-skill (UI Motion & Micro-interactions)",
+      "category": "Master Skills",
+      "badge": "按需觸發",
+      "badge_type": "motion",
+      "triggers": [
+        "@ui-motion-skill",
+        "animejs",
+        "lottie",
+        "text-to-lottie",
+        "reactbits",
+        "動效",
+        "微互動"
+      ],
+      "description_zh": "規範前端動畫與微互動開發標準。整合 Anime.js 時間軸與物理彈簧緩動、LottieFiles 向量點優化、Text-to-Lottie 向量 JSON 生成與 React Bits (shadcn CLI) 組件庫。",
+      "description_en": "Standards for UI animations combining Anime.js timeline engineering, LottieFiles vector design, Text-to-Lottie generation, and React Bits shadcn CLI components.",
+      "sub_modules_zh": [
+        "hyperframes@animejs: Anime.js 時間軸 (anime.timeline)、Stagger 交錯動畫與 GPU Transform 屬性優化",
+        "LottieFiles & Text-to-Lottie: 向量點優化與純向量 Lottie JSON 動態代碼生成",
+        "React Bits Protocol: shadcn CLI 官方下載模式 (SplitText, BlurText, MagnetLines, SoftAurora, BlobCursor)"
+      ],
+      "sub_modules_en": [
+        "hyperframes@animejs: Anime.js timeline (anime.timeline), stagger physics, and GPU transform optimizations",
+        "LottieFiles & Text-to-Lottie: Vector point optimization and pure vector Lottie JSON dynamic code generation",
+        "React Bits Protocol: Official shadcn CLI download mode (SplitText, BlurText, MagnetLines, SoftAurora, BlobCursor)"
+      ],
+      "principles": [
+        {
+          "title_zh": "✨ 前端動效 3 大核心模組 Live 互動體驗展演",
+          "title_en": "✨ Live Interactive Demo of 3 Core Motion Modules",
+          "desc_zh": "下方包含 Anime.js 時間軸彈簧物理、LottieFiles 向量 JSON 動效與 React Bits (shadcn CLI) 組件的 Live 實體效果與互動展示。",
+          "desc_en": "Below are live interactive component demonstrations for Anime.js spring physics, LottieFiles vector animations, and React Bits shadcn primitives.",
+          "img_url_zh": "",
+          "img_url_en": ""
+        }
+      ]
+    },
+    {
+      "id": "presentation-skill",
+      "name": "presentation-skill",
+      "title_zh": "presentation-skill (簡報視覺與 Slidev 導出全集)",
+      "title_en": "presentation-skill (Presentation Specs & Slidev)",
+      "category": "Master Skills",
+      "badge": "按需觸發",
+      "badge_type": "presentation",
+      "triggers": [
+        "@presentation-skill",
+        "felo",
+        "slidev",
+        "簡報風格",
+        "簡報導出",
+        "slides.md",
+        "beautiful-article",
+        "reacticle",
+        "tufte",
+        "vignelli",
+        "bodoni",
+        "網頁文章",
+        "刊物排版"
+      ],
+      "description_zh": "本技能定義 10 大客製化 16:9 簡報視覺風格 Specs、強行兩階段簡報計畫書對齊 (2-Stage Deck Plan Gate)、Slidev/Felo 導出器，以及 beautiful-article 文章排版引擎。",
+      "description_en": "Defines 10 custom 16:9 presentation specs, compulsory 2-stage deck planning gate, Slidev exporters, and beautiful-article editorial engine.",
+      "sub_modules_zh": [
+        "兩階段簡報規劃門禁 (2-Stage Deck Plan Gate): 嚴禁直接做簡報！必須先產出 presentation_plan.md (含頁數、大標小標、內文大意、視覺選型、紅線自查)，經確認後才輸出簡報。",
+        "Print CSS 完美列印規範 (Ctrl+P另存PDF): 強制 @page { size: 16in 9in; margin: 0; } 鎖死16:9消白邊、容器改成 display: block 防 Flexbox 跨頁穿插、清除 UI 浮動按鈕與 shadow 雜訊。",
+        "10 大 16:9 簡報視覺 Specs 完整條款: 霓虹拼貼 (Neon 10:1), Apple 3D Mockup, 石膏 Pop 撞色, Kinfolk 雜誌風, 瑞士新經濟 (嚴禁 Markdown 符號), 沉靜黑夜 Living Artifact, 溫柔扁平插畫, Slidev 導出器等。",
+        "簡報 6 大紅線原則: (1) 100% 完整呈現原文 (2) 不改變圖片比例 (3) 嚴禁文字圖片重疊貼邊 (4) 圖片直觀對應 (5) 圖片符合風格 (6) 每頁皆須圖文並茂且排版多樣不重複。",
+        "ppt-master 微軟原生 PowerPoint 生成: 支援原生母版 (Slide Master)、可編輯形狀、數據驅動圖表、動畫轉場與旁白音檔，直出原生 .pptx 檔案。",
+        "editorial-vision-studio 視覺總監: 具備 10 大雜誌封面/海報級 AI 提示詞編譯大腦，為簡報自動構思絕不違和的高質感配圖 Prompt。"
+      ],
+      "sub_modules_en": [
+        "2-Stage Deck Plan Gate: Mandatory 2-stage execution! Writes presentation_plan.md (slides count, headers, subtext, visual choice, redline check) for user approval before writing slides code.",
+        "10 Artistic 16:9 Presentation Specs: Neon Architecture (10:1 scaling), Apple 3D Mockup, Sculpture Pop, Kinfolk (Mincho Serif), Swiss New Economy (STRICT NO MARKDOWN), Living Artifact, Gentle Flat, Slidev.",
+        "3 Red-Line Presentation Rules: (1) 100% full content fidelity, (2) preserve image aspect ratios, (3) zero text-image overlaps or border clipping.",
+        "beautiful-article Editorial Engine: Single-page web publication refactoring with 10 retention models and 11 master themes."
+      ],
+      "principles": [
+        {
+          "title_zh": "📝 簡報製作 Master Prompt 提示詞範例 (Standard Master Prompt)",
+          "title_en": "📝 Standard Master Prompt Template for Presentation Creation",
+          "desc_zh": "<div class=\"prompt-scenario-tabs mb-4 flex gap-2 flex-wrap border-b border-stone-200 dark:border-stone-700 pb-3\">\n    <button type=\"button\" onclick=\"switchPromptScenarioInDesc('standard')\" id=\"desc-tab-standard\" class=\"scenario-tab px-3 py-1.5 text-xs font-bold rounded-lg bg-stone-900 text-white dark:bg-amber-500 dark:text-stone-950 shadow-sm transition cursor-pointer\">\n        📌 標準全新簡報製作 (預設)\n    </button>\n    <button type=\"button\" onclick=\"switchPromptScenarioInDesc('same_style_new_content')\" id=\"desc-tab-same_style_new_content\" class=\"scenario-tab px-3 py-1.5 text-xs font-bold rounded-lg bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-stone-200 hover:bg-stone-300 dark:hover:bg-stone-700 transition cursor-pointer\">\n        🔄 同風格換內容 (極速 0-Token 模式)\n    </button>\n    <button type=\"button\" onclick=\"switchPromptScenarioInDesc('diff_style_new_content')\" id=\"desc-tab-diff_style_new_content\" class=\"scenario-tab px-3 py-1.5 text-xs font-bold rounded-lg bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-stone-200 hover:bg-stone-300 dark:hover:bg-stone-700 transition cursor-pointer\">\n        🎨 換風格換內容 (樣式分流模式)\n    </button>\n</div>\n\n我要在這個對話進行「(......簡報製作任務)」。請以(\"......檔案路徑\")的內容為材料，採取並嚴格遵守(\"......簡報風格\")的規則和風格，製作 16:9 /(或)A4 Slidev， HTML / (或)可編輯的 ppt 簡報。\n\n請先不要直接執行簡報的製作，而是先寫出「簡報規劃的計畫書」，計畫書中要寫出：總共會有幾頁、每一頁的「大標題」內容、「小標題」內容、大致的內文要寫什麼、需不需要使用 ai 圖片生成，或是可以去網路上搜尋下載圖片。\n\n【6個紅線 (嚴格遵守)】\n\n1. 簡報請完整呈現「(某某檔案)」的完美內容。撰寫內容時請不要克制，頁數不用省、內文也可以寫多一點。並且不要有曲解、誇大其辭、用詞太過激昂的情況。\n2. 圖片請不要調整原有的圖片比例，只允許對圖片進行「裁切」、「縮小」、「放大」。\n3. 無論是大標題小標題或內文、圖片，請都不要與其他文字或圖片有重疊，也不要有貼到畫面過於邊緣的地方(但若圖片是打算沒有空白縫隙的貼緊邊緣，則沒有此限制)。\n4. 保證網路搜尋或自行生成的圖片絕對都要與當前簡報頁面的內容直接高度相關，嚴禁使用抽象隱喻、幾何符號或高深意象圖，必須選用一眼就能直觀看懂、與簡報內文精準對應的具體實物或情境圖片。\n5. 保證網路搜尋或生成的圖片絕對都要符合當前選擇的整體簡報風格，嚴禁出現與整體簡報風格相比顯得突兀或視覺風格斷層的圖片。\n6. 簡報的每一頁都必須同時包含「圖片」與「文字」（圖文並茂），且每一頁的視覺佈局與結構必須變化多元，嚴禁連續多頁重複使用完全相同的範本或視覺排版結構。",
+          "desc_en": "I would like to conduct a \"(...Presentation Deck Task)\". Using the material from (\"...File Path\"), adopt and strictly follow the rules and style of (\"...Presentation Style\") to produce 16:9 /(or)A4 Slidev, HTML / (or) editable ppt slides.\n\nDO NOT execute slide deck creation directly! You MUST first write a \"Presentation Plan Document\" outlining: total slide count, main header, subheader, key body text summary, and whether AI image generation or online image download is required.\n\n【6 RED-LINE RULES (STRICT)】\n\n1. Preserve 100% full text fidelity of \"(...Source File)\". Do not distort, exaggerate, or use overly aggressive phrasing.\n2. Never distort image aspect ratios. Only crop, shrink, or enlarge.\n3. Zero text/image overlaps and zero unintended edge clipping. Keep generous margin buffers (except for full-bleed images intended to fit edge-to-edge without gaps).\n4. All searched or generated images MUST be directly, intuitively relevant to the current slide's topic. Pure abstract metaphors or vague geometric graphics are strictly forbidden; use easily understandable, explicit real-world or situational imagery.\n5. All searched or generated images MUST strictly match the chosen presentation visual style. Images that clash visually or break style consistency are strictly forbidden.\n6. Every single slide MUST contain both images and text (rich text-image pairing). Slide layout structures MUST vary dynamically across pages; repeating identical layout templates across multiple consecutive slides is strictly forbidden.",
+          "img_url_zh": "",
+          "img_url_en": ""
+        },
+        {
+          "title_zh": "📰 beautiful-article 10 大文章保留率模型與 11 大排版主題",
+          "title_en": "📰 beautiful-article 10 Article Retention Models & 11 Master Themes",
+          "desc_zh": "beautiful-article 是將原始素材（URL/PDF/DOCX/筆記）重構並排版為高品質單頁網頁文章的編輯引擎：\n1. 10 大文章保留率模型：支援深度長文 (Longform 100%)、實作教學 (Tutorial 90%)、完整報告 (Report 80%)、摘要簡報 (Briefing 50%) 到視覺文章 (Visual Essay 40%)，可依閱讀目的嚴格精準控制資訊密度。\n2. 11 大大師排版主題 (Theme Profiles)：涵蓋 Tufte (學術邊註風格)、Bodoni (經典時尚刊物)、Vignelli (網格系統)、Press (新聞編輯)、Knuth (數學排版) 等 11 種出版物等級的字體與版面氣質。\n3. Reacticle 語意組件與 3:4 書籍封面：採用 Hero / Lead / Quote / Callout / Raw 語意層與 3:4 書本風格封面，搭配自動生成 TOC 目錄，打造離線亦可完美閱讀與分享的排版作品。",
+          "desc_en": "beautiful-article converts raw documents (URL/PDF/DOCX/notes) into publication-grade single-file HTML web articles:\n1. 10 Article Retention Models: Supports Longform (100%), Tutorial (90%), Full Report (80%), Briefing (50%), and Visual Essay (40%) to control information density precisely.\n2. 11 Master Theme Profiles: Includes Tufte (academic marginalia), Bodoni (classic editorial), Vignelli (grid system), Press (news editorial), and Knuth (math publishing).\n3. Reacticle Component Protocol & 3:4 Cover: Uses prose-first semantic components (Hero, Lead, Quote, Callout, Raw layer) with a 3:4 book cover and auto TOC for offline reading and sharing.",
+          "img_url_zh": "",
+          "img_url_en": ""
+        }
+      ],
+      "prompt_scenarios": {
+        "standard": {
+          "name": "📌 標準全新簡報製作 (預設)",
+          "instruction": "請以「(某某檔案)」的內容為材料，採取並嚴格遵守「(某風格)」的規則和風格，製作 16:9 HTML 簡報。並把做出的所有檔案放在「(某資料夾)」資料夾。"
+        },
+        "same_style_new_content": {
+          "name": "🔄 同風格換內容 (極速 0-Token 模式)",
+          "instruction": "我要對目前的簡報進行「同內容換風格」的極速視覺重構！\n【執行指令】\n1. 請保留現有的 `deck_content.json` 內容完全不要修改。\n2. 請根據「(......填入新風格名稱，如：Kinfolk 雜誌風 / 瑞士新經濟 / 暗黑便當簡報)」的規範，專門重新寫一份對應的 `deck_theme.css` 樣式檔。\n3. 寫完 CSS 後，請直接執行 Phase 3 的 `build_deck_v2.py` 自動裝配腳本，生成全新的 HTML 簡報！"
+        },
+        "diff_style_new_content": {
+          "name": "🎨 換風格套用新內容 (樣式分流模式)",
+          "instruction": "請以「(某某檔案)」的內容為材料製作成 16:9 HTML 簡報。這次視覺風格請採用「(新風格，如 Typographic Deck)」規範！請先產出 deck_content.json 與對應的 deck_theme.css，然後跑 Phase 3 的 build_deck.py 自動裝配成 HTML 簡報！"
+        }
+      },
+      "master_prompt": ""
+    }
+  ],
+  "web_styles_50": [
+    {
+      "name": "Neo-Brutalism (新蠻荒主義)",
+      "triggers": "neubrutalism, 新蠻荒, raw brutal",
+      "hex": [
+        "#FFE600",
+        "#FF5959",
+        "#000000"
+      ],
+      "desc": "高飽和撞色、重黑粗線條邊框與硬塊陰影 (box-shadow: 4px 4px #000)。",
+      "css": "background: #FFE600; border: 3px solid #000; box-shadow: 4px 4px 0px #000; font-weight: 800; color: #000;",
+      "name_zh": "Neo-Brutalism (新蠻荒主義)",
+      "name_en": "Neo-Brutalism",
+      "desc_zh": "高飽和撞色、重黑粗線條邊框與硬塊陰影 (box-shadow: 4px 4px #000)。",
+      "desc_en": "High-contrast bold colors, heavy black borders, and hard solid drop shadows (box-shadow: 4px 4px #000).",
+      "triggers_zh": "neubrutalism, 新蠻荒, raw brutal",
+      "triggers_en": "neubrutalism, raw brutal",
+      "copy_prompt_zh": "請使用「Neo-Brutalism (新蠻荒主義)」前端風格規範進行視覺設計，嚴格套用色票（#FFE600, #FF5959, #000000）與特性（高飽和撞色、重黑粗線條邊框與硬塊陰影 (box-shadow: 4px 4px #000)。）！",
+      "copy_prompt_en": "Please apply the 'Neo-Brutalism' design style, strictly enforcing palette (#FFE600, #FF5959, #000000) and aesthetics (High-contrast bold colors, heavy black borders, and hard solid drop shadows (box-shadow: 4px 4px #000).)!"
+    },
+    {
+      "name": "Swiss Grid (瑞士網格國際風格)",
+      "triggers": "swiss style, 瑞士風格, grid layout",
+      "hex": [
+        "#F4F4F5",
+        "#FF3B30",
+        "#18181B"
+      ],
+      "desc": "嚴格 12 欄網格對齊、非對稱無襯線大字體、絕對理性與現代主義排版。",
+      "css": "background: #F4F4F5; border-top: 4px solid #FF3B30; color: #18181B; font-family: Helvetica, sans-serif;",
+      "name_zh": "Swiss Grid (瑞士網格國際風格)",
+      "name_en": "Swiss",
+      "desc_zh": "嚴格 12 欄網格對齊、非對稱無襯線大字體、絕對理性與現代主義排版。",
+      "desc_en": "Strict 12-column grid alignment, asymmetric grotesque typography, and absolute rational modernist layout.",
+      "triggers_zh": "swiss style, 瑞士風格, grid layout",
+      "triggers_en": "swiss style, grid layout",
+      "copy_prompt_zh": "請使用「Swiss Grid (瑞士網格國際風格)」前端風格規範進行視覺設計，嚴格套用色票（#F4F4F5, #FF3B30, #18181B）與特性（嚴格 12 欄網格對齊、非對稱無襯線大字體、絕對理性與現代主義排版。）！",
+      "copy_prompt_en": "Please apply the 'Swiss' design style, strictly enforcing palette (#F4F4F5, #FF3B30, #18181B) and aesthetics (Strict 12-column grid alignment, asymmetric grotesque typography, and absolute rational modernist layout.)!"
+    },
+    {
+      "name": "Japanese Editorial (日式雜誌風)",
+      "triggers": "japanese, 日式風格, 雜誌風, 和風",
+      "hex": [
+        "#F7F5F0",
+        "#2C2C2C",
+        "#C84B31"
+      ],
+      "desc": "暖色紙張材質 (Ivory Paper)、竪排文字 (writing-mode)、極致留白與優雅空氣感。",
+      "css": "background: #F7F5F0; color: #2C2C2C; font-family: 'Yu Mincho', serif; border: 1px solid #E5E0D8;",
+      "name_zh": "Japanese Editorial (日式雜誌風)",
+      "name_en": "Japanese",
+      "desc_zh": "暖色紙張材質 (Ivory Paper)、竪排文字 (writing-mode)、極致留白與優雅空氣感。",
+      "desc_en": "Warm paper texture (Ivory Paper), vertical typography (writing-mode), generous whitespace, and serene quiet luxury.",
+      "triggers_zh": "japanese, 日式風格, 雜誌風, 和風",
+      "triggers_en": "japanese",
+      "copy_prompt_zh": "請使用「Japanese Editorial (日式雜誌風)」前端風格規範進行視覺設計，嚴格套用色票（#F7F5F0, #2C2C2C, #C84B31）與特性（暖色紙張材質 (Ivory Paper)、竪排文字 (writing-mode)、極致留白與優雅空氣感。）！",
+      "copy_prompt_en": "Please apply the 'Japanese' design style, strictly enforcing palette (#F7F5F0, #2C2C2C, #C84B31) and aesthetics (Warm paper texture (Ivory Paper), vertical typography (writing-mode), generous whitespace, and serene quiet luxury.)!"
+    },
+    {
+      "name": "Glassmorphism (新玻璃擬物)",
+      "triggers": "glassmorphism, 玻璃擬物, glass ui",
+      "hex": [
+        "rgba(255,255,255,0.4)",
+        "#a855f7",
+        "#06b6d4"
+      ],
+      "desc": "毛玻璃背景虛化 (backdrop-filter: blur)、半透明邊框與光感漸變。",
+      "css": "background: rgba(255,255,255,0.4); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.6);",
+      "name_zh": "Glassmorphism (新玻璃擬物)",
+      "name_en": "Glassmorphism",
+      "desc_zh": "毛玻璃背景虛化 (backdrop-filter: blur)、半透明邊框與光感漸變。",
+      "desc_en": "Frosted glass backdrop blur (backdrop-filter: blur), translucent glass borders, and subtle rim light gradients.",
+      "triggers_zh": "glassmorphism, 玻璃擬物, glass ui",
+      "triggers_en": "glassmorphism, glass ui",
+      "copy_prompt_zh": "請使用「Glassmorphism (新玻璃擬物)」前端風格規範進行視覺設計，嚴格套用色票（rgba(255,255,255,0.4), #a855f7, #06b6d4）與特性（毛玻璃背景虛化 (backdrop-filter: blur)、半透明邊框與光感漸變。）！",
+      "copy_prompt_en": "Please apply the 'Glassmorphism' design style, strictly enforcing palette (rgba(255,255,255,0.4), #a855f7, #06b6d4) and aesthetics (Frosted glass backdrop blur (backdrop-filter: blur), translucent glass borders, and subtle rim light gradients.)!"
+    },
+    {
+      "name": "Bento Grid 2.0 (便當盒網格)",
+      "triggers": "bento, bento grid, 便當盒佈局",
+      "hex": [
+        "#090d16",
+        "#ffffff",
+        "#38bdf8"
+      ],
+      "desc": "Apple/Linear 風格微卡片組合、多尺寸方格、極細 1px 邊框與內置微小動效。",
+      "css": "background: #09090B; border: 1px solid #27272A; border-radius: 16px; color: #FAFAFA;",
+      "name_zh": "Bento Grid 2.0 (便當盒網格)",
+      "name_en": "Bento",
+      "desc_zh": "Apple/Linear 風格微卡片組合、多尺寸方格、極細 1px 邊框與內置微小動效。",
+      "desc_en": "Apple/Linear style modular card layout, multi-size grid containers, 1px crisp borders, and subtle hover micro-interactions.",
+      "triggers_zh": "bento, bento grid, 便當盒佈局",
+      "triggers_en": "bento, bento grid",
+      "copy_prompt_zh": "請使用「Bento Grid 2.0 (便當盒網格)」前端風格規範進行視覺設計，嚴格套用色票（#090d16, #ffffff, #38bdf8）與特性（Apple/Linear 風格微卡片組合、多尺寸方格、極細 1px 邊框與內置微小動效。）！",
+      "copy_prompt_en": "Please apply the 'Bento' design style, strictly enforcing palette (#090d16, #ffffff, #38bdf8) and aesthetics (Apple/Linear style modular card layout, multi-size grid containers, 1px crisp borders, and subtle hover micro-interactions.)!"
+    },
+    {
+      "name": "Cyberpunk 2077 (賽博朋克)",
+      "triggers": "cyberpunk, 賽博朋克, 霓虹霓光",
+      "hex": [
+        "#00F0FF",
+        "#FF0055",
+        "#FFE600"
+      ],
+      "desc": "高對比霓虹青紫黃、故障風 (Glitch Effect)、科技切角與發光邊框。",
+      "css": "background: #00F0FF; color: #000; clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%); font-weight: 900;",
+      "name_zh": "Cyberpunk 2077 (賽博朋克)",
+      "name_en": "Cyberpunk",
+      "desc_zh": "高對比霓虹青紫黃、故障風 (Glitch Effect)、科技切角與發光邊框。",
+      "desc_en": "High-contrast neon cyan/magenta/yellow, glitch line effects, tactical angled cuts, and glowing border boxes.",
+      "triggers_zh": "cyberpunk, 賽博朋克, 霓虹霓光",
+      "triggers_en": "cyberpunk",
+      "copy_prompt_zh": "請使用「Cyberpunk 2077 (賽博朋克)」前端風格規範進行視覺設計，嚴格套用色票（#00F0FF, #FF0055, #FFE600）與特性（高對比霓虹青紫黃、故障風 (Glitch Effect)、科技切角與發光邊框。）！",
+      "copy_prompt_en": "Please apply the 'Cyberpunk' design style, strictly enforcing palette (#00F0FF, #FF0055, #FFE600) and aesthetics (High-contrast neon cyan/magenta/yellow, glitch line effects, tactical angled cuts, and glowing border boxes.)!"
+    },
+    {
+      "name": "VisionOS Spatial (蘋果空間UI)",
+      "triggers": "visionos, spatial ui, 空間UI",
+      "hex": [
+        "rgba(255,255,255,0.25)",
+        "#38bdf8",
+        "#0f172a"
+      ],
+      "desc": "動態懸浮光效、Specular Highlight 高光邊緣、懸停深淺景深。",
+      "css": "background: rgba(255,255,255,0.25); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.1);",
+      "name_zh": "VisionOS Spatial (蘋果空間UI)",
+      "name_en": "VisionOS",
+      "desc_zh": "動態懸浮光效、Specular Highlight 高光邊緣、懸停深淺景深。",
+      "desc_en": "Spatial UI layout, translucent glass cards, 22px rounded corners, specular border highlights, and floating depth.",
+      "triggers_zh": "visionos, spatial ui, 空間UI",
+      "triggers_en": "visionos, spatial ui, UI",
+      "copy_prompt_zh": "請使用「VisionOS Spatial (蘋果空間UI)」前端風格規範進行視覺設計，嚴格套用色票（rgba(255,255,255,0.25), #38bdf8, #0f172a）與特性（動態懸浮光效、Specular Highlight 高光邊緣、懸停深淺景深。）！",
+      "copy_prompt_en": "Please apply the 'VisionOS' design style, strictly enforcing palette (rgba(255,255,255,0.25), #38bdf8, #0f172a) and aesthetics (Spatial UI layout, translucent glass cards, 22px rounded corners, specular border highlights, and floating depth.)!"
+    },
+    {
+      "name": "Aurora UI (極光動態漸變)",
+      "triggers": "aurora, 極光風格, fluid gradient",
+      "hex": [
+        "#7928CA",
+        "#FF0080",
+        "#00DFD8"
+      ],
+      "desc": "彌散色彩斑塊、動態 Blur 漸變背景、夢幻光暈與現代高質感。",
+      "css": "background: linear-gradient(135deg, #7928CA, #FF0080, #00DFD8); color: #FFF; border-radius: 12px;",
+      "name_zh": "Aurora UI (極光動態漸變)",
+      "name_en": "Aurora",
+      "desc_zh": "彌散色彩斑塊、動態 Blur 漸變背景、夢幻光暈與現代高質感。",
+      "desc_en": "Diffuse fluid aurora backdrop gradients, vibrant ambient glows, translucent card overlays, and ethereal lighting.",
+      "triggers_zh": "aurora, 極光風格, fluid gradient",
+      "triggers_en": "aurora, fluid gradient",
+      "copy_prompt_zh": "請使用「Aurora UI (極光動態漸變)」前端風格規範進行視覺設計，嚴格套用色票（#7928CA, #FF0080, #00DFD8）與特性（彌散色彩斑塊、動態 Blur 漸變背景、夢幻光暈與現代高質感。）！",
+      "copy_prompt_en": "Please apply the 'Aurora' design style, strictly enforcing palette (#7928CA, #FF0080, #00DFD8) and aesthetics (Diffuse fluid aurora backdrop gradients, vibrant ambient glows, translucent card overlays, and ethereal lighting.)!"
+    },
+    {
+      "name": "Neumorphism (新擬物柔和風格)",
+      "triggers": "neumorphism, 軟UI, soft ui",
+      "hex": [
+        "#E0E5EC",
+        "#A3B1C6",
+        "#FFFFFF"
+      ],
+      "desc": "同色系雙向陰影 (light/dark shadow)、凸起與凹陷的微立體觸感。",
+      "css": "background: #E0E5EC; box-shadow: 6px 6px 12px #a3b1c6, -6px -6px 12px #ffffff; border-radius: 16px;",
+      "name_zh": "Neumorphism (新擬物柔和風格)",
+      "name_en": "Neumorphism",
+      "desc_zh": "同色系雙向陰影 (light/dark shadow)、凸起與凹陷的微立體觸感。",
+      "desc_en": "Soft extruded plastic aesthetic, dual inset/outset light & shadow highlights, and tactile rounded surfaces.",
+      "triggers_zh": "neumorphism, 軟UI, soft ui",
+      "triggers_en": "neumorphism, UI, soft ui",
+      "copy_prompt_zh": "請使用「Neumorphism (新擬物柔和風格)」前端風格規範進行視覺設計，嚴格套用色票（#E0E5EC, #A3B1C6, #FFFFFF）與特性（同色系雙向陰影 (light/dark shadow)、凸起與凹陷的微立體觸感。）！",
+      "copy_prompt_en": "Please apply the 'Neumorphism' design style, strictly enforcing palette (#E0E5EC, #A3B1C6, #FFFFFF) and aesthetics (Soft extruded plastic aesthetic, dual inset/outset light & shadow highlights, and tactile rounded surfaces.)!"
+    },
+    {
+      "name": "Industrial Brutalism (工業蠻荒)",
+      "triggers": "industrial, 工業風, raw concrete",
+      "hex": [
+        "#1A1A1A",
+        "#E5E5E5",
+        "#FF4500"
+      ],
+      "desc": "裸露混凝土感、金屬網格底紋、警示黃橙色與粗獷鋼鐵線條。",
+      "css": "background: #1A1A1A; border-left: 4px solid #FF4500; color: #E5E5E5; font-family: monospace;",
+      "name_zh": "Industrial Brutalism (工業蠻荒)",
+      "name_en": "Industrial",
+      "desc_zh": "裸露混凝土感、金屬網格底紋、警示黃橙色與粗獷鋼鐵線條。",
+      "desc_en": "Exposed concrete textures, metallic grid mesh, safety orange warning accents, and heavy steel rivets.",
+      "triggers_zh": "industrial, 工業風, raw concrete",
+      "triggers_en": "industrial, raw concrete",
+      "copy_prompt_zh": "請使用「Industrial Brutalism (工業蠻荒)」前端風格規範進行視覺設計，嚴格套用色票（#1A1A1A, #E5E5E5, #FF4500）與特性（裸露混凝土感、金屬網格底紋、警示黃橙色與粗獷鋼鐵線條。）！",
+      "copy_prompt_en": "Please apply the 'Industrial' design style, strictly enforcing palette (#1A1A1A, #E5E5E5, #FF4500) and aesthetics (Exposed concrete textures, metallic grid mesh, safety orange warning accents, and heavy steel rivets.)!"
+    },
+    {
+      "name": "Claymorphism (黏土擬物風格)",
+      "triggers": "claymorphism, 黏土風格, 3d clay",
+      "hex": [
+        "#F3E8FF",
+        "#C084FC",
+        "#9333EA"
+      ],
+      "desc": "圓潤蓬鬆雙內陰影、軟萌 3D 黏土造型與可愛浮雕感。",
+      "css": "background: #F3E8FF; box-shadow: inset -6px -6px 12px #C084FC, inset 6px 6px 12px #FFF; border-radius: 24px; color: #581C87;",
+      "name_zh": "Claymorphism (黏土擬物風格)",
+      "name_en": "Claymorphism",
+      "desc_zh": "圓潤蓬鬆雙內陰影、軟萌 3D 黏土造型與可愛浮雕感。",
+      "desc_en": "3D clay object effect, inflated rounded shapes, inner shadow highlights, and playful soft pastel tones.",
+      "triggers_zh": "claymorphism, 黏土風格, 3d clay",
+      "triggers_en": "claymorphism, 3d clay",
+      "copy_prompt_zh": "請使用「Claymorphism (黏土擬物風格)」前端風格規範進行視覺設計，嚴格套用色票（#F3E8FF, #C084FC, #9333EA）與特性（圓潤蓬鬆雙內陰影、軟萌 3D 黏土造型與可愛浮雕感。）！",
+      "copy_prompt_en": "Please apply the 'Claymorphism' design style, strictly enforcing palette (#F3E8FF, #C084FC, #9333EA) and aesthetics (3D clay object effect, inflated rounded shapes, inner shadow highlights, and playful soft pastel tones.)!"
+    },
+    {
+      "name": "Dark OLED Obsidian (深空黑曜石)",
+      "triggers": "dark oled, 黑曜石, pure black",
+      "hex": [
+        "#000000",
+        "#121212",
+        "#00E5FF"
+      ],
+      "desc": "發光二極體純黑底、高鮮豔發光文字與省電極致視覺。",
+      "css": "background: #000000; border: 1px solid #1f1f1f; color: #00E5FF; text-shadow: 0 0 8px rgba(0,229,255,0.5);",
+      "name_zh": "Dark OLED Obsidian (深空黑曜石)",
+      "name_en": "Dark",
+      "desc_zh": "發光二極體純黑底、高鮮豔發光文字與省電極致視覺。",
+      "desc_en": "Pure OLED black canvas, vivid neon glowing text, ultra battery saving visual minimalism.",
+      "triggers_zh": "dark oled, 黑曜石, pure black",
+      "triggers_en": "dark oled, pure black",
+      "copy_prompt_zh": "請使用「Dark OLED Obsidian (深空黑曜石)」前端風格規範進行視覺設計，嚴格套用色票（#000000, #121212, #00E5FF）與特性（發光二極體純黑底、高鮮豔發光文字與省電極致視覺。）！",
+      "copy_prompt_en": "Please apply the 'Dark' design style, strictly enforcing palette (#000000, #121212, #00E5FF) and aesthetics (Pure OLED black canvas, vivid neon glowing text, ultra battery saving visual minimalism.)!"
+    },
+    {
+      "name": "Retro Win95 (95年代復古網頁)",
+      "triggers": "retro 95, 95復古, classic win",
+      "hex": [
+        "#008080",
+        "#C0C0C0",
+        "#000080"
+      ],
+      "desc": "灰底凸起三維框 (border 2px inset/outset)、青綠桌面與傳統視窗標題列。",
+      "css": "background: #C0C0C0; border: 2px outset #FFF; color: #000; font-family: 'MS Sans Serif', sans-serif;",
+      "name_zh": "Retro Win95 (95年代復古網頁)",
+      "name_en": "Retro",
+      "desc_zh": "灰底凸起三維框 (border 2px inset/outset)、青綠桌面與傳統視窗標題列。",
+      "desc_en": "Bevelled 3D borders (inset/outset), teal desktop canvas, and classic window titlebars.",
+      "triggers_zh": "retro 95, 95復古, classic win",
+      "triggers_en": "retro 95, 95, classic win",
+      "copy_prompt_zh": "請使用「Retro Win95 (95年代復古網頁)」前端風格規範進行視覺設計，嚴格套用色票（#008080, #C0C0C0, #000080）與特性（灰底凸起三維框 (border 2px inset/outset)、青綠桌面與傳統視窗標題列。）！",
+      "copy_prompt_en": "Please apply the 'Retro' design style, strictly enforcing palette (#008080, #C0C0C0, #000080) and aesthetics (Bevelled 3D borders (inset/outset), teal desktop canvas, and classic window titlebars.)!"
+    },
+    {
+      "name": "Kinfolk Editorial (Kinfolk 雜誌風格)",
+      "triggers": "kinfolk, 雜誌編輯, 暖白紙色",
+      "hex": [
+        "#F4F1EA",
+        "#33312E",
+        "#8C8275"
+      ],
+      "desc": "極大比例留白、明朝體 Serif、莫蘭迪低飽和大地色與高級沉靜感。",
+      "css": "background: #F4F1EA; color: #33312E; font-family: Georgia, serif; letter-spacing: 0.05em;",
+      "name_zh": "Kinfolk Editorial (Kinfolk 雜誌風格)",
+      "name_en": "Kinfolk",
+      "desc_zh": "極大比例留白、明朝體 Serif、莫蘭迪低飽和大地色與高級沉靜感。",
+      "desc_en": "Extreme whitespace ratio, Mincho Serif typography, muted Morandi earth tones, and quiet luxury sophistication.",
+      "triggers_zh": "kinfolk, 雜誌編輯, 暖白紙色",
+      "triggers_en": "kinfolk",
+      "copy_prompt_zh": "請使用「Kinfolk Editorial (Kinfolk 雜誌風格)」前端風格規範進行視覺設計，嚴格套用色票（#F4F1EA, #33312E, #8C8275）與特性（極大比例留白、明朝體 Serif、莫蘭迪低飽和大地色與高級沉靜感。）！",
+      "copy_prompt_en": "Please apply the 'Kinfolk' design style, strictly enforcing palette (#F4F1EA, #33312E, #8C8275) and aesthetics (Extreme whitespace ratio, Mincho Serif typography, muted Morandi earth tones, and quiet luxury sophistication.)!"
+    },
+    {
+      "name": "Vaporwave (美式蒸汽波)",
+      "triggers": "vaporwave, 蒸汽波, 復古霓虹",
+      "hex": [
+        "#FF71CE",
+        "#01CDFE",
+        "#05FFA1"
+      ],
+      "desc": "80 年代粉紫青漸變、棕櫚樹網格、復古雕像與懷舊浪漫。",
+      "css": "background: linear-gradient(to right, #FF71CE, #01CDFE); color: #FFF; font-family: sans-serif; font-weight: 700;",
+      "name_zh": "Vaporwave (美式蒸汽波)",
+      "name_en": "Vaporwave",
+      "desc_zh": "80 年代粉紫青漸變、棕櫚樹網格、復古雕像與懷舊浪漫。",
+      "desc_en": "80s synthwave aesthetics, pastel pink/cyan gradients, Japanese kanji overlays, statues, and VHS scanlines.",
+      "triggers_zh": "vaporwave, 蒸汽波, 復古霓虹",
+      "triggers_en": "vaporwave",
+      "copy_prompt_zh": "請使用「Vaporwave (美式蒸汽波)」前端風格規範進行視覺設計，嚴格套用色票（#FF71CE, #01CDFE, #05FFA1）與特性（80 年代粉紫青漸變、棕櫚樹網格、復古雕像與懷舊浪漫。）！",
+      "copy_prompt_en": "Please apply the 'Vaporwave' design style, strictly enforcing palette (#FF71CE, #01CDFE, #05FFA1) and aesthetics (80s synthwave aesthetics, pastel pink/cyan gradients, Japanese kanji overlays, statues, and VHS scanlines.)!"
+    },
+    {
+      "name": "Flat Design 2.0 (現代扁平 2.0)",
+      "triggers": "flat design, 現代扁平, minimalist flat",
+      "hex": [
+        "#2563EB",
+        "#F8FAFC",
+        "#0F172A"
+      ],
+      "desc": "取消純硬線條，加入極輕柔單層微陰影與鮮明品牌幾何圖形。",
+      "css": "background: #2563EB; color: #FFF; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);",
+      "name_zh": "Flat Design 2.0 (現代扁平 2.0)",
+      "name_en": "Flat",
+      "desc_zh": "取消純硬線條，加入極輕柔單層微陰影與鮮明品牌幾何圖形。",
+      "desc_en": "Vibrant solid color blocks, zero shadows or gradients, crisp geometric shapes, and clear visual hierarchy.",
+      "triggers_zh": "flat design, 現代扁平, minimalist flat",
+      "triggers_en": "flat design, minimalist flat",
+      "copy_prompt_zh": "請使用「Flat Design 2.0 (現代扁平 2.0)」前端風格規範進行視覺設計，嚴格套用色票（#2563EB, #F8FAFC, #0F172A）與特性（取消純硬線條，加入極輕柔單層微陰影與鮮明品牌幾何圖形。）！",
+      "copy_prompt_en": "Please apply the 'Flat' design style, strictly enforcing palette (#2563EB, #F8FAFC, #0F172A) and aesthetics (Vibrant solid color blocks, zero shadows or gradients, crisp geometric shapes, and clear visual hierarchy.)!"
+    },
+    {
+      "name": "Minimal Dark Terminal (黑客終端)",
+      "triggers": "terminal, 黑客風格, cli ui",
+      "hex": [
+        "#0D1117",
+        "#238636",
+        "#58A6FF"
+      ],
+      "desc": "GitHub Dark 與黑客終端等寬字體、綠色 Status 點與指令提示符。",
+      "css": "background: #0D1117; border: 1px solid #30363D; color: #58A6FF; font-family: monospace;",
+      "name_zh": "Minimal Dark Terminal (黑客終端)",
+      "name_en": "Minimal",
+      "desc_zh": "GitHub Dark 與黑客終端等寬字體、綠色 Status 點與指令提示符。",
+      "desc_en": "GitHub Dark Status",
+      "triggers_zh": "terminal, 黑客風格, cli ui",
+      "triggers_en": "terminal, cli ui",
+      "copy_prompt_zh": "請使用「Minimal Dark Terminal (黑客終端)」前端風格規範進行視覺設計，嚴格套用色票（#0D1117, #238636, #58A6FF）與特性（GitHub Dark 與黑客終端等寬字體、綠色 Status 點與指令提示符。）！",
+      "copy_prompt_en": "Please apply the 'Minimal' design style, strictly enforcing palette (#0D1117, #238636, #58A6FF) and aesthetics (GitHub Dark Status)!"
+    },
+    {
+      "name": "Biomimetic Nature (仿生自然風格)",
+      "triggers": "biomimetic, 自然風格, 森林綠",
+      "hex": [
+        "#0F291E",
+        "#34D399",
+        "#ECFDF5"
+      ],
+      "desc": "葉脈曲線、苔蘚深綠、有機弧線邊框與大地自然氣息。",
+      "css": "background: #0F291E; color: #34D399; border-radius: 30px 10px 30px 10px; border: 1px solid #059669;",
+      "name_zh": "Biomimetic Nature (仿生自然風格)",
+      "name_en": "Biomimetic",
+      "desc_zh": "葉脈曲線、苔蘚深綠、有機弧線邊框與大地自然氣息。",
+      "desc_en": "Nature structure inspired algorithms, honeycomb grids, voronoi cell patterns, and organic structural rhythm.",
+      "triggers_zh": "biomimetic, 自然風格, 森林綠",
+      "triggers_en": "biomimetic",
+      "copy_prompt_zh": "請使用「Biomimetic Nature (仿生自然風格)」前端風格規範進行視覺設計，嚴格套用色票（#0F291E, #34D399, #ECFDF5）與特性（葉脈曲線、苔蘚深綠、有機弧線邊框與大地自然氣息。）！",
+      "copy_prompt_en": "Please apply the 'Biomimetic' design style, strictly enforcing palette (#0F291E, #34D399, #ECFDF5) and aesthetics (Nature structure inspired algorithms, honeycomb grids, voronoi cell patterns, and organic structural rhythm.)!"
+    },
+    {
+      "name": "Chromatic Holographic (全息光澤)",
+      "triggers": "holographic, 全息彩虹, chrome shine",
+      "hex": [
+        "#FF9A9E",
+        "#FECFEF",
+        "#A1C4FD"
+      ],
+      "desc": "金屬全息反射、彩虹光澤流動感與未來流行主義。",
+      "css": "background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%); color: #1e293b; border-radius: 12px;",
+      "name_zh": "Chromatic Holographic (全息光澤)",
+      "name_en": "Chromatic",
+      "desc_zh": "金屬全息反射、彩虹光澤流動感與未來流行主義。",
+      "desc_en": "RGB color channel split effect, chromatic aberration hover states, prism light refractions, and neon accents.",
+      "triggers_zh": "holographic, 全息彩虹, chrome shine",
+      "triggers_en": "holographic, chrome shine",
+      "copy_prompt_zh": "請使用「Chromatic Holographic (全息光澤)」前端風格規範進行視覺設計，嚴格套用色票（#FF9A9E, #FECFEF, #A1C4FD）與特性（金屬全息反射、彩虹光澤流動感與未來流行主義。）！",
+      "copy_prompt_en": "Please apply the 'Chromatic' design style, strictly enforcing palette (#FF9A9E, #FECFEF, #A1C4FD) and aesthetics (RGB color channel split effect, chromatic aberration hover states, prism light refractions, and neon accents.)!"
+    },
+    {
+      "name": "E-Ink Paper (電子墨水屏)",
+      "triggers": "eink, 電子紙, Kindle風格",
+      "hex": [
+        "#EAEAEA",
+        "#111111",
+        "#777777"
+      ],
+      "desc": "無高調彩度、雙色灰階動態抖動網點、極致無負擔閱讀體驗。",
+      "css": "background: #EAEAEA; color: #111; border: 1px solid #111; font-family: serif;",
+      "name_zh": "E-Ink Paper (電子墨水屏)",
+      "name_en": "E-Ink",
+      "desc_zh": "無高調彩度、雙色灰階動態抖動網點、極致無負擔閱讀體驗。",
+      "desc_en": "Kindle paper display aesthetic, zero smooth gradients, pure stippled halftone dots, and high legibility contrast.",
+      "triggers_zh": "eink, 電子紙, Kindle風格",
+      "triggers_en": "eink, Kindle",
+      "copy_prompt_zh": "請使用「E-Ink Paper (電子墨水屏)」前端風格規範進行視覺設計，嚴格套用色票（#EAEAEA, #111111, #777777）與特性（無高調彩度、雙色灰階動態抖動網點、極致無負擔閱讀體驗。）！",
+      "copy_prompt_en": "Please apply the 'E-Ink' design style, strictly enforcing palette (#EAEAEA, #111111, #777777) and aesthetics (Kindle paper display aesthetic, zero smooth gradients, pure stippled halftone dots, and high legibility contrast.)!"
+    },
+    {
+      "name": "Gen-Z Chaos (Z世代解構主義)",
+      "triggers": "genz, z世代, 拼貼解構",
+      "hex": [
+        "#CCFF00",
+        "#FF00FF",
+        "#000000"
+      ],
+      "desc": "傾斜貼紙文字、貼紙手繪插畫、打破慣例框框與高彩活力爆發。",
+      "css": "background: #CCFF00; color: #000; transform: rotate(-2deg); font-weight: 900; border: 2px solid #000;",
+      "name_zh": "Gen-Z Chaos (Z世代解構主義)",
+      "name_en": "Gen-Z",
+      "desc_zh": "傾斜貼紙文字、貼紙手繪插畫、打破慣例框框與高彩活力爆發。",
+      "desc_en": "",
+      "triggers_zh": "genz, z世代, 拼貼解構",
+      "triggers_en": "genz, z",
+      "copy_prompt_zh": "請使用「Gen-Z Chaos (Z世代解構主義)」前端風格規範進行視覺設計，嚴格套用色票（#CCFF00, #FF00FF, #000000）與特性（傾斜貼紙文字、貼紙手繪插畫、打破慣例框框與高彩活力爆發。）！",
+      "copy_prompt_en": "Please apply the 'Gen-Z' design style, strictly enforcing palette (#CCFF00, #FF00FF, #000000) and aesthetics (傾斜貼紙文字、貼紙手繪插畫、打破慣例框框與高彩活力爆發。)!"
+    },
+    {
+      "name": "Tactile Skeuomorphism (經典擬物觸感)",
+      "triggers": "skeuomorphism, 經典擬物, 皮革木紋",
+      "hex": [
+        "#3D2314",
+        "#D4AF37",
+        "#F5E6D3"
+      ],
+      "desc": "縫線皮革、金屬按鈕紋理、實體微立體感與工藝重現。",
+      "css": "background: #3D2314; color: #F5E6D3; border: 2px solid #D4AF37; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);",
+      "name_zh": "Tactile Skeuomorphism (經典擬物觸感)",
+      "name_en": "Tactile",
+      "desc_zh": "縫線皮革、金屬按鈕紋理、實體微立體感與工藝重現。",
+      "desc_en": "Physical material textures, embossed paper, leather grain, realistic depth shadows, and touchable surfaces.",
+      "triggers_zh": "skeuomorphism, 經典擬物, 皮革木紋",
+      "triggers_en": "skeuomorphism",
+      "copy_prompt_zh": "請使用「Tactile Skeuomorphism (經典擬物觸感)」前端風格規範進行視覺設計，嚴格套用色票（#3D2314, #D4AF37, #F5E6D3）與特性（縫線皮革、金屬按鈕紋理、實體微立體感與工藝重現。）！",
+      "copy_prompt_en": "Please apply the 'Tactile' design style, strictly enforcing palette (#3D2314, #D4AF37, #F5E6D3) and aesthetics (Physical material textures, embossed paper, leather grain, realistic depth shadows, and touchable surfaces.)!"
+    },
+    {
+      "name": "Voxel 3D (體素積木風)",
+      "triggers": "voxel, 體素積木, Minecraft風格",
+      "hex": [
+        "#4ADE80",
+        "#166534",
+        "#FEF08A"
+      ],
+      "desc": "3D 立體方塊像素、階梯網格與幾何趣味。",
+      "css": "background: #4ADE80; color: #166534; border: 3px solid #166534; box-shadow: 6px 6px 0px #166534;",
+      "name_zh": "Voxel 3D (體素積木風)",
+      "name_en": "Voxel",
+      "desc_zh": "3D 立體方塊像素、階梯網格與幾何趣味。",
+      "desc_en": "3D voxel grid block aesthetics, pixelated isometric cards, Minecraft-inspired geometry, and retro gaming vibe.",
+      "triggers_zh": "voxel, 體素積木, Minecraft風格",
+      "triggers_en": "voxel, Minecraft",
+      "copy_prompt_zh": "請使用「Voxel 3D (體素積木風)」前端風格規範進行視覺設計，嚴格套用色票（#4ADE80, #166534, #FEF08A）與特性（3D 立體方塊像素、階梯網格與幾何趣味。）！",
+      "copy_prompt_en": "Please apply the 'Voxel' design style, strictly enforcing palette (#4ADE80, #166534, #FEF08A) and aesthetics (3D voxel grid block aesthetics, pixelated isometric cards, Minecraft-inspired geometry, and retro gaming vibe.)!"
+    },
+    {
+      "name": "HUD Military Tech (戰術抬頭顯示)",
+      "triggers": "hud, 抬頭顯示, 戰術科技",
+      "hex": [
+        "#051923",
+        "#00A6FB",
+        "#0582CA"
+      ],
+      "desc": "十字準星、座標數據圖例、動態邊角括號與軍事科技風格。",
+      "css": "background: #051923; border: 1px solid #00A6FB; color: #00A6FB; font-family: monospace;",
+      "name_zh": "HUD Military Tech (戰術抬頭顯示)",
+      "name_en": "HUD",
+      "desc_zh": "十字準星、座標數據圖例、動態邊角括號與軍事科技風格。",
+      "desc_en": "Sci-fi heads-up display, holographic grid overlays, corner brackets, technical data telemetry, and glowing reticles.",
+      "triggers_zh": "hud, 抬頭顯示, 戰術科技",
+      "triggers_en": "hud",
+      "copy_prompt_zh": "請使用「HUD Military Tech (戰術抬頭顯示)」前端風格規範進行視覺設計，嚴格套用色票（#051923, #00A6FB, #0582CA）與特性（十字準星、座標數據圖例、動態邊角括號與軍事科技風格。）！",
+      "copy_prompt_en": "Please apply the 'HUD' design style, strictly enforcing palette (#051923, #00A6FB, #0582CA) and aesthetics (Sci-fi heads-up display, holographic grid overlays, corner brackets, technical data telemetry, and glowing reticles.)!"
+    },
+    {
+      "name": "Gradient Mesh 3.0 (高階色彩網格)",
+      "triggers": "gradient mesh, 漸變網格, 彌散光學",
+      "hex": [
+        "#FF512F",
+        "#DD2476",
+        "#3A1C71"
+      ],
+      "desc": "3 色以上流體漸變、多維立體光源與高端科技流體。",
+      "css": "background: linear-gradient(to right, #FF512F, #DD2476); color: #FFF; border-radius: 16px;",
+      "name_zh": "Gradient Mesh 3.0 (高階色彩網格)",
+      "name_en": "Gradient",
+      "desc_zh": "3 色以上流體漸變、多維立體光源與高端科技流體。",
+      "desc_en": "3",
+      "triggers_zh": "gradient mesh, 漸變網格, 彌散光學",
+      "triggers_en": "gradient mesh",
+      "copy_prompt_zh": "請使用「Gradient Mesh 3.0 (高階色彩網格)」前端風格規範進行視覺設計，嚴格套用色票（#FF512F, #DD2476, #3A1C71）與特性（3 色以上流體漸變、多維立體光源與高端科技流體。）！",
+      "copy_prompt_en": "Please apply the 'Gradient' design style, strictly enforcing palette (#FF512F, #DD2476, #3A1C71) and aesthetics (3)!"
+    },
+    {
+      "name": "Accessible High-Contrast (無障礙高對比)",
+      "triggers": "a11y high contrast, 高對比無障礙, WCAG AAA",
+      "hex": [
+        "#000000",
+        "#FFFF00",
+        "#FFFFFF"
+      ],
+      "desc": "符合 WCAG AAA 最高標準、純黑底純黃字與極度清晰識別度。",
+      "css": "background: #000000; color: #FFFF00; border: 3px solid #FFFF00; font-size: 14px; font-weight: bold;",
+      "name_zh": "Accessible High-Contrast (無障礙高對比)",
+      "name_en": "Accessible",
+      "desc_zh": "符合 WCAG AAA 最高標準、純黑底純黃字與極度清晰識別度。",
+      "desc_en": "Strict WCAG AAA contrast ratio, large font sizing, high visibility focus states, and clean legible layout.",
+      "triggers_zh": "a11y high contrast, 高對比無障礙, WCAG AAA",
+      "triggers_en": "a11y high contrast, WCAG AAA",
+      "copy_prompt_zh": "請使用「Accessible High-Contrast (無障礙高對比)」前端風格規範進行視覺設計，嚴格套用色票（#000000, #FFFF00, #FFFFFF）與特性（符合 WCAG AAA 最高標準、純黑底純黃字與極度清晰識別度。）！",
+      "copy_prompt_en": "Please apply the 'Accessible' design style, strictly enforcing palette (#000000, #FFFF00, #FFFFFF) and aesthetics (Strict WCAG AAA contrast ratio, large font sizing, high visibility focus states, and clean legible layout.)!"
+    },
+    {
+      "name": "Memphis Group 80s (孟菲斯波普風格)",
+      "triggers": "memphis, 孟菲斯, 波點幾何",
+      "hex": [
+        "#F43F5E",
+        "#0EA5E9",
+        "#FACC15"
+      ],
+      "desc": "波浪紋、黑白波點幾何塊、彩線拋物線與快樂波普風格。",
+      "css": "background: #FACC15; color: #000; border: 2px solid #000; background-image: radial-gradient(#0ea5e9 20%, transparent 20%);",
+      "name_zh": "Memphis Group 80s (孟菲斯波普風格)",
+      "name_en": "Memphis",
+      "desc_zh": "波浪紋、黑白波點幾何塊、彩線拋物線與快樂波普風格。",
+      "desc_en": "80s Memphis group design, bold geometric patterns, squiggly lines, terrazzo textures, and cheerful clash colors.",
+      "triggers_zh": "memphis, 孟菲斯, 波點幾何",
+      "triggers_en": "memphis",
+      "copy_prompt_zh": "請使用「Memphis Group 80s (孟菲斯波普風格)」前端風格規範進行視覺設計，嚴格套用色票（#F43F5E, #0EA5E9, #FACC15）與特性（波浪紋、黑白波點幾何塊、彩線拋物線與快樂波普風格。）！",
+      "copy_prompt_en": "Please apply the 'Memphis' design style, strictly enforcing palette (#F43F5E, #0EA5E9, #FACC15) and aesthetics (80s Memphis group design, bold geometric patterns, squiggly lines, terrazzo textures, and cheerful clash colors.)!"
+    },
+    {
+      "name": "Scandinavian Hygge (北歐溫馨簡約)",
+      "triggers": "hygge, scandinavian, 北歐極簡",
+      "hex": [
+        "#F8FAF8",
+        "#4A5568",
+        "#E2E8F0"
+      ],
+      "desc": "極簡燕麥色底、柔和木質色調、極高舒適度與放鬆家居質感。",
+      "css": "background: #F8FAF8; color: #4A5568; border-radius: 12px; border: 1px solid #E2E8F0;",
+      "name_zh": "Scandinavian Hygge (北歐溫馨簡約)",
+      "name_en": "Scandinavian",
+      "desc_zh": "極簡燕麥色底、柔和木質色調、極高舒適度與放鬆家居質感。",
+      "desc_en": "",
+      "triggers_zh": "hygge, scandinavian, 北歐極簡",
+      "triggers_en": "hygge, scandinavian",
+      "copy_prompt_zh": "請使用「Scandinavian Hygge (北歐溫馨簡約)」前端風格規範進行視覺設計，嚴格套用色票（#F8FAF8, #4A5568, #E2E8F0）與特性（極簡燕麥色底、柔和木質色調、極高舒適度與放鬆家居質感。）！",
+      "copy_prompt_en": "Please apply the 'Scandinavian' design style, strictly enforcing palette (#F8FAF8, #4A5568, #E2E8F0) and aesthetics (極簡燕麥色底、柔和木質色調、極高舒適度與放鬆家居質感。)!"
+    },
+    {
+      "name": "Kinetic Typography (動態字體風格)",
+      "triggers": "kinetic, 動態排版, 大字體流動",
+      "hex": [
+        "#000000",
+        "#FFFFFF",
+        "#FF3366"
+      ],
+      "desc": "超大尺寸字體溢出邊框、滾動字幕與流動文字視覺號召。",
+      "css": "background: #000; color: #FFF; font-size: 16px; font-weight: 900; letter-spacing: -1px;",
+      "name_zh": "Kinetic Typography (動態字體風格)",
+      "name_en": "Kinetic",
+      "desc_zh": "超大尺寸字體溢出邊框、滾動字幕與流動文字視覺號召。",
+      "desc_en": "Dynamic typography layout, bold moving text marquees, physics-driven hover states, and high energy rhythm.",
+      "triggers_zh": "kinetic, 動態排版, 大字體流動",
+      "triggers_en": "kinetic",
+      "copy_prompt_zh": "請使用「Kinetic Typography (動態字體風格)」前端風格規範進行視覺設計，嚴格套用色票（#000000, #FFFFFF, #FF3366）與特性（超大尺寸字體溢出邊框、滾動字幕與流動文字視覺號召。）！",
+      "copy_prompt_en": "Please apply the 'Kinetic' design style, strictly enforcing palette (#000000, #FFFFFF, #FF3366) and aesthetics (Dynamic typography layout, bold moving text marquees, physics-driven hover states, and high energy rhythm.)!"
+    },
+    {
+      "name": "Dimensional Papercut (立體剪紙)",
+      "triggers": "papercut, 剪紙風格, 疊層影子",
+      "hex": [
+        "#1E293B",
+        "#38BDF8",
+        "#7DD3FC"
+      ],
+      "desc": "多層紙張堆疊立體影、陰影落差與溫馨工藝質感。",
+      "css": "background: #38BDF8; color: #0F172A; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3); border-radius: 12px;",
+      "name_zh": "Dimensional Papercut (立體剪紙)",
+      "name_en": "Dimensional",
+      "desc_zh": "多層紙張堆疊立體影、陰影落差與溫馨工藝質感。",
+      "desc_en": "Multi-layer stacked card depth, perspective 3D tilt hover transforms, and elevation shadow stacks.",
+      "triggers_zh": "papercut, 剪紙風格, 疊層影子",
+      "triggers_en": "papercut",
+      "copy_prompt_zh": "請使用「Dimensional Papercut (立體剪紙)」前端風格規範進行視覺設計，嚴格套用色票（#1E293B, #38BDF8, #7DD3FC）與特性（多層紙張堆疊立體影、陰影落差與溫馨工藝質感。）！",
+      "copy_prompt_en": "Please apply the 'Dimensional' design style, strictly enforcing palette (#1E293B, #38BDF8, #7DD3FC) and aesthetics (Multi-layer stacked card depth, perspective 3D tilt hover transforms, and elevation shadow stacks.)!"
+    },
+    {
+      "name": "Retro Future 80s (80年代未來的遐想)",
+      "triggers": "retro future, 復古未來, synthwave",
+      "hex": [
+        "#2E0249",
+        "#570A57",
+        "#F806CC"
+      ],
+      "desc": "霓虹網格線延伸至地平線、夕陽太陽圓盤與電子合成器風格。",
+      "css": "background: #2E0249; border-bottom: 2px solid #F806CC; color: #F806CC; font-family: sans-serif;",
+      "name_zh": "Retro Future 80s (80年代未來的遐想)",
+      "name_en": "Retro",
+      "desc_zh": "霓虹網格線延伸至地平線、夕陽太陽圓盤與電子合成器風格。",
+      "desc_en": "Bevelled 3D borders (inset/outset), teal desktop canvas, and classic window titlebars.",
+      "triggers_zh": "retro future, 復古未來, synthwave",
+      "triggers_en": "retro future, synthwave",
+      "copy_prompt_zh": "請使用「Retro Future 80s (80年代未來的遐想)」前端風格規範進行視覺設計，嚴格套用色票（#2E0249, #570A57, #F806CC）與特性（霓虹網格線延伸至地平線、夕陽太陽圓盤與電子合成器風格。）！",
+      "copy_prompt_en": "Please apply the 'Retro' design style, strictly enforcing palette (#2E0249, #570A57, #F806CC) and aesthetics (Bevelled 3D borders (inset/outset), teal desktop canvas, and classic window titlebars.)!"
+    },
+    {
+      "name": "Micro-Interaction Focus (微互動導向)",
+      "triggers": "micro interaction, 微互動, 靈動微動",
+      "hex": [
+        "#FFFFFF",
+        "#0284C7",
+        "#F1F5F9"
+      ],
+      "desc": "每一個組件懸停均有 3D 浮動、點擊微彈簧與精緻反饋。",
+      "css": "background: #FFF; border: 1px solid #E2E8F0; color: #0284C7; transition: transform 0.2s;",
+      "name_zh": "Micro-Interaction Focus (微互動導向)",
+      "name_en": "Micro-Interaction",
+      "desc_zh": "每一個組件懸停均有 3D 浮動、點擊微彈簧與精緻反饋。",
+      "desc_en": "3D",
+      "triggers_zh": "micro interaction, 微互動, 靈動微動",
+      "triggers_en": "micro interaction",
+      "copy_prompt_zh": "請使用「Micro-Interaction Focus (微互動導向)」前端風格規範進行視覺設計，嚴格套用色票（#FFFFFF, #0284C7, #F1F5F9）與特性（每一個組件懸停均有 3D 浮動、點擊微彈簧與精緻反饋。）！",
+      "copy_prompt_en": "Please apply the 'Micro-Interaction' design style, strictly enforcing palette (#FFFFFF, #0284C7, #F1F5F9) and aesthetics (3D)!"
+    },
+    {
+      "name": "Liquid Motion (流體水波)",
+      "triggers": "liquid motion, 流體質感, 水波動態",
+      "hex": [
+        "#0EA5E9",
+        "#38BDF8",
+        "#E0F2FE"
+      ],
+      "desc": "有機液體波動邊框、藍色清澈漸變與流暢水潤感知。",
+      "css": "background: linear-gradient(180deg, #0EA5E9 0%, #38BDF8 100%); color: #FFF; border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;",
+      "name_zh": "Liquid Motion (流體水波)",
+      "name_en": "Liquid",
+      "desc_zh": "有機液體波動邊框、藍色清澈漸變與流暢水潤感知。",
+      "desc_en": "Fluid organic morphing blobs, smooth blobby SVG paths, glossy liquid surface reflections, and elastic motion.",
+      "triggers_zh": "liquid motion, 流體質感, 水波動態",
+      "triggers_en": "liquid motion",
+      "copy_prompt_zh": "請使用「Liquid Motion (流體水波)」前端風格規範進行視覺設計，嚴格套用色票（#0EA5E9, #38BDF8, #E0F2FE）與特性（有機液體波動邊框、藍色清澈漸變與流暢水潤感知。）！",
+      "copy_prompt_en": "Please apply the 'Liquid' design style, strictly enforcing palette (#0EA5E9, #38BDF8, #E0F2FE) and aesthetics (Fluid organic morphing blobs, smooth blobby SVG paths, glossy liquid surface reflections, and elastic motion.)!"
+    },
+    {
+      "name": "Zero-Margin Maximalism (極致滿版極多主義)",
+      "triggers": "maximalism, 極多主義, 零留白",
+      "hex": [
+        "#FF0000",
+        "#00FF00",
+        "#0000FF"
+      ],
+      "desc": "充滿畫面的色彩圖塊、無留白、撞擊感與爆炸資訊視覺。",
+      "css": "background: #FF0000; color: #FFFF00; font-weight: 900; padding: 12px; text-transform: uppercase;",
+      "name_zh": "Zero-Margin Maximalism (極致滿版極多主義)",
+      "name_en": "Zero-Margin",
+      "desc_zh": "充滿畫面的色彩圖塊、無留白、撞擊感與爆炸資訊視覺。",
+      "desc_en": "",
+      "triggers_zh": "maximalism, 極多主義, 零留白",
+      "triggers_en": "maximalism",
+      "copy_prompt_zh": "請使用「Zero-Margin Maximalism (極致滿版極多主義)」前端風格規範進行視覺設計，嚴格套用色票（#FF0000, #00FF00, #0000FF）與特性（充滿畫面的色彩圖塊、無留白、撞擊感與爆炸資訊視覺。）！",
+      "copy_prompt_en": "Please apply the 'Zero-Margin' design style, strictly enforcing palette (#FF0000, #00FF00, #0000FF) and aesthetics (充滿畫面的色彩圖塊、無留白、撞擊感與爆炸資訊視覺。)!"
+    },
+    {
+      "name": "Raw Concrete Monolith (巨石水泥風)",
+      "triggers": "monolith, 巨石建築, 原始水泥",
+      "hex": [
+        "#262626",
+        "#525252",
+        "#A3A3A3"
+      ],
+      "desc": "深灰巨石塊面、堅硬幾何與現代建築感質感。",
+      "css": "background: #262626; color: #D4D4D4; border: 1px solid #404040; font-family: sans-serif;",
+      "name_zh": "Raw Concrete Monolith (巨石水泥風)",
+      "name_en": "Raw",
+      "desc_zh": "深灰巨石塊面、堅硬幾何與現代建築感質感。",
+      "desc_en": "Unprocessed brutalist layout, raw mono font hierarchy, wireframe border lines, and technical blueprint feel.",
+      "triggers_zh": "monolith, 巨石建築, 原始水泥",
+      "triggers_en": "monolith",
+      "copy_prompt_zh": "請使用「Raw Concrete Monolith (巨石水泥風)」前端風格規範進行視覺設計，嚴格套用色票（#262626, #525252, #A3A3A3）與特性（深灰巨石塊面、堅硬幾何與現代建築感質感。）！",
+      "copy_prompt_en": "Please apply the 'Raw' design style, strictly enforcing palette (#262626, #525252, #A3A3A3) and aesthetics (Unprocessed brutalist layout, raw mono font hierarchy, wireframe border lines, and technical blueprint feel.)!"
+    },
+    {
+      "name": "Soft Pastel UI (柔和馬卡龍粉彩)",
+      "triggers": "pastel, 馬卡龍, 柔色彩彩",
+      "hex": [
+        "#FECDD3",
+        "#E0E7FF",
+        "#FEF08A"
+      ],
+      "desc": "淡粉淡藍馬卡龍配色、低對比無壓迫感與療癒氛圍。",
+      "css": "background: #FECDD3; color: #881337; border-radius: 16px; font-weight: 600;",
+      "name_zh": "Soft Pastel UI (柔和馬卡龍粉彩)",
+      "name_en": "Soft",
+      "desc_zh": "淡粉淡藍馬卡龍配色、低對比無壓迫感與療癒氛圍。",
+      "desc_en": "",
+      "triggers_zh": "pastel, 馬卡龍, 柔色彩彩",
+      "triggers_en": "pastel",
+      "copy_prompt_zh": "請使用「Soft Pastel UI (柔和馬卡龍粉彩)」前端風格規範進行視覺設計，嚴格套用色票（#FECDD3, #E0E7FF, #FEF08A）與特性（淡粉淡藍馬卡龍配色、低對比無壓迫感與療癒氛圍。）！",
+      "copy_prompt_en": "Please apply the 'Soft' design style, strictly enforcing palette (#FECDD3, #E0E7FF, #FEF08A) and aesthetics (淡粉淡藍馬卡龍配色、低對比無壓迫感與療癒氛圍。)!"
+    },
+    {
+      "name": "Cyber Gothic (賽博哥特風格)",
+      "triggers": "cyber gothic, 暗黑哥特, 黑銀科技",
+      "hex": [
+        "#050505",
+        "#E2E8F0",
+        "#94A3B8"
+      ],
+      "desc": "深黑銀灰襯線字體、尖角金屬框邊與冷峻神秘科技感。",
+      "css": "background: #050505; color: #E2E8F0; border: 1px solid #334155; font-family: Times, serif;",
+      "name_zh": "Cyber Gothic (賽博哥特風格)",
+      "name_en": "Cyber",
+      "desc_zh": "深黑銀灰襯線字體、尖角金屬框邊與冷峻神秘科技感。",
+      "desc_en": "",
+      "triggers_zh": "cyber gothic, 暗黑哥特, 黑銀科技",
+      "triggers_en": "cyber gothic",
+      "copy_prompt_zh": "請使用「Cyber Gothic (賽博哥特風格)」前端風格規範進行視覺設計，嚴格套用色票（#050505, #E2E8F0, #94A3B8）與特性（深黑銀灰襯線字體、尖角金屬框邊與冷峻神秘科技感。）！",
+      "copy_prompt_en": "Please apply the 'Cyber' design style, strictly enforcing palette (#050505, #E2E8F0, #94A3B8) and aesthetics (深黑銀灰襯線字體、尖角金屬框邊與冷峻神秘科技感。)!"
+    },
+    {
+      "name": "Vintage Film Grain (復古底片顆粒)",
+      "triggers": "film grain, 復古底片, 膠片質感",
+      "hex": [
+        "#292524",
+        "#D6D3D1",
+        "#F59E0B"
+      ],
+      "desc": "細緻雜訊噪點底紋、舊照片暖色調與懷舊底片藝術。",
+      "css": "background: #292524; color: #D6D3D1; border: 1px dashed #78716C;",
+      "name_zh": "Vintage Film Grain (復古底片顆粒)",
+      "name_en": "Vintage",
+      "desc_zh": "細緻雜訊噪點底紋、舊照片暖色調與懷舊底片藝術。",
+      "desc_en": "",
+      "triggers_zh": "film grain, 復古底片, 膠片質感",
+      "triggers_en": "film grain",
+      "copy_prompt_zh": "請使用「Vintage Film Grain (復古底片顆粒)」前端風格規範進行視覺設計，嚴格套用色票（#292524, #D6D3D1, #F59E0B）與特性（細緻雜訊噪點底紋、舊照片暖色調與懷舊底片藝術。）！",
+      "copy_prompt_en": "Please apply the 'Vintage' design style, strictly enforcing palette (#292524, #D6D3D1, #F59E0B) and aesthetics (細緻雜訊噪點底紋、舊照片暖色調與懷舊底片藝術。)!"
+    },
+    {
+      "name": "Spatial Floating Cards (懸浮景深卡片)",
+      "triggers": "floating ui, 景深懸浮, 3d level",
+      "hex": [
+        "#F8FAFC",
+        "#FFFFFF",
+        "#0EA5E9"
+      ],
+      "desc": "三層 z-index 陰影落差、滾動時層次浮動視覺。",
+      "css": "background: #FFF; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1); border-radius: 12px;",
+      "name_zh": "Spatial Floating Cards (懸浮景深卡片)",
+      "name_en": "Spatial",
+      "desc_zh": "三層 z-index 陰影落差、滾動時層次浮動視覺。",
+      "desc_en": "Apple VisionOS spatial UI canvas, glass depth panels, dynamic rim lighting, and floating spatial controls.",
+      "triggers_zh": "floating ui, 景深懸浮, 3d level",
+      "triggers_en": "floating ui, 3d level",
+      "copy_prompt_zh": "請使用「Spatial Floating Cards (懸浮景深卡片)」前端風格規範進行視覺設計，嚴格套用色票（#F8FAFC, #FFFFFF, #0EA5E9）與特性（三層 z-index 陰影落差、滾動時層次浮動視覺。）！",
+      "copy_prompt_en": "Please apply the 'Spatial' design style, strictly enforcing palette (#F8FAFC, #FFFFFF, #0EA5E9) and aesthetics (Apple VisionOS spatial UI canvas, glass depth panels, dynamic rim lighting, and floating spatial controls.)!"
+    },
+    {
+      "name": "Voice AI Responsive (語音波形響應)",
+      "triggers": "voice ui, 語音波形, ai assistant",
+      "hex": [
+        "#0F172A",
+        "#38BDF8",
+        "#818CF8"
+      ],
+      "desc": "動態音波起伏條、Siri/Gemini 風格流光邊框。",
+      "css": "background: #0F172A; border: 2px solid #38BDF8; color: #38BDF8; border-radius: 20px;",
+      "name_zh": "Voice AI Responsive (語音波形響應)",
+      "name_en": "Voice",
+      "desc_zh": "動態音波起伏條、Siri/Gemini 風格流光邊框。",
+      "desc_en": "Voice assistant wave animation UI, pulsing audio amplitude rings, ambient glow state transitions, and clean card.",
+      "triggers_zh": "voice ui, 語音波形, ai assistant",
+      "triggers_en": "voice ui, ai assistant",
+      "copy_prompt_zh": "請使用「Voice AI Responsive (語音波形響應)」前端風格規範進行視覺設計，嚴格套用色票（#0F172A, #38BDF8, #818CF8）與特性（動態音波起伏條、Siri/Gemini 風格流光邊框。）！",
+      "copy_prompt_en": "Please apply the 'Voice' design style, strictly enforcing palette (#0F172A, #38BDF8, #818CF8) and aesthetics (Voice assistant wave animation UI, pulsing audio amplitude rings, ambient glow state transitions, and clean card.)!"
+    },
+    {
+      "name": "Extreme Minimalism (極致極簡主義)",
+      "triggers": "extreme minimalism, 極簡純白, ultra clean",
+      "hex": [
+        "#FFFFFF",
+        "#111111",
+        "#EEEEEE"
+      ],
+      "desc": "除文字與單線條外無任何多餘裝飾、回歸純粹資訊。",
+      "css": "background: #FFF; color: #111; border-bottom: 1px solid #111; font-weight: 400;",
+      "name_zh": "Extreme Minimalism (極致極簡主義)",
+      "name_en": "Extreme",
+      "desc_zh": "除文字與單線條外無任何多餘裝飾、回歸純粹資訊。",
+      "desc_en": "",
+      "triggers_zh": "extreme minimalism, 極簡純白, ultra clean",
+      "triggers_en": "extreme minimalism, ultra clean",
+      "copy_prompt_zh": "請使用「Extreme Minimalism (極致極簡主義)」前端風格規範進行視覺設計，嚴格套用色票（#FFFFFF, #111111, #EEEEEE）與特性（除文字與單線條外無任何多餘裝飾、回歸純粹資訊。）！",
+      "copy_prompt_en": "Please apply the 'Extreme' design style, strictly enforcing palette (#FFFFFF, #111111, #EEEEEE) and aesthetics (除文字與單線條外無任何多餘裝飾、回歸純粹資訊。)!"
+    },
+    {
+      "name": "Biophilic Greenhouse (綠意溫室風)",
+      "triggers": "greenhouse, 綠意溫室, 植物系",
+      "hex": [
+        "#064E3B",
+        "#A7F3D0",
+        "#047857"
+      ],
+      "desc": "植物綠與暖日光配色、自然和諧感。",
+      "css": "background: #064E3B; color: #A7F3D0; border-radius: 12px;",
+      "name_zh": "Biophilic Greenhouse (綠意溫室風)",
+      "name_en": "Biophilic",
+      "desc_zh": "植物綠與暖日光配色、自然和諧感。",
+      "desc_en": "Nature-inspired organic design, earthy sage green and forest tones, leaf silhouettes, and natural paper textures.",
+      "triggers_zh": "greenhouse, 綠意溫室, 植物系",
+      "triggers_en": "greenhouse",
+      "copy_prompt_zh": "請使用「Biophilic Greenhouse (綠意溫室風)」前端風格規範進行視覺設計，嚴格套用色票（#064E3B, #A7F3D0, #047857）與特性（植物綠與暖日光配色、自然和諧感。）！",
+      "copy_prompt_en": "Please apply the 'Biophilic' design style, strictly enforcing palette (#064E3B, #A7F3D0, #047857) and aesthetics (Nature-inspired organic design, earthy sage green and forest tones, leaf silhouettes, and natural paper textures.)!"
+    },
+    {
+      "name": "3D Hyper-Realism (超寫實 3D 渲染)",
+      "triggers": "hyper 3d, 寫實3d, 光線追蹤",
+      "hex": [
+        "#0F172A",
+        "#38BDF8",
+        "#F43F5E"
+      ],
+      "desc": "光線追蹤金屬光澤、球體玻璃反射質感。",
+      "css": "background: radial-gradient(circle at 50% 50%, #1e293b, #0f172a); color: #38bdf8;",
+      "name_zh": "3D Hyper-Realism (超寫實 3D 渲染)",
+      "name_en": "3D",
+      "desc_zh": "光線追蹤金屬光澤、球體玻璃反射質感。",
+      "desc_en": "",
+      "triggers_zh": "hyper 3d, 寫實3d, 光線追蹤",
+      "triggers_en": "hyper 3d, 3d",
+      "copy_prompt_zh": "請使用「3D Hyper-Realism (超寫實 3D 渲染)」前端風格規範進行視覺設計，嚴格套用色票（#0F172A, #38BDF8, #F43F5E）與特性（光線追蹤金屬光澤、球體玻璃反射質感。）！",
+      "copy_prompt_en": "Please apply the '3D' design style, strictly enforcing palette (#0F172A, #38BDF8, #F43F5E) and aesthetics (光線追蹤金屬光澤、球體玻璃反射質感。)!"
+    },
+    {
+      "name": "Bauhaus Geometric (包浩斯幾何風格)",
+      "triggers": "bauhaus, 包浩斯, 原色幾何",
+      "hex": [
+        "#DD2476",
+        "#FF512F",
+        "#1A202C"
+      ],
+      "desc": "三原色 (紅黃藍) 圓形正方形三角構造、經典工業美學。",
+      "css": "background: #DD2476; color: #FFF; border-radius: 50% 0 0 0;",
+      "name_zh": "Bauhaus Geometric (包浩斯幾何風格)",
+      "name_en": "Bauhaus",
+      "desc_zh": "三原色 (紅黃藍) 圓形正方形三角構造、經典工業美學。",
+      "desc_en": "()",
+      "triggers_zh": "bauhaus, 包浩斯, 原色幾何",
+      "triggers_en": "bauhaus",
+      "copy_prompt_zh": "請使用「Bauhaus Geometric (包浩斯幾何風格)」前端風格規範進行視覺設計，嚴格套用色票（#DD2476, #FF512F, #1A202C）與特性（三原色 (紅黃藍) 圓形正方形三角構造、經典工業美學。）！",
+      "copy_prompt_en": "Please apply the 'Bauhaus' design style, strictly enforcing palette (#DD2476, #FF512F, #1A202C) and aesthetics (())!"
+    },
+    {
+      "name": "AI Native Glass (AI 原生智能介面)",
+      "triggers": "ai native, ai 介面, 智能流光",
+      "hex": [
+        "#0B0F19",
+        "#6366F1",
+        "#A855F7"
+      ],
+      "desc": "智能漸變光暈跟隨滑鼠、自動卡片佈局與科技感知。",
+      "css": "background: #0B0F19; border: 1px solid #6366F1; color: #A855F7;",
+      "name_zh": "AI Native Glass (AI 原生智能介面)",
+      "name_en": "AI",
+      "desc_zh": "智能漸變光暈跟隨滑鼠、自動卡片佈局與科技感知。",
+      "desc_en": "",
+      "triggers_zh": "ai native, ai 介面, 智能流光",
+      "triggers_en": "ai native, ai",
+      "copy_prompt_zh": "請使用「AI Native Glass (AI 原生智能介面)」前端風格規範進行視覺設計，嚴格套用色票（#0B0F19, #6366F1, #A855F7）與特性（智能漸變光暈跟隨滑鼠、自動卡片佈局與科技感知。）！",
+      "copy_prompt_en": "Please apply the 'AI' design style, strictly enforcing palette (#0B0F19, #6366F1, #A855F7) and aesthetics (智能漸變光暈跟隨滑鼠、自動卡片佈局與科技感知。)!"
+    },
+    {
+      "name": "Soft Pastel Neumorphic (柔彩軟擬物)",
+      "triggers": "pastel neumorphism, 柔彩軟擬物",
+      "hex": [
+        "#F3F4F6",
+        "#E5E7EB",
+        "#9CA3AF"
+      ],
+      "desc": "馬卡龍色彩結合軟凝膠質感凹凸細節。",
+      "css": "background: #F3F4F6; box-shadow: 4px 4px 8px #d1d5db, -4px -4px 8px #ffffff;",
+      "name_zh": "Soft Pastel Neumorphic (柔彩軟擬物)",
+      "name_en": "Soft",
+      "desc_zh": "馬卡龍色彩結合軟凝膠質感凹凸細節。",
+      "desc_en": "",
+      "triggers_zh": "pastel neumorphism, 柔彩軟擬物",
+      "triggers_en": "pastel neumorphism",
+      "copy_prompt_zh": "請使用「Soft Pastel Neumorphic (柔彩軟擬物)」前端風格規範進行視覺設計，嚴格套用色票（#F3F4F6, #E5E7EB, #9CA3AF）與特性（馬卡龍色彩結合軟凝膠質感凹凸細節。）！",
+      "copy_prompt_en": "Please apply the 'Soft' design style, strictly enforcing palette (#F3F4F6, #E5E7EB, #9CA3AF) and aesthetics (馬卡龍色彩結合軟凝膠質感凹凸細節。)!"
+    },
+    {
+      "name": "Brutalist Mono Terminal (蠻荒單色終端)",
+      "triggers": "mono brutalist, 單色蠻荒",
+      "hex": [
+        "#000000",
+        "#FFFFFF"
+      ],
+      "desc": "純黑白粗體等寬字、粗框無陰影黑白二值視覺。",
+      "css": "background: #000; color: #FFF; border: 3px solid #FFF; font-family: monospace;",
+      "name_zh": "Brutalist Mono Terminal (蠻荒單色終端)",
+      "name_en": "Brutalist",
+      "desc_zh": "純黑白粗體等寬字、粗框無陰影黑白二值視覺。",
+      "desc_en": "",
+      "triggers_zh": "mono brutalist, 單色蠻荒",
+      "triggers_en": "mono brutalist",
+      "copy_prompt_zh": "請使用「Brutalist Mono Terminal (蠻荒單色終端)」前端風格規範進行視覺設計，嚴格套用色票（#000000, #FFFFFF）與特性（純黑白粗體等寬字、粗框無陰影黑白二值視覺。）！",
+      "copy_prompt_en": "Please apply the 'Brutalist' design style, strictly enforcing palette (#000000, #FFFFFF) and aesthetics (純黑白粗體等寬字、粗框無陰影黑白二值視覺。)!"
+    },
+    {
+      "name": "Luxe Gold Noir (黑金奢華暗黑風)",
+      "triggers": "luxe gold, 黑金奢華, 高級金",
+      "hex": [
+        "#0A0A0A",
+        "#D4AF37",
+        "#262626"
+      ],
+      "desc": "純黑亮面背景、拉絲黃金高光線條邊框與極致尊榮質感。",
+      "css": "background: #0A0A0A; border: 1px solid #D4AF37; color: #D4AF37;",
+      "name_zh": "Luxe Gold Noir (黑金奢華暗黑風)",
+      "name_en": "Luxe",
+      "desc_zh": "純黑亮面背景、拉絲黃金高光線條邊框與極致尊榮質感。",
+      "desc_en": "",
+      "triggers_zh": "luxe gold, 黑金奢華, 高級金",
+      "triggers_en": "luxe gold",
+      "copy_prompt_zh": "請使用「Luxe Gold Noir (黑金奢華暗黑風)」前端風格規範進行視覺設計，嚴格套用色票（#0A0A0A, #D4AF37, #262626）與特性（純黑亮面背景、拉絲黃金高光線條邊框與極致尊榮質感。）！",
+      "copy_prompt_en": "Please apply the 'Luxe' design style, strictly enforcing palette (#0A0A0A, #D4AF37, #262626) and aesthetics (純黑亮面背景、拉絲黃金高光線條邊框與極致尊榮質感。)!"
+    },
+    {
+      "name": "Clean Nordique (北歐極簡清爽)",
+      "triggers": "nordique, 北歐清爽, clean slate",
+      "hex": [
+        "#F8FAFC",
+        "#0284C7",
+        "#475569"
+      ],
+      "desc": "Slate/White 高雅配色、簡潔清晰卡片分層與放鬆目視質感。",
+      "css": "background: #F8FAFC; border: 1px solid #E2E8F0; color: #0F172A;",
+      "name_zh": "Clean Nordique (北歐極簡清爽)",
+      "name_en": "Clean",
+      "desc_zh": "Slate/White 高雅配色、簡潔清晰卡片分層與放鬆目視質感。",
+      "desc_en": "Slate/White",
+      "triggers_zh": "nordique, 北歐清爽, clean slate",
+      "triggers_en": "nordique, clean slate",
+      "copy_prompt_zh": "請使用「Clean Nordique (北歐極簡清爽)」前端風格規範進行視覺設計，嚴格套用色票（#F8FAFC, #0284C7, #475569）與特性（Slate/White 高雅配色、簡潔清晰卡片分層與放鬆目視質感。）！",
+      "copy_prompt_en": "Please apply the 'Clean' design style, strictly enforcing palette (#F8FAFC, #0284C7, #475569) and aesthetics (Slate/White)!"
+    },
+    {
+      "name": "Cyber Metallic Slate (賽博金屬板岩)",
+      "triggers": "metallic slate, 金屬板岩, 硬核科技",
+      "hex": [
+        "#1E293B",
+        "#94A3B8",
+        "#38BDF8"
+      ],
+      "desc": "拉絲鋼鐵板岩冷灰底、湛藍指示燈亮點與極度堅固感。",
+      "css": "background: #1E293B; border-top: 2px solid #38BDF8; color: #94A3B8;",
+      "name_zh": "Cyber Metallic Slate (賽博金屬板岩)",
+      "name_en": "Cyber",
+      "desc_zh": "拉絲鋼鐵板岩冷灰底、湛藍指示燈亮點與極度堅固感。",
+      "desc_en": "",
+      "triggers_zh": "metallic slate, 金屬板岩, 硬核科技",
+      "triggers_en": "metallic slate",
+      "copy_prompt_zh": "請使用「Cyber Metallic Slate (賽博金屬板岩)」前端風格規範進行視覺設計，嚴格套用色票（#1E293B, #94A3B8, #38BDF8）與特性（拉絲鋼鐵板岩冷灰底、湛藍指示燈亮點與極度堅固感。）！",
+      "copy_prompt_en": "Please apply the 'Cyber' design style, strictly enforcing palette (#1E293B, #94A3B8, #38BDF8) and aesthetics (拉絲鋼鐵板岩冷灰底、湛藍指示燈亮點與極度堅固感。)!"
+    }
+  ],
+  "hallmark_themes_20": [
+    {
+      "name": "editorial-serif (典雅雜誌明朝)",
+      "color": "#FBF9F5, #1C1917, #8C8275",
+      "font": "Playfair Display / Georgia",
+      "css": "background: #FBF9F5; color: #1C1917; border: 1px solid #E7E5E4; font-family: Georgia, serif;",
+      "desc": "暖紙白底、高雅 serif 大字體標題、1.8x 行高、適用品牌故事與精品的極致空氣感",
+      "name_zh": "editorial-serif (典雅雜誌明朝)",
+      "name_en": "editorial-serif",
+      "desc_zh": "暖紙白底、高雅 serif 大字體標題、1.8x 行高、適用品牌故事與精品的極致空氣感",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Playfair Display ).",
+      "triggers_en": "hallmark, editorial-serif",
+      "copy_prompt_zh": "請使用 Nutlope Hallmark「editorial-serif (典雅雜誌明朝)」主題氣質進行排版，落實色票（）與完整 8-State 組件狀態！",
+      "copy_prompt_en": "Please style using Nutlope Hallmark theme 'editorial-serif', applying palette () and complete 8-state component rules!"
+    },
+    {
+      "name": "neubrutalism-vivid (高對比蠻荒)",
+      "color": "#FFE600, #000000, #FF3B30",
+      "font": "Space Grotesk / Impact",
+      "css": "background: #FFE600; color: #000000; border: 3px solid #000; box-shadow: 4px 4px 0px #000; font-family: sans-serif; font-weight: 800;",
+      "desc": "純黑 4px 重硬邊框、硬塊陰影 (box-shadow: 4px 4px #000)、高飽和黃紅青撞色",
+      "name_zh": "neubrutalism-vivid (高對比蠻荒)",
+      "name_en": "neubrutalism-vivid",
+      "desc_zh": "純黑 4px 重硬邊框、硬塊陰影 (box-shadow: 4px 4px #000)、高飽和黃紅青撞色",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Space Grotesk ).",
+      "triggers_en": "hallmark, neubrutalism-vivid",
+      "copy_prompt_zh": "請使用 Nutlope Hallmark「neubrutalism-vivid (高對比蠻荒)」主題氣質進行排版，落實色票（）與完整 8-State 組件狀態！",
+      "copy_prompt_en": "Please style using Nutlope Hallmark theme 'neubrutalism-vivid', applying palette () and complete 8-state component rules!"
+    },
+    {
+      "name": "cyber-terminal (深空科技終端)",
+      "color": "#090D16, #00FF66, #00BFFF",
+      "font": "JetBrains Mono / monospace",
+      "css": "background: #090D16; color: #00FF66; border: 1px solid #00FF66; font-family: monospace; text-shadow: 0 0 5px rgba(0,255,102,0.5);",
+      "desc": "單色綠字黑底、矩陣光暈邊框、等寬字體、命令提示列符號與戰術數據面板",
+      "name_zh": "cyber-terminal (深空科技終端)",
+      "name_en": "cyber-terminal",
+      "desc_zh": "單色綠字黑底、矩陣光暈邊框、等寬字體、命令提示列符號與戰術數據面板",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (JetBrains Mono ).",
+      "triggers_en": "hallmark, cyber-terminal",
+      "copy_prompt_zh": "請使用 Nutlope Hallmark「cyber-terminal (深空科技終端)」主題氣質進行排版，落實色票（）與完整 8-State 組件狀態！",
+      "copy_prompt_en": "Please style using Nutlope Hallmark theme 'cyber-terminal', applying palette () and complete 8-state component rules!"
+    },
+    {
+      "name": "bento-dark-lux (暗黑奢華便當盒)",
+      "color": "#09090B, #FAFAFA, #27272A",
+      "font": "Inter / Plus Jakarta",
+      "css": "background: #09090B; color: #FAFAFA; border: 1px solid #27272A; border-radius: 16px; font-family: sans-serif;",
+      "desc": "OLED 純黑底、1px 微暗邊框、Linear/Apple 式高質感微卡片佈局與 subtle hover 光暈",
+      "name_zh": "bento-dark-lux (暗黑奢華便當盒)",
+      "name_en": "bento-dark-lux",
+      "desc_zh": "OLED 純黑底、1px 微暗邊框、Linear/Apple 式高質感微卡片佈局與 subtle hover 光暈",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Inter ).",
+      "triggers_en": "hallmark, bento-dark-lux",
+      "copy_prompt_zh": "請使用 Nutlope Hallmark「bento-dark-lux (暗黑奢華便當盒)」主題氣質進行排版，落實色票（）與完整 8-State 組件狀態！",
+      "copy_prompt_en": "Please style using Nutlope Hallmark theme 'bento-dark-lux', applying palette () and complete 8-state component rules!"
+    },
+    {
+      "name": "glass-aurora (極光毛玻璃)",
+      "color": "rgba(255,255,255,0.12), #FFFFFF, #38BDF8",
+      "font": "Satoshi / System UI",
+      "css": "background: linear-gradient(135deg, rgba(121,40,202,0.6), rgba(255,0,128,0.6)); color: #FFF; backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.4); border-radius: 14px;",
+      "desc": "彌散光暈漸變背景、毛玻璃虛化邊框、Specular 高光頂邊與夢幻質感",
+      "name_zh": "glass-aurora (極光毛玻璃)",
+      "name_en": "glass-aurora",
+      "desc_zh": "彌散光暈漸變背景、毛玻璃虛化邊框、Specular 高光頂邊與夢幻質感",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Satoshi ).",
+      "triggers_en": "hallmark, glass-aurora",
+      "copy_prompt_zh": "請使用 Nutlope Hallmark「glass-aurora (極光毛玻璃)」主題氣質進行排版，落實色票（）與完整 8-State 組件狀態！",
+      "copy_prompt_en": "Please style using Nutlope Hallmark theme 'glass-aurora', applying palette () and complete 8-state component rules!"
+    },
+    {
+      "name": "nordique-clean (北歐極簡清爽)",
+      "color": "#F8FAFC, #0F172A, #0284C7",
+      "font": "Inter / System",
+      "css": "background: #F8FAFC; color: #0F172A; border: 1px solid #E2E8F0; border-radius: 12px; font-family: sans-serif;",
+      "desc": "高雅 Slate 暖白底色、湛藍點睛色、極簡 1px 邊框與舒適閱讀卡片與高透氣感",
+      "name_zh": "nordique-clean (北歐極簡清爽)",
+      "name_en": "nordique-clean",
+      "desc_zh": "高雅 Slate 暖白底色、湛藍點睛色、極簡 1px 邊框與舒適閱讀卡片與高透氣感",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Inter ).",
+      "triggers_en": "hallmark, nordique-clean",
+      "copy_prompt_zh": "請使用 Nutlope Hallmark「nordique-clean (北歐極簡清爽)」主題氣質進行排版，落實色票（）與完整 8-State 組件狀態！",
+      "copy_prompt_en": "Please style using Nutlope Hallmark theme 'nordique-clean', applying palette () and complete 8-state component rules!"
+    },
+    {
+      "name": "japanese-editorial (日式和風質感)",
+      "color": "#F7F5F0, #2C2C2C, #C84B31",
+      "font": "Yu Mincho / Shippori",
+      "css": "background: #F7F5F0; color: #2C2C2C; border: 1px solid #E5E0D8; font-family: serif;",
+      "desc": "莫蘭迪紙張色系、日式留白、竪排視覺標題與空氣感體驗",
+      "name_zh": "japanese-editorial (日式和風質感)",
+      "name_en": "japanese-editorial",
+      "desc_zh": "莫蘭迪紙張色系、日式留白、竪排視覺標題與空氣感體驗",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Yu Mincho ).",
+      "triggers_en": "hallmark, japanese-editorial",
+      "copy_prompt_zh": "請使用 Nutlope Hallmark「japanese-editorial (日式和風質感)」主題氣質進行排版，落實色票（）與完整 8-State 組件狀態！",
+      "copy_prompt_en": "Please style using Nutlope Hallmark theme 'japanese-editorial', applying palette () and complete 8-state component rules!"
+    },
+    {
+      "name": "industrial-steel (工業鋼鐵硬核)",
+      "color": "#1A1A1A, #E5E5E5, #FF4500",
+      "font": "Roboto Mono / monospace",
+      "css": "background: #1A1A1A; color: #E5E5E5; border-left: 4px solid #FF4500; font-family: monospace;",
+      "desc": "金屬網格底紋、警示橘紅邊框、純硬塊線條與堅毅工程感知",
+      "name_zh": "industrial-steel (工業鋼鐵硬核)",
+      "name_en": "industrial-steel",
+      "desc_zh": "金屬網格底紋、警示橘紅邊框、純硬塊線條與堅毅工程感知",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Roboto Mono ).",
+      "triggers_en": "hallmark, industrial-steel",
+      "copy_prompt_zh": "請使用 Nutlope Hallmark「industrial-steel (工業鋼鐵硬核)」主題氣質進行排版，落實色票（）與完整 8-State 組件狀態！",
+      "copy_prompt_en": "Please style using Nutlope Hallmark theme 'industrial-steel', applying palette () and complete 8-state component rules!"
+    },
+    {
+      "name": "vision-spatial (蘋果空間懸浮)",
+      "color": "rgba(255,255,255,0.25), #0F172A, #38BDF8",
+      "font": "SF Pro / Inter",
+      "css": "background: rgba(255,255,255,0.3); color: #0F172A; border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-radius: 20px;",
+      "desc": "動態懸浮光效、Specular Highlight 高光頂邊與微立態層次落差",
+      "name_zh": "vision-spatial (蘋果空間懸浮)",
+      "name_en": "vision-spatial",
+      "desc_zh": "動態懸浮光效、Specular Highlight 高光頂邊與微立態層次落差",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (SF Pro ).",
+      "triggers_en": "hallmark, vision-spatial",
+      "copy_prompt_zh": "請使用 Nutlope Hallmark「vision-spatial (蘋果空間懸浮)」主題氣質進行排版，落實色票（）與完整 8-State 組件狀態！",
+      "copy_prompt_en": "Please style using Nutlope Hallmark theme 'vision-spatial', applying palette () and complete 8-state component rules!"
+    },
+    {
+      "name": "clay-pastel (馬卡龍黏土)",
+      "color": "#F3E8FF, #581C87, #C084FC",
+      "font": "Fredoka / Nunito",
+      "css": "background: #F3E8FF; color: #581C87; box-shadow: inset -4px -4px 8px #C084FC, inset 4px 4px 8px #FFF; border-radius: 20px;",
+      "desc": "軟萌雙向雙層內陰影、軟膠浮雕質感與療癒互動觸感",
+      "name_zh": "clay-pastel (馬卡龍黏土)",
+      "name_en": "clay-pastel",
+      "desc_zh": "軟萌雙向雙層內陰影、軟膠浮雕質感與療癒互動觸感",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Fredoka ).",
+      "triggers_en": "hallmark, clay-pastel",
+      "copy_prompt_zh": "請使用 Nutlope Hallmark「clay-pastel (馬卡龍黏土)」主題氣質進行排版，落實色票（）與完整 8-State 組件狀態！",
+      "copy_prompt_en": "Please style using Nutlope Hallmark theme 'clay-pastel', applying palette () and complete 8-state component rules!"
+    },
+    {
+      "name": "retro-win95 (95 懷舊復古)",
+      "color": "#C0C0C0, #000000, #000080",
+      "font": "MS Sans Serif / Tahoma",
+      "css": "background: #C0C0C0; color: #000; border: 2px outset #FFF; font-family: Tahoma, sans-serif;",
+      "desc": "經典灰底 3D 凸起框 (outset)、深藍視窗標題列與懷舊視窗美學",
+      "name_zh": "retro-win95 (95 懷舊復古)",
+      "name_en": "retro-win95",
+      "desc_zh": "經典灰底 3D 凸起框 (outset)、深藍視窗標題列與懷舊視窗美學",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (MS Sans Serif ).",
+      "triggers_en": "hallmark, retro-win95",
+      "copy_prompt_zh": "請使用 Nutlope Hallmark「retro-win95 (95 懷舊復古)」主題氣質進行排版，落實色票（）與完整 8-State 組件狀態！",
+      "copy_prompt_en": "Please style using Nutlope Hallmark theme 'retro-win95', applying palette () and complete 8-state component rules!"
+    },
+    {
+      "name": "vapor-neon (蒸汽波懷舊)",
+      "color": "#FF71CE, #FFFFFF, #01CDFE",
+      "font": "Outfit / System",
+      "css": "background: linear-gradient(90deg, #FF71CE, #01CDFE); color: #FFF; font-family: sans-serif; font-weight: 700; border-radius: 10px;",
+      "desc": "80 年代霓虹粉青雙色漸變、日落太陽幾何與復古浪漫",
+      "name_zh": "vapor-neon (蒸汽波懷舊)",
+      "name_en": "vapor-neon",
+      "desc_zh": "80 年代霓虹粉青雙色漸變、日落太陽幾何與復古浪漫",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Outfit ).",
+      "triggers_en": "hallmark, vapor-neon",
+      "copy_prompt_zh": "請使用 Nutlope Hallmark「vapor-neon (蒸汽波懷舊)」主題氣質進行排版，落實色票（）與完整 8-State 組件狀態！",
+      "copy_prompt_en": "Please style using Nutlope Hallmark theme 'vapor-neon', applying palette () and complete 8-state component rules!"
+    },
+    {
+      "name": "monochrome-minimal (單色極簡)",
+      "color": "#000000, #FFFFFF, #888888",
+      "font": "Space Mono / monospace",
+      "css": "background: #000000; color: #FFFFFF; border: 1px solid #FFFFFF; font-family: monospace;",
+      "desc": "純黑白二值對比、無任何干擾多餘色彩與純粹資訊力量",
+      "name_zh": "monochrome-minimal (單色極簡)",
+      "name_en": "monochrome-minimal",
+      "desc_zh": "純黑白二值對比、無任何干擾多餘色彩與純粹資訊力量",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Space Mono ).",
+      "triggers_en": "hallmark, monochrome-minimal",
+      "copy_prompt_zh": "請使用 Nutlope Hallmark「monochrome-minimal (單色極簡)」主題氣質進行排版，落實色票（）與完整 8-State 組件狀態！",
+      "copy_prompt_en": "Please style using Nutlope Hallmark theme 'monochrome-minimal', applying palette () and complete 8-state component rules!"
+    },
+    {
+      "name": "biophilic-emerald (綠意翡翠)",
+      "color": "#064E3B, #A7F3D0, #047857",
+      "font": "Plus Jakarta / sans-serif",
+      "css": "background: #064E3B; color: #A7F3D0; border: 1px solid #047857; border-radius: 16px;",
+      "desc": "翡翠深綠配色、自然有機曲線邊框與植感呼吸感",
+      "name_zh": "biophilic-emerald (綠意翡翠)",
+      "name_en": "biophilic-emerald",
+      "desc_zh": "翡翠深綠配色、自然有機曲線邊框與植感呼吸感",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Plus Jakarta ).",
+      "triggers_en": "hallmark, biophilic-emerald",
+      "copy_prompt_zh": "請使用 Nutlope Hallmark「biophilic-emerald (綠意翡翠)」主題氣質進行排版，落實色票（）與完整 8-State 組件狀態！",
+      "copy_prompt_en": "Please style using Nutlope Hallmark theme 'biophilic-emerald', applying palette () and complete 8-state component rules!"
+    },
+    {
+      "name": "holo-chromatic (彩虹全息)",
+      "color": "#A1C4FD, #1E293B, #C2E9FB",
+      "font": "Syne / Inter",
+      "css": "background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%); color: #1e293b; border-radius: 14px; font-weight: 700;",
+      "desc": "彩虹全息流光金屬漸變、高奢科技感與未來流行美學",
+      "name_zh": "holo-chromatic (彩虹全息)",
+      "name_en": "holo-chromatic",
+      "desc_zh": "彩虹全息流光金屬漸變、高奢科技感與未來流行美學",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Syne ).",
+      "triggers_en": "hallmark, holo-chromatic",
+      "copy_prompt_zh": "請使用 Nutlope Hallmark「holo-chromatic (彩虹全息)」主題氣質進行排版，落實色票（）與完整 8-State 組件狀態！",
+      "copy_prompt_en": "Please style using Nutlope Hallmark theme 'holo-chromatic', applying palette () and complete 8-state component rules!"
+    },
+    {
+      "name": "eink-reader (電子紙閱讀)",
+      "color": "#EAEAEA, #111111, #666666",
+      "font": "Lora / Georgia",
+      "css": "background: #EAEAEA; color: #111111; border: 1px solid #111; font-family: Georgia, serif;",
+      "desc": "無彩度純灰階抖動網點、高對比書籍閱讀質感與低壓視覺",
+      "name_zh": "eink-reader (電子紙閱讀)",
+      "name_en": "eink-reader",
+      "desc_zh": "無彩度純灰階抖動網點、高對比書籍閱讀質感與低壓視覺",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Lora ).",
+      "triggers_en": "hallmark, eink-reader",
+      "copy_prompt_zh": "請使用 Nutlope Hallmark「eink-reader (電子紙閱讀)」主題氣質進行排版，落實色票（）與完整 8-State 組件狀態！",
+      "copy_prompt_en": "Please style using Nutlope Hallmark theme 'eink-reader', applying palette () and complete 8-state component rules!"
+    },
+    {
+      "name": "genz-deconstruct (Z 世代解構)",
+      "color": "#CCFF00, #000000, #FF00FF",
+      "font": "Cabinet Grotesk / Impact",
+      "css": "background: #CCFF00; color: #000000; border: 2px solid #000; transform: rotate(-1deg); font-weight: 900;",
+      "desc": "傾斜貼紙字體、打破網格與高張力撞色幾何活力",
+      "name_zh": "genz-deconstruct (Z 世代解構)",
+      "name_en": "genz-deconstruct",
+      "desc_zh": "傾斜貼紙字體、打破網格與高張力撞色幾何活力",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Cabinet Grotesk ).",
+      "triggers_en": "hallmark, genz-deconstruct",
+      "copy_prompt_zh": "請使用 Nutlope Hallmark「genz-deconstruct (Z 世代解構)」主題氣質進行排版，落實色票（）與完整 8-State 組件狀態！",
+      "copy_prompt_en": "Please style using Nutlope Hallmark theme 'genz-deconstruct', applying palette () and complete 8-state component rules!"
+    },
+    {
+      "name": "hud-tactical (戰術抬頭顯示)",
+      "color": "#051923, #00A6FB, #0582CA",
+      "font": "Fira Code / monospace",
+      "css": "background: #051923; color: #00A6FB; border: 1px solid #00A6FB; font-family: monospace;",
+      "desc": "十字準星、座標數據圖例、動態括號與軍事科技面",
+      "name_zh": "hud-tactical (戰術抬頭顯示)",
+      "name_en": "hud-tactical",
+      "desc_zh": "十字準星、座標數據圖例、動態括號與軍事科技面",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Fira Code ).",
+      "triggers_en": "hallmark, hud-tactical",
+      "copy_prompt_zh": "請使用 Nutlope Hallmark「hud-tactical (戰術抬頭顯示)」主題氣質進行排版，落實色票（）與完整 8-State 組件狀態！",
+      "copy_prompt_en": "Please style using Nutlope Hallmark theme 'hud-tactical', applying palette () and complete 8-state component rules!"
+    },
+    {
+      "name": "mesh-gradient (彌散網格)",
+      "color": "#FF512F, #FFFFFF, #DD2476",
+      "font": "Clash Display / sans-serif",
+      "css": "background: linear-gradient(135deg, #FF512F, #DD2476); color: #FFFFFF; border-radius: 16px;",
+      "desc": "多色流體漸變、光學彌散背景與現代高視覺號召",
+      "name_zh": "mesh-gradient (彌散網格)",
+      "name_en": "mesh-gradient",
+      "desc_zh": "多色流體漸變、光學彌散背景與現代高視覺號召",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Clash Display ).",
+      "triggers_en": "hallmark, mesh-gradient",
+      "copy_prompt_zh": "請使用 Nutlope Hallmark「mesh-gradient (彌散網格)」主題氣質進行排版，落實色票（）與完整 8-State 組件狀態！",
+      "copy_prompt_en": "Please style using Nutlope Hallmark theme 'mesh-gradient', applying palette () and complete 8-state component rules!"
+    },
+    {
+      "name": "luxe-noir (黑金高奢)",
+      "color": "#0A0A0A, #D4AF37, #262626",
+      "font": "Cinzel / Times",
+      "css": "background: #0A0A0A; color: #D4AF37; border: 1px solid #D4AF37; font-family: Times, serif;",
+      "desc": "曜石黑底、拉絲黃金高光線條與極致尊榮奢華感知",
+      "name_zh": "luxe-noir (黑金高奢)",
+      "name_en": "luxe-noir",
+      "desc_zh": "曜石黑底、拉絲黃金高光線條與極致尊榮奢華感知",
+      "desc_en": "Hallmark signature theme with 8-state component completeness and unique visual atmosphere (Cinzel ).",
+      "triggers_en": "hallmark, luxe-noir",
+      "copy_prompt_zh": "請使用 Nutlope Hallmark「luxe-noir (黑金高奢)」主題氣質進行排版，落實色票（）與完整 8-State 組件狀態！",
+      "copy_prompt_en": "Please style using Nutlope Hallmark theme 'luxe-noir', applying palette () and complete 8-state component rules!"
+    }
+  ],
+  "presentation_specs_10": [
+    {
+      "name": "neon-collage-architect",
+      "triggers": "霓虹拼貼, neon collage, 構築主義",
+      "ratio": "16:9 · 10:1 Font scaling",
+      "css": "background: #0D0E15; color: #00F0FF; border: 2px solid #FF0055; font-family: sans-serif;",
+      "desc": "3 色限量色盤、10:1 標題/副標字體跳躍率、技術圖紙與前衛拼貼感。",
+      "slide_title": "NEON ARCHITECTURE 2050",
+      "slide_sub": "Constructivism & Tech Diagram Layout",
+      "slide_badge": "SPEC #01",
+      "bg_accent": "#FF0055",
+      "name_zh": "neon-collage-architect",
+      "name_en": "neon-collage-architect",
+      "desc_zh": "3 色限量色盤、10:1 標題/副標字體跳躍率、技術圖紙與前衛拼貼感。",
+      "desc_en": "3 limited colorways, 10:1 header scale, blueprint graph grid, and tech collage aesthetic.",
+      "triggers_zh": "霓虹拼貼, neon collage, 構築主義",
+      "triggers_en": "neon collage",
+      "ratio_en": "16:9 · 10:1 Font scaling",
+      "copy_prompt_zh": "請使用「neon-collage-architect」簡報視覺規範，依據「3 色限量色盤、10:1 標題/副標字體跳躍率、技術圖紙與前衛拼貼感。」之要求，製作 16:9 規格的專業簡報！",
+      "copy_prompt_en": "Please use the 'neon-collage-architect' presentation spec according to '3 limited colorways, 10:1 header scale, blueprint graph grid, and tech collage aesthetic.' to create a 16:9 professional slide deck!"
+    },
+    {
+      "name": "premium-apple-mockup-designer",
+      "triggers": "premium mockup, apple mockup, 裝置模型",
+      "ratio": "16:9 · 3D Device Framing",
+      "css": "background: #000000; color: #F5F5F7; border: 1px solid #333336; font-family: -apple-system, sans-serif;",
+      "desc": "Studio Display, iPhone, MacBook 3D 裁切佈局展示。",
+      "slide_title": "Pro Display XDR Specs",
+      "slide_sub": "Extreme Dynamic Range & 6K Precision",
+      "slide_badge": "MOCKUP 3D",
+      "bg_accent": "#2997FF",
+      "name_zh": "premium-apple-mockup-designer",
+      "name_en": "premium-apple-mockup-designer",
+      "desc_zh": "Studio Display, iPhone, MacBook 3D 裁切佈局展示。",
+      "desc_en": "Studio Display, iPhone, and MacBook 3D device framing layouts.",
+      "triggers_zh": "premium mockup, apple mockup, 裝置模型",
+      "triggers_en": "premium mockup, apple mockup",
+      "ratio_en": "16:9 · 3D Device Framing",
+      "copy_prompt_zh": "請使用「premium-apple-mockup-designer」簡報視覺規範，依據「Studio Display, iPhone, MacBook 3D 裁切佈局展示。」之要求，製作 16:9 規格的專業簡報！",
+      "copy_prompt_en": "Please use the 'premium-apple-mockup-designer' presentation spec according to 'Studio Display, iPhone, and MacBook 3D device framing layouts.' to create a 16:9 professional slide deck!"
+    },
+    {
+      "name": "sculpture-pop-remix",
+      "triggers": "sculpture pop, remix pop, 石膏撞色",
+      "ratio": "16:9 · Vaporwave Pop",
+      "css": "background: linear-gradient(135deg, #FF71CE, #01CDFE); color: #FFFFFF; font-family: sans-serif; font-weight: 800;",
+      "desc": "古典石膏像結合高對比雙色調與蒸汽波美學。",
+      "slide_title": "SCULPTURE POP REMIX",
+      "slide_sub": "Classical Aesthetics meets Cyberpunk Contrast",
+      "slide_badge": "VAPOR POP",
+      "bg_accent": "#05FFA1",
+      "name_zh": "sculpture-pop-remix",
+      "name_en": "sculpture-pop-remix",
+      "desc_zh": "古典石膏像結合高對比雙色調與蒸汽波美學。",
+      "desc_en": "Classical marble sculpture aesthetics combined with high-contrast vaporwave neon tones.",
+      "triggers_zh": "sculpture pop, remix pop, 石膏撞色",
+      "triggers_en": "sculpture pop, remix pop",
+      "ratio_en": "16:9 · Vaporwave Pop",
+      "copy_prompt_zh": "請使用「sculpture-pop-remix」簡報視覺規範，依據「古典石膏像結合高對比雙色調與蒸汽波美學。」之要求，製作 16:9 規格的專業簡報！",
+      "copy_prompt_en": "Please use the 'sculpture-pop-remix' presentation spec according to 'Classical marble sculpture aesthetics combined with high-contrast vaporwave neon tones.' to create a 16:9 professional slide deck!"
+    },
+    {
+      "name": "modern-editorial-designer",
+      "triggers": "editorial, 雜誌風, kinfolk",
+      "ratio": "16:9 · Ivory Paper 1.8x",
+      "css": "background: #F4F1EA; color: #2B2927; border: 1px solid #E2DED4; font-family: Georgia, serif;",
+      "desc": "暖白紙色 (#f1f0ea)、明朝體 (Serif)、大面積留白與空氣感。",
+      "slide_title": "Kinfolk & Quiet Luxury",
+      "slide_sub": "Minimalist Editorial Layout with High Air Quality",
+      "slide_badge": "EDITORIAL",
+      "bg_accent": "#8C8275",
+      "name_zh": "modern-editorial-designer",
+      "name_en": "modern-editorial-designer",
+      "desc_zh": "暖白紙色 (#f1f0ea)、明朝體 (Serif)、大面積留白與空氣感。",
+      "desc_en": "Warm paper background (#f1f0ea), Mincho Serif typography, and Kinfolk quiet luxury airiness.",
+      "triggers_zh": "editorial, 雜誌風, kinfolk",
+      "triggers_en": "editorial, kinfolk",
+      "ratio_en": "16:9 · Ivory Paper 1.8x",
+      "copy_prompt_zh": "請使用「modern-editorial-designer」簡報視覺規範，依據「暖白紙色 (#f1f0ea)、明朝體 (Serif)、大面積留白與空氣感。」之要求，製作 16:9 規格的專業簡報！",
+      "copy_prompt_en": "Please use the 'modern-editorial-designer' presentation spec according to 'Warm paper background (#f1f0ea), Mincho Serif typography, and Kinfolk quiet luxury airiness.' to create a 16:9 professional slide deck!"
+    },
+    {
+      "name": "new-economy-editorial-director",
+      "triggers": "swiss style, new economy, bauhaus",
+      "ratio": "16:9 · STRICT NO MARKDOWN",
+      "css": "background: #F4F4F5; color: #18181B; border-top: 5px solid #FF3B30; font-family: Helvetica, sans-serif;",
+      "desc": "【嚴格禁止 Markdown 符號】純文字非對稱構圖、10:1 巨型標題。",
+      "slide_title": "NEW ECONOMY 2050",
+      "slide_sub": "Swiss International Typographic Alignment",
+      "slide_badge": "NO MARKDOWN",
+      "bg_accent": "#FF3B30",
+      "name_zh": "new-economy-editorial-director",
+      "name_en": "new-economy-editorial-director",
+      "desc_zh": "【嚴格禁止 Markdown 符號】純文字非對稱構圖、10:1 巨型標題。",
+      "desc_en": "Strict no-markdown pure text asymmetric layout with 10:1 colossal Swiss titles.",
+      "triggers_zh": "swiss style, new economy, bauhaus",
+      "triggers_en": "swiss style, new economy, bauhaus",
+      "ratio_en": "16:9 · STRICT NO MARKDOWN",
+      "copy_prompt_zh": "請使用「new-economy-editorial-director」簡報視覺規範，依據「【嚴格禁止 Markdown 符號】純文字非對稱構圖、10:1 巨型標題。」之要求，製作 16:9 規格的專業簡報！",
+      "copy_prompt_en": "Please use the 'new-economy-editorial-director' presentation spec according to 'Strict no-markdown pure text asymmetric layout with 10:1 colossal Swiss titles.' to create a 16:9 professional slide deck!"
+    },
+    {
+      "name": "dark-mode-bento-architect",
+      "triggers": "bento presentation, 暗黑便當簡報, oled slide",
+      "ratio": "16:9 · OLED Dark Grid",
+      "css": "background: #09090B; color: #FAFAFA; border: 1px solid #27272A; font-family: sans-serif;",
+      "desc": "深色便當盒佈局、高對比發光文字與模組化卡片分區。",
+      "slide_title": "Linear Bento Slide Deck",
+      "slide_sub": "Modular Grid Cards with Subtle Glowing Borders",
+      "slide_badge": "BENTO OLED",
+      "bg_accent": "#38BDF8",
+      "name_zh": "dark-mode-bento-architect",
+      "name_en": "dark-mode-bento-architect",
+      "desc_zh": "深色便當盒佈局、高對比發光文字與模組化卡片分區。",
+      "desc_en": "OLED pitch black bento grid layout, high-contrast glowing text, and modular card partitions.",
+      "triggers_zh": "bento presentation, 暗黑便當簡報, oled slide",
+      "triggers_en": "bento presentation, oled slide",
+      "ratio_en": "16:9 · OLED Dark Grid",
+      "copy_prompt_zh": "請使用「dark-mode-bento-architect」簡報視覺規範，依據「深色便當盒佈局、高對比發光文字與模組化卡片分區。」之要求，製作 16:9 規格的專業簡報！",
+      "copy_prompt_en": "Please use the 'dark-mode-bento-architect' presentation spec according to 'OLED pitch black bento grid layout, high-contrast glowing text, and modular card partitions.' to create a 16:9 professional slide deck!"
+    },
+    {
+      "name": "cyberpunk-glitch-presenter",
+      "triggers": "cyberpunk slide, 賽博簡報, 故障風簡報",
+      "ratio": "16:9 · High Contrast Neon",
+      "css": "background: #05050A; color: #00F0FF; border: 1px solid #FF0055; font-family: monospace;",
+      "desc": "高對比青紫霓虹撞色、故障線條與前衛戰術科技感。",
+      "slide_title": "CYBERPUNK GLITCH PROTOCOL",
+      "slide_sub": "High Voltage Neon & Tactical Grid Lines",
+      "slide_badge": "GLITCH 2077",
+      "bg_accent": "#FF0055",
+      "name_zh": "cyberpunk-glitch-presenter",
+      "name_en": "cyberpunk-glitch-presenter",
+      "desc_zh": "高對比青紫霓虹撞色、故障線條與前衛戰術科技感。",
+      "desc_en": "High-voltage cyan/magenta neon contrast, glitch line effects, and tactical tech vibe.",
+      "triggers_zh": "cyberpunk slide, 賽博簡報, 故障風簡報",
+      "triggers_en": "cyberpunk slide",
+      "ratio_en": "16:9 · High Contrast Neon",
+      "copy_prompt_zh": "請使用「cyberpunk-glitch-presenter」簡報視覺規範，依據「高對比青紫霓虹撞色、故障線條與前衛戰術科技感。」之要求，製作 16:9 規格的專業簡報！",
+      "copy_prompt_en": "Please use the 'cyberpunk-glitch-presenter' presentation spec according to 'High-voltage cyan/magenta neon contrast, glitch line effects, and tactical tech vibe.' to create a 16:9 professional slide deck!"
+    },
+    {
+      "name": "glassmorphism-aurora-slide",
+      "triggers": "glass slide, 極光簡報, 毛玻璃簡報",
+      "ratio": "16:9 · Blur 20px Specular",
+      "css": "background: linear-gradient(135deg, rgba(121,40,202,0.8), rgba(255,0,128,0.8)); color: #FFFFFF; backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.4);",
+      "desc": "彌散漸變極光背景、毛玻璃卡片與高光邊緣構圖。",
+      "slide_title": "Aurora Spatial Presentation",
+      "slide_sub": "Diffuse Fluid Gradient with Specular Rim Light",
+      "slide_badge": "AURORA GLASS",
+      "bg_accent": "#00DFD8",
+      "name_zh": "glassmorphism-aurora-slide",
+      "name_en": "glassmorphism-aurora-slide",
+      "desc_zh": "彌散漸變極光背景、毛玻璃卡片與高光邊緣構圖。",
+      "desc_en": "Diffuse fluid aurora background gradients, frosted glass cards, and specular rim lights.",
+      "triggers_zh": "glass slide, 極光簡報, 毛玻璃簡報",
+      "triggers_en": "glass slide",
+      "ratio_en": "16:9 · Blur 20px Specular",
+      "copy_prompt_zh": "請使用「glassmorphism-aurora-slide」簡報視覺規範，依據「彌散漸變極光背景、毛玻璃卡片與高光邊緣構圖。」之要求，製作 16:9 規格的專業簡報！",
+      "copy_prompt_en": "Please use the 'glassmorphism-aurora-slide' presentation spec according to 'Diffuse fluid aurora background gradients, frosted glass cards, and specular rim lights.' to create a 16:9 professional slide deck!"
+    },
+    {
+      "name": "minimalist-typographic-deck",
+      "triggers": "typographic deck, 文字簡報, 極簡簡報",
+      "ratio": "16:9 · Pure Typography",
+      "css": "background: #FFFFFF; color: #0F172A; border-bottom: 3px solid #0F172A; font-family: sans-serif; font-weight: 900;",
+      "desc": "無任何多餘圖片裝飾、100% 依賴字體層級與理性視覺落差。",
+      "slide_title": "PURE TYPOGRAPHY SLIDE",
+      "slide_sub": "Zero Graphic Clutter · 100% Font Hierarchy Precision",
+      "slide_badge": "TYPO 100%",
+      "bg_accent": "#0F172A",
+      "name_zh": "minimalist-typographic-deck",
+      "name_en": "minimalist-typographic-deck",
+      "desc_zh": "無任何多餘圖片裝飾、100% 依賴字體層級與理性視覺落差。",
+      "desc_en": "Zero graphic clutter, 100% font scale hierarchy, and pure rational layout contrast.",
+      "triggers_zh": "typographic deck, 文字簡報, 極簡簡報",
+      "triggers_en": "typographic deck",
+      "ratio_en": "16:9 · Pure Typography",
+      "copy_prompt_zh": "請使用「minimalist-typographic-deck」簡報視覺規範，依據「無任何多餘圖片裝飾、100% 依賴字體層級與理性視覺落差。」之要求，製作 16:9 規格的專業簡報！",
+      "copy_prompt_en": "Please use the 'minimalist-typographic-deck' presentation spec according to 'Zero graphic clutter, 100% font scale hierarchy, and pure rational layout contrast.' to create a 16:9 professional slide deck!"
+    },
+    {
+      "name": "slidev-markdown-exporter",
+      "triggers": "slidev export, slidev markdown, slides.md",
+      "ratio": "16:9 · Slidev AST Engine",
+      "css": "background: #1E1E1E; color: #4EC9B0; border: 1px solid #333; font-family: monospace;",
+      "desc": "轉譯完整 Slidev (slides.md)，含 v-clicks 動畫與 Mermaid 圖表。",
+      "slide_title": "slides.md AST Exporter",
+      "slide_sub": "Native Slidev Syntax & Mermaid Diagrams",
+      "slide_badge": "SLIDEV AST",
+      "bg_accent": "#CE9178",
+      "name_zh": "slidev-markdown-exporter",
+      "name_en": "slidev-markdown-exporter",
+      "desc_zh": "轉譯完整 Slidev (slides.md)，含 v-clicks 動畫與 Mermaid 圖表。",
+      "desc_en": "16:9 Live Presentation Slide Deck Spec (16:9 · Slidev AST Engine).",
+      "triggers_zh": "slidev export, slidev markdown, slides.md",
+      "triggers_en": "slidev export, slidev markdown, slides.md",
+      "ratio_en": "16:9 · Slidev AST Engine",
+      "copy_prompt_zh": "請使用「slidev-markdown-exporter」簡報視覺規範，依據「轉譯完整 Slidev (slides.md)，含 v-clicks 動畫與 Mermaid 圖表。」之要求，製作 16:9 規格的專業簡報！",
+      "copy_prompt_en": "Please use the 'slidev-markdown-exporter' presentation spec according to '16:9 Live Presentation Slide Deck Spec (16:9 · Slidev AST Engine).' to create a 16:9 professional slide deck!"
+    },
+    {
+      "name": "PPT-Master Native Office (微軟原生 PPTX)",
+      "name_zh": "PPT-Master Native Office (微軟原生 PPTX)",
+      "name_en": "PPT-Master Native Office (.pptx)",
+      "triggers": "ppt-master, 原生pptx, powerpoint export",
+      "triggers_zh": "ppt-master, 原生pptx, powerpoint export, office 簡報",
+      "triggers_en": "ppt-master, native pptx, powerpoint export",
+      "ratio": "16:9 · Native Office PPTX",
+      "ratio_en": "16:9 · Native Office PPTX",
+      "css": "background: #D24726; color: #FFFFFF; border: 2px solid #A83318; font-family: Calibri, sans-serif; font-weight: 700;",
+      "desc": "原生微軟 PowerPoint 格式生成，支援母版 Slide Master、可自由拉伸形狀與數據圖表。",
+      "desc_zh": "原生微軟 PowerPoint 格式生成，支援母版 Slide Master、可自由拉伸形狀與數據圖表。",
+      "desc_en": "Generates native Microsoft PowerPoint (.pptx) with master layouts, fully editable shapes, and data-bound charts.",
+      "slide_title": "Native PowerPoint PPTX",
+      "slide_sub": "100% Fully Editable Objects & Master Layouts",
+      "slide_badge": "NATIVE PPTX",
+      "bg_accent": "#D24726",
+      "copy_prompt_zh": "請使用 ppt-master 技能，將這份資料製作成微軟原生、完全可編輯的 PowerPoint (.pptx) 簡報，包含原生形狀與母版排版！",
+      "copy_prompt_en": "Please use the ppt-master skill to turn this document into a fully editable native Microsoft PowerPoint (.pptx) file!"
+    },
+    {
+      "name": "Editorial Vision Studio (雜誌封面配圖總監)",
+      "name_zh": "Editorial Vision Studio (雜誌封面配圖總監)",
+      "name_en": "Editorial Vision Studio (Art Director)",
+      "triggers": "editorial vision, 藝術總監, 配圖總監, image prompt",
+      "triggers_zh": "editorial vision, 藝術總監, 配圖總監, image prompt, 雜誌封面配圖",
+      "triggers_en": "editorial vision, art director, image prompt, magazine visual",
+      "ratio": "16:9 · Art Director Image Prompts",
+      "ratio_en": "16:9 · Art Director Image Prompts",
+      "css": "background: #1C1917; color: #F5F5F4; border: 1px solid #78716C; font-family: 'Times New Roman', serif;",
+      "desc": "AI 視覺總監大腦，為簡報各頁面自動構思 Swiss, Kinfolk, Brutalist 等社論級精準生圖 Prompt。",
+      "desc_zh": "AI 視覺總監大腦，為簡報各頁面自動構思 Swiss, Kinfolk, Brutalist 等社論級精準生圖 Prompt。",
+      "desc_en": "AI Creative Director engine that compiles high-end, contextually coherent Midjourney/Flux image prompts for every slide.",
+      "slide_title": "Editorial Vision Art Director",
+      "slide_sub": "Bespoke Magazine-Grade Image Prompts for Slides",
+      "slide_badge": "VISION AI",
+      "bg_accent": "#E7E5E4",
+      "copy_prompt_zh": "請使用 editorial-vision-studio 視覺總監大腦，為當前簡報的主題與各頁內文構思頂級雜誌社論質感的 AI 生圖提示詞！",
+      "copy_prompt_en": "Please use editorial-vision-studio to craft magazine-grade, contextually tailored AI image generation prompts for our slides!"
+    }
+  ],
+  "diagram_designs_27": [
+    {
+      "name": "Architecture (系統架構圖)",
+      "name_zh": "Architecture (系統架構圖)",
+      "name_en": "Architecture Diagram",
+      "desc_zh": "純 HTML/CSS/SVG 代碼繪製端到端組件、微服務與資料流通訊連線。",
+      "desc_en": "Pure HTML/CSS/SVG end-to-end service components and communication links.",
+      "triggers_zh": "架構圖, architecture diagram, 系統圖",
+      "triggers_en": "architecture diagram, system diagram",
+      "hex": [
+        "#0f172a",
+        "#38bdf8",
+        "#f8fafc"
+      ],
+      "css": "background: #0f172a; color: #f8fafc; border: 1px solid #334155; font-family: 'JetBrains Mono', monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 社論級規範，以純 HTML/CSS/SVG 繪製高質感的「系統架構圖 (Architecture Diagram)」，包含核心服務組件與通訊連線！",
+      "copy_prompt_en": "Please use diagram-design editorial standards to create a clean HTML/CSS/SVG 'Architecture Diagram' showing core services and data links!"
+    },
+    {
+      "name": "Consultant 2x2 Matrix (商業四象限矩陣)",
+      "name_zh": "Consultant 2x2 Matrix (商業四象限矩陣)",
+      "name_en": "Consultant 2x2 Matrix",
+      "desc_zh": "麥肯錫級雙軸定位矩陣、命名單元格與策略落點標籤，清晰傳遞決策情境。",
+      "desc_en": "McKinsey-grade two-axis strategy matrix with named cells and quadrant tags.",
+      "triggers_zh": "四象限, 2x2 矩陣, consultant matrix",
+      "triggers_en": "2x2 matrix, quadrant chart, strategy matrix",
+      "hex": [
+        "#ffffff",
+        "#e11d48",
+        "#1e293b"
+      ],
+      "css": "background: #ffffff; color: #1e293b; border: 2px solid #e2e8f0; font-family: Inter, sans-serif;",
+      "copy_prompt_zh": "請使用 diagram-design 規範，繪製專業的「商業四象限決策矩陣 (2x2 Matrix)」，清楚標記雙軸維度與象限落點！",
+      "copy_prompt_en": "Please use diagram-design standards to generate a professional 'Consultant 2x2 Matrix' with clear axis labels and quadrant tags!"
+    },
+    {
+      "name": "Flywheel Loop (商業成長飛輪/循環圖)",
+      "name_zh": "Flywheel Loop (商業成長飛輪/循環圖)",
+      "name_en": "Flywheel Loop Diagram",
+      "desc_zh": "以共享核心為中樞的環形飛輪動能站點，標示循環增強迴路與反饋流向。",
+      "desc_en": "Circular flywheel stations around a shared core, illustrating reinforcing feedback loops.",
+      "triggers_zh": "飛輪圖, 循環圖, flywheel loop",
+      "triggers_en": "flywheel loop, reinforcing loop, cycle diagram",
+      "hex": [
+        "#09090b",
+        "#10b981",
+        "#27272a"
+      ],
+      "css": "background: #09090b; color: #fafafa; border: 1px solid #27272a; border-radius: 50%;",
+      "copy_prompt_zh": "請使用 diagram-design 規範，以純代碼繪製「商業成長飛輪 (Flywheel Loop)」循環圖表，展示各節點的自增強反饋流！",
+      "copy_prompt_en": "Please use diagram-design specs to render a pure code 'Flywheel Loop' showing reinforcing feedback stations around a core!"
+    },
+    {
+      "name": "Sequence Diagram (時序呼叫流程圖)",
+      "name_zh": "Sequence Diagram (時序呼叫流程圖)",
+      "name_en": "Sequence Diagram",
+      "desc_zh": "依時間軸垂直展開之角色訊息傳遞、同步/非同步呼叫與生命週期線條。",
+      "desc_en": "Actor message passing, sync/async RPC calls, and lifelines along a vertical timeline.",
+      "triggers_zh": "時序圖, 呼叫流程, sequence diagram",
+      "triggers_en": "sequence diagram, message flow, lifeline",
+      "hex": [
+        "#18181b",
+        "#a855f7",
+        "#fafafa"
+      ],
+      "css": "background: #18181b; color: #fafafa; border: 1px solid #3f3f46; font-family: monospace;",
+      "copy_prompt_zh": "請使用 diagram-design 規範，繪製精美的「時序呼叫流程圖 (Sequence Diagram)」，標示角色生命線與訊息傳遞！",
+      "copy_prompt_en": "Please use diagram-design standards to generate a clean 'Sequence Diagram' detailing lifelines and message passing!"
+    }
+  ]
+}

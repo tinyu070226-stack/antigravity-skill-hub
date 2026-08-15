@@ -15,6 +15,7 @@ description: 本技能定義 Antigravity 與 OpenCode 雙 Agent 協同架構、�
 - Antigravity × OpenCode 協同模式: CLI 直連、Task Board 檔案看板、JSON Hooks 攔截、open-code-review 門禁
 - team-mode: 依任務難度調度 Pro (高難度架構) 與 Flash (檔案檢索) 模型子 Agent
 - OpenCode 多模型戰隊分工 Protocol: 美學與前端首選 Claude 3.7/3.5、邏輯與除錯首選 o3-mini/o1、長文與批量重構首選 Qwen-3-Coder/DeepSeek-R1
+- Matt Pocock 頂級工程套件: /grill-with-docs 需求詰問與 ADR 架構決策、domain-modeling 專案術語字典 (CONTEXT.md)、tdd 測試驅動開發與 diagnosing-bugs 科學除錯。
 
 
 ## 核心設計與工程原則 (Principles)

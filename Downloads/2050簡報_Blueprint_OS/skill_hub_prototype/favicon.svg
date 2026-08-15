@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="16" fill="#0f172a"/>
+  
+  <!-- Outer Floating Orbital Line -->
+  <circle cx="32" cy="32" r="22" fill="none" stroke="#0284c7" stroke-width="3.5" stroke-dasharray="85 30" transform="rotate(-45 32 32)"/>
+  
+  <!-- Inner Stylized A Mark -->
+  <path d="M 32 16 L 44 46 L 37 46 L 33.5 37 L 30.5 37 L 27 46 L 20 46 Z M 32 23.5 L 29 31.5 L 35 31.5 Z" fill="#ffffff"/>
+  
+  <!-- Accent Orbital Cyan Dot -->
+  <circle cx="48" cy="18" r="4" fill="#38bdf8"/>
+</svg>
