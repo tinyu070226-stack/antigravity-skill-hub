@@ -326,12 +326,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         const rawPTitle = currentLang === 'zh' ? (p.title_zh || p.title) : (p.title_en || p.title);
         const rawPDesc = currentLang === 'zh' ? (p.desc_zh || p.desc) : (p.desc_en || p.desc);
         const pImg = currentLang === 'zh' ? (p.img_url_zh || p.img_url) : (p.img_url_en || p.img_url);
+        const pSvg = currentLang === 'zh' ? (p.svg_zh || p.svg) : (p.svg_en || p.svg);
 
         const pTitle = currentLang === 'en' ? cleanEnglishText(rawPTitle) : rawPTitle;
         const pDesc = currentLang === 'en' ? cleanEnglishText(rawPDesc) : rawPDesc;
 
         let mediaHtml = '';
-        if (pImg) {
+        if (pSvg) {
+          mediaHtml = `<div style="margin-top:20px; border:1px solid #e2e8f0; border-radius:12px; overflow:hidden; background:#ffffff; box-shadow:inset 0 2px 4px rgba(0,0,0,0.02); display:flex; align-items:center; justify-content:center; padding:12px;">
+            <div style="width:100%; height:auto; display:flex; align-items:center; justify-content:center;">
+              ${pSvg}
+            </div>
+          </div>`;
+        } else if (pImg) {
           mediaHtml = `<div style="margin-top:16px; border:1px solid #e2e8f0; border-radius:12px; overflow:hidden;"><img src="${pImg}" alt="${pTitle}" style="width:100%; height:auto; display:block;" /></div>`;
         }
 
