@@ -261,44 +261,16 @@
       cursor: default;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    .diagram-zoomable-container:hover {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    }
-    .diagram-zoom-hint { display: none !important;
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(15, 23, 42, 0.75);
-      color: #ffffff;
-      backdrop-filter: blur(6px);
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.2px;
-      opacity: 0;
-      transform: translateY(-4px);
-      transition: all 0.2s ease;
-      pointer-events: none;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      z-index: 10;
-    }
-    .diagram-zoomable-container:hover .diagram-zoom-hint { display: none !important;
-      opacity: 1;
-      transform: translateY(0);
-    }
 
     #diagram-lightbox {
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.88);
-      backdrop-filter: blur(12px);
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(14px);
       z-index: 10000;
       display: none;
       opacity: 0;
-      transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.2s ease;
       align-items: center;
       justify-content: center;
       overflow: hidden;
@@ -313,34 +285,34 @@
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(30, 41, 59, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(30, 41, 59, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 40px;
-      padding: 6px 18px;
+      padding: 7px 20px;
       display: flex;
       align-items: center;
       gap: 14px;
       color: #ffffff;
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 600;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
       z-index: 10002;
     }
     .lightbox-toolbar button {
-      background: transparent;
-      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       color: #f1f5f9;
       cursor: pointer;
-      font-size: 14px;
+      font-size: 13px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 4px 8px;
+      padding: 3px 10px;
       border-radius: 6px;
-      transition: background 0.15s;
+      transition: all 0.15s;
     }
     .lightbox-toolbar button:hover {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.25);
     }
     .lightbox-close-btn {
       position: absolute;
@@ -372,6 +344,7 @@
       align-items: center;
       justify-content: center;
       cursor: grab;
+      overflow: hidden;
     }
     .lightbox-content-viewport:active {
       cursor: grabbing;
@@ -379,23 +352,25 @@
     .lightbox-stage {
       position: relative;
       transform-origin: center center;
-      transition: transform 0.08s ease-out;
-      max-width: 90vw;
-      max-height: 85vh;
+      transition: transform 0.05s linear;
       display: flex;
       align-items: center;
       justify-content: center;
       background: #ffffff;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      border-radius: 14px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+      width: 1020px;
+      height: auto;
+      max-width: 90vw;
+      max-height: 85vh;
+      padding: 16px;
     }
     .lightbox-stage svg {
-      max-width: 82vw !important;
-      max-height: 78vh !important;
-      width: auto !important;
-      height: auto !important;
+      width: 100% !important;
+      height: 100% !important;
+      min-width: 0 !important;
       display: block !important;
+      object-fit: contain !important;
     }
 
   </style>
