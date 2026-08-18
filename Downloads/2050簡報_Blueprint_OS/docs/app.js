@@ -994,7 +994,7 @@ function fallbackCopyText(text) {
 }
 
 // ==========================================
-// 🔍 IN-CARD DIAGRAM INTERACTIVE PAN & ZOOM
+// 🔍 IN-CARD DIAGRAM INTERACTIVE PAN & ZOOM (WITH STRICT BOUNDARY CLAMPING)
 // ==========================================
 window.inlinePanZoomInstances = {};
 
@@ -1017,7 +1017,22 @@ window.initInlineDiagram = function(canvasId) {
     startY: 0
   };
 
+  function clampPan() {
+    if (state.zoom <= 1.0) {
+      state.panX = 0;
+      state.panY = 0;
+      return;
+    }
+    var rect = viewport.getBoundingClientRect();
+    var maxPanX = (rect.width * (state.zoom - 1)) / 2;
+    var maxPanY = (rect.height * (state.zoom - 1)) / 2;
+
+    state.panX = Math.min(Math.max(-maxPanX, state.panX), maxPanX);
+    state.panY = Math.min(Math.max(-maxPanY, state.panY), maxPanY);
+  }
+
   function applyTransform() {
+    clampPan();
     if (layer) {
       layer.style.transform = 'translate(' + state.panX + 'px, ' + state.panY + 'px) scale(' + state.zoom + ')';
     }
@@ -1056,7 +1071,7 @@ window.initInlineDiagram = function(canvasId) {
   viewport.addEventListener('wheel', function(e) {
     e.preventDefault();
     var delta = e.deltaY < 0 ? 0.15 : -0.15;
-    state.zoom = Math.min(Math.max(0.7, state.zoom + delta), 3.5);
+    state.zoom = Math.min(Math.max(1.0, state.zoom + delta), 3.5);
     applyTransform();
   }, { passive: false });
 
@@ -1069,13 +1084,15 @@ window.initInlineDiagram = function(canvasId) {
       state.panY = 0;
     } else {
       state.zoom = 1.8; // Smooth 1.8x zoom on double-click
+      state.panX = 0;
+      state.panY = 0;
     }
     applyTransform();
   });
 
   // Toolbar methods
   window['zoomInlineCanvas_' + canvasId] = function(delta) {
-    state.zoom = Math.min(Math.max(0.7, state.zoom + delta), 3.5);
+    state.zoom = Math.min(Math.max(1.0, state.zoom + delta), 3.5);
     applyTransform();
   };
 
