@@ -266,8 +266,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const promptText = currentLang === 'en' ? (item.copy_prompt_en || item.copy_prompt_zh || mainTrig) : (item.copy_prompt_zh || mainTrig);
 
     const svgContainer = item.real_svg ? `
-      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-bottom: 14px; overflow: hidden; max-height: 220px; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);">
-        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; transform: scale(0.95); transform-origin: center;">
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 8px; margin-bottom: 14px; overflow: hidden; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); position: relative;">
+        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden;">
           ${item.real_svg}
         </div>
       </div>
