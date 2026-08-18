@@ -1,4 +1,3 @@
-
 window.showToast = function(message) {
   let toast = document.getElementById('toast');
   if (!toast) {
@@ -333,12 +332,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         const pDesc = currentLang === 'en' ? cleanEnglishText(rawPDesc) : rawPDesc;
 
         let mediaHtml = '';
+        const canvasId = 'inline-canvas-' + idx;
         if (pSvg) {
           mediaHtml = `
-            <div class="diagram-zoomable-container" data-action="zoomable" ondblclick="openDiagramLightbox(this, '${encodeURIComponent(pTitle)}')" ondblclick="openDiagramLightbox(this, '${encodeURIComponent(pTitle)}')" style="margin-top:20px; border:1px solid #e2e8f0; border-radius:12px; overflow:hidden; background:#ffffff; box-shadow:inset 0 2px 4px rgba(0,0,0,0.02); display:flex; align-items:center; justify-content:center; padding:12px;">
-              
-              <div style="width:100%; height:auto; display:flex; align-items:center; justify-content:center;">
-                ${pSvg}
+            <div id="${canvasId}" class="inline-diagram-canvas">
+              <div class="inline-diagram-toolbar">
+                <button type="button" onclick="window['zoomInlineCanvas_${canvasId}'](0.2)" title="放大">+</button>
+                <span class="inline-zoom-text">100%</span>
+                <button type="button" onclick="window['zoomInlineCanvas_${canvasId}'](-0.2)" title="縮小">-</button>
+                <button type="button" onclick="window['resetInlineCanvas_${canvasId}']()" title="重置">↺</button>
+                <span style="opacity:0.6; font-size:10px; margin-left:2px;">雙擊放大 · 拖曳移動</span>
+              </div>
+              <div class="inline-diagram-viewport">
+                <div class="inline-diagram-layer">
+                  ${pSvg}
+                </div>
               </div>
             </div>`;
         } else if (pImg) {
@@ -376,10 +384,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </button>
               </div>
             </div>
-
-            <!-- Classic Inner Prompt Box with Classic Floating Top-Right Copy Button -->
-            <div style="position:relative; background:#f8fafc; color:#0f172a; border:1px solid #cbd5e1; border-radius:14px; padding:18px 68px 14px 20px; font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif; text-align:left; display:block; margin-top:12px;">
-              <button id="master-prompt-copy-btn-classic" title="${tooltipLabel}" type="button" onclick="window.doCopyPrompt(event)" style="position:absolute; top:14px; right:14px; background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 1px 3px rgba(0,0,0,0.06); transition:all 0.2s; font-size:16px; line-height:1; z-index:10;">
+            <div style="position:relative; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:18px 20px; font-family:'JetBrains Mono', monospace; font-size:13px; color:#1e293b; max-height:480px; overflow-y:auto; box-shadow:inset 0 2px 4px rgba(0,0,0,0.02);">
+              <button class="copy-box-btn" onclick="copyMasterPrompt(this)" title="${tooltipLabel}" style="position:absolute; top:12px; right:12px; background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; width:34px; height:34px; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 1px 3px rgba(0,0,0,0.08); font-size:16px; transition:all 0.15s ease;">
                 📋
               </button>
               <div id="master-prompt-card-body">
@@ -396,34 +402,25 @@ document.addEventListener('DOMContentLoaded', async () => {
             </div>
           `;
         } else {
-          // Clean, comfortable reading layout (balanced weights, no heavy bold clutter)
+          // Clean, comfortable reading layout
           let formattedDesc = '';
           try {
             const descLines = (pDesc || '').split('\n');
             formattedDesc = descLines.map(function(rawLine) {
               const line = (rawLine || '').trim();
               if (!line) return '<div style="height: 6px;"></div>';
-              
-              // Major sections like 一、 🎯 or 二、 🧪
               if (/^[一二三四五六七八九十]、/.test(line)) {
                 return '<div style="font-size: 14.5px; font-weight: 700; color: #0f172a; margin-top: 14px; margin-bottom: 6px; padding-bottom: 4px; border-bottom: 1px dashed #e2e8f0;">' + line + '</div>';
               }
-              
-              // Sub-bullets for when/how to use
               if (line.includes('• 何時用') || line.includes('• 怎麼用') || line.includes('• Use when') || line.includes('• Trigger with')) {
                 let content = line.replace(/^[•*\-\s]+/, '');
                 content = content.replace(/`([^`]+)`/g, '<code style="background:#f1f5f9; color:#0f172a; padding:2px 5px; border-radius:4px; font-family:monospace; font-size:12px;">$1</code>');
-                // Clean regular styling for sub-bullets
                 return '<div style="margin-left: 20px; font-size: 13.5px; color: #475569; font-weight: 400; line-height: 1.7; margin-bottom: 3px;"><span style="color:#0284c7;">• </span>' + content + '</div>';
               }
-
-              // Numbered items or subitems (e.g. 1. 🍖 grill-with-docs, 1. 20 主題氣質)
               if (/^(\d+\.|•|\*)\s+/.test(line)) {
                 let content = line.replace(/`([^`]+)`/g, '<code style="background:#f1f5f9; color:#0f172a; padding:2px 5px; border-radius:4px; font-family:monospace; font-size:12px;">$1</code>');
                 return '<div style="margin-left: 4px; font-size: 13.5px; font-weight: 400; color: #334155; line-height: 1.7; margin-top: 6px; margin-bottom: 3px;">' + content + '</div>';
               }
-              
-              // Standard regular text line
               let safeLine = line.replace(/`([^`]+)`/g, '<code style="background:#f1f5f9; color:#0f172a; padding:2px 5px; border-radius:4px; font-family:monospace; font-size:12px;">$1</code>');
               return '<p style="font-size: 13.5px; font-weight: 400; color: #475569; line-height: 1.75; margin: 0 0 6px 0;">' + safeLine + '</p>';
             }).join('');
@@ -439,6 +436,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         detailPrinciples.appendChild(pBox);
+        if (pSvg) {
+          setTimeout(() => window.initInlineDiagram(canvasId), 50);
+        }
       });
     }
 
@@ -993,230 +993,98 @@ function fallbackCopyText(text) {
     document.body.removeChild(textArea);
 }
 
-// ============================================================
-// PROMPT SCENARIO SWITCHER - GLOBAL WINDOW FUNCTIONS
-// (Called via inline onclick in isMasterPromptCard HTML block)
-// ============================================================
-
-window.promptScenarioIntros = {
-    standard: '我要在這個對話進行「(......簡報製作任務)」。請以("(......檔案路徑)")的內容為材料，採取並嚴格遵守("(......簡報風格)")的規則和風格，製作 16:9 /(或)A4 Slidev， HTML /(或)可編輯的 ppt 簡報。',
-    same_style_new_content: '我要在這個對話進行「(......簡報製作任務)」。請以("(......檔案路徑)")的內容為材料，依照我們標準的 0-Token 簡報流水線 Phase 1，幫我產出 deck_content.json。請繼續使用「(現有風格，如 Kinfolk)」風格，並幫我安排好 Hero、Split、Quote Card、Timeline、Bento 這 5 種 Layout 屬性。產出後請直接執行 build_deck.py 生成簡報！',
-    diff_style_new_content: '我要在這個對話進行「(......簡報製作任務)」。請以("(......檔案路徑)")的內容為材料製作成 16:9 HTML 簡報。這次視覺風格請採用「(新風格，如 Typographic Deck)」規範！請先產出 deck_content.json 與對應的 deck_theme.css，然後跑 Phase 3 的 build_deck.py 自動裝配成 HTML 簡報！'
-};
-
-window.promptCommonBody = [
-    '請先不要直接執行簡報的製作，而是先寫出「簡報規劃的計畫書」，計畫書中要寫出：總共會有幾頁、每一頁的「大標題」內容、「小標題」內容、大致的內文要寫什麼、需不需要使用 ai 圖片生成，或是可以去網路上搜尋下載圖片。',
-    '【6個紅線 (嚴格遵守)】',
-    '1. 簡報請完整呈現「(某某檔案)」的完整內容。撰寫內容時請不要克制，頁數不用省、內文也可以寫多一點。並且不要有曲解、誇大其辭、用詞太過激昂的情況。',
-    '2. 圖片請不要調整原有的圖片比例，只允許對圖片進行「裁切」、「縮小」、「放大」。',
-    '3. 無論是大標題小標題或內文、圖片，請都不要與其他文字或圖片有重疊，也不要有貼到畫面過於邊緣的地方(但若圖片是打算沒有空白縫隙的貼緊邊緣，則沒有此限制)。',
-    '4. 保證網路搜尋或自行生成的圖片絕對都要與當前簡報頁面的內容直接高度相關，嚴禁使用抽象隱喻、幾何符號或高深意象圖，必須選用一眼就能直觀看懂、與簡報內文精準對應的具體實物或情境圖片。',
-    '5. 保證網路搜尋或生成的圖片絕對都要符合當前選擇的整體簡報風格，嚴禁出現與整體簡報風格相比顯得突兀或視覺風格斷層的圖片。',
-    '6. 簡報的每一頁都必須同時包含「圖片」與「文字」（圖文並茂），且每一頁的視覺佈局與結構必須變化多元，嚴禁連續多頁重複使用完全相同的範本或視覺排版結構。'
-];
-
-window.activeScenarioKey = 'standard';
-
-window.doSwitchScenario = function(key, evt) {
-    if (evt) { evt.preventDefault(); evt.stopPropagation(); }
-    window.activeScenarioKey = key;
-
-    ['standard', 'same_style_new_content', 'diff_style_new_content'].forEach(function(t) {
-        var btn = document.getElementById('btn-tab-' + t);
-        if (btn) {
-            if (t === key) {
-                btn.style.background = '#0f172a';
-                btn.style.color = '#ffffff';
-                btn.style.border = 'none';
-            } else {
-                btn.style.background = '#f1f5f9';
-                btn.style.color = '#334155';
-                btn.style.border = '1px solid #cbd5e1';
-            }
-        }
-    });
-
-    var bodyEl = document.getElementById('master-prompt-card-body');
-    if (bodyEl) {
-        var html = '<p style="margin:0 0 12px 0;line-height:1.75;font-size:13.5px;color:#0f172a;">' + window.promptScenarioIntros[key] + '</p>';
-        window.promptCommonBody.forEach(function(line) {
-            html += '<p style="margin:0 0 12px 0;line-height:1.75;font-size:13.5px;color:#0f172a;">' + line + '</p>';
-        });
-        bodyEl.innerHTML = html;
-    }
-};
-
-window.doCopyPrompt = function(evt) {
-    if (evt) { evt.preventDefault(); evt.stopPropagation(); }
-    var key = window.activeScenarioKey || 'standard';
-    var fullText = window.promptScenarioIntros[key] + '\n\n' + window.promptCommonBody.join('\n\n');
-    var isEn = window.currentLang === 'en';
-
-    function flash() {
-        // Top toast notification
-        if (window.showToast) {
-            window.showToast(isEn ? '📋 Master Prompt Copied!' : '📋 提示詞複製成功');
-        }
-
-        // Button press + green flash animation
-        var btn = document.getElementById('master-prompt-copy-btn-classic');
-        if (btn) {
-            btn.style.transition = 'all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-            btn.style.transform = 'scale(0.88)';
-            setTimeout(function() {
-                btn.innerHTML = '✅';
-                btn.style.background = '#10b981';
-                btn.style.borderColor = '#10b981';
-                btn.style.color = '#ffffff';
-                btn.style.transform = 'scale(1.1)';
-                setTimeout(function() {
-                    btn.style.transform = 'scale(1)';
-                    setTimeout(function() {
-                        btn.innerHTML = '📋';
-                        btn.style.background = '#ffffff';
-                        btn.style.borderColor = '#cbd5e1';
-                        btn.style.color = '';
-                        btn.style.transition = '';
-                    }, 1600);
-                }, 150);
-            }, 100);
-        }
-    }
-
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(fullText).then(flash).catch(function() {
-            fallbackCopyText(fullText); flash();
-        });
-    } else {
-        fallbackCopyText(fullText); flash();
-    }
-};
-
-
 // ==========================================
-// 🔍 DIAGRAM LIGHTBOX & PAN-ZOOM ENGINE
+// 🔍 IN-CARD DIAGRAM INTERACTIVE PAN & ZOOM
 // ==========================================
-window.currentLightboxZoom = 1.0;
-window.currentLightboxPanX = 0;
-window.currentLightboxPanY = 0;
-window.isLightboxDragging = false;
-window.startLightboxDragX = 0;
-window.startLightboxDragY = 0;
+window.inlinePanZoomInstances = {};
 
-window.openDiagramLightbox = function(el, encodedTitle) {
-  var svgEl = el.querySelector('svg');
-  if (!svgEl) return;
+window.initInlineDiagram = function(canvasId) {
+  if (window.inlinePanZoomInstances[canvasId]) return;
 
-  var lightbox = document.getElementById('diagram-lightbox');
-  var stage = document.getElementById('lightbox-stage');
-  var titleEl = document.getElementById('lightbox-title-text');
+  var canvas = document.getElementById(canvasId);
+  if (!canvas) return;
 
-  if (!lightbox || !stage) return;
+  var viewport = canvas.querySelector('.inline-diagram-viewport');
+  var layer = canvas.querySelector('.inline-diagram-layer');
+  var zoomText = canvas.querySelector('.inline-zoom-text');
 
-  var title = encodedTitle ? decodeURIComponent(encodedTitle) : '圖表放大檢視';
-  if (titleEl) titleEl.innerText = '🔍 ' + title;
+  var state = {
+    zoom: 1.0,
+    panX: 0,
+    panY: 0,
+    isDragging: false,
+    startX: 0,
+    startY: 0
+  };
 
-  // Clone SVG into Stage
-  stage.innerHTML = svgEl.outerHTML;
-
-  // Reset transforms
-  window.currentLightboxZoom = 1.0;
-  window.currentLightboxPanX = 0;
-  window.currentLightboxPanY = 0;
-  window.applyLightboxTransform();
-
-  lightbox.classList.add('active');
-  document.body.style.overflow = 'hidden';
-};
-
-window.closeDiagramLightbox = function() {
-  var lightbox = document.getElementById('diagram-lightbox');
-  if (lightbox) {
-    lightbox.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-};
-
-window.zoomLightbox = function(delta) {
-  window.currentLightboxZoom = Math.min(Math.max(0.4, window.currentLightboxZoom + delta), 4.0);
-  window.applyLightboxTransform();
-};
-
-window.resetLightboxTransform = function() {
-  window.currentLightboxZoom = 1.0;
-  window.currentLightboxPanX = 0;
-  window.currentLightboxPanY = 0;
-  window.applyLightboxTransform();
-};
-
-window.applyLightboxTransform = function() {
-  var stage = document.getElementById('lightbox-stage');
-  var zoomVal = document.getElementById('lightbox-zoom-val');
-  if (stage) {
-    stage.style.transform = 'translate(' + window.currentLightboxPanX + 'px, ' + window.currentLightboxPanY + 'px) scale(' + window.currentLightboxZoom + ')';
-  }
-  if (zoomVal) {
-    zoomVal.innerText = Math.round(window.currentLightboxZoom * 100) + '%';
-  }
-};
-
-// Global Listeners
-(function initLightboxHandlers() {
-  // Mouse Drag (Pan)
-  window.addEventListener('mousedown', function(e) {
-    var viewport = document.getElementById('lightbox-viewport');
-    var lightbox = document.getElementById('diagram-lightbox');
-    if (!lightbox || !lightbox.classList.contains('active')) return;
-    
-    if (e.target.closest('.lightbox-toolbar') || e.target.closest('.lightbox-close-btn')) return;
-    
-    if (e.button === 0) {
-      window.isLightboxDragging = true;
-      window.startLightboxDragX = e.clientX - window.currentLightboxPanX;
-      window.startLightboxDragY = e.clientY - window.currentLightboxPanY;
-      e.preventDefault();
+  function applyTransform() {
+    if (layer) {
+      layer.style.transform = 'translate(' + state.panX + 'px, ' + state.panY + 'px) scale(' + state.zoom + ')';
     }
+    if (zoomText) {
+      zoomText.innerText = Math.round(state.zoom * 100) + '%';
+    }
+  }
+
+  // 1. Mouse Drag Pan
+  viewport.addEventListener('mousedown', function(e) {
+    if (e.target.closest('.inline-diagram-toolbar')) return;
+    if (e.button !== 0) return; // Left click only
+
+    state.isDragging = true;
+    viewport.classList.add('is-dragging');
+    state.startX = e.clientX - state.panX;
+    state.startY = e.clientY - state.panY;
+    e.preventDefault();
   });
 
   window.addEventListener('mousemove', function(e) {
-    if (!window.isLightboxDragging) return;
-    window.currentLightboxPanX = e.clientX - window.startLightboxDragX;
-    window.currentLightboxPanY = e.clientY - window.startLightboxDragY;
-    window.applyLightboxTransform();
+    if (!state.isDragging) return;
+    state.panX = e.clientX - state.startX;
+    state.panY = e.clientY - state.startY;
+    applyTransform();
   });
 
   window.addEventListener('mouseup', function() {
-    window.isLightboxDragging = false;
+    if (state.isDragging) {
+      state.isDragging = false;
+      viewport.classList.remove('is-dragging');
+    }
   });
 
-  // Wheel Zoom
-  window.addEventListener('wheel', function(e) {
-    var lightbox = document.getElementById('diagram-lightbox');
-    if (!lightbox || !lightbox.classList.contains('active')) return;
-    
+  // 2. Mouse Wheel Zoom (Within Card Box)
+  viewport.addEventListener('wheel', function(e) {
     e.preventDefault();
     var delta = e.deltaY < 0 ? 0.15 : -0.15;
-    window.zoomLightbox(delta);
+    state.zoom = Math.min(Math.max(0.7, state.zoom + delta), 3.5);
+    applyTransform();
   }, { passive: false });
 
-  // Double Click inside Stage toggles Zoom
-  window.addEventListener('dblclick', function(e) {
-    var lightbox = document.getElementById('diagram-lightbox');
-    if (!lightbox || !lightbox.classList.contains('active')) return;
-    
-    if (e.target.closest('.lightbox-toolbar') || e.target.closest('.lightbox-close-btn')) return;
-    
-    if (window.currentLightboxZoom > 1.1) {
-      window.resetLightboxTransform();
+  // 3. Double Click inside Card to Toggle Zoom / Reset
+  viewport.addEventListener('dblclick', function(e) {
+    if (e.target.closest('.inline-diagram-toolbar')) return;
+    if (state.zoom > 1.15) {
+      state.zoom = 1.0;
+      state.panX = 0;
+      state.panY = 0;
     } else {
-      window.zoomLightbox(0.7);
+      state.zoom = 1.8; // Smooth 1.8x zoom on double-click
     }
+    applyTransform();
   });
 
-  // ESC key to close
-  window.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      window.closeDiagramLightbox();
-    }
-  });
-})();
+  // Toolbar methods
+  window['zoomInlineCanvas_' + canvasId] = function(delta) {
+    state.zoom = Math.min(Math.max(0.7, state.zoom + delta), 3.5);
+    applyTransform();
+  };
+
+  window['resetInlineCanvas_' + canvasId] = function() {
+    state.zoom = 1.0;
+    state.panX = 0;
+    state.panY = 0;
+    applyTransform();
+  };
+
+  window.inlinePanZoomInstances[canvasId] = state;
+};
