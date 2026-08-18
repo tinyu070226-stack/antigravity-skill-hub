@@ -303,6 +303,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     backBtn.style.display = 'flex';
     detailGrid.innerHTML = '';
     if (detailPrinciples) detailPrinciples.innerHTML = '';
+    window.inlinePanZoomInstances = {};
     const query = detailSearch.value.toLowerCase().trim();
 
     if (shouldScrollTop) {
@@ -999,8 +1000,6 @@ function fallbackCopyText(text) {
 window.inlinePanZoomInstances = {};
 
 window.initInlineDiagram = function(canvasId) {
-  if (window.inlinePanZoomInstances[canvasId]) return;
-
   var canvas = document.getElementById(canvasId);
   if (!canvas) return;
 
@@ -1041,10 +1040,11 @@ window.initInlineDiagram = function(canvasId) {
     }
   }
 
-  // 1. Mouse Drag Pan
+  // 1. Mouse Drag Pan (Only When Zoomed In > 1.0)
   viewport.addEventListener('mousedown', function(e) {
     if (e.target.closest('.inline-diagram-toolbar')) return;
     if (e.button !== 0) return; // Left click only
+    if (state.zoom <= 1.0) return; // Only drag when zoomed in
 
     state.isDragging = true;
     viewport.classList.add('is-dragging');
@@ -1067,8 +1067,12 @@ window.initInlineDiagram = function(canvasId) {
     }
   });
 
-  // 2. Mouse Wheel Zoom (Within Card Box)
+  // 2. Mouse Wheel Zoom (ONLY Active When Already Double-Clicked / Zoomed In > 1.0)
   viewport.addEventListener('wheel', function(e) {
+    if (state.zoom <= 1.0) {
+      // Allow normal page scrolling when not zoomed in!
+      return;
+    }
     e.preventDefault();
     var delta = e.deltaY < 0 ? 0.15 : -0.15;
     state.zoom = Math.min(Math.max(1.0, state.zoom + delta), 3.5);
