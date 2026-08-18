@@ -254,6 +254,150 @@
     .scenario-btn:active {
       transform: scale(0.95);
     }
+  
+    /* Diagram Lightbox Modal with Pan & Zoom */
+    .diagram-zoomable-container {
+      position: relative;
+      cursor: zoom-in;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .diagram-zoomable-container:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+    .diagram-zoom-hint {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(15, 23, 42, 0.75);
+      color: #ffffff;
+      backdrop-filter: blur(6px);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: all 0.2s ease;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      z-index: 10;
+    }
+    .diagram-zoomable-container:hover .diagram-zoom-hint {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #diagram-lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(12px);
+      z-index: 10000;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      user-select: none;
+    }
+    #diagram-lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+    .lightbox-toolbar {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 40px;
+      padding: 6px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: #ffffff;
+      font-size: 12.5px;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      z-index: 10002;
+    }
+    .lightbox-toolbar button {
+      background: transparent;
+      border: none;
+      color: #f1f5f9;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: background 0.15s;
+    }
+    .lightbox-toolbar button:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+    .lightbox-close-btn {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      z-index: 10002;
+    }
+    .lightbox-close-btn:hover {
+      background: #ef4444;
+      border-color: #ef4444;
+      transform: scale(1.08);
+    }
+    .lightbox-content-viewport {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+    }
+    .lightbox-content-viewport:active {
+      cursor: grabbing;
+    }
+    .lightbox-stage {
+      position: relative;
+      transform-origin: center center;
+      transition: transform 0.08s ease-out;
+      max-width: 90vw;
+      max-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+    .lightbox-stage svg {
+      max-width: 82vw !important;
+      max-height: 78vh !important;
+      width: auto !important;
+      height: auto !important;
+      display: block !important;
+    }
+
   </style>
 </head>
 <body>
@@ -411,6 +555,27 @@ function copyPresentationPrompt() {
     });
 }
 </script>
+
+  <!-- Diagram Lightbox Modal -->
+  <div id="diagram-lightbox" onclick="if(event.target === this || event.target.classList.contains('lightbox-content-viewport')) closeDiagramLightbox();">
+    <div class="lightbox-toolbar">
+      <span id="lightbox-title-text" style="color:#38bdf8; font-weight:700; margin-right:4px;">🔍 圖表預覽</span>
+      <span style="opacity:0.4;">|</span>
+      <button type="button" onclick="zoomLightbox(0.2)" title="放大">+</button>
+      <span id="lightbox-zoom-val">100%</span>
+      <button type="button" onclick="zoomLightbox(-0.2)" title="縮小">-</button>
+      <button type="button" onclick="resetLightboxTransform()" title="重置比例">↺ 重置</button>
+      <span style="opacity:0.4;">|</span>
+      <span style="font-size:11.5px; opacity:0.75; font-family:sans-serif;">按住滑鼠左鍵可拖曳移動 · 滾輪縮放</span>
+    </div>
+    <button class="lightbox-close-btn" onclick="closeDiagramLightbox()" title="關閉 (ESC)">✕</button>
+    <div class="lightbox-content-viewport" id="lightbox-viewport">
+      <div class="lightbox-stage" id="lightbox-stage">
+        <!-- Injected SVG -->
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>
