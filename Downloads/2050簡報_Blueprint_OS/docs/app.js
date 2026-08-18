@@ -266,8 +266,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const promptText = currentLang === 'en' ? (item.copy_prompt_en || item.copy_prompt_zh || mainTrig) : (item.copy_prompt_zh || mainTrig);
 
     const svgContainer = item.real_svg ? `
-      <div class="diagram-zoomable-container" onclick="openDiagramLightbox(this, '${encodeURIComponent(rawName)}')" ondblclick="openDiagramLightbox(this, '${encodeURIComponent(rawName)}')" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 6px; margin-bottom: 14px; overflow: hidden; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); position: relative;">
-        <div class="diagram-zoom-hint">🔍 放大檢視</div>
+      <div class="diagram-zoomable-container" data-action="zoomable" ondblclick="openDiagramLightbox(this, '${encodeURIComponent(rawName)}')" ondblclick="openDiagramLightbox(this, '${encodeURIComponent(rawName)}')" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 6px; margin-bottom: 14px; overflow: hidden; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); position: relative;">
+        
         <div class="diagram-svg-wrapper" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden;">
           ${item.real_svg}
         </div>
@@ -335,8 +335,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         let mediaHtml = '';
         if (pSvg) {
           mediaHtml = `
-            <div class="diagram-zoomable-container" onclick="openDiagramLightbox(this, '${encodeURIComponent(pTitle)}')" ondblclick="openDiagramLightbox(this, '${encodeURIComponent(pTitle)}')" style="margin-top:20px; border:1px solid #e2e8f0; border-radius:12px; overflow:hidden; background:#ffffff; box-shadow:inset 0 2px 4px rgba(0,0,0,0.02); display:flex; align-items:center; justify-content:center; padding:12px;">
-              <div class="diagram-zoom-hint">🔍 點擊 / 雙擊放大</div>
+            <div class="diagram-zoomable-container" data-action="zoomable" ondblclick="openDiagramLightbox(this, '${encodeURIComponent(pTitle)}')" ondblclick="openDiagramLightbox(this, '${encodeURIComponent(pTitle)}')" style="margin-top:20px; border:1px solid #e2e8f0; border-radius:12px; overflow:hidden; background:#ffffff; box-shadow:inset 0 2px 4px rgba(0,0,0,0.02); display:flex; align-items:center; justify-content:center; padding:12px;">
+              
               <div style="width:100%; height:auto; display:flex; align-items:center; justify-content:center;">
                 ${pSvg}
               </div>
@@ -1091,3 +1091,132 @@ window.doCopyPrompt = function(evt) {
         fallbackCopyText(fullText); flash();
     }
 };
+
+
+// ==========================================
+// 🔍 DIAGRAM LIGHTBOX & PAN-ZOOM ENGINE
+// ==========================================
+window.currentLightboxZoom = 1.0;
+window.currentLightboxPanX = 0;
+window.currentLightboxPanY = 0;
+window.isLightboxDragging = false;
+window.startLightboxDragX = 0;
+window.startLightboxDragY = 0;
+
+window.openDiagramLightbox = function(el, encodedTitle) {
+  var svgEl = el.querySelector('svg');
+  if (!svgEl) return;
+
+  var lightbox = document.getElementById('diagram-lightbox');
+  var stage = document.getElementById('lightbox-stage');
+  var titleEl = document.getElementById('lightbox-title-text');
+
+  if (!lightbox || !stage) return;
+
+  var title = encodedTitle ? decodeURIComponent(encodedTitle) : '圖表放大檢視';
+  if (titleEl) titleEl.innerText = '🔍 ' + title;
+
+  // Clone SVG into Stage
+  stage.innerHTML = svgEl.outerHTML;
+
+  // Reset transforms
+  window.currentLightboxZoom = 1.0;
+  window.currentLightboxPanX = 0;
+  window.currentLightboxPanY = 0;
+  window.applyLightboxTransform();
+
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+};
+
+window.closeDiagramLightbox = function() {
+  var lightbox = document.getElementById('diagram-lightbox');
+  if (lightbox) {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+};
+
+window.zoomLightbox = function(delta) {
+  window.currentLightboxZoom = Math.min(Math.max(0.4, window.currentLightboxZoom + delta), 4.0);
+  window.applyLightboxTransform();
+};
+
+window.resetLightboxTransform = function() {
+  window.currentLightboxZoom = 1.0;
+  window.currentLightboxPanX = 0;
+  window.currentLightboxPanY = 0;
+  window.applyLightboxTransform();
+};
+
+window.applyLightboxTransform = function() {
+  var stage = document.getElementById('lightbox-stage');
+  var zoomVal = document.getElementById('lightbox-zoom-val');
+  if (stage) {
+    stage.style.transform = 'translate(' + window.currentLightboxPanX + 'px, ' + window.currentLightboxPanY + 'px) scale(' + window.currentLightboxZoom + ')';
+  }
+  if (zoomVal) {
+    zoomVal.innerText = Math.round(window.currentLightboxZoom * 100) + '%';
+  }
+};
+
+// Global Listeners
+(function initLightboxHandlers() {
+  // Mouse Drag (Pan)
+  window.addEventListener('mousedown', function(e) {
+    var viewport = document.getElementById('lightbox-viewport');
+    var lightbox = document.getElementById('diagram-lightbox');
+    if (!lightbox || !lightbox.classList.contains('active')) return;
+    
+    if (e.target.closest('.lightbox-toolbar') || e.target.closest('.lightbox-close-btn')) return;
+    
+    if (e.button === 0) {
+      window.isLightboxDragging = true;
+      window.startLightboxDragX = e.clientX - window.currentLightboxPanX;
+      window.startLightboxDragY = e.clientY - window.currentLightboxPanY;
+      e.preventDefault();
+    }
+  });
+
+  window.addEventListener('mousemove', function(e) {
+    if (!window.isLightboxDragging) return;
+    window.currentLightboxPanX = e.clientX - window.startLightboxDragX;
+    window.currentLightboxPanY = e.clientY - window.startLightboxDragY;
+    window.applyLightboxTransform();
+  });
+
+  window.addEventListener('mouseup', function() {
+    window.isLightboxDragging = false;
+  });
+
+  // Wheel Zoom
+  window.addEventListener('wheel', function(e) {
+    var lightbox = document.getElementById('diagram-lightbox');
+    if (!lightbox || !lightbox.classList.contains('active')) return;
+    
+    e.preventDefault();
+    var delta = e.deltaY < 0 ? 0.15 : -0.15;
+    window.zoomLightbox(delta);
+  }, { passive: false });
+
+  // Double Click inside Stage toggles Zoom
+  window.addEventListener('dblclick', function(e) {
+    var lightbox = document.getElementById('diagram-lightbox');
+    if (!lightbox || !lightbox.classList.contains('active')) return;
+    
+    if (e.target.closest('.lightbox-toolbar') || e.target.closest('.lightbox-close-btn')) return;
+    
+    if (window.currentLightboxZoom > 1.1) {
+      window.resetLightboxTransform();
+    } else {
+      window.zoomLightbox(0.7);
+    }
+  });
+
+  // ESC key to close
+  window.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      window.closeDiagramLightbox();
+    }
+  });
+})();

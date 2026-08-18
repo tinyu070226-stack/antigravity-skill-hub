@@ -258,13 +258,13 @@
     /* Diagram Lightbox Modal with Pan & Zoom */
     .diagram-zoomable-container {
       position: relative;
-      cursor: zoom-in;
+      cursor: default;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
     .diagram-zoomable-container:hover {
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     }
-    .diagram-zoom-hint {
+    .diagram-zoom-hint { display: none !important;
       position: absolute;
       top: 10px;
       right: 10px;
@@ -285,7 +285,7 @@
       gap: 5px;
       z-index: 10;
     }
-    .diagram-zoomable-container:hover .diagram-zoom-hint {
+    .diagram-zoomable-container:hover .diagram-zoom-hint { display: none !important;
       opacity: 1;
       transform: translateY(0);
     }
