@@ -319,7 +319,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     detailDesc.textContent = currentLang === 'en' ? cleanEnglishText(rawDesc) : rawDesc;
 
     if (masterInfo.principles && masterInfo.principles.length > 0 && detailPrinciples) {
-      masterInfo.principles.forEach(p => {
+      masterInfo.principles.forEach((p, idx) => {
         const pBox = document.createElement('div');
         pBox.style.cssText = 'background:#ffffff; border:1px solid #e2e8f0; border-radius:16px; padding:28px; margin-bottom:28px; box-shadow:0 1px 3px rgba(15,23,42,0.04); text-align:left;';
         
