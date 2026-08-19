@@ -1067,17 +1067,7 @@ window.initInlineDiagram = function(canvasId) {
     }
   });
 
-  // 2. Mouse Wheel Zoom (ONLY Active When Already Double-Clicked / Zoomed In > 1.0)
-  viewport.addEventListener('wheel', function(e) {
-    if (state.zoom <= 1.0) {
-      // Allow normal page scrolling when not zoomed in!
-      return;
-    }
-    e.preventDefault();
-    var delta = e.deltaY < 0 ? 0.15 : -0.15;
-    state.zoom = Math.min(Math.max(1.0, state.zoom + delta), 3.5);
-    applyTransform();
-  }, { passive: false });
+
 
   // 3. Double Click inside Card to Toggle Zoom / Reset
   viewport.addEventListener('dblclick', function(e) {
